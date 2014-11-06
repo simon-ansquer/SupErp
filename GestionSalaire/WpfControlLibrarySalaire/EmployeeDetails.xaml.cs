@@ -12,19 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfControlLibrarySalaire;
 
-namespace WpfApplicationSalaire
+namespace WpfControlLibrarySalaire
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour EmployeeDetails.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EmployeeDetails : UserControl
     {
-        public MainWindow()
+        public EmployeeDetails()
         {
             InitializeComponent();
-            this.DataContext = new EmployeesList();
         }
     }
 }

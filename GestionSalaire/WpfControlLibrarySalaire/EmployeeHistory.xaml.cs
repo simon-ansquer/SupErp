@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace WpfControlLibrarySalaire
 {
     /// <summary>
-    /// Logique d'interaction pour UserControl1.xaml
+    /// Logique d'interaction pour EmployeeHistory.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class EmployeeHistory : UserControl
     {
-        public UserControl1()
+        public EmployeeHistory()
         {
             InitializeComponent();
         }
