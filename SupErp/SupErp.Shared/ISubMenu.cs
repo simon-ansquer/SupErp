@@ -20,5 +20,10 @@ namespace SupErp.Shared
         /// Liste des sous-menus de ce sous-menu
         /// </summary>
         List<ISubMenu> SubMenus { get; set; }
+
+        /// <summary>
+        /// Booléen qui indique si ce sous-menu necessite les droits en écriture pour être affiché dans le menu
+        /// </summary>
+        public bool CanWrite { get; set; }
     }
 }
