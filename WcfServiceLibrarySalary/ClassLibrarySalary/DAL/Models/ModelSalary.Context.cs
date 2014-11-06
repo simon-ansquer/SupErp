@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WcfServiceLibrarySalary.DAL.Models
+namespace ClassLibrarySalary.DAL.Models
 {
     using System;
     using System.Data.Entity;

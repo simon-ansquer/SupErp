@@ -7,17 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WcfServiceLibrarySalary.DAL.Models
+namespace ClassLibrarySalary.DAL.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ConfigAbsence
+    public partial class Salary
     {
         public long id { get; set; }
-        public Nullable<int> MaximumHalfDayAbsence { get; set; }
-        public Nullable<long> AbsenceType_id { get; set; }
+        public Nullable<long> User_id { get; set; }
+        public Nullable<decimal> NetSalary { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     
-        public virtual AbsenceType AbsenceType { get; set; }
+        public virtual User User { get; set; }
     }
 }

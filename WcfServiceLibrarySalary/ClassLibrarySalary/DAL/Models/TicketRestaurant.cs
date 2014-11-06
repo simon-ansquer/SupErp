@@ -7,20 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WcfServiceLibrarySalary.DAL.Models
+namespace ClassLibrarySalary.DAL.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Prime
+    public partial class TicketRestaurant
     {
         public long id { get; set; }
-        public Nullable<long> User_id { get; set; }
         public string Label { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
-        public Nullable<decimal> Price { get; set; }
-    
-        public virtual User User { get; set; }
+        public Nullable<decimal> Value { get; set; }
+        public Nullable<decimal> PercentageEnterprise { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     }
 }

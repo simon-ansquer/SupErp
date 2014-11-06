@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="88bdd9fe3ddd4e8f941bac9a0d95ca07" Name="Diagram1">
+      <Diagram DiagramId="0b14eb42e40949eaade17b2e3435f746" Name="Diagram1">
         <EntityTypeShape EntityType="SUPERPDEVModel.Absence" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SUPERPDEVModel.AbsenceType" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SUPERPDEVModel.ConfigAbsence" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />

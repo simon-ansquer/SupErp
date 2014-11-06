@@ -7,17 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WcfServiceLibrarySalary.DAL.Models
+namespace ClassLibrarySalary.DAL.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class TicketRestaurant
+    public partial class Status
     {
+        public Status()
+        {
+            this.Users = new HashSet<User>();
+        }
+    
         public long id { get; set; }
         public string Label { get; set; }
-        public Nullable<decimal> Value { get; set; }
-        public Nullable<decimal> PercentageEnterprise { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<decimal> PercentageTaxe { get; set; }
+    
+        public virtual ICollection<User> Users { get; set; }
     }
 }

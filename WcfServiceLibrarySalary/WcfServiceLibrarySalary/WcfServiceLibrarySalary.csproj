@@ -53,68 +53,12 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\Models\Absence.cs">
-      <DependentUpon>ModelSalary.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\AbsenceType.cs">
-      <DependentUpon>ModelSalary.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\ConfigAbsence.cs">
-      <DependentUpon>ModelSalary.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\ModelSalary.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelSalary.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\ModelSalary.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelSalary.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\ModelSalary.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelSalary.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\Prime.cs">
-      <DependentUpon>ModelSalary.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\Salary.cs">
-      <DependentUpon>ModelSalary.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\Status.cs">
-      <DependentUpon>ModelSalary.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\TicketRestaurant.cs">
-      <DependentUpon>ModelSalary.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\User.cs">
-      <DependentUpon>ModelSalary.tt</DependentUpon>
-    </Compile>
     <Compile Include="IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="DAL\Models\ModelSalary.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelSalary.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DAL\Models\ModelSalary.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelSalary.edmx</DependentUpon>
-      <LastGenOutput>ModelSalary.Context.cs</LastGenOutput>
-    </None>
-    <None Include="DAL\Models\ModelSalary.edmx.diagram">
-      <DependentUpon>ModelSalary.edmx</DependentUpon>
-    </None>
-    <None Include="DAL\Models\ModelSalary.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelSalary.edmx</DependentUpon>
-      <LastGenOutput>ModelSalary.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
