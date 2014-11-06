@@ -24,6 +24,6 @@ namespace SupErp.Shared
         /// <summary>
         /// Booléen qui indique si ce sous-menu necessite les droits en écriture pour être affiché dans le menu.
         /// </summary>
-        public bool CanWrite { get; set; }
+        bool CanWrite { get; set; }
     }
 }

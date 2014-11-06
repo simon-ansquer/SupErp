@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupErp.Shared", "SupErp.Sha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupErp.WCF", "SupErp.WCF\SupErp.WCF.csproj", "{DDDB3846-F079-4103-B316-1EB8EDB76090}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupErp.Entities", "SupErp.Entities\SupErp.Entities.csproj", "{A11A9E2D-75AC-4E97-B28A-DA6BA10D5637}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DDDB3846-F079-4103-B316-1EB8EDB76090}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDDB3846-F079-4103-B316-1EB8EDB76090}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDDB3846-F079-4103-B316-1EB8EDB76090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A11A9E2D-75AC-4E97-B28A-DA6BA10D5637}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A11A9E2D-75AC-4E97-B28A-DA6BA10D5637}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A11A9E2D-75AC-4E97-B28A-DA6BA10D5637}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A11A9E2D-75AC-4E97-B28A-DA6BA10D5637}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
