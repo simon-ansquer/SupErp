@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupErp.Shared", "SupErp.Shared\SupErp.Shared.csproj", "{AED44877-9636-4E8C-95A3-722D99F6260B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupErp.WCF", "SupErp.WCF\SupErp.WCF.csproj", "{DDDB3846-F079-4103-B316-1EB8EDB76090}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AED44877-9636-4E8C-95A3-722D99F6260B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AED44877-9636-4E8C-95A3-722D99F6260B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AED44877-9636-4E8C-95A3-722D99F6260B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDDB3846-F079-4103-B316-1EB8EDB76090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDB3846-F079-4103-B316-1EB8EDB76090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDDB3846-F079-4103-B316-1EB8EDB76090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDDB3846-F079-4103-B316-1EB8EDB76090}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
