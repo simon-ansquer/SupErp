@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{213A7D7D-BC29-4530-B974-FCBF102C2318}</ProjectGuid>
+    <ProjectGuid>{C3F88C5E-9BC4-49C7-8B2C-A2B5835BBCEB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WcfServiceLibrarySalary</RootNamespace>
@@ -54,76 +54,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\Models\Absence.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
+      <DependentUpon>ModelSalary.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Models\AbsenceType.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\BILL_BillQuotation.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\BILL_BillQuotationStatus.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\BILL_Category.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\BILL_Product.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\BILL_Status.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\BILL_Transmitter.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\BILL_Vat.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
+      <DependentUpon>ModelSalary.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Models\ConfigAbsence.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
+      <DependentUpon>ModelSalary.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\Models\Customer.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
+    <Compile Include="DAL\Models\ModelSalary.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelSalary.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\Models\Module.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
+    <Compile Include="DAL\Models\ModelSalary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelSalary.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Models\ModelSalary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelSalary.edmx</DependentUpon>
     </Compile>
     <Compile Include="DAL\Models\Prime.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\Role.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\RoleModule.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
+      <DependentUpon>ModelSalary.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Models\Salary.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\SalaryModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SalaryModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\SalaryModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SalaryModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Models\SalaryModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SalaryModel.edmx</DependentUpon>
+      <DependentUpon>ModelSalary.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Models\Status.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
+      <DependentUpon>ModelSalary.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Models\TicketRestaurant.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
+      <DependentUpon>ModelSalary.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Models\User.cs">
-      <DependentUpon>SalaryModel.tt</DependentUpon>
+      <DependentUpon>ModelSalary.tt</DependentUpon>
     </Compile>
     <Compile Include="IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,26 +98,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="DAL\Models\SalaryModel.edmx">
+    <EntityDeploy Include="DAL\Models\ModelSalary.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SalaryModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelSalary.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DAL\Models\SalaryModel.Context.tt">
+    <None Include="DAL\Models\ModelSalary.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SalaryModel.edmx</DependentUpon>
-      <LastGenOutput>SalaryModel.Context.cs</LastGenOutput>
+      <DependentUpon>ModelSalary.edmx</DependentUpon>
+      <LastGenOutput>ModelSalary.Context.cs</LastGenOutput>
     </None>
-    <None Include="DAL\Models\SalaryModel.edmx.diagram">
-      <DependentUpon>SalaryModel.edmx</DependentUpon>
+    <None Include="DAL\Models\ModelSalary.edmx.diagram">
+      <DependentUpon>ModelSalary.edmx</DependentUpon>
     </None>
-    <None Include="DAL\Models\SalaryModel.tt">
+    <None Include="DAL\Models\ModelSalary.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SalaryModel.edmx</DependentUpon>
-      <LastGenOutput>SalaryModel.cs</LastGenOutput>
+      <DependentUpon>ModelSalary.edmx</DependentUpon>
+      <LastGenOutput>ModelSalary.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
