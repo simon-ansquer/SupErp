@@ -63,6 +63,9 @@
     <Compile Include="BILL_Category.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="BILL_LineBillQuotation.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="BILL_Product.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>

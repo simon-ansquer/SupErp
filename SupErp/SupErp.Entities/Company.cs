@@ -17,6 +17,7 @@ namespace SupErp.Entities
         public Company()
         {
             this.Company_Contact = new HashSet<Company_Contact>();
+            this.BILL_BillQuotation = new HashSet<BILL_BillQuotation>();
         }
     
         public long id { get; set; }
@@ -27,5 +28,6 @@ namespace SupErp.Entities
         public string city { get; set; }
     
         public virtual ICollection<Company_Contact> Company_Contact { get; set; }
+        public virtual ICollection<BILL_BillQuotation> BILL_BillQuotation { get; set; }
     }
 }
