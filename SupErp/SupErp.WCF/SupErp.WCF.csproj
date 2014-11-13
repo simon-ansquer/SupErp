@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="GestionSalaireWCF\Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
