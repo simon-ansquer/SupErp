@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DllManager.cs" />
+    <Compile Include="Exceptions\MainMenuImplementationException.cs" />
+    <Compile Include="Exceptions\MainMenuNotImplementedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
