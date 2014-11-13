@@ -94,10 +94,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SupErp.Kernel\SupErp.Kernel.csproj">
+      <Project>{e9aeb03e-1864-470f-8819-7a7419d3b87c}</Project>
+      <Name>SupErp.Kernel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SupErp.Shared\SupErp.Shared.csproj">
       <Project>{aed44877-9636-4e8c-95a3-722d99f6260b}</Project>
       <Name>SupErp.Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

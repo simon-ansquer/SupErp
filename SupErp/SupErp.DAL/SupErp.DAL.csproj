@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AA5A818D-CD76-4958-9282-66B0F1CE29BA}</ProjectGuid>
+    <ProjectGuid>{369107F3-119A-4358-86BF-23BB9E74018F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SupErp.BLL</RootNamespace>
-    <AssemblyName>SupErp.BLL</AssemblyName>
+    <RootNamespace>SupErp.DAL</RootNamespace>
+    <AssemblyName>SupErp.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,10 +42,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SupErp.DAL\SupErp.DAL.csproj">
-      <Project>{369107f3-119a-4358-86bf-23bb9e74018f}</Project>
-      <Name>SupErp.DAL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SupErp.Entities\SupErp.Entities.csproj">
       <Project>{a11a9e2d-75ac-4e97-b28a-da6ba10d5637}</Project>
       <Name>SupErp.Entities</Name>
