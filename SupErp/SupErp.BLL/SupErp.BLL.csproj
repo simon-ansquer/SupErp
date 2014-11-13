@@ -39,7 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModuleUser\UserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SupErp.DAL\SupErp.DAL.csproj">
+      <Project>{369107f3-119a-4358-86bf-23bb9e74018f}</Project>
+      <Name>SupErp.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SupErp.Entities\SupErp.Entities.csproj">
+      <Project>{a11a9e2d-75ac-4e97-b28a-da6ba10d5637}</Project>
+      <Name>SupErp.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GestionSalaireBLL\Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="GestionSalaireWCF\Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
@@ -81,6 +82,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SupErp.BLL\SupErp.BLL.csproj">
+      <Project>{aa5a818d-cd76-4958-9282-66b0f1ce29ba}</Project>
+      <Name>SupErp.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SupErp.Entities\SupErp.Entities.csproj">
       <Project>{a11a9e2d-75ac-4e97-b28a-da6ba10d5637}</Project>
       <Name>SupErp.Entities</Name>

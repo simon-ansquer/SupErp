@@ -17,6 +17,7 @@ namespace SupErp.Entities
         public BILL_BillQuotation()
         {
             this.BILL_BillQuotationStatus = new HashSet<BILL_BillQuotationStatus>();
+            this.BILL_LineBillQuotation = new HashSet<BILL_LineBillQuotation>();
         }
     
         public long BillQuotation_Id { get; set; }
@@ -26,9 +27,11 @@ namespace SupErp.Entities
         public System.DateTime DateBillQuotation { get; set; }
         public Nullable<long> Customer_Id { get; set; }
         public Nullable<long> Transmitter_Id { get; set; }
+        public Nullable<long> Company_Id { get; set; }
     
         public virtual ICollection<BILL_BillQuotationStatus> BILL_BillQuotationStatus { get; set; }
-        public virtual Customer Customer { get; set; }
         public virtual BILL_Transmitter BILL_Transmitter { get; set; }
+        public virtual ICollection<BILL_LineBillQuotation> BILL_LineBillQuotation { get; set; }
+        public virtual Company Company { get; set; }
     }
 }
