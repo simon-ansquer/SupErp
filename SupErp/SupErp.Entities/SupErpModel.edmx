@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SUPERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SUPERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Absence">
           <Key>
             <PropertyRef Name="id" />
@@ -90,15 +90,18 @@
           <Property Name="Rate" Type="float" />
           <Property Name="DateVat" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="ConfigAbsence">
+        <EntityType Name="Company">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MaximumHalfDayAbsence" Type="int" />
-          <Property Name="AbsenceType_id" Type="bigint" />
+          <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="siret" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="postalcode" Type="int" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <EntityType Name="Customer">
+        <EntityType Name="Company_Contact">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -106,13 +109,17 @@
           <Property Name="firstname" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="lastname" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="gender" Type="int" Nullable="false" />
-          <Property Name="company" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="siret" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="200" />
           <Property Name="phone" Type="varchar" MaxLength="200" />
-          <Property Name="address" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="postalcode" Type="int" Nullable="false" />
-          <Property Name="city" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="company_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigAbsence">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaximumHalfDayAbsence" Type="int" />
+          <Property Name="AbsenceType_id" Type="bigint" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -191,7 +198,7 @@
           <Property Name="Role_id" Type="bigint" />
           <Property Name="Status_id" Type="bigint" />
         </EntityType>
-        <Association Name="FK__Absence__Absence__5441852A">
+        <Association Name="FK__Absence__Absence__4F7CD00D">
           <End Role="AbsenceType" Type="Self.AbsenceType" Multiplicity="0..1" />
           <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
           <ReferentialConstraint>
@@ -203,7 +210,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Absence__User_id__5812160E">
+        <Association Name="FK__Absence__User_id__5070F446">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
           <ReferentialConstraint>
@@ -215,7 +222,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BILL_Bill__BillQ__70DDC3D8">
+        <Association Name="FK__BILL_Bill__BillQ__5441852A">
           <End Role="BILL_BillQuotation" Type="Self.BILL_BillQuotation" Multiplicity="0..1" />
           <End Role="BILL_BillQuotationStatus" Type="Self.BILL_BillQuotationStatus" Multiplicity="*" />
           <ReferentialConstraint>
@@ -227,19 +234,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BILL_Bill__Custo__6754599E">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="BILL_BillQuotation" Type="Self.BILL_BillQuotation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="BILL_BillQuotation">
-              <PropertyRef Name="Customer_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__BILL_Bill__Statu__6FE99F9F">
+        <Association Name="FK__BILL_Bill__Statu__534D60F1">
           <End Role="BILL_Status" Type="Self.BILL_Status" Multiplicity="0..1" />
           <End Role="BILL_BillQuotationStatus" Type="Self.BILL_BillQuotationStatus" Multiplicity="*" />
           <ReferentialConstraint>
@@ -251,7 +246,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BILL_Bill__Trans__68487DD7">
+        <Association Name="FK__BILL_Bill__Trans__52593CB8">
           <End Role="BILL_Transmitter" Type="Self.BILL_Transmitter" Multiplicity="0..1" />
           <End Role="BILL_BillQuotation" Type="Self.BILL_BillQuotation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -263,7 +258,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BILL_Prod__Categ__619B8048">
+        <Association Name="FK__BILL_Prod__Categ__5535A963">
           <End Role="BILL_Category" Type="Self.BILL_Category" Multiplicity="0..1" />
           <End Role="BILL_Product" Type="Self.BILL_Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -275,7 +270,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BILL_Prod__Vat_I__628FA481">
+        <Association Name="FK__BILL_Prod__Vat_I__5629CD9C">
           <End Role="BILL_Vat" Type="Self.BILL_Vat" Multiplicity="0..1" />
           <End Role="BILL_Product" Type="Self.BILL_Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -287,7 +282,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ConfigAbs__Absen__534D60F1">
+        <Association Name="FK__Company_C__compa__6383C8BA">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Company_Contact" Type="Self.Company_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Company_Contact">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ConfigAbs__Absen__571DF1D5">
           <End Role="AbsenceType" Type="Self.AbsenceType" Multiplicity="0..1" />
           <End Role="ConfigAbsence" Type="Self.ConfigAbsence" Multiplicity="*" />
           <ReferentialConstraint>
@@ -299,7 +306,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Prime__User_id__571DF1D5">
+        <Association Name="FK__Prime__User_id__5812160E">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Prime" Type="Self.Prime" Multiplicity="*" />
           <ReferentialConstraint>
@@ -311,7 +318,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Salary__User_id__5629CD9C">
+        <Association Name="FK__Salary__User_id__5AEE82B9">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
           <ReferentialConstraint>
@@ -323,7 +330,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User__Status_id__5535A963">
+        <Association Name="FK__User__Status_id__5BE2A6F2">
           <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -381,8 +388,9 @@
           <EntitySet Name="BILL_Status" EntityType="Self.BILL_Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BILL_Transmitter" EntityType="Self.BILL_Transmitter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BILL_Vat" EntityType="Self.BILL_Vat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company_Contact" EntityType="Self.Company_Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConfigAbsence" EntityType="Self.ConfigAbsence" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prime" EntityType="Self.Prime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
@@ -391,51 +399,51 @@
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketRestaurant" EntityType="Self.TicketRestaurant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Absence__Absence__5441852A" Association="Self.FK__Absence__Absence__5441852A">
+          <AssociationSet Name="FK__Absence__Absence__4F7CD00D" Association="Self.FK__Absence__Absence__4F7CD00D">
             <End Role="AbsenceType" EntitySet="AbsenceType" />
             <End Role="Absence" EntitySet="Absence" />
           </AssociationSet>
-          <AssociationSet Name="FK__Absence__User_id__5812160E" Association="Self.FK__Absence__User_id__5812160E">
+          <AssociationSet Name="FK__Absence__User_id__5070F446" Association="Self.FK__Absence__User_id__5070F446">
             <End Role="User" EntitySet="User" />
             <End Role="Absence" EntitySet="Absence" />
           </AssociationSet>
-          <AssociationSet Name="FK__BILL_Bill__BillQ__70DDC3D8" Association="Self.FK__BILL_Bill__BillQ__70DDC3D8">
+          <AssociationSet Name="FK__BILL_Bill__BillQ__5441852A" Association="Self.FK__BILL_Bill__BillQ__5441852A">
             <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
             <End Role="BILL_BillQuotationStatus" EntitySet="BILL_BillQuotationStatus" />
           </AssociationSet>
-          <AssociationSet Name="FK__BILL_Bill__Custo__6754599E" Association="Self.FK__BILL_Bill__Custo__6754599E">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
-          </AssociationSet>
-          <AssociationSet Name="FK__BILL_Bill__Statu__6FE99F9F" Association="Self.FK__BILL_Bill__Statu__6FE99F9F">
+          <AssociationSet Name="FK__BILL_Bill__Statu__534D60F1" Association="Self.FK__BILL_Bill__Statu__534D60F1">
             <End Role="BILL_Status" EntitySet="BILL_Status" />
             <End Role="BILL_BillQuotationStatus" EntitySet="BILL_BillQuotationStatus" />
           </AssociationSet>
-          <AssociationSet Name="FK__BILL_Bill__Trans__68487DD7" Association="Self.FK__BILL_Bill__Trans__68487DD7">
+          <AssociationSet Name="FK__BILL_Bill__Trans__52593CB8" Association="Self.FK__BILL_Bill__Trans__52593CB8">
             <End Role="BILL_Transmitter" EntitySet="BILL_Transmitter" />
             <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
           </AssociationSet>
-          <AssociationSet Name="FK__BILL_Prod__Categ__619B8048" Association="Self.FK__BILL_Prod__Categ__619B8048">
+          <AssociationSet Name="FK__BILL_Prod__Categ__5535A963" Association="Self.FK__BILL_Prod__Categ__5535A963">
             <End Role="BILL_Category" EntitySet="BILL_Category" />
             <End Role="BILL_Product" EntitySet="BILL_Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__BILL_Prod__Vat_I__628FA481" Association="Self.FK__BILL_Prod__Vat_I__628FA481">
+          <AssociationSet Name="FK__BILL_Prod__Vat_I__5629CD9C" Association="Self.FK__BILL_Prod__Vat_I__5629CD9C">
             <End Role="BILL_Vat" EntitySet="BILL_Vat" />
             <End Role="BILL_Product" EntitySet="BILL_Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__ConfigAbs__Absen__534D60F1" Association="Self.FK__ConfigAbs__Absen__534D60F1">
+          <AssociationSet Name="FK__Company_C__compa__6383C8BA" Association="Self.FK__Company_C__compa__6383C8BA">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Company_Contact" EntitySet="Company_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ConfigAbs__Absen__571DF1D5" Association="Self.FK__ConfigAbs__Absen__571DF1D5">
             <End Role="AbsenceType" EntitySet="AbsenceType" />
             <End Role="ConfigAbsence" EntitySet="ConfigAbsence" />
           </AssociationSet>
-          <AssociationSet Name="FK__Prime__User_id__571DF1D5" Association="Self.FK__Prime__User_id__571DF1D5">
+          <AssociationSet Name="FK__Prime__User_id__5812160E" Association="Self.FK__Prime__User_id__5812160E">
             <End Role="User" EntitySet="User" />
             <End Role="Prime" EntitySet="Prime" />
           </AssociationSet>
-          <AssociationSet Name="FK__Salary__User_id__5629CD9C" Association="Self.FK__Salary__User_id__5629CD9C">
+          <AssociationSet Name="FK__Salary__User_id__5AEE82B9" Association="Self.FK__Salary__User_id__5AEE82B9">
             <End Role="User" EntitySet="User" />
             <End Role="Salary" EntitySet="Salary" />
           </AssociationSet>
-          <AssociationSet Name="FK__User__Status_id__5535A963" Association="Self.FK__User__Status_id__5535A963">
+          <AssociationSet Name="FK__User__Status_id__5BE2A6F2" Association="Self.FK__User__Status_id__5BE2A6F2">
             <End Role="Status" EntitySet="Status" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
@@ -452,11 +460,92 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SUPERPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SUPERPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Absences" EntityType="SUPERPModel.Absence" />
+          <EntitySet Name="AbsenceTypes" EntityType="SUPERPModel.AbsenceType" />
+          <EntitySet Name="BILL_BillQuotation" EntityType="SUPERPModel.BILL_BillQuotation" />
+          <EntitySet Name="BILL_BillQuotationStatus" EntityType="SUPERPModel.BILL_BillQuotationStatus" />
+          <EntitySet Name="BILL_Category" EntityType="SUPERPModel.BILL_Category" />
+          <EntitySet Name="BILL_Product" EntityType="SUPERPModel.BILL_Product" />
+          <EntitySet Name="BILL_Status" EntityType="SUPERPModel.BILL_Status" />
+          <EntitySet Name="BILL_Transmitter" EntityType="SUPERPModel.BILL_Transmitter" />
+          <EntitySet Name="BILL_Vat" EntityType="SUPERPModel.BILL_Vat" />
+          <EntitySet Name="Companies" EntityType="SUPERPModel.Company" />
+          <EntitySet Name="Company_Contact" EntityType="SUPERPModel.Company_Contact" />
+          <EntitySet Name="ConfigAbsences" EntityType="SUPERPModel.ConfigAbsence" />
+          <EntitySet Name="Modules" EntityType="SUPERPModel.Module" />
+          <EntitySet Name="Primes" EntityType="SUPERPModel.Prime" />
+          <EntitySet Name="Roles" EntityType="SUPERPModel.Role" />
+          <EntitySet Name="RoleModules" EntityType="SUPERPModel.RoleModule" />
+          <EntitySet Name="Salaries" EntityType="SUPERPModel.Salary" />
+          <EntitySet Name="Status" EntityType="SUPERPModel.Status" />
+          <EntitySet Name="TicketRestaurants" EntityType="SUPERPModel.TicketRestaurant" />
+          <EntitySet Name="Users" EntityType="SUPERPModel.User" />
+          <AssociationSet Name="FK__Absence__Absence__4F7CD00D" Association="SUPERPModel.FK__Absence__Absence__4F7CD00D">
+            <End Role="AbsenceType" EntitySet="AbsenceTypes" />
+            <End Role="Absence" EntitySet="Absences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Absence__User_id__5070F446" Association="SUPERPModel.FK__Absence__User_id__5070F446">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Absence" EntitySet="Absences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ConfigAbs__Absen__571DF1D5" Association="SUPERPModel.FK__ConfigAbs__Absen__571DF1D5">
+            <End Role="AbsenceType" EntitySet="AbsenceTypes" />
+            <End Role="ConfigAbsence" EntitySet="ConfigAbsences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL_Bill__BillQ__5441852A" Association="SUPERPModel.FK__BILL_Bill__BillQ__5441852A">
+            <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
+            <End Role="BILL_BillQuotationStatus" EntitySet="BILL_BillQuotationStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL_Bill__Trans__52593CB8" Association="SUPERPModel.FK__BILL_Bill__Trans__52593CB8">
+            <End Role="BILL_Transmitter" EntitySet="BILL_Transmitter" />
+            <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL_Bill__Statu__534D60F1" Association="SUPERPModel.FK__BILL_Bill__Statu__534D60F1">
+            <End Role="BILL_Status" EntitySet="BILL_Status" />
+            <End Role="BILL_BillQuotationStatus" EntitySet="BILL_BillQuotationStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL_Prod__Categ__5535A963" Association="SUPERPModel.FK__BILL_Prod__Categ__5535A963">
+            <End Role="BILL_Category" EntitySet="BILL_Category" />
+            <End Role="BILL_Product" EntitySet="BILL_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL_Prod__Vat_I__5629CD9C" Association="SUPERPModel.FK__BILL_Prod__Vat_I__5629CD9C">
+            <End Role="BILL_Vat" EntitySet="BILL_Vat" />
+            <End Role="BILL_Product" EntitySet="BILL_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Company_C__compa__6383C8BA" Association="SUPERPModel.FK__Company_C__compa__6383C8BA">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Company_Contact" EntitySet="Company_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModule_Module" Association="SUPERPModel.FK_RoleModule_Module">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="RoleModule" EntitySet="RoleModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prime__User_id__5812160E" Association="SUPERPModel.FK__Prime__User_id__5812160E">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Prime" EntitySet="Primes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModule_Role" Association="SUPERPModel.FK_RoleModule_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="RoleModule" EntitySet="RoleModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="SUPERPModel.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salary__User_id__5AEE82B9" Association="SUPERPModel.FK__Salary__User_id__5AEE82B9">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Salary" EntitySet="Salaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__Status_id__5BE2A6F2" Association="SUPERPModel.FK__User__Status_id__5BE2A6F2">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Absence">
           <Key>
             <PropertyRef Name="id" />
@@ -466,8 +555,8 @@
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="AbsenceType_id" Type="Int64" />
-          <NavigationProperty Name="AbsenceType" Relationship="Self.FK__Absence__Absence__5441852A" FromRole="Absence" ToRole="AbsenceType" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Absence__User_id__5812160E" FromRole="Absence" ToRole="User" />
+          <NavigationProperty Name="AbsenceType" Relationship="SUPERPModel.FK__Absence__Absence__4F7CD00D" FromRole="Absence" ToRole="AbsenceType" />
+          <NavigationProperty Name="User" Relationship="SUPERPModel.FK__Absence__User_id__5070F446" FromRole="Absence" ToRole="User" />
         </EntityType>
         <EntityType Name="AbsenceType">
           <Key>
@@ -475,8 +564,8 @@
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Label" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Absences" Relationship="Self.FK__Absence__Absence__5441852A" FromRole="AbsenceType" ToRole="Absence" />
-          <NavigationProperty Name="ConfigAbsences" Relationship="Self.FK__ConfigAbs__Absen__534D60F1" FromRole="AbsenceType" ToRole="ConfigAbsence" />
+          <NavigationProperty Name="Absences" Relationship="SUPERPModel.FK__Absence__Absence__4F7CD00D" FromRole="AbsenceType" ToRole="Absence" />
+          <NavigationProperty Name="ConfigAbsences" Relationship="SUPERPModel.FK__ConfigAbs__Absen__571DF1D5" FromRole="AbsenceType" ToRole="ConfigAbsence" />
         </EntityType>
         <EntityType Name="BILL_BillQuotation">
           <Key>
@@ -489,9 +578,8 @@
           <Property Name="DateBillQuotation" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Customer_Id" Type="Int64" />
           <Property Name="Transmitter_Id" Type="Int64" />
-          <NavigationProperty Name="BILL_BillQuotationStatus" Relationship="Self.FK__BILL_Bill__BillQ__70DDC3D8" FromRole="BILL_BillQuotation" ToRole="BILL_BillQuotationStatus" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK__BILL_Bill__Custo__6754599E" FromRole="BILL_BillQuotation" ToRole="Customer" />
-          <NavigationProperty Name="BILL_Transmitter" Relationship="Self.FK__BILL_Bill__Trans__68487DD7" FromRole="BILL_BillQuotation" ToRole="BILL_Transmitter" />
+          <NavigationProperty Name="BILL_BillQuotationStatus" Relationship="SUPERPModel.FK__BILL_Bill__BillQ__5441852A" FromRole="BILL_BillQuotation" ToRole="BILL_BillQuotationStatus" />
+          <NavigationProperty Name="BILL_Transmitter" Relationship="SUPERPModel.FK__BILL_Bill__Trans__52593CB8" FromRole="BILL_BillQuotation" ToRole="BILL_Transmitter" />
         </EntityType>
         <EntityType Name="BILL_BillQuotationStatus">
           <Key>
@@ -501,52 +589,52 @@
           <Property Name="DateAdvancement" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Status_Id" Type="Int64" />
           <Property Name="BillQuotation_Id" Type="Int64" />
-          <NavigationProperty Name="BILL_BillQuotation" Relationship="Self.FK__BILL_Bill__BillQ__70DDC3D8" FromRole="BILL_BillQuotationStatus" ToRole="BILL_BillQuotation" />
-          <NavigationProperty Name="BILL_Status" Relationship="Self.FK__BILL_Bill__Statu__6FE99F9F" FromRole="BILL_BillQuotationStatus" ToRole="BILL_Status" />
+          <NavigationProperty Name="BILL_BillQuotation" Relationship="SUPERPModel.FK__BILL_Bill__BillQ__5441852A" FromRole="BILL_BillQuotationStatus" ToRole="BILL_BillQuotation" />
+          <NavigationProperty Name="BILL_Status" Relationship="SUPERPModel.FK__BILL_Bill__Statu__534D60F1" FromRole="BILL_BillQuotationStatus" ToRole="BILL_Status" />
         </EntityType>
         <EntityType Name="BILL_Category">
           <Key>
             <PropertyRef Name="Category_Id" />
           </Key>
           <Property Name="Category_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DescriptionCat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BILL_Product" Relationship="Self.FK__BILL_Prod__Categ__619B8048" FromRole="BILL_Category" ToRole="BILL_Product" />
+          <NavigationProperty Name="BILL_Product" Relationship="SUPERPModel.FK__BILL_Prod__Categ__5535A963" FromRole="BILL_Category" ToRole="BILL_Product" />
         </EntityType>
         <EntityType Name="BILL_Product">
           <Key>
             <PropertyRef Name="Product_Id" />
           </Key>
           <Property Name="Product_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DescriptionPro" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Category_Id" Type="Int64" />
           <Property Name="Vat_Id" Type="Int64" />
-          <NavigationProperty Name="BILL_Category" Relationship="Self.FK__BILL_Prod__Categ__619B8048" FromRole="BILL_Product" ToRole="BILL_Category" />
-          <NavigationProperty Name="BILL_Vat" Relationship="Self.FK__BILL_Prod__Vat_I__628FA481" FromRole="BILL_Product" ToRole="BILL_Vat" />
+          <NavigationProperty Name="BILL_Category" Relationship="SUPERPModel.FK__BILL_Prod__Categ__5535A963" FromRole="BILL_Product" ToRole="BILL_Category" />
+          <NavigationProperty Name="BILL_Vat" Relationship="SUPERPModel.FK__BILL_Prod__Vat_I__5629CD9C" FromRole="BILL_Product" ToRole="BILL_Vat" />
         </EntityType>
         <EntityType Name="BILL_Status">
           <Key>
             <PropertyRef Name="Status_Id" />
           </Key>
           <Property Name="Status_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Libel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="BILL_BillQuotationStatus" Relationship="Self.FK__BILL_Bill__Statu__6FE99F9F" FromRole="BILL_Status" ToRole="BILL_BillQuotationStatus" />
+          <Property Name="Libel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BILL_BillQuotationStatus" Relationship="SUPERPModel.FK__BILL_Bill__Statu__534D60F1" FromRole="BILL_Status" ToRole="BILL_BillQuotationStatus" />
         </EntityType>
         <EntityType Name="BILL_Transmitter">
           <Key>
             <PropertyRef Name="Transmitter_Id" />
           </Key>
           <Property Name="Transmitter_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PostCode" Type="Int32" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NSiret" Type="Int64" Nullable="false" />
           <Property Name="AdressMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="BILL_BillQuotation" Relationship="Self.FK__BILL_Bill__Trans__68487DD7" FromRole="BILL_Transmitter" ToRole="BILL_BillQuotation" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BILL_BillQuotation" Relationship="SUPERPModel.FK__BILL_Bill__Trans__52593CB8" FromRole="BILL_Transmitter" ToRole="BILL_BillQuotation" />
         </EntityType>
         <EntityType Name="BILL_Vat">
           <Key>
@@ -555,7 +643,32 @@
           <Property Name="Vat_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Rate" Type="Double" />
           <Property Name="DateVat" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="BILL_Product" Relationship="Self.FK__BILL_Prod__Vat_I__628FA481" FromRole="BILL_Vat" ToRole="BILL_Product" />
+          <NavigationProperty Name="BILL_Product" Relationship="SUPERPModel.FK__BILL_Prod__Vat_I__5629CD9C" FromRole="BILL_Vat" ToRole="BILL_Product" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="siret" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="postalcode" Type="Int32" Nullable="false" />
+          <Property Name="city" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Company_Contact" Relationship="SUPERPModel.FK__Company_C__compa__6383C8BA" FromRole="Company" ToRole="Company_Contact" />
+        </EntityType>
+        <EntityType Name="Company_Contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="company_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="SUPERPModel.FK__Company_C__compa__6383C8BA" FromRole="Company_Contact" ToRole="Company" />
         </EntityType>
         <EntityType Name="ConfigAbsence">
           <Key>
@@ -564,24 +677,7 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaximumHalfDayAbsence" Type="Int32" />
           <Property Name="AbsenceType_id" Type="Int64" />
-          <NavigationProperty Name="AbsenceType" Relationship="Self.FK__ConfigAbs__Absen__534D60F1" FromRole="ConfigAbsence" ToRole="AbsenceType" />
-        </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="firstname" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lastname" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="gender" Type="Int32" Nullable="false" />
-          <Property Name="company" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="siret" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="postalcode" Type="Int32" Nullable="false" />
-          <Property Name="city" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="BILL_BillQuotation" Relationship="Self.FK__BILL_Bill__Custo__6754599E" FromRole="Customer" ToRole="BILL_BillQuotation" />
+          <NavigationProperty Name="AbsenceType" Relationship="SUPERPModel.FK__ConfigAbs__Absen__571DF1D5" FromRole="ConfigAbsence" ToRole="AbsenceType" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -589,7 +685,7 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="RoleModules" Relationship="Self.FK_RoleModule_Module" FromRole="Module" ToRole="RoleModule" />
+          <NavigationProperty Name="RoleModules" Relationship="SUPERPModel.FK_RoleModule_Module" FromRole="Module" ToRole="RoleModule" />
         </EntityType>
         <EntityType Name="Prime">
           <Key>
@@ -601,7 +697,7 @@
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Prime__User_id__571DF1D5" FromRole="Prime" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="SUPERPModel.FK__Prime__User_id__5812160E" FromRole="Prime" ToRole="User" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -609,8 +705,8 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="Label" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="RoleModules" Relationship="Self.FK_RoleModule_Role" FromRole="Role" ToRole="RoleModule" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+          <NavigationProperty Name="RoleModules" Relationship="SUPERPModel.FK_RoleModule_Role" FromRole="Role" ToRole="RoleModule" />
+          <NavigationProperty Name="Users" Relationship="SUPERPModel.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="RoleModule">
           <Key>
@@ -619,8 +715,8 @@
           <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="Module_id" Type="Int64" Nullable="false" />
           <Property Name="Role_id" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Module" Relationship="Self.FK_RoleModule_Module" FromRole="RoleModule" ToRole="Module" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_RoleModule_Role" FromRole="RoleModule" ToRole="Role" />
+          <NavigationProperty Name="Module" Relationship="SUPERPModel.FK_RoleModule_Module" FromRole="RoleModule" ToRole="Module" />
+          <NavigationProperty Name="Role" Relationship="SUPERPModel.FK_RoleModule_Role" FromRole="RoleModule" ToRole="Role" />
         </EntityType>
         <EntityType Name="Salary">
           <Key>
@@ -630,7 +726,7 @@
           <Property Name="User_id" Type="Int64" />
           <Property Name="NetSalary" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Salary__User_id__5629CD9C" FromRole="Salary" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="SUPERPModel.FK__Salary__User_id__5AEE82B9" FromRole="Salary" ToRole="User" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -639,7 +735,7 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Label" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PercentageTaxe" Type="Decimal" Precision="5" Scale="2" />
-          <NavigationProperty Name="Users" Relationship="Self.FK__User__Status_id__5535A963" FromRole="Status" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="SUPERPModel.FK__User__Status_id__5BE2A6F2" FromRole="Status" ToRole="User" />
         </EntityType>
         <EntityType Name="TicketRestaurant">
           <Key>
@@ -667,15 +763,15 @@
           <Property Name="Date_departure" Type="DateTime" Precision="3" />
           <Property Name="Role_id" Type="Int64" />
           <Property Name="Status_id" Type="Int64" />
-          <NavigationProperty Name="Absences" Relationship="Self.FK__Absence__User_id__5812160E" FromRole="User" ToRole="Absence" />
-          <NavigationProperty Name="Primes" Relationship="Self.FK__Prime__User_id__571DF1D5" FromRole="User" ToRole="Prime" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="Salaries" Relationship="Self.FK__Salary__User_id__5629CD9C" FromRole="User" ToRole="Salary" />
-          <NavigationProperty Name="Status" Relationship="Self.FK__User__Status_id__5535A963" FromRole="User" ToRole="Status" />
+          <NavigationProperty Name="Absences" Relationship="SUPERPModel.FK__Absence__User_id__5070F446" FromRole="User" ToRole="Absence" />
+          <NavigationProperty Name="Primes" Relationship="SUPERPModel.FK__Prime__User_id__5812160E" FromRole="User" ToRole="Prime" />
+          <NavigationProperty Name="Role" Relationship="SUPERPModel.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Salaries" Relationship="SUPERPModel.FK__Salary__User_id__5AEE82B9" FromRole="User" ToRole="Salary" />
+          <NavigationProperty Name="Status" Relationship="SUPERPModel.FK__User__Status_id__5BE2A6F2" FromRole="User" ToRole="Status" />
         </EntityType>
-        <Association Name="FK__Absence__Absence__5441852A">
-          <End Role="AbsenceType" Type="Self.AbsenceType" Multiplicity="0..1" />
-          <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+        <Association Name="FK__Absence__Absence__4F7CD00D">
+          <End Type="SUPERPModel.AbsenceType" Role="AbsenceType" Multiplicity="0..1" />
+          <End Type="SUPERPModel.Absence" Role="Absence" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AbsenceType">
               <PropertyRef Name="id" />
@@ -685,9 +781,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Absence__User_id__5812160E">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+        <Association Name="FK__Absence__User_id__5070F446">
+          <End Type="SUPERPModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="SUPERPModel.Absence" Role="Absence" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -697,9 +793,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ConfigAbs__Absen__534D60F1">
-          <End Role="AbsenceType" Type="Self.AbsenceType" Multiplicity="0..1" />
-          <End Role="ConfigAbsence" Type="Self.ConfigAbsence" Multiplicity="*" />
+        <Association Name="FK__ConfigAbs__Absen__571DF1D5">
+          <End Type="SUPERPModel.AbsenceType" Role="AbsenceType" Multiplicity="0..1" />
+          <End Type="SUPERPModel.ConfigAbsence" Role="ConfigAbsence" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AbsenceType">
               <PropertyRef Name="id" />
@@ -709,9 +805,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BILL_Bill__BillQ__70DDC3D8">
-          <End Role="BILL_BillQuotation" Type="Self.BILL_BillQuotation" Multiplicity="0..1" />
-          <End Role="BILL_BillQuotationStatus" Type="Self.BILL_BillQuotationStatus" Multiplicity="*" />
+        <Association Name="FK__BILL_Bill__BillQ__5441852A">
+          <End Type="SUPERPModel.BILL_BillQuotation" Role="BILL_BillQuotation" Multiplicity="0..1" />
+          <End Type="SUPERPModel.BILL_BillQuotationStatus" Role="BILL_BillQuotationStatus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BILL_BillQuotation">
               <PropertyRef Name="BillQuotation_Id" />
@@ -721,21 +817,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BILL_Bill__Custo__6754599E">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="BILL_BillQuotation" Type="Self.BILL_BillQuotation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="BILL_BillQuotation">
-              <PropertyRef Name="Customer_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__BILL_Bill__Trans__68487DD7">
-          <End Role="BILL_Transmitter" Type="Self.BILL_Transmitter" Multiplicity="0..1" />
-          <End Role="BILL_BillQuotation" Type="Self.BILL_BillQuotation" Multiplicity="*" />
+        <Association Name="FK__BILL_Bill__Trans__52593CB8">
+          <End Type="SUPERPModel.BILL_Transmitter" Role="BILL_Transmitter" Multiplicity="0..1" />
+          <End Type="SUPERPModel.BILL_BillQuotation" Role="BILL_BillQuotation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BILL_Transmitter">
               <PropertyRef Name="Transmitter_Id" />
@@ -745,9 +829,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BILL_Bill__Statu__6FE99F9F">
-          <End Role="BILL_Status" Type="Self.BILL_Status" Multiplicity="0..1" />
-          <End Role="BILL_BillQuotationStatus" Type="Self.BILL_BillQuotationStatus" Multiplicity="*" />
+        <Association Name="FK__BILL_Bill__Statu__534D60F1">
+          <End Type="SUPERPModel.BILL_Status" Role="BILL_Status" Multiplicity="0..1" />
+          <End Type="SUPERPModel.BILL_BillQuotationStatus" Role="BILL_BillQuotationStatus" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BILL_Status">
               <PropertyRef Name="Status_Id" />
@@ -757,9 +841,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BILL_Prod__Categ__619B8048">
-          <End Role="BILL_Category" Type="Self.BILL_Category" Multiplicity="0..1" />
-          <End Role="BILL_Product" Type="Self.BILL_Product" Multiplicity="*" />
+        <Association Name="FK__BILL_Prod__Categ__5535A963">
+          <End Type="SUPERPModel.BILL_Category" Role="BILL_Category" Multiplicity="0..1" />
+          <End Type="SUPERPModel.BILL_Product" Role="BILL_Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BILL_Category">
               <PropertyRef Name="Category_Id" />
@@ -769,9 +853,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BILL_Prod__Vat_I__628FA481">
-          <End Role="BILL_Vat" Type="Self.BILL_Vat" Multiplicity="0..1" />
-          <End Role="BILL_Product" Type="Self.BILL_Product" Multiplicity="*" />
+        <Association Name="FK__BILL_Prod__Vat_I__5629CD9C">
+          <End Type="SUPERPModel.BILL_Vat" Role="BILL_Vat" Multiplicity="0..1" />
+          <End Type="SUPERPModel.BILL_Product" Role="BILL_Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BILL_Vat">
               <PropertyRef Name="Vat_Id" />
@@ -781,9 +865,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Company_C__compa__6383C8BA">
+          <End Type="SUPERPModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="SUPERPModel.Company_Contact" Role="Company_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Company_Contact">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RoleModule_Module">
-          <End Role="Module" Type="Self.Module" Multiplicity="1" />
-          <End Role="RoleModule" Type="Self.RoleModule" Multiplicity="*" />
+          <End Type="SUPERPModel.Module" Role="Module" Multiplicity="1" />
+          <End Type="SUPERPModel.RoleModule" Role="RoleModule" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Id" />
@@ -793,9 +889,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Prime__User_id__571DF1D5">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Prime" Type="Self.Prime" Multiplicity="*" />
+        <Association Name="FK__Prime__User_id__5812160E">
+          <End Type="SUPERPModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="SUPERPModel.Prime" Role="Prime" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -806,8 +902,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RoleModule_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="RoleModule" Type="Self.RoleModule" Multiplicity="*" />
+          <End Type="SUPERPModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="SUPERPModel.RoleModule" Role="RoleModule" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="Id" />
@@ -818,8 +914,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="SUPERPModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="SUPERPModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="Id" />
@@ -829,9 +925,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Salary__User_id__5629CD9C">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+        <Association Name="FK__Salary__User_id__5AEE82B9">
+          <End Type="SUPERPModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="SUPERPModel.Salary" Role="Salary" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -841,9 +937,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User__Status_id__5535A963">
-          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+        <Association Name="FK__User__Status_id__5BE2A6F2">
+          <End Type="SUPERPModel.Status" Role="Status" Multiplicity="0..1" />
+          <End Type="SUPERPModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Status">
               <PropertyRef Name="id" />
@@ -853,87 +949,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SUPERPEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Absences" EntityType="Self.Absence" />
-          <EntitySet Name="AbsenceTypes" EntityType="Self.AbsenceType" />
-          <EntitySet Name="BILL_BillQuotation" EntityType="Self.BILL_BillQuotation" />
-          <EntitySet Name="BILL_BillQuotationStatus" EntityType="Self.BILL_BillQuotationStatus" />
-          <EntitySet Name="BILL_Category" EntityType="Self.BILL_Category" />
-          <EntitySet Name="BILL_Product" EntityType="Self.BILL_Product" />
-          <EntitySet Name="BILL_Status" EntityType="Self.BILL_Status" />
-          <EntitySet Name="BILL_Transmitter" EntityType="Self.BILL_Transmitter" />
-          <EntitySet Name="BILL_Vat" EntityType="Self.BILL_Vat" />
-          <EntitySet Name="ConfigAbsences" EntityType="Self.ConfigAbsence" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="Modules" EntityType="Self.Module" />
-          <EntitySet Name="Primes" EntityType="Self.Prime" />
-          <EntitySet Name="Roles" EntityType="Self.Role" />
-          <EntitySet Name="RoleModules" EntityType="Self.RoleModule" />
-          <EntitySet Name="Salaries" EntityType="Self.Salary" />
-          <EntitySet Name="Status" EntityType="Self.Status" />
-          <EntitySet Name="TicketRestaurants" EntityType="Self.TicketRestaurant" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK__Absence__Absence__5441852A" Association="Self.FK__Absence__Absence__5441852A">
-            <End Role="AbsenceType" EntitySet="AbsenceTypes" />
-            <End Role="Absence" EntitySet="Absences" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Absence__User_id__5812160E" Association="Self.FK__Absence__User_id__5812160E">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Absence" EntitySet="Absences" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ConfigAbs__Absen__534D60F1" Association="Self.FK__ConfigAbs__Absen__534D60F1">
-            <End Role="AbsenceType" EntitySet="AbsenceTypes" />
-            <End Role="ConfigAbsence" EntitySet="ConfigAbsences" />
-          </AssociationSet>
-          <AssociationSet Name="FK__BILL_Bill__BillQ__70DDC3D8" Association="Self.FK__BILL_Bill__BillQ__70DDC3D8">
-            <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
-            <End Role="BILL_BillQuotationStatus" EntitySet="BILL_BillQuotationStatus" />
-          </AssociationSet>
-          <AssociationSet Name="FK__BILL_Bill__Custo__6754599E" Association="Self.FK__BILL_Bill__Custo__6754599E">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
-          </AssociationSet>
-          <AssociationSet Name="FK__BILL_Bill__Trans__68487DD7" Association="Self.FK__BILL_Bill__Trans__68487DD7">
-            <End Role="BILL_Transmitter" EntitySet="BILL_Transmitter" />
-            <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
-          </AssociationSet>
-          <AssociationSet Name="FK__BILL_Bill__Statu__6FE99F9F" Association="Self.FK__BILL_Bill__Statu__6FE99F9F">
-            <End Role="BILL_Status" EntitySet="BILL_Status" />
-            <End Role="BILL_BillQuotationStatus" EntitySet="BILL_BillQuotationStatus" />
-          </AssociationSet>
-          <AssociationSet Name="FK__BILL_Prod__Categ__619B8048" Association="Self.FK__BILL_Prod__Categ__619B8048">
-            <End Role="BILL_Category" EntitySet="BILL_Category" />
-            <End Role="BILL_Product" EntitySet="BILL_Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK__BILL_Prod__Vat_I__628FA481" Association="Self.FK__BILL_Prod__Vat_I__628FA481">
-            <End Role="BILL_Vat" EntitySet="BILL_Vat" />
-            <End Role="BILL_Product" EntitySet="BILL_Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RoleModule_Module" Association="Self.FK_RoleModule_Module">
-            <End Role="Module" EntitySet="Modules" />
-            <End Role="RoleModule" EntitySet="RoleModules" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Prime__User_id__571DF1D5" Association="Self.FK__Prime__User_id__571DF1D5">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Prime" EntitySet="Primes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RoleModule_Role" Association="Self.FK_RoleModule_Role">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="RoleModule" EntitySet="RoleModules" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Salary__User_id__5629CD9C" Association="Self.FK__Salary__User_id__5629CD9C">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Salary" EntitySet="Salaries" />
-          </AssociationSet>
-          <AssociationSet Name="FK__User__Status_id__5535A963" Association="Self.FK__User__Status_id__5535A963">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -943,205 +958,213 @@
           <EntitySetMapping Name="Absences">
             <EntityTypeMapping TypeName="SUPERPModel.Absence">
               <MappingFragment StoreEntitySet="Absence">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="User_id" ColumnName="User_id" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="AbsenceType_id" ColumnName="AbsenceType_id" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AbsenceTypes">
             <EntityTypeMapping TypeName="SUPERPModel.AbsenceType">
               <MappingFragment StoreEntitySet="AbsenceType">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BILL_BillQuotation">
             <EntityTypeMapping TypeName="SUPERPModel.BILL_BillQuotation">
               <MappingFragment StoreEntitySet="BILL_BillQuotation">
-                <ScalarProperty Name="BillQuotation_Id" ColumnName="BillQuotation_Id" />
-                <ScalarProperty Name="NBill" ColumnName="NBill" />
-                <ScalarProperty Name="Vat" ColumnName="Vat" />
-                <ScalarProperty Name="AmountDF" ColumnName="AmountDF" />
-                <ScalarProperty Name="DateBillQuotation" ColumnName="DateBillQuotation" />
-                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
                 <ScalarProperty Name="Transmitter_Id" ColumnName="Transmitter_Id" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+                <ScalarProperty Name="DateBillQuotation" ColumnName="DateBillQuotation" />
+                <ScalarProperty Name="AmountDF" ColumnName="AmountDF" />
+                <ScalarProperty Name="Vat" ColumnName="Vat" />
+                <ScalarProperty Name="NBill" ColumnName="NBill" />
+                <ScalarProperty Name="BillQuotation_Id" ColumnName="BillQuotation_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BILL_BillQuotationStatus">
             <EntityTypeMapping TypeName="SUPERPModel.BILL_BillQuotationStatus">
               <MappingFragment StoreEntitySet="BILL_BillQuotationStatus">
-                <ScalarProperty Name="BillQuotationStatus_Id" ColumnName="BillQuotationStatus_Id" />
-                <ScalarProperty Name="DateAdvancement" ColumnName="DateAdvancement" />
-                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
                 <ScalarProperty Name="BillQuotation_Id" ColumnName="BillQuotation_Id" />
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+                <ScalarProperty Name="DateAdvancement" ColumnName="DateAdvancement" />
+                <ScalarProperty Name="BillQuotationStatus_Id" ColumnName="BillQuotationStatus_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BILL_Category">
             <EntityTypeMapping TypeName="SUPERPModel.BILL_Category">
               <MappingFragment StoreEntitySet="BILL_Category">
-                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DescriptionCat" ColumnName="DescriptionCat" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BILL_Product">
             <EntityTypeMapping TypeName="SUPERPModel.BILL_Product">
               <MappingFragment StoreEntitySet="BILL_Product">
-                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="DescriptionPro" ColumnName="DescriptionPro" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
                 <ScalarProperty Name="Vat_Id" ColumnName="Vat_Id" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DescriptionPro" ColumnName="DescriptionPro" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BILL_Status">
             <EntityTypeMapping TypeName="SUPERPModel.BILL_Status">
               <MappingFragment StoreEntitySet="BILL_Status">
-                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
                 <ScalarProperty Name="Libel" ColumnName="Libel" />
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BILL_Transmitter">
             <EntityTypeMapping TypeName="SUPERPModel.BILL_Transmitter">
               <MappingFragment StoreEntitySet="BILL_Transmitter">
-                <ScalarProperty Name="Transmitter_Id" ColumnName="Transmitter_Id" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="NSiret" ColumnName="NSiret" />
-                <ScalarProperty Name="AdressMail" ColumnName="AdressMail" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="AdressMail" ColumnName="AdressMail" />
+                <ScalarProperty Name="NSiret" ColumnName="NSiret" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Transmitter_Id" ColumnName="Transmitter_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BILL_Vat">
             <EntityTypeMapping TypeName="SUPERPModel.BILL_Vat">
               <MappingFragment StoreEntitySet="BILL_Vat">
-                <ScalarProperty Name="Vat_Id" ColumnName="Vat_Id" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="DateVat" ColumnName="DateVat" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Vat_Id" ColumnName="Vat_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="SUPERPModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="siret" ColumnName="siret" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Company_Contact">
+            <EntityTypeMapping TypeName="SUPERPModel.Company_Contact">
+              <MappingFragment StoreEntitySet="Company_Contact">
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ConfigAbsences">
             <EntityTypeMapping TypeName="SUPERPModel.ConfigAbsence">
               <MappingFragment StoreEntitySet="ConfigAbsence">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="MaximumHalfDayAbsence" ColumnName="MaximumHalfDayAbsence" />
                 <ScalarProperty Name="AbsenceType_id" ColumnName="AbsenceType_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="SUPERPModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="MaximumHalfDayAbsence" ColumnName="MaximumHalfDayAbsence" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="firstname" ColumnName="firstname" />
-                <ScalarProperty Name="lastname" ColumnName="lastname" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="company" ColumnName="company" />
-                <ScalarProperty Name="siret" ColumnName="siret" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="postalcode" ColumnName="postalcode" />
-                <ScalarProperty Name="city" ColumnName="city" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Modules">
             <EntityTypeMapping TypeName="SUPERPModel.Module">
               <MappingFragment StoreEntitySet="Module">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Primes">
             <EntityTypeMapping TypeName="SUPERPModel.Prime">
               <MappingFragment StoreEntitySet="Prime">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="User_id" ColumnName="User_id" />
-                <ScalarProperty Name="Label" ColumnName="Label" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="SUPERPModel.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RoleModules">
             <EntityTypeMapping TypeName="SUPERPModel.RoleModule">
               <MappingFragment StoreEntitySet="RoleModule">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Module_id" ColumnName="Module_id" />
                 <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+                <ScalarProperty Name="Module_id" ColumnName="Module_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Salaries">
             <EntityTypeMapping TypeName="SUPERPModel.Salary">
               <MappingFragment StoreEntitySet="Salary">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="User_id" ColumnName="User_id" />
-                <ScalarProperty Name="NetSalary" ColumnName="NetSalary" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="NetSalary" ColumnName="NetSalary" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Status">
             <EntityTypeMapping TypeName="SUPERPModel.Status">
               <MappingFragment StoreEntitySet="Status">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Label" ColumnName="Label" />
                 <ScalarProperty Name="PercentageTaxe" ColumnName="PercentageTaxe" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TicketRestaurants">
             <EntityTypeMapping TypeName="SUPERPModel.TicketRestaurant">
               <MappingFragment StoreEntitySet="TicketRestaurant">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Label" ColumnName="Label" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="PercentageEnterprise" ColumnName="PercentageEnterprise" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PercentageEnterprise" ColumnName="PercentageEnterprise" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="SUPERPModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Passwordhash" ColumnName="Passwordhash" />
-                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Zip_code" ColumnName="Zip_code" />
-                <ScalarProperty Name="Date_arrival" ColumnName="Date_arrival" />
-                <ScalarProperty Name="Date_departure" ColumnName="Date_departure" />
-                <ScalarProperty Name="Role_id" ColumnName="Role_id" />
                 <ScalarProperty Name="Status_id" ColumnName="Status_id" />
+                <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+                <ScalarProperty Name="Date_departure" ColumnName="Date_departure" />
+                <ScalarProperty Name="Date_arrival" ColumnName="Date_arrival" />
+                <ScalarProperty Name="Zip_code" ColumnName="Zip_code" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Passwordhash" ColumnName="Passwordhash" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

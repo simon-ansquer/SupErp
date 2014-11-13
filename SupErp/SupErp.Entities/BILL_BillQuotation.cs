@@ -28,7 +28,6 @@ namespace SupErp.Entities
         public Nullable<long> Transmitter_Id { get; set; }
     
         public virtual ICollection<BILL_BillQuotationStatus> BILL_BillQuotationStatus { get; set; }
-        public virtual Customer Customer { get; set; }
         public virtual BILL_Transmitter BILL_Transmitter { get; set; }
     }
 }
