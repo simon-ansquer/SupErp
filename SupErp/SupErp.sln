@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupErp.Shared", "SupErp.Shared\SupErp.Shared.csproj", "{AED44877-9636-4E8C-95A3-722D99F6260B}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupErp.Kernel", "SupErp.Kernel\SupErp.Kernel.csproj", "{E9AEB03E-1864-470F-8819-7A7419D3B87C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupErp.DAL", "SupErp.DAL\SupErp.DAL.csproj", "{369107F3-119A-4358-86BF-23BB9E74018F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupErp.Tests", "SupErp.Tests\SupErp.Tests.csproj", "{D9DBA5E0-62CA-441D-BAE4-ED0F92954458}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{369107F3-119A-4358-86BF-23BB9E74018F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{369107F3-119A-4358-86BF-23BB9E74018F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{369107F3-119A-4358-86BF-23BB9E74018F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9DBA5E0-62CA-441D-BAE4-ED0F92954458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9DBA5E0-62CA-441D-BAE4-ED0F92954458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9DBA5E0-62CA-441D-BAE4-ED0F92954458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9DBA5E0-62CA-441D-BAE4-ED0F92954458}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

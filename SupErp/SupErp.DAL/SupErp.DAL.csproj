@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompanyDAL.cs" />
+    <Compile Include="Company_ContactDAL.cs" />
     <Compile Include="ModuleUser\UserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
