@@ -45,5 +45,6 @@ namespace SupErp.Entities
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<TicketRestaurant> TicketRestaurants { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<BILL_LineBillQuotation> BILL_LineBillQuotation { get; set; }
     }
 }
