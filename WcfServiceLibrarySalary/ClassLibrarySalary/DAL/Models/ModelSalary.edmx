@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SUPERPDEVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Absence">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="bigint" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="AbsenceType_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="AbsenceType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ConfigAbsence">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaximumHalfDayAbsence" Type="int" />
+          <Property Name="AbsenceType_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Prime">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="bigint" />
+          <Property Name="Label" Type="nvarchar" MaxLength="100" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Price" Type="money" />
+        </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="bigint" />
+          <Property Name="NetSalary" Type="money" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Label" Type="varchar" MaxLength="100" />
+          <Property Name="PercentageTaxe" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="TicketRestaurant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="100" />
+          <Property Name="Value" Type="money" />
+          <Property Name="PercentageEnterprise" Type="decimal" Precision="5" Scale="3" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="100" />
+          <Property Name="Passwordhash" Type="nchar" MaxLength="200" />
+          <Property Name="Firstname" Type="nchar" MaxLength="50" />
+          <Property Name="Lastname" Type="nchar" MaxLength="50" />
+          <Property Name="City" Type="nchar" MaxLength="30" />
+          <Property Name="Address" Type="nchar" MaxLength="200" />
+          <Property Name="Zip_code" Type="nchar" MaxLength="10" />
+          <Property Name="Date_arrival" Type="datetime" />
+          <Property Name="Date_departure" Type="datetime" />
+          <Property Name="Role_id" Type="bigint" />
+          <Property Name="Status_id" Type="bigint" />
+        </EntityType>
+        <Association Name="FK__Absence__Absence__5441852A">
+          <End Role="AbsenceType" Type="Self.AbsenceType" Multiplicity="0..1" />
+          <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AbsenceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Absence">
+              <PropertyRef Name="AbsenceType_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Absence__User_id__5812160E">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Absence">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ConfigAbs__Absen__534D60F1">
+          <End Role="AbsenceType" Type="Self.AbsenceType" Multiplicity="0..1" />
+          <End Role="ConfigAbsence" Type="Self.ConfigAbsence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AbsenceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConfigAbsence">
+              <PropertyRef Name="AbsenceType_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prime__User_id__571DF1D5">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Prime" Type="Self.Prime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prime">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salary__User_id__5629CD9C">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__Status_id__5535A963">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SUPERPDEVModelStoreContainer">
+          <EntitySet Name="Absence" EntityType="Self.Absence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AbsenceType" EntityType="Self.AbsenceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigAbsence" EntityType="Self.ConfigAbsence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prime" EntityType="Self.Prime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketRestaurant" EntityType="Self.TicketRestaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Absence__Absence__5441852A" Association="Self.FK__Absence__Absence__5441852A">
+            <End Role="AbsenceType" EntitySet="AbsenceType" />
+            <End Role="Absence" EntitySet="Absence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Absence__User_id__5812160E" Association="Self.FK__Absence__User_id__5812160E">
+            <End Role="User" EntitySet="User" />
+            <End Role="Absence" EntitySet="Absence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ConfigAbs__Absen__534D60F1" Association="Self.FK__ConfigAbs__Absen__534D60F1">
+            <End Role="AbsenceType" EntitySet="AbsenceType" />
+            <End Role="ConfigAbsence" EntitySet="ConfigAbsence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prime__User_id__571DF1D5" Association="Self.FK__Prime__User_id__571DF1D5">
+            <End Role="User" EntitySet="User" />
+            <End Role="Prime" EntitySet="Prime" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salary__User_id__5629CD9C" Association="Self.FK__Salary__User_id__5629CD9C">
+            <End Role="User" EntitySet="User" />
+            <End Role="Salary" EntitySet="Salary" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__Status_id__5535A963" Association="Self.FK__User__Status_id__5535A963">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SUPERPDEVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Absence">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_id" Type="Int64" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="AbsenceType_id" Type="Int64" />
+          <NavigationProperty Name="AbsenceType" Relationship="Self.FK__Absence__Absence__5441852A" FromRole="Absence" ToRole="AbsenceType" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Absence__User_id__5812160E" FromRole="Absence" ToRole="User" />
+        </EntityType>
+        <EntityType Name="AbsenceType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Label" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Absences" Relationship="Self.FK__Absence__Absence__5441852A" FromRole="AbsenceType" ToRole="Absence" />
+          <NavigationProperty Name="ConfigAbsences" Relationship="Self.FK__ConfigAbs__Absen__534D60F1" FromRole="AbsenceType" ToRole="ConfigAbsence" />
+        </EntityType>
+        <EntityType Name="ConfigAbsence">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaximumHalfDayAbsence" Type="Int32" />
+          <Property Name="AbsenceType_id" Type="Int64" />
+          <NavigationProperty Name="AbsenceType" Relationship="Self.FK__ConfigAbs__Absen__534D60F1" FromRole="ConfigAbsence" ToRole="AbsenceType" />
+        </EntityType>
+        <EntityType Name="Prime">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_id" Type="Int64" />
+          <Property Name="Label" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Prime__User_id__571DF1D5" FromRole="Prime" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_id" Type="Int64" />
+          <Property Name="NetSalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Salary__User_id__5629CD9C" FromRole="Salary" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Label" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PercentageTaxe" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__User__Status_id__5535A963" FromRole="Status" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TicketRestaurant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Label" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PercentageEnterprise" Type="Decimal" Precision="5" Scale="3" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Passwordhash" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="Zip_code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Date_arrival" Type="DateTime" Precision="3" />
+          <Property Name="Date_departure" Type="DateTime" Precision="3" />
+          <Property Name="Role_id" Type="Int64" />
+          <Property Name="Status_id" Type="Int64" />
+          <NavigationProperty Name="Absences" Relationship="Self.FK__Absence__User_id__5812160E" FromRole="User" ToRole="Absence" />
+          <NavigationProperty Name="Primes" Relationship="Self.FK__Prime__User_id__571DF1D5" FromRole="User" ToRole="Prime" />
+          <NavigationProperty Name="Salaries" Relationship="Self.FK__Salary__User_id__5629CD9C" FromRole="User" ToRole="Salary" />
+          <NavigationProperty Name="Status" Relationship="Self.FK__User__Status_id__5535A963" FromRole="User" ToRole="Status" />
+        </EntityType>
+        <Association Name="FK__Absence__Absence__5441852A">
+          <End Role="AbsenceType" Type="Self.AbsenceType" Multiplicity="0..1" />
+          <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AbsenceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Absence">
+              <PropertyRef Name="AbsenceType_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Absence__User_id__5812160E">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Absence">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ConfigAbs__Absen__534D60F1">
+          <End Role="AbsenceType" Type="Self.AbsenceType" Multiplicity="0..1" />
+          <End Role="ConfigAbsence" Type="Self.ConfigAbsence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AbsenceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConfigAbsence">
+              <PropertyRef Name="AbsenceType_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prime__User_id__571DF1D5">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Prime" Type="Self.Prime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prime">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salary__User_id__5629CD9C">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__Status_id__5535A963">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SUPERPDEVEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Absences" EntityType="Self.Absence" />
+          <EntitySet Name="AbsenceTypes" EntityType="Self.AbsenceType" />
+          <EntitySet Name="ConfigAbsences" EntityType="Self.ConfigAbsence" />
+          <EntitySet Name="Primes" EntityType="Self.Prime" />
+          <EntitySet Name="Salaries" EntityType="Self.Salary" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="TicketRestaurants" EntityType="Self.TicketRestaurant" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Absence__Absence__5441852A" Association="Self.FK__Absence__Absence__5441852A">
+            <End Role="AbsenceType" EntitySet="AbsenceTypes" />
+            <End Role="Absence" EntitySet="Absences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Absence__User_id__5812160E" Association="Self.FK__Absence__User_id__5812160E">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Absence" EntitySet="Absences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ConfigAbs__Absen__534D60F1" Association="Self.FK__ConfigAbs__Absen__534D60F1">
+            <End Role="AbsenceType" EntitySet="AbsenceTypes" />
+            <End Role="ConfigAbsence" EntitySet="ConfigAbsences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prime__User_id__571DF1D5" Association="Self.FK__Prime__User_id__571DF1D5">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Prime" EntitySet="Primes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salary__User_id__5629CD9C" Association="Self.FK__Salary__User_id__5629CD9C">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Salary" EntitySet="Salaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__Status_id__5535A963" Association="Self.FK__User__Status_id__5535A963">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SUPERPDEVModelStoreContainer" CdmEntityContainer="SUPERPDEVEntities">
+          <EntitySetMapping Name="Absences">
+            <EntityTypeMapping TypeName="SUPERPDEVModel.Absence">
+              <MappingFragment StoreEntitySet="Absence">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="AbsenceType_id" ColumnName="AbsenceType_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AbsenceTypes">
+            <EntityTypeMapping TypeName="SUPERPDEVModel.AbsenceType">
+              <MappingFragment StoreEntitySet="AbsenceType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigAbsences">
+            <EntityTypeMapping TypeName="SUPERPDEVModel.ConfigAbsence">
+              <MappingFragment StoreEntitySet="ConfigAbsence">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="MaximumHalfDayAbsence" ColumnName="MaximumHalfDayAbsence" />
+                <ScalarProperty Name="AbsenceType_id" ColumnName="AbsenceType_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Primes">
+            <EntityTypeMapping TypeName="SUPERPDEVModel.Prime">
+              <MappingFragment StoreEntitySet="Prime">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salaries">
+            <EntityTypeMapping TypeName="SUPERPDEVModel.Salary">
+              <MappingFragment StoreEntitySet="Salary">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="NetSalary" ColumnName="NetSalary" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="SUPERPDEVModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="PercentageTaxe" ColumnName="PercentageTaxe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketRestaurants">
+            <EntityTypeMapping TypeName="SUPERPDEVModel.TicketRestaurant">
+              <MappingFragment StoreEntitySet="TicketRestaurant">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="PercentageEnterprise" ColumnName="PercentageEnterprise" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SUPERPDEVModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Passwordhash" ColumnName="Passwordhash" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Zip_code" ColumnName="Zip_code" />
+                <ScalarProperty Name="Date_arrival" ColumnName="Date_arrival" />
+                <ScalarProperty Name="Date_departure" ColumnName="Date_departure" />
+                <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+                <ScalarProperty Name="Status_id" ColumnName="Status_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

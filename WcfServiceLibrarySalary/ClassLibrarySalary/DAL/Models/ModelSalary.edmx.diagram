@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0b14eb42e40949eaade17b2e3435f746" Name="Diagram1">
+        <EntityTypeShape EntityType="SUPERPDEVModel.Absence" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPDEVModel.AbsenceType" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPDEVModel.ConfigAbsence" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPDEVModel.Prime" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPDEVModel.Salary" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPDEVModel.Status" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPDEVModel.TicketRestaurant" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPDEVModel.User" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="SUPERPDEVModel.FK__Absence__Absence__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPDEVModel.FK__Absence__User_id__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPDEVModel.FK__ConfigAbs__Absen__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPDEVModel.FK__Prime__User_id__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPDEVModel.FK__Salary__User_id__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPDEVModel.FK__User__Status_id__5535A963" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
