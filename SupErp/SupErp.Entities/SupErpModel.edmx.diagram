@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ec3fdf7f8a9b44a5b9eb18a1fd9dab4b" Name="Diagram1">
+        <EntityTypeShape EntityType="SUPERPModel.Absence" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.AbsenceType" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotation" Width="1.5" PointX="13" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotationStatus" Width="1.5" PointX="15.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_Category" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_Product" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_Status" Width="1.5" PointX="13" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_Transmitter" Width="1.5" PointX="10.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_Vat" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.ConfigAbsence" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.Customer" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.Module" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.Prime" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.Role" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.RoleModule" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.Salary" Width="1.5" PointX="8.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.Status" Width="1.5" PointX="3.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.TicketRestaurant" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.User" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="SUPERPModel.FK__Absence__Absence__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK__Absence__User_id__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK__ConfigAbs__Absen__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__BillQ__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__Custo__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__Trans__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__Statu__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Prod__Categ__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Prod__Vat_I__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK_RoleModule_Module" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK__Prime__User_id__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK_RoleModule_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK__Salary__User_id__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="SUPERPModel.FK__User__Status_id__5535A963" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
