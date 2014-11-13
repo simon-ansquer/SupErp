@@ -9,7 +9,7 @@ using System.Text;
 namespace SupErp.WCF
 {
     [ServiceContract]
-    public interface IService1
+    public interface IService
     {
 
     }

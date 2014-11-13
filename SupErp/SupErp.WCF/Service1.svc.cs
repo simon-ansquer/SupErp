@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SupErp.WCF
 {
-    public class Service1 : IService1
+    public class Service1 : IService
     {
     }
 }
