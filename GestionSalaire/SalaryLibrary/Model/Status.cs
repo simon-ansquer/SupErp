@@ -7,17 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SalaryLibrary.DAL
+namespace SalaryLibrary.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ConfigAbsence
+    public partial class Status
     {
-        public long id { get; set; }
-        public Nullable<int> MaximumHalfDayAbsence { get; set; }
-        public Nullable<long> AbsenceType_id { get; set; }
+        public Status()
+        {
+            this.Users = new HashSet<User>();
+        }
     
-        public virtual AbsenceType AbsenceType { get; set; }
+        public long id { get; set; }
+        public string Label { get; set; }
+        public Nullable<decimal> PercentageTaxe { get; set; }
+    
+        public virtual ICollection<User> Users { get; set; }
     }
 }

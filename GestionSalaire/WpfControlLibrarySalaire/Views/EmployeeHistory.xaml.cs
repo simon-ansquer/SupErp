@@ -12,23 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfControlLibrarySalaire.Interfaces;
 
-namespace WpfControlLibrarySalaire
+namespace WpfControlLibrarySalaire.Views
 {
     /// <summary>
-    /// Logique d'interaction pour UserControl1.xaml
+    /// Logique d'interaction pour EmployeeHistory.xaml
     /// </summary>
-    public partial class EmployeesList : UserControl, IMainMenu
+    public partial class EmployeeHistory : UserControl
     {
-        public EmployeesList()
+        public EmployeeHistory()
         {
             InitializeComponent();
-        }
-
-        public string MenuName
-        {
-            get { return "Salaires"; }
         }
     }
 }
