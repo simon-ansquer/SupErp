@@ -7,7 +7,7 @@ using SupErp.Entities;
 
 namespace SupErp.DAL.FacturationDAL
 {
-    public class BillQuotationStatus_DAL
+    public class BillQuotationStatusDAL
     {
         #region Read
 
