@@ -648,7 +648,6 @@
           <Property Name="Vat" Type="Boolean" />
           <Property Name="AmountDF" Type="Int32" Nullable="false" />
           <Property Name="DateBillQuotation" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Customer_Id" Type="Int64" />
           <Property Name="Transmitter_Id" Type="Int64" />
           <NavigationProperty Name="BILL_BillQuotationStatus" Relationship="SUPERPModel.FK__BILL_Bill__BillQ__5441852A" FromRole="BILL_BillQuotation" ToRole="BILL_BillQuotationStatus" />
           <NavigationProperty Name="BILL_Transmitter" Relationship="SUPERPModel.FK__BILL_Bill__Trans__52593CB8" FromRole="BILL_BillQuotation" ToRole="BILL_Transmitter" />
