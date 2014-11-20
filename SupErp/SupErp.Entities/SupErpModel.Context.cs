@@ -28,6 +28,8 @@ namespace SupErp.Entities
         public virtual DbSet<Absence> Absences { get; set; }
         public virtual DbSet<AbsenceType> AbsenceTypes { get; set; }
         public virtual DbSet<BILL_BillQuotation> BILL_BillQuotation { get; set; }
+        public virtual DbSet<BILL_LineBillQuotation> BILL_LineBillQuotation { get; set; }
+
         public virtual DbSet<BILL_BillQuotationStatus> BILL_BillQuotationStatus { get; set; }
         public virtual DbSet<BILL_Category> BILL_Category { get; set; }
         public virtual DbSet<BILL_Product> BILL_Product { get; set; }
