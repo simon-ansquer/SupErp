@@ -23,10 +23,12 @@ namespace SupErp.Tests
         public void TestGetUsers()
         {
             List<User> lst = new List<User>();
-
             lst = clientService.GetUser();
-
             Assert.AreNotEqual(lst.Count, 0);
+
+            lst = clientService.GetUser("del");
+            Assert.AreEqual(lst.Count, 1);
+
         }
     }
 }

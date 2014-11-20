@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using SupErp.IHM.ServiceReference1;
+using SupErp.Entities;
 
 namespace SupErp.IHM.ViewModels
 {

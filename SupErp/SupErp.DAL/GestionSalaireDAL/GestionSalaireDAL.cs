@@ -104,27 +104,34 @@ namespace SupErp.DAL.GestionSalaireDAL
         public List<User> GetUsers(String q)
         {
 
-            StringBuilder sb = new StringBuilder();
-            bool first = true;
-            foreach (char c in q)
-            {
-                if (first)
-                {
-                    sb.Append("(");
-                    first = false;
-                }
-                if (c.Equals(' '))
-                {
-                    sb.Append(")?");
-                    first = true;
-                }
-                else
-                {
-                    sb.Append(c);
-                }
+            if (!String.IsNullOrEmpty(q))
+            { 
+                //StringBuilder sb = new StringBuilder();
+                //bool first = true;
+                //foreach (char c in q)
+                //{
+                //    if (first)
+                //    {
+                //        sb.Append("(");
+                //        first = false;
+                //    }
+                //    if (c.Equals(' '))
+                //    {
+                //        sb.Append(")?");
+                //        first = true;
+                //    }
+                //    else
+                //    {
+                //        sb.Append(c);
+                //    }
+                //}
+                //sb.Append(")?");
+                //Regex regex = new Regex(sb.ToString(), RegexOptions.IgnoreCase);
+                var query = q.Split(' ');
+                return Entities.Users.Include("Salaries").Include("Absences").Where(x => query.Contains(x.Lastname) || query.Contains(x.Firstname) || x.Lastname.Contains(q) || x.Firstname.Contains(q)).ToList();
             }
-            Regex regex = new Regex(sb.ToString());
-            return Entities.Users.Include("Salaries").Include("Absences").Where(x => String.IsNullOrEmpty(q) || (regex.IsMatch(x.Lastname) || regex.IsMatch(x.Firstname))).ToList();
+            return Entities.Users.Include("Salaries").Include("Absences").ToList();
+            
         }
 
         /// <summary>
