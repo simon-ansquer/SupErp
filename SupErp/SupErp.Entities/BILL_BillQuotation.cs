@@ -25,7 +25,6 @@ namespace SupErp.Entities
         public Nullable<bool> Vat { get; set; }
         public int AmountDF { get; set; }
         public System.DateTime DateBillQuotation { get; set; }
-        public Nullable<long> Customer_Id { get; set; }
         public Nullable<long> Transmitter_Id { get; set; }
         public Nullable<long> Company_Id { get; set; }
     
