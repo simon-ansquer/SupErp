@@ -14,7 +14,7 @@ namespace WpfApplicationSalaire
             InitializeComponent();
             Frame uneFrame = new Frame();
             MainGrid.Children.Add(uneFrame);
-            uneFrame.Navigate(new EmployeesList());
+            uneFrame.Navigate(new EmployeeHistory());
         }
     }
 }

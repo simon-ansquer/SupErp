@@ -3,15 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModels="clr-namespace:WpfControlLibrarySalaire.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000"
              Background="White"
              FontFamily="Segoe UI">
+    <UserControl.Resources>
+        <viewModels:EmployeeHistoryViewModel x:Key="EmployeeHistoryViewModel" />
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
@@ -24,12 +26,10 @@
             <RowDefinition Height="146*"/>
             <RowDefinition Height="145*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"  TextWrapping="Wrap" Text="Historique des salaires de NOM PRENOM" VerticalAlignment="Center" FontSize="20" TextAlignment="Center" />
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"  TextWrapping="Wrap" Text="Historique des salaires de NOM PRENOM" VerticalAlignment="Center" FontSize="20" TextAlignment="Center" />
         <Button Content="Retour" Foreground="White" Background="#4388CC" Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="15"/>
 
-
-
-        <DataGrid Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"  Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Stretch" ItemsSource="{Binding Source=Salaries}"  GridLinesVisibility="Horizontal" FontSize="13" HorizontalGridLinesBrush="Silver"
+        <DataGrid Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"  Grid.Row="2" Grid.RowSpan="3" VerticalAlignment="Stretch" ItemsSource="{Binding Source=Salaries}"  GridLinesVisibility="Horizontal" FontSize="13" HorizontalGridLinesBrush="Silver"
                   AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" AlternatingRowBackground="#FFCCCCCC" AlternationCount="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Width ="1*" Binding="{Binding Date}" CanUserResize="False" >

@@ -61,7 +61,7 @@
     </Page>
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\EmployeesListViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeHistoryViewModel.cs" />
     <Compile Include="Views\EmployeeDetails.xaml.cs">
       <DependentUpon>EmployeeDetails.xaml</DependentUpon>
     </Compile>
