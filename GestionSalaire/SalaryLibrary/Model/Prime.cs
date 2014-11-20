@@ -7,17 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SalaryLibrary.DAL
+namespace SalaryLibrary.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class TicketRestaurant
+    public partial class Prime
     {
         public long id { get; set; }
+        public Nullable<long> User_id { get; set; }
         public string Label { get; set; }
-        public Nullable<decimal> Value { get; set; }
-        public Nullable<decimal> PercentageEnterprise { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
+        public Nullable<decimal> Price { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }

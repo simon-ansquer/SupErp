@@ -7,18 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SalaryLibrary.DAL
+namespace SalaryLibrary.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Salary
+    public partial class AbsenceType
     {
-        public long id { get; set; }
-        public Nullable<long> User_id { get; set; }
-        public Nullable<decimal> NetSalary { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public AbsenceType()
+        {
+            this.Absences = new HashSet<Absence>();
+            this.ConfigAbsences = new HashSet<ConfigAbsence>();
+        }
     
-        public virtual User User { get; set; }
+        public long id { get; set; }
+        public string Label { get; set; }
+    
+        public virtual ICollection<Absence> Absences { get; set; }
+        public virtual ICollection<ConfigAbsence> ConfigAbsences { get; set; }
     }
 }
