@@ -8,13 +8,13 @@
         <EntityTypeShape EntityType="SUPERPModel.Absence" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SUPERPModel.AbsenceType" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotation" Width="1.5" PointX="13" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotationStatus" Width="1.5" PointX="15.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotationStatus" Width="2.75" PointX="15.25" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_Category" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_Product" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_Status" Width="1.5" PointX="13" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_Transmitter" Width="1.5" PointX="10.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_Vat" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SUPERPModel.ConfigAbsence" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUPERPModel.ConfigAbsence" Width="2.125" PointX="8.125" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="SUPERPModel.Customer" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SUPERPModel.Module" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="SUPERPModel.Prime" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
