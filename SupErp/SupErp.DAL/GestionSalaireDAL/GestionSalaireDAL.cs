@@ -138,9 +138,9 @@ namespace SupErp.DAL.GestionSalaireDAL
         /// Retourne l'ensemble des primes
         /// </summary>
         /// <returns>Liste de primes</returns>
-        public List<User> GetUsersById(long id)
+        public User GetUserById(long id)
         {
-            return Entities.Users.Include("Salaries").Include("Absences").Include("Primes").Where(x => x.Id == id).ToList();
+            return Entities.Users.Include("Salaries").Include("Absences").Include("Primes").Where(x => x.Id == id).ToList().First();
         }
 
 

@@ -18,5 +18,7 @@ namespace SupErp.WCF.GestionSalaireWCF
         [OperationContract]
         List<User> GetUser(string query);
 
+        [OperationContract]
+        User GetUserById(long userID);
     }
 }
