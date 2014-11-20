@@ -27,7 +27,7 @@ namespace SupErp.Entities
         public Nullable<long> Vat_Id { get; set; }
     
         public virtual BILL_Category BILL_Category { get; set; }
-        public virtual BILL_Vat BILL_Vat { get; set; }
         public virtual ICollection<BILL_LineBillQuotation> BILL_LineBillQuotation { get; set; }
+        public virtual BILL_Vat BILL_Vat { get; set; }
     }
 }

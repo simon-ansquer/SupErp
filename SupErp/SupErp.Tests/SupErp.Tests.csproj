@@ -52,6 +52,17 @@
   <ItemGroup>
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalaireTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SupErp.Entities\SupErp.Entities.csproj">
+      <Project>{a11a9e2d-75ac-4e97-b28a-da6ba10d5637}</Project>
+      <Name>SupErp.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SupErp.WCF\SupErp.WCF.csproj">
+      <Project>{dddb3846-f079-4103-b316-1eb8edb76090}</Project>
+      <Name>SupErp.WCF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
