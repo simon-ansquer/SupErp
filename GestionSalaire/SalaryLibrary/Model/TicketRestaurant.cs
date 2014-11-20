@@ -7,22 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SalaryLibrary.DAL
+namespace SalaryLibrary.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Status
+    public partial class TicketRestaurant
     {
-        public Status()
-        {
-            this.Users = new HashSet<User>();
-        }
-    
         public long id { get; set; }
         public string Label { get; set; }
-        public Nullable<decimal> PercentageTaxe { get; set; }
-    
-        public virtual ICollection<User> Users { get; set; }
+        public Nullable<decimal> Value { get; set; }
+        public Nullable<decimal> PercentageEnterprise { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     }
 }

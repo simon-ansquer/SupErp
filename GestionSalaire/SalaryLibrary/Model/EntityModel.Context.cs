@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SalaryLibrary.DAL
+namespace SalaryLibrary.Model
 {
     using System;
     using System.Data.Entity;

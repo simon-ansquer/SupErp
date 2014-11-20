@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfControlLibrarySalaire
+namespace WpfControlLibrarySalaire.Views
 {
     /// <summary>
-    /// Logique d'interaction pour EmployeeHistory.xaml
+    /// Logique d'interaction pour EmployeeDetails.xaml
     /// </summary>
-    public partial class EmployeeHistory : UserControl
+    public partial class EmployeeDetails : UserControl
     {
-        public EmployeeHistory()
+        public EmployeeDetails()
         {
             InitializeComponent();
         }
