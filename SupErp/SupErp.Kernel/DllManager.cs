@@ -1,4 +1,5 @@
-﻿using SupErp.Kernel.Exceptions;
+﻿using SupErp.Entities;
+using SupErp.Kernel.Exceptions;
 using SupErp.Shared;
 using System;
 using System.Collections.Generic;
@@ -40,15 +41,22 @@ namespace SupErp.Kernel
             return (IMainMenu)Activator.CreateInstance(mainMenus.First());
         }
 
-        public List<IMainMenu> GetMainMenus()
+        /// <summary>
+        /// Permet de récuperer tous les menus et sous-menus des modules auxquels l'utilisateur a accès
+        /// </summary>
+        /// <param name="userRole">Role de l'utilsateur courant</param>
+        /// <returns>Liste de IMainMenu</returns>
+        public List<IMainMenu> GetMainMenus(Role userRole)
         {
-            List<IMainMenu> mainMenus = new List<IMainMenu>();
- 
+            List<IMainMenu> mainMenus = new List<IMainMenu>(); 
             IEnumerable<string> paths = GetDllsPaths();
 
             foreach (string p in paths)
             {
-                mainMenus.Add(GetMainMenu(p));
+                if (userRole.RoleModules.Any(x => x.Module.Name == Path.GetFileNameWithoutExtension(p)))
+                {
+                    mainMenus.Add(GetMainMenu(p));
+                }
             }
 
             return mainMenus;
