@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SupErp.Entities
+namespace SalaryLibrary.DAL
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SUPERPEntities : DbContext
+    public partial class SUPERPDEVEntities : DbContext
     {
-        public SUPERPEntities()
-            : base("name=SUPERPEntities")
+        public SUPERPDEVEntities()
+            : base("name=SUPERPDEVEntities")
         {
         }
     
@@ -27,21 +27,8 @@ namespace SupErp.Entities
     
         public virtual DbSet<Absence> Absences { get; set; }
         public virtual DbSet<AbsenceType> AbsenceTypes { get; set; }
-        public virtual DbSet<BILL_BillQuotation> BILL_BillQuotation { get; set; }
-        public virtual DbSet<BILL_BillQuotationStatus> BILL_BillQuotationStatus { get; set; }
-        public virtual DbSet<BILL_Category> BILL_Category { get; set; }
-        public virtual DbSet<BILL_LineBillQuotation> BILL_LineBillQuotation { get; set; }
-        public virtual DbSet<BILL_Product> BILL_Product { get; set; }
-        public virtual DbSet<BILL_Status> BILL_Status { get; set; }
-        public virtual DbSet<BILL_Transmitter> BILL_Transmitter { get; set; }
-        public virtual DbSet<BILL_Vat> BILL_Vat { get; set; }
-        public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<Company_Contact> Company_Contact { get; set; }
         public virtual DbSet<ConfigAbsence> ConfigAbsences { get; set; }
-        public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<Prime> Primes { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<RoleModule> RoleModules { get; set; }
         public virtual DbSet<Salary> Salaries { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<TicketRestaurant> TicketRestaurants { get; set; }

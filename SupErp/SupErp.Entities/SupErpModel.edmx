@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SUPERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SUPERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Absence">
           <Key>
             <PropertyRef Name="id" />
@@ -529,6 +529,7 @@
           <EntitySet Name="BILL_BillQuotation" EntityType="SUPERPModel.BILL_BillQuotation" />
           <EntitySet Name="BILL_BillQuotationStatus" EntityType="SUPERPModel.BILL_BillQuotationStatus" />
           <EntitySet Name="BILL_Category" EntityType="SUPERPModel.BILL_Category" />
+          <EntitySet Name="BILL_LineBillQuotation" EntityType="SUPERPModel.BILL_LineBillQuotation" />
           <EntitySet Name="BILL_Product" EntityType="SUPERPModel.BILL_Product" />
           <EntitySet Name="BILL_Status" EntityType="SUPERPModel.BILL_Status" />
           <EntitySet Name="BILL_Transmitter" EntityType="SUPERPModel.BILL_Transmitter" />
@@ -564,6 +565,14 @@
             <End Role="BILL_Transmitter" EntitySet="BILL_Transmitter" />
             <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
           </AssociationSet>
+          <AssociationSet Name="FK__BILL_Line__BillQ__66603565" Association="SUPERPModel.FK__BILL_Line__BillQ__66603565">
+            <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
+            <End Role="BILL_LineBillQuotation" EntitySet="BILL_LineBillQuotation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillQuotation_Company" Association="SUPERPModel.FK_BillQuotation_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
+          </AssociationSet>
           <AssociationSet Name="FK__BILL_Bill__Statu__534D60F1" Association="SUPERPModel.FK__BILL_Bill__Statu__534D60F1">
             <End Role="BILL_Status" EntitySet="BILL_Status" />
             <End Role="BILL_BillQuotationStatus" EntitySet="BILL_BillQuotationStatus" />
@@ -571,6 +580,10 @@
           <AssociationSet Name="FK__BILL_Prod__Categ__5535A963" Association="SUPERPModel.FK__BILL_Prod__Categ__5535A963">
             <End Role="BILL_Category" EntitySet="BILL_Category" />
             <End Role="BILL_Product" EntitySet="BILL_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL_Line__Produ__6754599E" Association="SUPERPModel.FK__BILL_Line__Produ__6754599E">
+            <End Role="BILL_Product" EntitySet="BILL_Product" />
+            <End Role="BILL_LineBillQuotation" EntitySet="BILL_LineBillQuotation" />
           </AssociationSet>
           <AssociationSet Name="FK__BILL_Prod__Vat_I__5629CD9C" Association="SUPERPModel.FK__BILL_Prod__Vat_I__5629CD9C">
             <End Role="BILL_Vat" EntitySet="BILL_Vat" />
@@ -604,19 +617,6 @@
             <End Role="Status" EntitySet="Status" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="BILL_LineBillQuotation" EntityType="SUPERPModel.BILL_LineBillQuotation" />
-          <AssociationSet Name="FK__BILL_Line__BillQ__66603565" Association="SUPERPModel.FK__BILL_Line__BillQ__66603565">
-            <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
-            <End Role="BILL_LineBillQuotation" EntitySet="BILL_LineBillQuotation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BillQuotation_Company" Association="SUPERPModel.FK_BillQuotation_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="BILL_BillQuotation" EntitySet="BILL_BillQuotation" />
-          </AssociationSet>
-          <AssociationSet Name="FK__BILL_Line__Produ__6754599E" Association="SUPERPModel.FK__BILL_Line__Produ__6754599E">
-            <End Role="BILL_Product" EntitySet="BILL_Product" />
-            <End Role="BILL_LineBillQuotation" EntitySet="BILL_LineBillQuotation" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Absence">
           <Key>
@@ -648,11 +648,10 @@
           <Property Name="Vat" Type="Boolean" />
           <Property Name="AmountDF" Type="Int32" Nullable="false" />
           <Property Name="DateBillQuotation" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Customer_Id" Type="Int64" />
           <Property Name="Transmitter_Id" Type="Int64" />
+          <Property Name="Company_Id" Type="Int64" />
           <NavigationProperty Name="BILL_BillQuotationStatus" Relationship="SUPERPModel.FK__BILL_Bill__BillQ__5441852A" FromRole="BILL_BillQuotation" ToRole="BILL_BillQuotationStatus" />
           <NavigationProperty Name="BILL_Transmitter" Relationship="SUPERPModel.FK__BILL_Bill__Trans__52593CB8" FromRole="BILL_BillQuotation" ToRole="BILL_Transmitter" />
-          <Property Name="Company_Id" Type="Int64" />
           <NavigationProperty Name="BILL_LineBillQuotation" Relationship="SUPERPModel.FK__BILL_Line__BillQ__66603565" FromRole="BILL_BillQuotation" ToRole="BILL_LineBillQuotation" />
           <NavigationProperty Name="Company" Relationship="SUPERPModel.FK_BillQuotation_Company" FromRole="BILL_BillQuotation" ToRole="Company" />
         </EntityType>
@@ -676,6 +675,18 @@
           <Property Name="DescriptionCat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BILL_Product" Relationship="SUPERPModel.FK__BILL_Prod__Categ__5535A963" FromRole="BILL_Category" ToRole="BILL_Product" />
         </EntityType>
+        <EntityType Name="BILL_LineBillQuotation">
+          <Key>
+            <PropertyRef Name="LineBillQuotation_Id" />
+          </Key>
+          <Property Name="LineBillQuotation_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateLine" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Quantite" Type="Double" Nullable="false" />
+          <Property Name="BillQuotation_Id" Type="Int64" />
+          <Property Name="Product_Id" Type="Int64" />
+          <NavigationProperty Name="BILL_BillQuotation" Relationship="SUPERPModel.FK__BILL_Line__BillQ__66603565" FromRole="BILL_LineBillQuotation" ToRole="BILL_BillQuotation" />
+          <NavigationProperty Name="BILL_Product" Relationship="SUPERPModel.FK__BILL_Line__Produ__6754599E" FromRole="BILL_LineBillQuotation" ToRole="BILL_Product" />
+        </EntityType>
         <EntityType Name="BILL_Product">
           <Key>
             <PropertyRef Name="Product_Id" />
@@ -687,8 +698,8 @@
           <Property Name="Category_Id" Type="Int64" />
           <Property Name="Vat_Id" Type="Int64" />
           <NavigationProperty Name="BILL_Category" Relationship="SUPERPModel.FK__BILL_Prod__Categ__5535A963" FromRole="BILL_Product" ToRole="BILL_Category" />
-          <NavigationProperty Name="BILL_Vat" Relationship="SUPERPModel.FK__BILL_Prod__Vat_I__5629CD9C" FromRole="BILL_Product" ToRole="BILL_Vat" />
           <NavigationProperty Name="BILL_LineBillQuotation" Relationship="SUPERPModel.FK__BILL_Line__Produ__6754599E" FromRole="BILL_Product" ToRole="BILL_LineBillQuotation" />
+          <NavigationProperty Name="BILL_Vat" Relationship="SUPERPModel.FK__BILL_Prod__Vat_I__5629CD9C" FromRole="BILL_Product" ToRole="BILL_Vat" />
         </EntityType>
         <EntityType Name="BILL_Status">
           <Key>
@@ -731,8 +742,8 @@
           <Property Name="address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="postalcode" Type="Int32" Nullable="false" />
           <Property Name="city" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Company_Contact" Relationship="SUPERPModel.FK__Company_C__compa__6383C8BA" FromRole="Company" ToRole="Company_Contact" />
           <NavigationProperty Name="BILL_BillQuotation" Relationship="SUPERPModel.FK_BillQuotation_Company" FromRole="Company" ToRole="BILL_BillQuotation" />
+          <NavigationProperty Name="Company_Contact" Relationship="SUPERPModel.FK__Company_C__compa__6383C8BA" FromRole="Company" ToRole="Company_Contact" />
         </EntityType>
         <EntityType Name="Company_Contact">
           <Key>
@@ -906,6 +917,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__BILL_Line__BillQ__66603565">
+          <End Type="SUPERPModel.BILL_BillQuotation" Role="BILL_BillQuotation" Multiplicity="0..1" />
+          <End Type="SUPERPModel.BILL_LineBillQuotation" Role="BILL_LineBillQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILL_BillQuotation">
+              <PropertyRef Name="BillQuotation_Id" />
+            </Principal>
+            <Dependent Role="BILL_LineBillQuotation">
+              <PropertyRef Name="BillQuotation_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillQuotation_Company">
+          <End Type="SUPERPModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SUPERPModel.BILL_BillQuotation" Role="BILL_BillQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BILL_BillQuotation">
+              <PropertyRef Name="Company_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__BILL_Bill__Statu__534D60F1">
           <End Type="SUPERPModel.BILL_Status" Role="BILL_Status" Multiplicity="0..1" />
           <End Type="SUPERPModel.BILL_BillQuotationStatus" Role="BILL_BillQuotationStatus" Multiplicity="*" />
@@ -927,6 +962,18 @@
             </Principal>
             <Dependent Role="BILL_Product">
               <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BILL_Line__Produ__6754599E">
+          <End Type="SUPERPModel.BILL_Product" Role="BILL_Product" Multiplicity="0..1" />
+          <End Type="SUPERPModel.BILL_LineBillQuotation" Role="BILL_LineBillQuotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILL_Product">
+              <PropertyRef Name="Product_Id" />
+            </Principal>
+            <Dependent Role="BILL_LineBillQuotation">
+              <PropertyRef Name="Product_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1026,55 +1073,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="BILL_LineBillQuotation">
-          <Key>
-            <PropertyRef Name="LineBillQuotation_Id" />
-          </Key>
-          <Property Name="LineBillQuotation_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DateLine" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Quantite" Type="Double" Nullable="false" />
-          <Property Name="BillQuotation_Id" Type="Int64" />
-          <Property Name="Product_Id" Type="Int64" />
-          <NavigationProperty Name="BILL_BillQuotation" Relationship="SUPERPModel.FK__BILL_Line__BillQ__66603565" FromRole="BILL_LineBillQuotation" ToRole="BILL_BillQuotation" />
-          <NavigationProperty Name="BILL_Product" Relationship="SUPERPModel.FK__BILL_Line__Produ__6754599E" FromRole="BILL_LineBillQuotation" ToRole="BILL_Product" />
-        </EntityType>
-        <Association Name="FK__BILL_Line__BillQ__66603565">
-          <End Type="SUPERPModel.BILL_BillQuotation" Role="BILL_BillQuotation" Multiplicity="0..1" />
-          <End Type="SUPERPModel.BILL_LineBillQuotation" Role="BILL_LineBillQuotation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BILL_BillQuotation">
-              <PropertyRef Name="BillQuotation_Id" />
-            </Principal>
-            <Dependent Role="BILL_LineBillQuotation">
-              <PropertyRef Name="BillQuotation_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BillQuotation_Company">
-          <End Type="SUPERPModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SUPERPModel.BILL_BillQuotation" Role="BILL_BillQuotation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="BILL_BillQuotation">
-              <PropertyRef Name="Company_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__BILL_Line__Produ__6754599E">
-          <End Type="SUPERPModel.BILL_Product" Role="BILL_Product" Multiplicity="0..1" />
-          <End Type="SUPERPModel.BILL_LineBillQuotation" Role="BILL_LineBillQuotation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BILL_Product">
-              <PropertyRef Name="Product_Id" />
-            </Principal>
-            <Dependent Role="BILL_LineBillQuotation">
-              <PropertyRef Name="Product_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1128,6 +1127,17 @@
                 <ScalarProperty Name="DescriptionCat" ColumnName="DescriptionCat" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BILL_LineBillQuotation">
+            <EntityTypeMapping TypeName="SUPERPModel.BILL_LineBillQuotation">
+              <MappingFragment StoreEntitySet="BILL_LineBillQuotation">
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="BillQuotation_Id" ColumnName="BillQuotation_Id" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="DateLine" ColumnName="DateLine" />
+                <ScalarProperty Name="LineBillQuotation_Id" ColumnName="LineBillQuotation_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1290,17 +1300,6 @@
                 <ScalarProperty Name="Passwordhash" ColumnName="Passwordhash" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BILL_LineBillQuotation">
-            <EntityTypeMapping TypeName="SUPERPModel.BILL_LineBillQuotation">
-              <MappingFragment StoreEntitySet="BILL_LineBillQuotation">
-                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
-                <ScalarProperty Name="BillQuotation_Id" ColumnName="BillQuotation_Id" />
-                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
-                <ScalarProperty Name="DateLine" ColumnName="DateLine" />
-                <ScalarProperty Name="LineBillQuotation_Id" ColumnName="LineBillQuotation_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

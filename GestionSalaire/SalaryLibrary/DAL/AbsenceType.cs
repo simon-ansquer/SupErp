@@ -7,27 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SupErp.Entities
+namespace SalaryLibrary.DAL
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Company
+    public partial class AbsenceType
     {
-        public Company()
+        public AbsenceType()
         {
-            this.BILL_BillQuotation = new HashSet<BILL_BillQuotation>();
-            this.Company_Contact = new HashSet<Company_Contact>();
+            this.Absences = new HashSet<Absence>();
+            this.ConfigAbsences = new HashSet<ConfigAbsence>();
         }
     
         public long id { get; set; }
-        public string name { get; set; }
-        public string siret { get; set; }
-        public string address { get; set; }
-        public int postalcode { get; set; }
-        public string city { get; set; }
+        public string Label { get; set; }
     
-        public virtual ICollection<BILL_BillQuotation> BILL_BillQuotation { get; set; }
-        public virtual ICollection<Company_Contact> Company_Contact { get; set; }
+        public virtual ICollection<Absence> Absences { get; set; }
+        public virtual ICollection<ConfigAbsence> ConfigAbsences { get; set; }
     }
 }

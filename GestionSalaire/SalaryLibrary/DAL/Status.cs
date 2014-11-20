@@ -7,27 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SupErp.Entities
+namespace SalaryLibrary.DAL
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Company
+    public partial class Status
     {
-        public Company()
+        public Status()
         {
-            this.BILL_BillQuotation = new HashSet<BILL_BillQuotation>();
-            this.Company_Contact = new HashSet<Company_Contact>();
+            this.Users = new HashSet<User>();
         }
     
         public long id { get; set; }
-        public string name { get; set; }
-        public string siret { get; set; }
-        public string address { get; set; }
-        public int postalcode { get; set; }
-        public string city { get; set; }
+        public string Label { get; set; }
+        public Nullable<decimal> PercentageTaxe { get; set; }
     
-        public virtual ICollection<BILL_BillQuotation> BILL_BillQuotation { get; set; }
-        public virtual ICollection<Company_Contact> Company_Contact { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }
