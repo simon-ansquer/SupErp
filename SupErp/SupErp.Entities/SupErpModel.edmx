@@ -524,22 +524,18 @@
     <edmx:ConceptualModels>
       <Schema Namespace="SUPERPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SUPERPEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Companies" EntityType="SUPERPModel.Company" />
-          <EntitySet Name="Company_Contact" EntityType="SUPERPModel.Company_Contact" />
-          <AssociationSet Name="FK__Company_C__compa__6383C8BA" Association="SUPERPModel.FK__Company_C__compa__6383C8BA">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Company_Contact" EntitySet="Company_Contact" />
-          </AssociationSet>
-          <EntitySet Name="BILL_LineBillQuotation" EntityType="SUPERPModel.BILL_LineBillQuotation" />
           <EntitySet Name="Absences" EntityType="SUPERPModel.Absence" />
           <EntitySet Name="AbsenceTypes" EntityType="SUPERPModel.AbsenceType" />
           <EntitySet Name="BILL_BillQuotation" EntityType="SUPERPModel.BILL_BillQuotation" />
           <EntitySet Name="BILL_BillQuotationStatus" EntityType="SUPERPModel.BILL_BillQuotationStatus" />
           <EntitySet Name="BILL_Category" EntityType="SUPERPModel.BILL_Category" />
+          <EntitySet Name="BILL_LineBillQuotation" EntityType="SUPERPModel.BILL_LineBillQuotation" />
           <EntitySet Name="BILL_Product" EntityType="SUPERPModel.BILL_Product" />
           <EntitySet Name="BILL_Status" EntityType="SUPERPModel.BILL_Status" />
           <EntitySet Name="BILL_Transmitter" EntityType="SUPERPModel.BILL_Transmitter" />
           <EntitySet Name="BILL_Vat" EntityType="SUPERPModel.BILL_Vat" />
+          <EntitySet Name="Companies" EntityType="SUPERPModel.Company" />
+          <EntitySet Name="Company_Contact" EntityType="SUPERPModel.Company_Contact" />
           <EntitySet Name="ConfigAbsences" EntityType="SUPERPModel.ConfigAbsence" />
           <EntitySet Name="Modules" EntityType="SUPERPModel.Module" />
           <EntitySet Name="Primes" EntityType="SUPERPModel.Prime" />
@@ -593,6 +589,10 @@
             <End Role="BILL_Vat" EntitySet="BILL_Vat" />
             <End Role="BILL_Product" EntitySet="BILL_Product" />
           </AssociationSet>
+          <AssociationSet Name="FK__Company_C__compa__6383C8BA" Association="SUPERPModel.FK__Company_C__compa__6383C8BA">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Company_Contact" EntitySet="Company_Contact" />
+          </AssociationSet>
           <AssociationSet Name="FK_RoleModule_Module" Association="SUPERPModel.FK_RoleModule_Module">
             <End Role="Module" EntitySet="Modules" />
             <End Role="RoleModule" EntitySet="RoleModules" />
@@ -617,57 +617,7 @@
             <End Role="Status" EntitySet="Status" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="Company">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="siret" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="postalcode" Type="Int32" Nullable="false" />
-          <Property Name="city" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Company_Contact" Relationship="SUPERPModel.FK__Company_C__compa__6383C8BA" FromRole="Company" ToRole="Company_Contact" />
-          <NavigationProperty Name="BILL_BillQuotation" Relationship="SUPERPModel.FK_BillQuotation_Company" FromRole="Company" ToRole="BILL_BillQuotation" />
-        </EntityType>
-        <EntityType Name="Company_Contact">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="firstname" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="lastname" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="gender" Type="Int32" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="company_id" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Company" Relationship="SUPERPModel.FK__Company_C__compa__6383C8BA" FromRole="Company_Contact" ToRole="Company" />
-        </EntityType>
-        <Association Name="FK__Company_C__compa__6383C8BA">
-          <End Type="SUPERPModel.Company" Role="Company" Multiplicity="1" />
-          <End Type="SUPERPModel.Company_Contact" Role="Company_Contact" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Company_Contact">
-              <PropertyRef Name="company_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="BILL_LineBillQuotation">
-          <Key>
-            <PropertyRef Name="LineBillQuotation_Id" />
-          </Key>
-          <Property Name="LineBillQuotation_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DateLine" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Quantite" Type="Double" Nullable="false" />
-          <Property Name="BillQuotation_Id" Type="Int64" />
-          <Property Name="Product_Id" Type="Int64" />
-          <NavigationProperty Name="BILL_BillQuotation" Relationship="SUPERPModel.FK__BILL_Line__BillQ__66603565" FromRole="BILL_LineBillQuotation" ToRole="BILL_BillQuotation" />
-          <NavigationProperty Name="BILL_Product" Relationship="SUPERPModel.FK__BILL_Line__Produ__6754599E" FromRole="BILL_LineBillQuotation" ToRole="BILL_Product" />
-          </EntityType>
+        </EntityContainer>
         <EntityType Name="Absence">
           <Key>
             <PropertyRef Name="id" />
@@ -725,6 +675,18 @@
           <Property Name="DescriptionCat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BILL_Product" Relationship="SUPERPModel.FK__BILL_Prod__Categ__5535A963" FromRole="BILL_Category" ToRole="BILL_Product" />
         </EntityType>
+        <EntityType Name="BILL_LineBillQuotation">
+          <Key>
+            <PropertyRef Name="LineBillQuotation_Id" />
+          </Key>
+          <Property Name="LineBillQuotation_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateLine" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Quantite" Type="Double" Nullable="false" />
+          <Property Name="BillQuotation_Id" Type="Int64" />
+          <Property Name="Product_Id" Type="Int64" />
+          <NavigationProperty Name="BILL_BillQuotation" Relationship="SUPERPModel.FK__BILL_Line__BillQ__66603565" FromRole="BILL_LineBillQuotation" ToRole="BILL_BillQuotation" />
+          <NavigationProperty Name="BILL_Product" Relationship="SUPERPModel.FK__BILL_Line__Produ__6754599E" FromRole="BILL_LineBillQuotation" ToRole="BILL_Product" />
+        </EntityType>
         <EntityType Name="BILL_Product">
           <Key>
             <PropertyRef Name="Product_Id" />
@@ -769,6 +731,32 @@
           <Property Name="Rate" Type="Double" />
           <Property Name="DateVat" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="BILL_Product" Relationship="SUPERPModel.FK__BILL_Prod__Vat_I__5629CD9C" FromRole="BILL_Vat" ToRole="BILL_Product" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="siret" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="postalcode" Type="Int32" Nullable="false" />
+          <Property Name="city" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BILL_BillQuotation" Relationship="SUPERPModel.FK_BillQuotation_Company" FromRole="Company" ToRole="BILL_BillQuotation" />
+          <NavigationProperty Name="Company_Contact" Relationship="SUPERPModel.FK__Company_C__compa__6383C8BA" FromRole="Company" ToRole="Company_Contact" />
+        </EntityType>
+        <EntityType Name="Company_Contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="company_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="SUPERPModel.FK__Company_C__compa__6383C8BA" FromRole="Company_Contact" ToRole="Company" />
         </EntityType>
         <EntityType Name="ConfigAbsence">
           <Key>
@@ -1001,6 +989,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Company_C__compa__6383C8BA">
+          <End Type="SUPERPModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="SUPERPModel.Company_Contact" Role="Company_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Company_Contact">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RoleModule_Module">
           <End Type="SUPERPModel.Module" Role="Module" Multiplicity="1" />
           <End Type="SUPERPModel.RoleModule" Role="RoleModule" Multiplicity="*" />
@@ -1079,42 +1079,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SUPERPModelStoreContainer" CdmEntityContainer="SUPERPEntities">
-          <EntitySetMapping Name="Companies">
-            <EntityTypeMapping TypeName="SUPERPModel.Company">
-              <MappingFragment StoreEntitySet="Company">
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="postalcode" ColumnName="postalcode" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="siret" ColumnName="siret" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Company_Contact">
-            <EntityTypeMapping TypeName="SUPERPModel.Company_Contact">
-              <MappingFragment StoreEntitySet="Company_Contact">
-                <ScalarProperty Name="company_id" ColumnName="company_id" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="lastname" ColumnName="lastname" />
-                <ScalarProperty Name="firstname" ColumnName="firstname" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BILL_LineBillQuotation">
-            <EntityTypeMapping TypeName="SUPERPModel.BILL_LineBillQuotation">
-              <MappingFragment StoreEntitySet="BILL_LineBillQuotation">
-                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
-                <ScalarProperty Name="BillQuotation_Id" ColumnName="BillQuotation_Id" />
-                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
-                <ScalarProperty Name="DateLine" ColumnName="DateLine" />
-                <ScalarProperty Name="LineBillQuotation_Id" ColumnName="LineBillQuotation_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Absences">
             <EntityTypeMapping TypeName="SUPERPModel.Absence">
               <MappingFragment StoreEntitySet="Absence">
@@ -1166,6 +1130,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BILL_LineBillQuotation">
+            <EntityTypeMapping TypeName="SUPERPModel.BILL_LineBillQuotation">
+              <MappingFragment StoreEntitySet="BILL_LineBillQuotation">
+                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+                <ScalarProperty Name="BillQuotation_Id" ColumnName="BillQuotation_Id" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="DateLine" ColumnName="DateLine" />
+                <ScalarProperty Name="LineBillQuotation_Id" ColumnName="LineBillQuotation_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BILL_Product">
             <EntityTypeMapping TypeName="SUPERPModel.BILL_Product">
               <MappingFragment StoreEntitySet="BILL_Product">
@@ -1206,6 +1181,31 @@
                 <ScalarProperty Name="DateVat" ColumnName="DateVat" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="Vat_Id" ColumnName="Vat_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="SUPERPModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="postalcode" ColumnName="postalcode" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="siret" ColumnName="siret" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Company_Contact">
+            <EntityTypeMapping TypeName="SUPERPModel.Company_Contact">
+              <MappingFragment StoreEntitySet="Company_Contact">
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
