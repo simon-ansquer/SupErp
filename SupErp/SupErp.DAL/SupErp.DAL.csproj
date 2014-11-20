@@ -46,8 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompanyDAL.cs" />
-    <Compile Include="Company_ContactDAL.cs" />
+    <Compile Include="GestionClientDAL\CompanyDAL.cs" />
+    <Compile Include="GestionClientDAL\Company_ContactDAL.cs" />
     <Compile Include="FacturationDAL\BillQuotationDAL.cs" />
     <Compile Include="FacturationDAL\BillQuotationStatusDAL.cs" />
     <Compile Include="FacturationDAL\LineBillQuotationDAL.cs" />
