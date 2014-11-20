@@ -72,5 +72,5 @@ namespace SupErp.DAL.FacturationDAL
         #endregion
     }
 
-    }
+
 }

@@ -14,7 +14,27 @@ namespace SupErp.DAL.ModuleUser
 
         public User Login(string email, string password)
         {
-            return null;
+            return new User
+            {
+                Id = 0,
+                Absences = null,
+                Address = "12 rue NomDeLaRue",
+                City = "NomDeLaVille",
+                Date_arrival = DateTime.Now,
+                Date_departure = DateTime.Now,
+                Email = "prenom.nom@mail.com",
+                Firstname = "Prenom",
+                Lastname = "Nom",
+                Passwordhash = "PasswordHash",
+                Primes = null,
+                Role = new Role {Id = 0, Label = "RoleTest", RoleModules = null},
+                Role_id = 0,
+                Salaries = null,
+                Status = new Status {id = 0, Label = "StatusTest", PercentageTaxe = 13},
+                Status_id = 0,
+                Zip_code = "ZipCode"
+            };
+            //return null;
         }
 
         #endregion

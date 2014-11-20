@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ec3fdf7f8a9b44a5b9eb18a1fd9dab4b" Name="Diagram1" ZoomLevel="59">
+      <Diagram DiagramId="ec3fdf7f8a9b44a5b9eb18a1fd9dab4b" Name="Diagram1" ZoomLevel="65">
         <EntityTypeShape EntityType="SUPERPModel.Absence" Width="1.5" PointX="11.25" PointY="5.625" />
         <EntityTypeShape EntityType="SUPERPModel.AbsenceType" Width="1.5" PointX="9" PointY="8" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotation" Width="1.5" PointX="13" PointY="1" />
@@ -18,10 +18,10 @@
         <EntityTypeShape EntityType="SUPERPModel.Company_Contact" Width="1.5" PointX="5" PointY="14" />
         <EntityTypeShape EntityType="SUPERPModel.ConfigAbsence" Width="1.5" PointX="11.25" PointY="12" />
         <EntityTypeShape EntityType="SUPERPModel.Module" Width="1.5" PointX="0.75" PointY="3" />
-        <EntityTypeShape EntityType="SUPERPModel.Prime" Width="1.5" PointX="8.25" PointY="4.25" />
+        <EntityTypeShape EntityType="SUPERPModel.Prime" Width="1.5" PointX="8.25" PointY="10.125" />
         <EntityTypeShape EntityType="SUPERPModel.Role" Width="1.5" PointX="0.75" PointY="6" />
         <EntityTypeShape EntityType="SUPERPModel.RoleModule" Width="1.5" PointX="3" PointY="5.875" />
-        <EntityTypeShape EntityType="SUPERPModel.Salary" Width="1.5" PointX="8.25" PointY="10.5" />
+        <EntityTypeShape EntityType="SUPERPModel.Salary" Width="1.5" PointX="8.25" PointY="4.25" />
         <EntityTypeShape EntityType="SUPERPModel.Status" Width="1.5" PointX="3.75" PointY="3" />
         <EntityTypeShape EntityType="SUPERPModel.TicketRestaurant" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="SUPERPModel.User" Width="1.5" PointX="6" PointY="4.75" />
@@ -30,8 +30,11 @@
         <AssociationConnector Association="SUPERPModel.FK__ConfigAbs__Absen__571DF1D5" />
         <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__BillQ__5441852A" />
         <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__Trans__52593CB8" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Line__BillQ__66603565" />
+        <AssociationConnector Association="SUPERPModel.FK_BillQuotation_Company" />
         <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__Statu__534D60F1" />
         <AssociationConnector Association="SUPERPModel.FK__BILL_Prod__Categ__5535A963" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Line__Produ__6754599E" />
         <AssociationConnector Association="SUPERPModel.FK__BILL_Prod__Vat_I__5629CD9C" />
         <AssociationConnector Association="SUPERPModel.FK__Company_C__compa__6383C8BA" />
         <AssociationConnector Association="SUPERPModel.FK_RoleModule_Module" />
@@ -40,11 +43,8 @@
         <AssociationConnector Association="SUPERPModel.FK_User_Role" />
         <AssociationConnector Association="SUPERPModel.FK__Salary__User_id__5AEE82B9" />
         <AssociationConnector Association="SUPERPModel.FK__User__Status_id__5BE2A6F2" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_LineBillQuotation" Width="2.375" PointX="15.25" PointY="5.75" />
-        <AssociationConnector Association="SUPERPModel.FK__BILL_Line__BillQ__66603565" />
-        <AssociationConnector Association="SUPERPModel.FK_BillQuotation_Company" />
-        <AssociationConnector Association="SUPERPModel.FK__BILL_Line__Produ__6754599E" />
-      </Diagram>
+        <EntityTypeShape EntityType="SUPERPModel.BILL_LineBillQuotation" Width="1.5" PointX="15.25" PointY="5.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

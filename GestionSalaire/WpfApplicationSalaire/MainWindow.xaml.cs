@@ -24,7 +24,9 @@ namespace WpfApplicationSalaire
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new EmployeesList();
+            Frame uneFrame = new Frame();
+            MainGrid.Children.Add(uneFrame);
+            uneFrame.Navigate(new EmployeesList());
         }
     }
 }

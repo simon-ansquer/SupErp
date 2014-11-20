@@ -11,8 +11,8 @@ namespace SupErp.BLL.ModuleUser
     public class UserBLL
     {
         //Conservation de l'instance au sein de la BLL, qui sera chargée à sa première utilisation
-        private static readonly Lazy<UserDAL> LazyUserDAL = new Lazy<UserDAL>(() => new UserDAL());
-        private static UserDAL userDAL { get { return LazyUserDAL.Value; } }
+        private static readonly Lazy<UserDAL> lazyUserDAL = new Lazy<UserDAL>(() => new UserDAL());
+        private static UserDAL userDAL { get { return lazyUserDAL.Value; } }
 
         #region Authentication
 

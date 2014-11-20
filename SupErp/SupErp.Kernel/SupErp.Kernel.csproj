@@ -39,9 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DllManager.cs" />
+    <Compile Include="Exceptions\MainMenuImplementationException.cs" />
+    <Compile Include="Exceptions\MainMenuNotImplementedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SupErp.Entities\SupErp.Entities.csproj">
+      <Project>{a11a9e2d-75ac-4e97-b28a-da6ba10d5637}</Project>
+      <Name>SupErp.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SupErp.Shared\SupErp.Shared.csproj">
       <Project>{aed44877-9636-4e8c-95a3-722d99f6260b}</Project>
       <Name>SupErp.Shared</Name>
