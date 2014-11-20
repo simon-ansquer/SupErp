@@ -24,5 +24,10 @@ namespace SupErp.WCF.GestionSalaireWCF
         {
             return salaireBLL.getUsers(query);
         }
+
+        public Entities.User GetUserById(long userID)
+        {
+            return salaireBLL.getUser(userID);
+        }
     }
 }

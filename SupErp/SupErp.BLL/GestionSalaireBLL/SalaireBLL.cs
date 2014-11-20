@@ -26,7 +26,10 @@ namespace SupErp.BLL.GestionSalaireBLL
             return salaireDAL.GetUsers(query);
         }
 
-
+        public User getUser(long userID)
+        {
+            return salaireDAL.GetUserById(userID);
+        }
 
 
 
