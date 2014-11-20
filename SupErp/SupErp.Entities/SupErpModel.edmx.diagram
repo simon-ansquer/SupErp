@@ -4,20 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ec3fdf7f8a9b44a5b9eb18a1fd9dab4b" Name="Diagram1" ZoomLevel="101">
+      <Diagram DiagramId="ec3fdf7f8a9b44a5b9eb18a1fd9dab4b" Name="Diagram1" ZoomLevel="65">
         <EntityTypeShape EntityType="SUPERPModel.Absence" Width="1.5" PointX="11.25" PointY="5.625" />
-        <EntityTypeShape EntityType="SUPERPModel.AbsenceType" Width="1.5" PointX="9" PointY="1" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotation" Width="1.5" PointX="13" PointY="13" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotationStatus" Width="1.5" PointX="15.25" PointY="10.5" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_Category" Width="1.5" PointX="10.75" PointY="23.875" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_LineBillQuotation" Width="1.5" PointX="15.25" PointY="13.375" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_Product" Width="1.5" PointX="13" PointY="22.125" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_Status" Width="1.5" PointX="13" PointY="9.75" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_Transmitter" Width="1.5" PointX="10.75" PointY="9.125" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_Vat" Width="1.5" PointX="10.75" PointY="21.375" />
-        <EntityTypeShape EntityType="SUPERPModel.Company" Width="1.5" PointX="10.75" PointY="13.25" />
-        <EntityTypeShape EntityType="SUPERPModel.Company_Contact" Width="1.5" PointX="13" PointY="17.125" />
-        <EntityTypeShape EntityType="SUPERPModel.ConfigAbsence" Width="1.5" PointX="11.25" PointY="1" />
+        <EntityTypeShape EntityType="SUPERPModel.AbsenceType" Width="1.5" PointX="9" PointY="8" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotation" Width="1.5" PointX="13" PointY="1" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotationStatus" Width="2.125" PointX="15.25" PointY="1.25" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_Category" Width="1.5" PointX="0.75" PointY="13.375" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_Product" Width="1.5" PointX="3" PointY="10" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_Status" Width="1.5" PointX="13" PointY="9.5" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_Transmitter" Width="1.5" PointX="10.75" PointY="1" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_Vat" Width="1.5" PointX="0.75" PointY="10.375" />
+        <EntityTypeShape EntityType="SUPERPModel.Company" Width="1.5" PointX="2.75" PointY="14" />
+        <EntityTypeShape EntityType="SUPERPModel.Company_Contact" Width="1.5" PointX="5" PointY="14" />
+        <EntityTypeShape EntityType="SUPERPModel.ConfigAbsence" Width="1.5" PointX="11.25" PointY="12" />
         <EntityTypeShape EntityType="SUPERPModel.Module" Width="1.5" PointX="0.75" PointY="3" />
         <EntityTypeShape EntityType="SUPERPModel.Prime" Width="1.5" PointX="8.25" PointY="10.125" />
         <EntityTypeShape EntityType="SUPERPModel.Role" Width="1.5" PointX="0.75" PointY="6" />
@@ -44,7 +43,8 @@
         <AssociationConnector Association="SUPERPModel.FK_User_Role" />
         <AssociationConnector Association="SUPERPModel.FK__Salary__User_id__5AEE82B9" />
         <AssociationConnector Association="SUPERPModel.FK__User__Status_id__5BE2A6F2" />
-      </Diagram>
+        <EntityTypeShape EntityType="SUPERPModel.BILL_LineBillQuotation" Width="1.5" PointX="15.25" PointY="5.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
