@@ -15,7 +15,7 @@ namespace SupErp.Kernel
     {
         private IEnumerable<string> GetDllsPaths()
         {
-            string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
+            string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules");
             return Directory.GetFiles(directoryPath, "*.dll");
         }
 
