@@ -34,6 +34,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -47,14 +49,56 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="UserControl1.xaml">
+    <Compile Include="AddRoleUserControl.xaml.cs">
+      <DependentUpon>AddRoleUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddUserUserControl.xaml.cs">
+      <DependentUpon>AddUserUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListRoleUserControl.xaml.cs">
+      <DependentUpon>ListRoleUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListUserUserControl.xaml.cs">
+      <DependentUpon>ListUserUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RoleUserControl.xaml.cs">
+      <DependentUpon>RoleUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserUserControl.xaml.cs">
+      <DependentUpon>UserUserControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AddRoleUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddUserUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
+    <Compile Include="AdminUserControl.xaml.cs">
+      <DependentUpon>AdminUserControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ListRoleUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListUserUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RoleUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
