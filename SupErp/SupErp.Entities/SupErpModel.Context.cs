@@ -33,7 +33,6 @@ namespace SupErp.Entities
         public virtual DbSet<BILL_BillQuotation> BILL_BillQuotation { get; set; }
         public virtual DbSet<BILL_BillQuotationStatus> BILL_BillQuotationStatus { get; set; }
         public virtual DbSet<BILL_Category> BILL_Category { get; set; }
-        public virtual DbSet<BILL_LineBillQuotation> BILL_LineBillQuotation { get; set; }
         public virtual DbSet<BILL_Product> BILL_Product { get; set; }
         public virtual DbSet<BILL_Status> BILL_Status { get; set; }
         public virtual DbSet<BILL_Transmitter> BILL_Transmitter { get; set; }
