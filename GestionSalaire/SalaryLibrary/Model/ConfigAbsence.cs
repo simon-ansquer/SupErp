@@ -7,20 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SalaryLibrary.DAL
+namespace SalaryLibrary.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Prime
+    public partial class ConfigAbsence
     {
         public long id { get; set; }
-        public Nullable<long> User_id { get; set; }
-        public string Label { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public Nullable<int> MaximumHalfDayAbsence { get; set; }
+        public Nullable<long> AbsenceType_id { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual AbsenceType AbsenceType { get; set; }
     }
 }

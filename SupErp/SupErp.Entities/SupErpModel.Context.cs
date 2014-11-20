@@ -25,9 +25,6 @@ namespace SupErp.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<Company_Contact> Company_Contact { get; set; }
-        public virtual DbSet<BILL_LineBillQuotation> BILL_LineBillQuotation { get; set; }
         public virtual DbSet<Absence> Absences { get; set; }
         public virtual DbSet<AbsenceType> AbsenceTypes { get; set; }
         public virtual DbSet<BILL_BillQuotation> BILL_BillQuotation { get; set; }
@@ -37,6 +34,8 @@ namespace SupErp.Entities
         public virtual DbSet<BILL_Status> BILL_Status { get; set; }
         public virtual DbSet<BILL_Transmitter> BILL_Transmitter { get; set; }
         public virtual DbSet<BILL_Vat> BILL_Vat { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Company_Contact> Company_Contact { get; set; }
         public virtual DbSet<ConfigAbsence> ConfigAbsences { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<Prime> Primes { get; set; }
