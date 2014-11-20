@@ -63,6 +63,9 @@
     <Compile Include="BILL_Category.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="BILL_LineBillQuotation.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="BILL_Product.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
@@ -75,10 +78,13 @@
     <Compile Include="BILL_Vat.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ConfigAbsence.cs">
+    <Compile Include="Company.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Customer.cs">
+    <Compile Include="Company_Contact.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigAbsence.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Module.cs">

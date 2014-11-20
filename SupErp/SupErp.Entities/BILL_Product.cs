@@ -14,6 +14,11 @@ namespace SupErp.Entities
     
     public partial class BILL_Product
     {
+        public BILL_Product()
+        {
+            this.BILL_LineBillQuotation = new HashSet<BILL_LineBillQuotation>();
+        }
+    
         public long Product_Id { get; set; }
         public string Name { get; set; }
         public string DescriptionPro { get; set; }
@@ -23,5 +28,6 @@ namespace SupErp.Entities
     
         public virtual BILL_Category BILL_Category { get; set; }
         public virtual BILL_Vat BILL_Vat { get; set; }
+        public virtual ICollection<BILL_LineBillQuotation> BILL_LineBillQuotation { get; set; }
     }
 }
