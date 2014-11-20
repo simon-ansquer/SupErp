@@ -1,0 +1,279 @@
+﻿<UserControl x:Class="SupErpModuleUser.AddUserUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Background="White"
+             d:DesignHeight="700" d:DesignWidth="500">
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid
+            Grid.Column="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                    Width="0.3*"/>
+                    <ColumnDefinition
+                    Width="0.7*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition
+                    Height="0.15*"/>
+                    <RowDefinition
+                    Height="0.1*"/>
+                    <RowDefinition
+                    Height="0.1*"/>
+                    <RowDefinition
+                    Height="0.1*"/>
+                    <RowDefinition
+                    Height="0.1*"/>
+                    <RowDefinition
+                    Height="0.1*"/>
+                    <RowDefinition
+                    Height="0.1*"/>
+                    <RowDefinition
+                    Height="0.1*"/>
+                    <RowDefinition
+                    Height="0.1*"/>
+                    <RowDefinition
+                    Height="0.1*"/>
+                    <RowDefinition
+                    Height="0.1*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                Grid.Column="0"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Text="Nouveau Utilisateur"
+                Foreground="Blue"
+                FontSize="20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+                <Line
+                Grid.Column="0"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                X1="0"
+                X2="500"
+                VerticalAlignment="Bottom"
+                Stroke="Blue"
+                Margin="15, 0, 15, 0"/>
+
+
+                <TextBlock
+                Grid.Column="0"
+                Grid.Row="1"
+                Text="Nom"
+                FontSize="18"
+                Foreground="Blue"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+                <TextBlock
+                Grid.Column="0"
+                Grid.Row="2"
+                Text="Prénom"
+                FontSize="18"
+                Foreground="Blue"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+                <TextBlock
+                Grid.Column="0"
+                Grid.Row="3"
+                Text="E-Mail"
+                FontSize="18"
+                Foreground="Blue"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+                <TextBlock
+                Grid.Column="0"
+                Grid.Row="4"
+                Text="Mot de passe"
+                FontSize="18"
+                Foreground="Blue"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+                <TextBlock
+                Grid.Column="0"
+                Grid.Row="5"
+                Text="Date de naissance"
+                FontSize="18"
+                Foreground="Blue"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+                <TextBlock
+                Grid.Column="0"
+                Grid.Row="6"
+                Text="Adresse"
+                FontSize="18"
+                Foreground="Blue"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+                <TextBlock
+                Grid.Column="0"
+                Grid.Row="7"
+                Text="Code Postal"
+                FontSize="18"
+                Foreground="Blue"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+                <TextBlock
+                Grid.Column="0"
+                Grid.Row="8"
+                Text="Ville"
+                FontSize="18"
+                Foreground="Blue"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+                <TextBlock
+                Grid.Column="0"
+                Grid.Row="9"
+                Text="Rôle"
+                FontSize="18"
+                Foreground="Blue"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+                <TextBox
+                    x:Name="tbNom"
+                Grid.Column="1"
+                Grid.Row="1"
+                Foreground="Blue"
+                BorderBrush="Blue"
+                Margin="0, 10, 10, 10"/>
+
+                <TextBox
+                    x:Name="tbPrenom"
+                Grid.Column="1"
+                Grid.Row="2"
+                Foreground="Blue"
+                BorderBrush="Blue"
+                Margin="0, 10, 10, 10"/>
+
+                <TextBox
+                    x:Name="tbEmail"
+                Grid.Column="1"
+                Grid.Row="3"
+                Foreground="Blue"
+                BorderBrush="Blue"
+                Margin="0, 10, 10, 10"/>
+
+                <TextBox
+                    x:Name="tbMotDePasse"
+                Grid.Column="1"
+                Grid.Row="4"
+                Foreground="Blue"
+                BorderBrush="Blue"
+                Margin="0, 10, 10, 10"/>
+
+                <TextBox
+                    x:Name="tbDateDeNaissance"
+                Grid.Column="1"
+                Grid.Row="5"
+                Foreground="Blue"
+                BorderBrush="Blue"
+                Margin="0, 10, 10, 10"/>
+
+                <TextBox
+                    x:Name="tbAdresse"
+                Grid.Column="1"
+                Grid.Row="6"
+                Foreground="Blue"
+                BorderBrush="Blue"
+                Margin="0, 10, 10, 10"/>
+
+                <TextBox
+                    x:Name="tbCodePostal"
+                Grid.Column="1"
+                Grid.Row="7"
+                Foreground="Blue"
+                BorderBrush="Blue"
+                Margin="0, 10, 10, 10"/>
+
+                <TextBox
+                    x:Name="tbVille"
+                Grid.Column="1"
+                Grid.Row="8"
+                Foreground="Blue"
+                BorderBrush="Blue"
+                Margin="0,13,10,7"/>
+
+                <ListBox
+                    x:Name="lbRoles"
+                    Grid.Column="1"
+                    Grid.Row="9"
+                    Foreground="Blue"
+                    BorderBrush="Blue"
+                    Margin="0, 10, 10, 10"/>
+
+                <Button
+                    x:Name="btAjouter"
+                Grid.Column="1"
+                Grid.Row="10"
+                Content="AJOUTER"
+                FontSize="18"
+                Foreground="Blue"
+                Background="Transparent"
+                BorderBrush="Blue"
+                Margin="0, 15, 100, 15" 
+                Click="AjouterUtilisateur"
+                Visibility="Collapsed"/>
+
+                <Grid
+                    Grid.Column="0"
+                    Grid.Row="10"
+                    Grid.ColumnSpan="2">
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="0.5*"/>
+                        <ColumnDefinition
+                            Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                        <Button
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Content="ANNULER"
+                    FontSize="18"
+                    Foreground="White"
+                    Background="Blue"
+                    BorderBrush="White"
+                    Margin="15, 15, 15, 15" 
+                    Click="Annuler"/>
+
+                        <Button
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Content="MODIFIER"
+                    FontSize="18"
+                    Foreground="Blue"
+                    Background="White"
+                    BorderBrush="Blue"
+                    Margin="15, 15, 15, 15" 
+                    Click="ModifierUtilisateur"/>
+
+                </Grid>
+                
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</UserControl>

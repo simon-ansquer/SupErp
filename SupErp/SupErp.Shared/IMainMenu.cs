@@ -15,11 +15,11 @@ namespace SupErp.Shared
         /// <summary>
         /// Nom du menu principal qui sera affiché dans l'application
         /// </summary>
-        string MenuName { get; set; }
+        string MenuName { get; }
 
         /// <summary>
         /// Liste des sous-menus du menu principal
         /// </summary>
-        List<ISubMenu> SubMenus { get; set; }
+        List<ISubMenu> SubMenus { get; }
     }
 }

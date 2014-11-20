@@ -49,53 +49,53 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddRoleUserControl.xaml.cs">
+    <Compile Include="Views\AddRoleUserControl.xaml.cs">
       <DependentUpon>AddRoleUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddUserUserControl.xaml.cs">
+    <Compile Include="Views\AddUserUserControl.xaml.cs">
       <DependentUpon>AddUserUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListRoleUserControl.xaml.cs">
+    <Compile Include="Views\ListRoleUserControl.xaml.cs">
       <DependentUpon>ListRoleUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListUserUserControl.xaml.cs">
+    <Compile Include="Views\ListUserUserControl.xaml.cs">
       <DependentUpon>ListUserUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RoleUserControl.xaml.cs">
+    <Compile Include="Views\RoleUserControl.xaml.cs">
       <DependentUpon>RoleUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserUserControl.xaml.cs">
+    <Compile Include="Views\UserUserControl.xaml.cs">
       <DependentUpon>UserUserControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddRoleUserControl.xaml">
+    <Page Include="Views\AddRoleUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddUserUserControl.xaml">
+    <Page Include="Views\AddUserUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminUserControl.xaml">
+    <Page Include="Views\AdminUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AdminUserControl.xaml.cs">
+    <Compile Include="Views\AdminUserControl.xaml.cs">
       <DependentUpon>AdminUserControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ListRoleUserControl.xaml">
+    <Page Include="Views\ListRoleUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListUserUserControl.xaml">
+    <Page Include="Views\ListUserUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RoleUserControl.xaml">
+    <Page Include="Views\RoleUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserUserControl.xaml">
+    <Page Include="Views\UserUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,6 +129,12 @@
       <Project>{aed44877-9636-4e8c-95a3-722d99f6260b}</Project>
       <Name>SupErp.Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

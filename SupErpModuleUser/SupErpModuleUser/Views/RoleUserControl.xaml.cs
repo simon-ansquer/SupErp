@@ -17,25 +17,31 @@ using System.Windows.Shapes;
 namespace SupErpModuleUser
 {
     /// <summary>
-    /// Logique d'interaction pour AddRoleUserControl.xaml
+    /// Logique d'interaction pour RoleUserControl.xaml
     /// </summary>
-    public partial class AddRoleUserControl : UserControl, ISubMenu
+    public partial class RoleUserControl : UserControl, ISubMenu
     {
-        public AddRoleUserControl()
+        private List<ISubMenu> subMenus;
+
+        public RoleUserControl()
         {
             InitializeComponent();
+
+            subMenus = new List<ISubMenu>();
+            subMenus.Add(new AddRoleUserControl());
+            subMenus.Add(new ListRoleUserControl());
         }
 
         public string SubMenuName
         {
-            get { return "Ajouter un rôle"; }
+            get { return "Rôles"; }
         }
 
         public List<ISubMenu> SubMenus
         {
             get
             {
-                return null;
+                return subMenus;
             }
         }
 

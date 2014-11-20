@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="SupErpModuleUser.ListRoleUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             Background="White"
+             d:DesignHeight="300" d:DesignWidth="500">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="0.1*"/>
+            <RowDefinition
+                Height="0.9*"/>
+        </Grid.RowDefinitions>
+            
+        <StackPanel
+            Grid.Column="0"
+            Grid.Row="0"
+            Orientation="Horizontal"
+            VerticalAlignment="Center">
+            
+            <TextBlock
+                Text="Administration >"
+                Foreground="Blue"
+                FontSize="20"/>
+            
+            <TextBlock
+                Text=" Rôle"
+                Foreground="Blue"
+                VerticalAlignment="Center"/>
+            
+        </StackPanel>
+        
+        <ListView
+            Grid.Column="0"
+            Grid.Row="1">
+            
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        Width="100">
+                        <TextBlock
+                            Text="Rôle"
+                            Background="White"/>
+                    </GridViewColumn>
+
+                    <GridViewColumn
+                        Width="400">
+                        <TextBlock
+                            Text="Modules"
+                            Background="White"
+                            HorizontalAlignment="Center"/>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Width="0.1*"/>
+                            <ColumnDefinition
+                                Width="0.8*"/>
+                            <ColumnDefinition
+                                Width="0.1*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Text="{Binding Nom}"/>
+                        
+                        <TextBlock
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Text="{Binding ModulesString}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+        </ListView>
+    </Grid>
+</UserControl>
