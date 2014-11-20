@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfControlLibrarySalaire.Models;
 
 namespace WpfControlLibrarySalaire.ViewModels
 {
     public class EmployeeHistoryViewModel
     {
+        List<HistoriqueSalaire> ListHistoriqueSalaire;
+        
         public EmployeeHistoryViewModel()
         {
             RandomizeData();
@@ -17,12 +20,14 @@ namespace WpfControlLibrarySalaire.ViewModels
     
     private void RandomizeData()
     {
-        //List<ListeSalaire> _ListSalaire = new List<ListeSalaire>();
+        ListHistoriqueSalaire = new List<HistoriqueSalaire>();
 
-    }
-    
-    
-    
+        for (int i = 0; i < 10; i++)
+        {
+            ListHistoriqueSalaire.Add(new HistoriqueSalaire(DateTime.Now, Convert.ToDouble(i)));
+        }
+
+    } 
     }   
 
 }
