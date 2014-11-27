@@ -67,7 +67,7 @@ namespace SupErp.DAL.FacturationDAL
             {
                 try
                 {
-                    context.DeleteBillVat.Remove(billVatToDelete);
+                    context.BILL_Vat.Remove(billVatToDelete);
                     context.SaveChanges();
                     return true;
                 }

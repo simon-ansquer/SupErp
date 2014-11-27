@@ -16,7 +16,8 @@ namespace SupErp.BLL.FacturationBLL
         #region Read
 
         public IEnumerable<BillQuotationStatus> Get
-            /*
+            
         #endregion
+         */
     }
 }
