@@ -19,6 +19,14 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
+        public BILL_BillQuotationStatus GetCurrentStatusBillQuotation(BILL_BillQuotation billQuotation)
+        {
+            using (SUPERPEntities context = new SUPERPEntities())
+            {
+                return context.BILL_BillQuotationStatus.First(bqs => bqs.BILL_BillQuotation == billQuotation)..ToList();
+            }
+        }
+
         public List<BILL_BillQuotationStatus> GetBillQuotationStatusByStatus(BILL_Status status)
         {
             using (SUPERPEntities context = new SUPERPEntities())
