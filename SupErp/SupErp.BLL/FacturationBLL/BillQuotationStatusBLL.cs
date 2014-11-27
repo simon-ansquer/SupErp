@@ -9,13 +9,14 @@ namespace SupErp.BLL.FacturationBLL
 {
     public class BillQuotationStatusBLL
     {
+        /*S
         private static BillQuotationStatusDAL billQuotationStatusDAL { get; set; }
 
 
         #region Read
 
         public IEnumerable<BillQuotationStatus> Get
-
+            /*
         #endregion
     }
 }
