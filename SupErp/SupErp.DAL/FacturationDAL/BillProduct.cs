@@ -84,7 +84,7 @@ namespace SupErp.DAL.FacturationDAL
             {
                 try
                 {
-                    context.DeleteBillProduct.Remove(billProductToDelete);
+                    context.BILL_Product.Remove(billProductToDelete);
                     context.SaveChanges();
                     return true;
                 }

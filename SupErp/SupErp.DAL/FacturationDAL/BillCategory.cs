@@ -26,7 +26,7 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        public BILL_Category GetBillCategory(DateTime descriptionBillCategory)
+        public BILL_Category GetBillCategoryByDescription(string descriptionBillCategory)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
@@ -67,7 +67,7 @@ namespace SupErp.DAL.FacturationDAL
             {
                 try
                 {
-                    context.DeleteBillCategory.Remove(billCategoryToDelete);
+                    context.BILL_Category.Remove(billCategoryToDelete);
                     context.SaveChanges();
                     return true;
                 }
