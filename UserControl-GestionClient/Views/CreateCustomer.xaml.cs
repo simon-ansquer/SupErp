@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace UserControl_GestionClient.Views
 {
     /// <summary>
-    /// Logique d'interaction pour AccueilGestionClient.xaml
+    /// Logique d'interaction pour CreateCustomer.xaml
     /// </summary>
-    public partial class AccueilGestionClient : UserControl
+    public partial class CreateCustomer : UserControl
     {
-        public AccueilGestionClient()
+        public CreateCustomer()
         {
             InitializeComponent();
         }

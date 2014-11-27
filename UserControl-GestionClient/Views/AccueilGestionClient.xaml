@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="UserControl_GestionClient.Views.AccueilGestionClient"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModels="clr-namespace:UserControl_GestionClient.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <viewModels:AccueilGestionClientViewModel x:Key="AccueilViewModel" />
+    </UserControl.Resources>
+    <Grid Margin="0,0,-396,0" DataContext="{StaticResource AccueilViewModel}">
+        <StackPanel Orientation="Vertical"
+                    Margin="-270,0,166,-100"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top" Width="800" Height="400">
+            <Button Content="Ajouter un client"
+        		Command="{Binding AddCustomer}" Margin="75,20,587,20" />
+            <DataGrid ItemsSource="{Binding CompanyCollection}"
+            	AutoGenerateColumns="False"
+            	CanUserAddRows="False" Height="300" Width="650" Margin="75,20,75,20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding name}"
+                        IsReadOnly="True"
+            			Header="Nom" />
+                    <DataGridTextColumn Binding="{Binding address}"
+            			IsReadOnly="True"
+            			Header="Adresse" />
+                    <DataGridTextColumn Binding="{Binding postalcode}"
+                        IsReadOnly="True"
+            			Header="Code Postal" />
+                    <DataGridTextColumn Binding="{Binding city}"
+            			IsReadOnly="True"
+            			Header="Ville" />
+                    <DataGridTextColumn Binding="{Binding siret}"
+            			IsReadOnly="True"
+            			Header="Siret" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>
