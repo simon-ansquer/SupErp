@@ -1,4 +1,5 @@
-﻿using SupErp.DAL.GestionSalaireDAL;
+﻿using SupErp.BLL.ModuleUser;
+using SupErp.DAL.GestionSalaireDAL;
 using SupErp.Entities;
 using System;
 using System.Collections.Generic;
@@ -32,10 +33,35 @@ namespace SupErp.BLL.GestionSalaireBLL
         }
 
 
+        public bool updateUserSalary(long idUser, decimal newSalary)
+        {
+            return salaireDAL.updateUserSalaire(idUser, newSalary);
+        }
 
+        public List<Status> GetState()
+        {
+            return salaireDAL.GetState();
+        }
 
+        public bool UpdateUserState(long idUser, long idState)
+        {
+            return salaireDAL.UpdateUserState(idUser, idState);
+        }
 
+        public bool addPrime(long idUser, Prime prime)
+        {
+            return salaireDAL.addPrime(idUser, prime);
+        }
 
+        public List<Prime> GetPrimesByUserId(long id)
+        {
+            return salaireDAL.GetPrimesByUserId(id);
+        }
+
+        public bool addAbsence(long idUser, Absence absence)
+        {
+            return salaireDAL.addAbsence(idUser, absence);
+        }
 
 
 

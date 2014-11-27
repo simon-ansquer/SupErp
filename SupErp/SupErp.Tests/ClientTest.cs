@@ -82,6 +82,24 @@ namespace SupErp.Tests
         }
 
         [TestMethod]
+        public void TestGetCompany()
+        {
+            Company comp = new Company();
+            comp = clientService.GetCompany(2);
+
+            Assert.AreEqual("testCreate", comp.name);
+        }
+
+        [TestMethod]
+        public void TestGetListCompany()
+        {
+            List<Company> comp = new List<Company> ();
+            comp = clientService.GetListCompany();
+
+            Assert.IsTrue(comp.Count > 1);
+        }
+
+        [TestMethod]
         public void TestCreateCompany_Contact()
         {
             Company_Contact cont = new Company_Contact();

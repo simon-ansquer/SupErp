@@ -8,9 +8,10 @@ using SupErp.Entities;
 
 namespace SupErp.BLL.FacturationBLL
 {
-    public class BillStatusBLL
+    public class StatusBLL
     {
-        private static BillStatusDAL DAL { get; set; }
+        private static readonly Lazy<StatusDAL> LazyStatusDAL = new Lazy<StatusDAL>(() => new StatusDAL());
+        private static StatusDAL DAL { get { return LazyStatusDAL.Value; } }
 
         #region Read
 

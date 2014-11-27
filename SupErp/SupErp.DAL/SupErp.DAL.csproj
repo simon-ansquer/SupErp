@@ -54,8 +54,8 @@
     <Compile Include="FacturationDAL\BillQuotationStatusDAL.cs" />
     <Compile Include="FacturationDAL\BillTransmitterDAL.cs" />
     <Compile Include="FacturationDAL\BillVatDAL.cs" />
-    <Compile Include="FacturationDAL\BillLineBillQuotationDAL.cs" />
-    <Compile Include="FacturationDAL\BillStatusDAL.cs" />
+    <Compile Include="FacturationDAL\LineBillQuotationDAL.cs" />
+    <Compile Include="FacturationDAL\StatusDAL.cs" />
     <Compile Include="GestionSalaireDAL\GestionSalaireDAL.cs" />
     <Compile Include="ModuleUser\UserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -18,6 +18,10 @@ namespace SupErp.WCF.GestionClientWCF
         bool CreateCompany(Company company);
 
         [OperationContract]
+        Company GetCompany(int idCustomer);
+
+        [OperationContract]
+        List<Company> GetListCompany();
         List<Company> GetCompany(int idCustomer);
 
 

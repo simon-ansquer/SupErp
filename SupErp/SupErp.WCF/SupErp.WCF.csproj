@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GestionClientWCF\ServiceGestionClient.svc" />
+	<Content Include="FacturationWCF\FacturationService.svc" />
     <Content Include="GestionSalaireWCF\ServiceSalaire.svc" />
     <Content Include="ModuleUser\UserService.svc" />
     <Content Include="Web.config">
@@ -71,6 +72,10 @@
     <Compile Include="GestionClientWCF\ServiceGestionClient.svc.cs">
       <DependentUpon>ServiceGestionClient.svc</DependentUpon>
     </Compile>
+	<Compile Include="FacturationWCF\FacturationService.svc.cs">
+      <DependentUpon>FacturationService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="FacturationWCF\IFacturationService.cs" />
     <Compile Include="GestionSalaireWCF\IServiceSalaire.cs" />
     <Compile Include="GestionSalaireWCF\ServiceSalaire.svc.cs">
       <DependentUpon>ServiceSalaire.svc</DependentUpon>

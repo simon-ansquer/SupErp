@@ -11,7 +11,7 @@ namespace SupErp.DAL.GestionClientDAL
     {
         public bool CreateCompany_Contact(Company_Contact contact)
         {
-            using (SUPERPEntities sup = new SUPERPEntities())
+            using (SUPERPEntities sup = new SUPERPEntities(false))
             {
                 sup.Company_Contact.Add(contact);
                 sup.SaveChanges();
@@ -22,7 +22,7 @@ namespace SupErp.DAL.GestionClientDAL
         public Company_Contact GetCompany_Contact(int idContact)
         {
             Company_Contact contact;
-            using (SUPERPEntities sup = new SUPERPEntities())
+            using (SUPERPEntities sup = new SUPERPEntities(false))
             {
                 contact = sup.Company_Contact.Where(o => o.id == idContact).FirstOrDefault(); ;
             }
@@ -32,7 +32,7 @@ namespace SupErp.DAL.GestionClientDAL
         public List<Company_Contact> GetListCompanyContact()
         {
             List<Company_Contact> lcontact;
-            using (SUPERPEntities sup = new SUPERPEntities())
+            using (SUPERPEntities sup = new SUPERPEntities(false))
             {
                 lcontact = sup.Company_Contact.ToList(); ;
             }
@@ -42,7 +42,7 @@ namespace SupErp.DAL.GestionClientDAL
         public List<Company_Contact> GetListCompanyContact(int idCompany)
         {
             List<Company_Contact> lcontact;
-            using (SUPERPEntities sup = new SUPERPEntities())
+            using (SUPERPEntities sup = new SUPERPEntities(false))
             {
                 lcontact = sup.Company_Contact.Where(o => o.company_id == idCompany).ToList(); ;
             }
