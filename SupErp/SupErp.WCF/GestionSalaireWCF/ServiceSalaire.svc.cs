@@ -29,5 +29,41 @@ namespace SupErp.WCF.GestionSalaireWCF
         {
             return salaireBLL.getUser(userID);
         }
+
+
+        public bool UpdateUserSalaryById(long idUser, decimal newSalaryNet)
+        {
+            return salaireBLL.updateUserSalary(idUser, newSalaryNet);
+        }
+
+
+        public List<Entities.Status> GetState()
+        {
+            return salaireBLL.GetState();
+        }
+
+
+        public bool UpdateUserState(long idUser, long idState)
+        {
+            return salaireBLL.UpdateUserState(idUser, idState);
+        }
+
+
+        public bool addPrime(long idUser, Entities.Prime prime)
+        {
+            return salaireBLL.addPrime(idUser, prime);
+        }
+
+
+        public List<Entities.Prime> GetPrimesByUserId(long id)
+        {
+            return salaireBLL.GetPrimesByUserId(id);
+        }
+
+
+        public bool addAbsence(long idUser, Entities.Absence absence)
+        {
+            return salaireBLL.addAbsence(idUser, absence);
+        }
     }
 }

@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SupErp.IHM.ServiceReference1 {
+namespace SupErp.IHM.UserServices {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IUserService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserServices.IUserService")]
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Login", ReplyAction="http://tempuri.org/IUserService/LoginResponse")]
@@ -83,12 +83,12 @@ namespace SupErp.IHM.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IUserServiceChannel : SupErp.IHM.ServiceReference1.IUserService, System.ServiceModel.IClientChannel {
+    public interface IUserServiceChannel : SupErp.IHM.UserServices.IUserService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UserServiceClient : System.ServiceModel.ClientBase<SupErp.IHM.ServiceReference1.IUserService>, SupErp.IHM.ServiceReference1.IUserService {
+    public partial class UserServiceClient : System.ServiceModel.ClientBase<SupErp.IHM.UserServices.IUserService>, SupErp.IHM.UserServices.IUserService {
         
         public UserServiceClient() {
         }

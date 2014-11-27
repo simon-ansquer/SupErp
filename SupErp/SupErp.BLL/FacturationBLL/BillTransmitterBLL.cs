@@ -10,7 +10,8 @@ namespace SupErp.BLL.FacturationBLL
 {
     public class BillTransmitterBLL
     {
-        private static BillTransmitterDAL billTransDAL { get; set; }
+        private static readonly Lazy<BillTransmitterDAL> LazyBillTransDAL = new Lazy<BillTransmitterDAL>(() => new BillTransmitterDAL());
+        private static BillTransmitterDAL billTransDAL { get { return LazyBillTransDAL.Value; } }
 
         #region Read
         public List<BILL_Transmitter> GetBillTrans()

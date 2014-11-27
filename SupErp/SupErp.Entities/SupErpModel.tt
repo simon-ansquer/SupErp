@@ -24,6 +24,7 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
     BeginNamespace(code);
 #>
 <#=codeStringGenerator.UsingDirectives(inHeader: false)#>
+<#=codeStringGenerator.WriteEntityTypeSerializationInfo(entity)#>
 <#=codeStringGenerator.EntityClassOpening(entity)#>
 {
 <#
@@ -69,6 +70,7 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
         foreach (var edmProperty in simpleProperties)
         {
 #>
+[DataMember]
     <#=codeStringGenerator.Property(edmProperty)#>
 <#
         }
@@ -82,6 +84,7 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
         foreach(var complexProperty in complexProperties)
         {
 #>
+[DataMember]
     <#=codeStringGenerator.Property(complexProperty)#>
 <#
         }
@@ -96,6 +99,7 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
         foreach (var navigationProperty in navigationProperties)
         {
 #>
+[DataMember]
     <#=codeStringGenerator.NavigationProperty(navigationProperty)#>
 <#
         }
@@ -112,6 +116,7 @@ foreach (var complex in typeMapper.GetItemsToGenerate<ComplexType>(itemCollectio
     BeginNamespace(code);
 #>
 <#=codeStringGenerator.UsingDirectives(inHeader: false, includeCollections: false)#>
+[DataContract]
 <#=Accessibility.ForType(complex)#> partial class <#=code.Escape(complex)#>
 {
 <#
@@ -418,13 +423,39 @@ public class CodeStringGenerator
         return inHeader == string.IsNullOrEmpty(_code.VsNamespaceSuggestion())
             ? string.Format(
                 CultureInfo.InvariantCulture,
-                "{0}using System;{1}" +
+                "{0}using System;{3}using System.Runtime.Serialization;{1}" +
                 "{2}",
                 inHeader ? Environment.NewLine : "",
                 includeCollections ? (Environment.NewLine + "using System.Collections.Generic;") : "",
-                inHeader ? "" : Environment.NewLine)
+                inHeader ? "" : Environment.NewLine, Environment.NewLine)
             : "";
     }
+
+	 public string WriteEntityTypeSerializationInfo(EntityType type)
+	 {
+	  StringBuilder output = new StringBuilder();
+	  output.AppendLine("[DataContract(IsReference = true)]");
+
+	  List<String> typeList = new List<String>();
+	  var complexProperties = _typeMapper.GetComplexProperties(type);
+	  foreach(var complexProperty in complexProperties)
+	  {
+	   typeList.Add(_code.Escape(complexProperty));
+	  }
+
+	  var navigationProperties = _typeMapper.GetNavigationProperties(type);
+	  foreach (var navigationProperty in navigationProperties)
+	  {
+	   typeList.Add(_code.Escape(_typeMapper.GetTypeName(navigationProperty.ToEndMember.GetEntityType())));
+	  }
+
+	  foreach(String sItem in typeList.Distinct())
+	  {
+	   output.AppendFormat("[KnownType(typeof({0}))]{1}", sItem, Environment.NewLine);
+	  }
+
+	  return output.ToString();
+	 }
 }
 
 public class TypeMapper
