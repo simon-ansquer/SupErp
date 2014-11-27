@@ -20,9 +20,32 @@ namespace SupErp.WCF.GestionSalaireWCF
             return salaireBLL.getUsers();
         }
 
-        public List<Entities.User> GetUser(string query)
+        public List<Entities.User> SearchUser(string query)
         {
             return salaireBLL.getUsers(query);
+        }
+
+        public Entities.User GetUserById(long userID)
+        {
+            return salaireBLL.getUser(userID);
+        }
+
+
+        public bool UpdateUserSalaryById(long idUser, decimal newSalaryNet)
+        {
+            return salaireBLL.updateUserSalary(idUser, newSalaryNet);
+        }
+
+
+        public List<Entities.Status> GetState()
+        {
+            return salaireBLL.GetState();
+        }
+
+
+        public bool UpdateUserState(long idUser, long idState)
+        {
+            return salaireBLL.UpdateUserState(idUser, idState);
         }
     }
 }

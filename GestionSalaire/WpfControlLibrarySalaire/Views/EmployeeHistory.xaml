@@ -32,7 +32,7 @@
         <DataGrid Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"  Grid.Row="2" Grid.RowSpan="3" VerticalAlignment="Stretch" ItemsSource="{Binding Source=Salaries}"  GridLinesVisibility="Horizontal" FontSize="13" HorizontalGridLinesBrush="Silver"
                   AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" AlternatingRowBackground="#FFCCCCCC" AlternationCount="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Width ="1*" Binding="{Binding Date}" CanUserResize="False" >
+                <DataGridTextColumn Header="Date" Width ="1*" Binding="{Binding DateSalaire}" CanUserResize="False" >
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />

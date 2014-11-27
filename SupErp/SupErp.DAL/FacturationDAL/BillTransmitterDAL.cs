@@ -7,58 +7,51 @@ using SupErp.Entities;
 
 namespace SupErp.DAL.FacturationDAL
 {
-    public class LineBillQuotationDAL
+    public class BillTransmitterDAL
     {
-          #region Read
-
-        public IEnumerable<BILL_LineBillQuotation> GetLineBillQuotation(BILL_BillQuotation billQuotation)
+        #region Read
+        public List<BILL_Transmitter> GetBillTrans()
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                return context.BILL_LineBillQuotation.Where(line => line.BILL_BillQuotation == billQuotation).ToList();
+                return context.BILL_Transmitter.ToList();
             }
         }
-
         #endregion
 
         #region Create
-
-        public BILL_LineBillQuotation CreateLineBillQuotation(BILL_LineBillQuotation billLineToAdd)
+        public BILL_Transmitter CreateBillTrans(BILL_Transmitter billVTransToAdd)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                var s = context.BILL_LineBillQuotation.Add(billLineToAdd);
+                var t = context.BILL_Transmitter.Add(billVTransToAdd);
                 context.SaveChanges();
-                return s;
+                return t;
             }
         }
-
         #endregion
 
         #region Edit
-
-        public BILL_LineBillQuotation EditLineBillQuotation(BILL_LineBillQuotation LineBillQuotationToEdit)
+        public BILL_Transmitter EditBillTrans(BILL_Transmitter billTransToEdit)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                var l = context.BILL_LineBillQuotation.Find(LineBillQuotationToEdit.LineBillQuotation_Id);
-                l = LineBillQuotationToEdit;
+                var t = context.BILL_Transmitter.Find(billTransToEdit.Transmitter_Id);
+                t = billTransToEdit;
                 context.SaveChanges();
-                return l;
+                return t;
             }
         }
-
         #endregion
 
         #region Delete
-
-        public bool DeleteLineBillQuotation(BILL_LineBillQuotation lineBillQuotationToDelete)
+        public bool DeleteBillTrans(BILL_Transmitter billTransToDelete)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
                 try
                 {
-                    context.BILL_LineBillQuotation.Remove(lineBillQuotationToDelete);
+                    context.BILL_Transmitter.Remove(billTransToDelete);
                     context.SaveChanges();
                     return true;
                 }
@@ -68,9 +61,6 @@ namespace SupErp.DAL.FacturationDAL
                 }
             }
         }
-
         #endregion
     }
-
-
 }
