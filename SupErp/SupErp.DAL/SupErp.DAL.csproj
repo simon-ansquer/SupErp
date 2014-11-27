@@ -49,6 +49,7 @@
     <Compile Include="FacturationDAL\BillCategory.cs" />
     <Compile Include="FacturationDAL\BillProduct.cs" />
     <Compile Include="FacturationDAL\BillQuotationDAL.cs" />
+    <Compile Include="FacturationDAL\BillQuotationStatusDAL.cs" />
     <Compile Include="FacturationDAL\BillTransmitter.cs" />
     <Compile Include="FacturationDAL\BillVat.cs" />
     <Compile Include="FacturationDAL\LineBillQuotationDAL.cs" />

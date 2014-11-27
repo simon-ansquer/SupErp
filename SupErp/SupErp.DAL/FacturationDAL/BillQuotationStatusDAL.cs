@@ -23,7 +23,8 @@ namespace SupErp.DAL.FacturationDAL
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                return context.BILL_BillQuotationStatus.First(bqs => bqs.BILL_BillQuotation == billQuotation)..ToList();
+                var listStatus = GetBillQuotationStatusByBillQuotation(billQuotation).OrderByDescending(x => x.DateAdvancement);
+                return listStatus.First();
             }
         }
 
