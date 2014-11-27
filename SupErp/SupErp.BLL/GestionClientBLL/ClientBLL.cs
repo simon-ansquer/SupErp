@@ -20,8 +20,7 @@ namespace SupErp.BLL.GestionClientBLL
 
         public bool CreateCompany(Company company)
         {
-            companyDAL.CreateCompany(company);
-            return true;
+            return companyDAL.CreateCompany(company);
         }
     }
 }

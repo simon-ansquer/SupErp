@@ -74,6 +74,9 @@ namespace SupErp.Tests
             Company comp = new Company();
             comp.name = "testCreate";
             comp.siret = "3333";
+            comp.city = "Bordeaux";
+            comp.address = "lol";
+            comp.postalcode = 33300;
 
             Assert.IsTrue(clientService.CreateCompany(comp));
         }
