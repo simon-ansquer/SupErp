@@ -19,7 +19,7 @@ namespace SupErp.WCF.GestionClientWCF
         [OperationContract]
         public bool CreateCompany(Company company)
         {
-            return false;
+            return clientBLL.CreateCompany(company);
         }
 
         [OperationContract]

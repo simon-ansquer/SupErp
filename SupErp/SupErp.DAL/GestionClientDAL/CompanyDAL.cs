@@ -9,12 +9,14 @@ namespace SupErp.DAL.GestionClientDAL
 {
     public class CompanyDAL
     {
-        public void CreateCompany(Company compa)
+        public bool CreateCompany(Company compa)
         {
             using (SUPERPEntities sup = new SUPERPEntities())
             {
                 sup.Companies.Add(compa);
+                sup.SaveChanges();
             }
+            return true;
         }
     }
 }
