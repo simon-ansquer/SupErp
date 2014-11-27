@@ -10,9 +10,8 @@ namespace SupErp.BLL.FacturationBLL
 {
     public class BillQuotationStatusBLL
     {
-        
-        private static BillQuotationStatusDAL DAL { get; set; }
-
+        private static readonly Lazy<BillQuotationStatusDAL> LazyStatusDAL = new Lazy<BillQuotationStatusDAL>(() => new BillQuotationStatusDAL());
+        private static BillQuotationStatusDAL DAL { get { return LazyStatusDAL.Value; } }
 
         #region Read
 

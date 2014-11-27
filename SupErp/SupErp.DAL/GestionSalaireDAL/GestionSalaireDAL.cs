@@ -1,6 +1,7 @@
 ﻿using SupErp.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -57,6 +58,28 @@ namespace SupErp.DAL.GestionSalaireDAL
         {
             return Entities.Primes.ToList();
         }
+        
+
+        public bool addPrime(long idUser, Prime prime)
+        {
+
+            User user = Entities.Users.First(i => i.Id == idUser);
+
+            if (user == null)
+                return false;
+
+            if (prime == null)
+                return false;
+
+            prime.User_id = idUser;
+
+            Entities.Primes.Add(prime);
+            Entities.SaveChanges();
+
+            return true;
+        }
+
+
         #endregion
 
         #region ABSENCES
@@ -89,6 +112,25 @@ namespace SupErp.DAL.GestionSalaireDAL
         public List<Absence> GetAbsenses()
         {
             return Entities.Absences.ToList();
+        }
+
+        public bool addAbsence(long idUser, Absence absence)
+        {
+
+            User user = Entities.Users.First(i => i.Id == idUser);
+
+            if (user == null)
+                return false;
+
+            if (absence == null)
+                return false;
+
+            absence.User_id = idUser;
+
+            Entities.Absences.Add(absence);
+            Entities.SaveChanges();
+
+            return true;
         }
         #endregion
 
@@ -147,10 +189,51 @@ namespace SupErp.DAL.GestionSalaireDAL
         public bool updateUserSalaire(long idUser, decimal newSalary)
         {
 
+            User user = Entities.Users.First(i => i.Id == idUser);
+
+            if (user == null)
+                return false;
+
+            user.Salaries.Add(new Salary() { NetSalary = newSalary, Date = DateTime.Now });
+            Entities.SaveChanges();
+            
+            return true;
+        }
+        
+        #endregion
+
+
+#region state
+
+        public bool UpdateUserState(long idUser, long idState)
+        {
+            
+            
+            User user = Entities.Users.First(i => i.Id == idUser);
+
+            if (user == null)
+                return false;
+
+            user.Status_id = idState;
+            Entities.SaveChanges();
+
+
             return true;
         }
 
+        public List<Status> GetState()
+        {
 
-        #endregion
+            return Entities.Status.ToList();
+        }
+
+
+
+
+#endregion
+
+
+
+
     }
 }

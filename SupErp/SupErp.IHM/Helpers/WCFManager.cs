@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SupErp.IHM.ServiceReference1;
+using SupErp.Entities;
+using SupErp.IHM.UserServices;
 
 namespace SupErp.IHM.Helpers
 {
@@ -13,7 +14,7 @@ namespace SupErp.IHM.Helpers
         /// <summary>
         /// The user service client
         /// </summary>
-        private static ServiceReference1.UserServiceClient userServiceClient;
+        private static UserServices.UserServiceClient userServiceClient;
 
         /// <summary>
         /// Gets the user service client.
@@ -21,7 +22,7 @@ namespace SupErp.IHM.Helpers
         /// <value>
         /// The user service client.
         /// </value>
-        public static ServiceReference1.UserServiceClient UserServiceClient
+        public static UserServices.UserServiceClient UserServiceClient
         {
             get
             {
