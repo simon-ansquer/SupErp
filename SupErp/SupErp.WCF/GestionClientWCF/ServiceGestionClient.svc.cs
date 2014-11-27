@@ -23,9 +23,15 @@ namespace SupErp.WCF.GestionClientWCF
         }
 
         [OperationContract]
-        public List<Company> GetCompany(int idCustomer)
+        public Company GetCompany(int idCompany)
         {
-            return clientBLL.GetCompany(idCustomer);
+            return clientBLL.GetCompany(idCompany);
+        }
+
+        [OperationContract]
+        public List<Company> GetListCompany()
+        {
+            return clientBLL.GetListCompany();
         }
     }
 }
