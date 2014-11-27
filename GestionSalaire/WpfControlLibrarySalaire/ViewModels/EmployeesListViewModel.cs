@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,31 +8,38 @@ using System.Windows;
 using System.Windows.Input;
 using WpfControlLibrarySalaire.Helpers;
 using WpfControlLibrarySalaire.Models;
+using WpfControlLibrarySalaire.ServiceSalaire;
+
 
 namespace WpfControlLibrarySalaire.ViewModels
 {
     public class EmployeesListViewModel : BaseViewModel
     {
-        private List<User> _employees;
-        public List<User> Employees
+        public EmployeesListViewModel()
         {
-            get
+            InitializeUsers();            
+        }
+
+        private async void InitializeUsers()
+        {
+            try
             {
-                return _employees;
+                var employees = await serviceSalaire.GetUserAsync();
+                Employees = new ObservableCollection<ServiceSalaire.User>(employees);
+                //EmployeesView();
             }
-            set
+            catch(Exception)
             {
-                if (_employees != value)
-                {
-                    _employees = value;
-                    RaisePropertyChanged(() => Employees);
-                }
+                serviceSalaire.Close();
             }
         }
 
-        public EmployeesListViewModel()
+        private void EmployeesView()
         {
-
+            foreach (ServiceSalaire.User employee in Employees)
+            {
+                
+            }
         }
 
         #region Commands
