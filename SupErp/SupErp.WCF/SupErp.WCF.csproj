@@ -59,14 +59,31 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Service1.svc" />
-    <Content Include="Web.config" />
+    <Content Include="GestionClientWCF\ServiceGestionClient.svc" />
+	<Content Include="FacturationWCF\FacturationService.svc" />
+    <Content Include="GestionSalaireWCF\ServiceSalaire.svc" />
+    <Content Include="ModuleUser\UserService.svc" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
+    <Compile Include="GestionClientWCF\IServiceGestionClient.cs" />
+    <Compile Include="GestionClientWCF\ServiceGestionClient.svc.cs">
+      <DependentUpon>ServiceGestionClient.svc</DependentUpon>
     </Compile>
-    <Compile Include="IService1.cs" />
+	<Compile Include="FacturationWCF\FacturationService.svc.cs">
+      <DependentUpon>FacturationService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="FacturationWCF\IFacturationService.cs" />
+    <Compile Include="GestionSalaireWCF\IServiceSalaire.cs" />
+    <Compile Include="GestionSalaireWCF\ServiceSalaire.svc.cs">
+      <DependentUpon>ServiceSalaire.svc</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleUser\IUserService.cs" />
+    <Compile Include="ModuleUser\UserService.svc.cs">
+      <DependentUpon>UserService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,52 @@
+﻿<Window x:Class="SupErp.IHM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SupERP" Height="350" Width="525"
+        xmlns:viewModels="clr-namespace:SupErp.IHM.ViewModels"
+        xmlns:local="clr-namespace:SupErp.IHM.ViewModels"
+        MinWidth="1290" MinHeight="810"
+        WindowState="Maximized" SizeChanged="Main_SizeChanged"
+        StateChanged="Main_StateChanged" x:Name="Main">
+
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="LeftTape" Background="#4388CC" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.05*" />
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.6*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.05*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="Logo" Grid.Column="1" Grid.Row="1" Foreground="#FFFFFF" FontFamily="Segoe UI">SupERP</TextBlock>
+            
+            <StackPanel x:Name="Form" Grid.Column="1" Grid.Row="3">
+                <TextBlock x:Name="Connexion" Foreground="#FFFFFF" FontFamily="Segoe UI" FontWeight="Bold">Connexion</TextBlock>
+                <TextBlock x:Name="LoginTbl" Foreground="#FFFFFF" FontFamily="Segoe UI" Margin="10,5,0,0" FontWeight="Light">Login</TextBlock>
+                <TextBox x:Name="LoginTbx" Margin="10,5,10,5" VerticalContentAlignment="Center" Foreground="#666666" FontFamily="Segoe UI" Text="{Binding Login}"></TextBox>
+                <TextBlock x:Name="PassTbl" Foreground="#FFFFFF" FontFamily="Segoe UI" Margin="10,5,0,0" FontWeight="Light">Password</TextBlock>
+                <PasswordBox x:Name="PassTbx" Margin="10,5,10,5" VerticalContentAlignment="Center" Foreground="#666666"></PasswordBox>
+                <Button x:Name="Connect" Background="#4388CC" BorderBrush="#FFFFFF" BorderThickness="2" Foreground="#FFFFFF" Margin="10,10,10,5" FontFamily="Segoe UI" Command="{Binding ConnectCommandHandler}">Connect</Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="RightTape" Background="#FFFFFF" Grid.Column="1">
+
+        </Grid>
+    </Grid>
+</Window>
