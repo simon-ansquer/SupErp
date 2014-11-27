@@ -80,5 +80,51 @@ namespace SupErp.Tests
 
             Assert.IsTrue(clientService.CreateCompany(comp));
         }
+
+        [TestMethod]
+        public void TestCreateCompany_Contact()
+        {
+            Company_Contact cont = new Company_Contact();
+            cont.firstname = "pierre";
+            cont.lastname = "Geogre";
+            cont.gender = 1;
+            cont.email = "pierre@geogre.fr";
+            cont.phone = "0506";
+            cont.company_id = 1;
+
+            Assert.IsTrue(clientService.CreateCompany_Contact(cont));
+        }
+
+        [TestMethod]
+        public void TestGetCompany_Contact()
+        {
+            Company_Contact cont;
+            cont = clientService.GetCompany_Contact(4);
+
+            Assert.AreEqual("pierre", cont.firstname);
+            Assert.AreEqual("Geogre", cont.lastname);
+            Assert.AreEqual(1, cont.gender);
+            Assert.AreEqual("pierre@geogre.fr", cont.email);
+            Assert.AreEqual("0506", cont.phone);
+            Assert.AreEqual(1, cont.company_id);
+        }
+
+        [TestMethod]
+        public void TestGetListCompany_Contact()
+        {
+            List<Company_Contact> lcont;
+            lcont = clientService.GetListCompany_Contact();
+
+            Assert.IsTrue(lcont.Count > 1);
+        }
+
+        [TestMethod]
+        public void TestGetListCompany_ContactByCompany()
+        {
+            List<Company_Contact> lcont;
+            lcont = clientService.GetListCompany_Contact(2);
+
+            Assert.IsTrue(lcont.Count > 0);
+        }
     }
 }
