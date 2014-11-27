@@ -46,20 +46,5 @@ namespace SupErpModuleUser
                 throw new NotImplementedException();
             }
         }
-
-        private void AjouterRole(object sender, RoutedEventArgs e)
-        {
-            //TODO Ajouter un rôle à l'aide du WS
-        }
-
-        private void Annuler(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ModifierRole(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -47,20 +47,5 @@ namespace SupErpModuleUser
                 throw new NotImplementedException();
             }
         }
-
-        private void AjouterUtilisateur(object sender, RoutedEventArgs e)
-        {
-            //TODO Ajouter l'utilisateur à l'aide du WS
-        }
-
-        private void Annuler(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ModifierUtilisateur(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

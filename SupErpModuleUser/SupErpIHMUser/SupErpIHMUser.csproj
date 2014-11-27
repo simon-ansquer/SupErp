@@ -94,6 +94,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SupErp\SupErp.Shared\SupErp.Shared.csproj">
+      <Project>{aed44877-9636-4e8c-95a3-722d99f6260b}</Project>
+      <Name>SupErp.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SupErpModuleUser\SupErpModuleUser.csproj">
       <Project>{0f2577dd-bf05-4f30-aea2-e1b09f77067e}</Project>
       <Name>SupErpModuleUser</Name>

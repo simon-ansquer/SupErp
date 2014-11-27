@@ -1,11 +1,17 @@
 ﻿<UserControl x:Class="SupErpModuleUser.AddUserUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:viewModels="clr-namespace:SupErpModuleUser.ViewModels"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="700" d:DesignWidth="500">
+    
+    <UserControl.DataContext>
+        <viewModels:AddUserViewModel/>
+    </UserControl.DataContext>
+    
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -58,14 +64,12 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
 
-                <Line
+                <Separator
                 Grid.Column="0"
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
-                X1="0"
-                X2="500"
                 VerticalAlignment="Bottom"
-                Stroke="Blue"
+                Background="Blue"
                 Margin="15, 0, 15, 0"/>
 
 
@@ -232,7 +236,7 @@
                 Background="Transparent"
                 BorderBrush="Blue"
                 Margin="0, 15, 100, 15" 
-                Click="AjouterUtilisateur"
+                Command="{Binding AddCommand}"
                 Visibility="Collapsed"/>
 
                 <Grid
@@ -256,7 +260,7 @@
                     Background="Blue"
                     BorderBrush="White"
                     Margin="15, 15, 15, 15" 
-                    Click="Annuler"/>
+                    Command="{Binding CancelCommand}"/>
 
                         <Button
                     Grid.Column="1"
@@ -267,7 +271,7 @@
                     Background="White"
                     BorderBrush="Blue"
                     Margin="15, 15, 15, 15" 
-                    Click="ModifierUtilisateur"/>
+                    Command="{Binding UpdateCommand}"/>
 
                 </Grid>
                 

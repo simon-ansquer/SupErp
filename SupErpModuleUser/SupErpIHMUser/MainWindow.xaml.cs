@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SupErpModuleUser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,10 @@ namespace SupErpIHMUser
         public MainWindow()
         {
             InitializeComponent();
+
+            Frame uneFrame = new Frame();
+            MainGrid.Children.Add(uneFrame);
+            uneFrame.Navigate(new AddRoleUserControl());
         }
     }
 }
