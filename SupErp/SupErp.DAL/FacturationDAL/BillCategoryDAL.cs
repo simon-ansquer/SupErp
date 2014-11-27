@@ -7,7 +7,7 @@ using SupErp.Entities;
 
 namespace SupErp.DAL.FacturationDAL
 {
-    class BillCategoryDAL
+    public class BillCategoryDAL
     {
         #region Read
         public List<BILL_Category> GetBillCategory()
