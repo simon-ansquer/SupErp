@@ -47,27 +47,32 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="EmployeeDetails.xaml">
+    <Page Include="Views\EmployeeDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EmployeeHistory.xaml">
+    <Page Include="Views\EmployeeHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EmployeesList.xaml">
+    <Page Include="Views\EmployeesList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="EmployeeDetails.xaml.cs">
+    <Compile Include="Helpers\DelegateCommand.cs" />
+    <Compile Include="Models\HistoriqueSalaire.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeHistoryViewModel.cs" />
+    <Compile Include="Views\EmployeeDetails.xaml.cs">
       <DependentUpon>EmployeeDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeHistory.xaml.cs">
+    <Compile Include="Views\EmployeeHistory.xaml.cs">
       <DependentUpon>EmployeeHistory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IMainMenu.cs" />
     <Compile Include="Interfaces\ISubMenu.cs" />
-    <Compile Include="EmployeesList.xaml.cs">
+    <Compile Include="Views\EmployeesList.xaml.cs">
       <DependentUpon>EmployeesList.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -108,6 +113,7 @@
   <ItemGroup>
     <Resource Include="Assets\icon-profile.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -103,9 +103,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\DataSources\SupErp.Entities.Role.datasource" />
     <None Include="Properties\DataSources\SupErp.Entities.User.datasource" />
     <None Include="Properties\Settings.settings">
@@ -113,8 +110,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\UserServices\UserService.wsdl" />
-    <None Include="Service References\UserServices\UserService.xsd">
+    <None Include="Service References\ServiceReference1\UserService.wsdl" />
+    <None Include="Service References\ServiceReference1\UserService.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\UserServices\UserService1.xsd">
@@ -129,7 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SupErp.Entities\SupErp.Entities.csproj">
-      <Project>{A11A9E2D-75AC-4E97-B28A-DA6BA10D5637}</Project>
+      <Project>{a11a9e2d-75ac-4e97-b28a-da6ba10d5637}</Project>
       <Name>SupErp.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\SupErp.Kernel\SupErp.Kernel.csproj">

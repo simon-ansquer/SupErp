@@ -49,64 +49,64 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="DAL\Absence.cs">
+    <Compile Include="Model\Absence.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\AbsenceType.cs">
+    <Compile Include="Model\AbsenceType.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\ConfigAbsence.cs">
+    <Compile Include="Model\ConfigAbsence.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\EntityModel.Context.cs">
+    <Compile Include="Model\EntityModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\EntityModel.cs">
+    <Compile Include="Model\EntityModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\EntityModel.Designer.cs">
+    <Compile Include="Model\EntityModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DAL\Prime.cs">
+    <Compile Include="Model\Prime.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\Salary.cs">
+    <Compile Include="Model\Salary.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\Status.cs">
+    <Compile Include="Model\Status.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\TicketRestaurant.cs">
+    <Compile Include="Model\TicketRestaurant.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\User.cs">
+    <Compile Include="Model\User.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="DAL\EntityModel.edmx">
+    <EntityDeploy Include="Model\EntityModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EntityModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="DAL\EntityModel.Context.tt">
+    <None Include="Model\EntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityModel.edmx</DependentUpon>
       <LastGenOutput>EntityModel.Context.cs</LastGenOutput>
     </None>
-    <None Include="DAL\EntityModel.edmx.diagram">
+    <None Include="Model\EntityModel.edmx.diagram">
       <DependentUpon>EntityModel.edmx</DependentUpon>
     </None>
-    <None Include="DAL\EntityModel.tt">
+    <None Include="Model\EntityModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityModel.edmx</DependentUpon>
       <LastGenOutput>EntityModel.cs</LastGenOutput>

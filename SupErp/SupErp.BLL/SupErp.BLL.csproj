@@ -39,6 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FacturationBLL\BillCategoryBLL.cs" />
+    <Compile Include="FacturationBLL\BillProductBLL.cs" />
+	<Compile Include="FacturationBLL\LineBillQuotationBLL.cs" />
+    <Compile Include="FacturationBLL\BillQuotationBLL.cs" />
+    <Compile Include="GestionClientBLL\ClientBLL.cs" />
+    <Compile Include="FacturationBLL\BillQuotationStatusBLL.cs" />
+    <Compile Include="FacturationBLL\BillTransmitterBLL.cs" />
+    <Compile Include="FacturationBLL\BillVatBLL.cs" />
+	<Compile Include="FacturationBLL\StatusBLL.cs" />
+    <Compile Include="GestionSalaireBLL\SalaireBLL.cs" />
     <Compile Include="ModuleUser\UserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,9 +62,7 @@
       <Name>SupErp.Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GestionSalaireBLL\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

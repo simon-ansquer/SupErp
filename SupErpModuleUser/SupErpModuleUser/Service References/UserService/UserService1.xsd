@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SupErp.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SupErp.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Absences" nillable="true" type="tns:ArrayOfAbsence" />
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Date_arrival" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Date_departure" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Firstname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Lastname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Passwordhash" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Primes" nillable="true" type="tns:ArrayOfPrime" />
+      <xs:element minOccurs="0" name="Role" nillable="true" type="tns:Role" />
+      <xs:element minOccurs="0" name="Role_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Salaries" nillable="true" type="tns:ArrayOfSalary" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="tns:Status" />
+      <xs:element minOccurs="0" name="Status_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Zip_code" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:complexType name="ArrayOfAbsence">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Absence" nillable="true" type="tns:Absence" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAbsence" nillable="true" type="tns:ArrayOfAbsence" />
+  <xs:complexType name="Absence">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AbsenceType" nillable="true" type="tns:AbsenceType" />
+      <xs:element minOccurs="0" name="AbsenceType_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="User_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Absence" nillable="true" type="tns:Absence" />
+  <xs:complexType name="AbsenceType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Absences" nillable="true" type="tns:ArrayOfAbsence" />
+      <xs:element minOccurs="0" name="ConfigAbsences" nillable="true" type="tns:ArrayOfConfigAbsence" />
+      <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AbsenceType" nillable="true" type="tns:AbsenceType" />
+  <xs:complexType name="ArrayOfConfigAbsence">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConfigAbsence" nillable="true" type="tns:ConfigAbsence" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConfigAbsence" nillable="true" type="tns:ArrayOfConfigAbsence" />
+  <xs:complexType name="ConfigAbsence">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AbsenceType" nillable="true" type="tns:AbsenceType" />
+      <xs:element minOccurs="0" name="AbsenceType_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="MaximumHalfDayAbsence" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConfigAbsence" nillable="true" type="tns:ConfigAbsence" />
+  <xs:complexType name="ArrayOfPrime">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Prime" nillable="true" type="tns:Prime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPrime" nillable="true" type="tns:ArrayOfPrime" />
+  <xs:complexType name="Prime">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="User_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Prime" nillable="true" type="tns:Prime" />
+  <xs:complexType name="Role">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RoleModules" nillable="true" type="tns:ArrayOfRoleModule" />
+      <xs:element minOccurs="0" name="Users" nillable="true" type="tns:ArrayOfUser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Role" nillable="true" type="tns:Role" />
+  <xs:complexType name="ArrayOfRoleModule">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RoleModule" nillable="true" type="tns:RoleModule" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRoleModule" nillable="true" type="tns:ArrayOfRoleModule" />
+  <xs:complexType name="RoleModule">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Module" nillable="true" type="tns:Module" />
+      <xs:element minOccurs="0" name="Module_id" type="xs:long" />
+      <xs:element minOccurs="0" name="Role" nillable="true" type="tns:Role" />
+      <xs:element minOccurs="0" name="Role_id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RoleModule" nillable="true" type="tns:RoleModule" />
+  <xs:complexType name="Module">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RoleModules" nillable="true" type="tns:ArrayOfRoleModule" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Module" nillable="true" type="tns:Module" />
+  <xs:complexType name="ArrayOfUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
+  <xs:complexType name="ArrayOfSalary">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Salary" nillable="true" type="tns:Salary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSalary" nillable="true" type="tns:ArrayOfSalary" />
+  <xs:complexType name="Salary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NetSalary" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="User_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Salary" nillable="true" type="tns:Salary" />
+  <xs:complexType name="Status">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PercentageTaxe" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Users" nillable="true" type="tns:ArrayOfUser" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Status" nillable="true" type="tns:Status" />
+  <xs:complexType name="ArrayOfRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Role" nillable="true" type="tns:Role" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRole" nillable="true" type="tns:ArrayOfRole" />
+</xs:schema>
