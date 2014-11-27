@@ -39,8 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FacturationBLL\BillLineBillQuotationBLL.cs" />
     <Compile Include="FacturationBLL\BillQuotationBLL.cs" />
     <Compile Include="FacturationBLL\BillQuotationStatusBLL.cs" />
+    <Compile Include="FacturationBLL\BillStatusBLL.cs" />
     <Compile Include="GestionSalaireBLL\SalaireBLL.cs" />
     <Compile Include="ModuleUser\UserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

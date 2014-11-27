@@ -28,11 +28,11 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        public List<BILL_BillQuotationStatus> GetBillQuotationStatusByStatus(BILL_Status status)
+        public List<BILL_BillQuotation> GetBillQuotationByStatus(BILL_Status status)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                return context.BILL_BillQuotationStatus.Where(bqs => bqs.BILL_Status == status).ToList();
+                return context.BILL_BillQuotationStatus.Where(bqs => bqs.BILL_Status == status).Select(s => s.BILL_BillQuotation).ToList();
             }
         }
 
