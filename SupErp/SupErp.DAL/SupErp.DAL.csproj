@@ -46,12 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FacturationDAL\BillCategory.cs" />
-    <Compile Include="FacturationDAL\BillProduct.cs" />
+    <Compile Include="FacturationDAL\BillCategoryDAL.cs" />
+    <Compile Include="FacturationDAL\BillProductDAL.cs" />
     <Compile Include="FacturationDAL\BillQuotationDAL.cs" />
     <Compile Include="FacturationDAL\BillQuotationStatusDAL.cs" />
-    <Compile Include="FacturationDAL\BillTransmitter.cs" />
-    <Compile Include="FacturationDAL\BillVat.cs" />
+    <Compile Include="FacturationDAL\BillTransmitterDAL.cs" />
+    <Compile Include="FacturationDAL\BillVatDAL.cs" />
     <Compile Include="FacturationDAL\LineBillQuotationDAL.cs" />
     <Compile Include="FacturationDAL\StatusDAL.cs" />
     <Compile Include="GestionSalaireDAL\GestionSalaireDAL.cs" />
