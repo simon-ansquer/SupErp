@@ -12,7 +12,7 @@ namespace SupErp.WCF.GestionClientWCF
     interface IServiceGestionClient
     {
         [OperationContract]
-        bool CreateCompany();
+        bool CreateCompany(Company company);
 
         [OperationContract]
         List<Company> GetCompany(int idCustomer);
