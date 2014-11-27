@@ -58,9 +58,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ClientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalaireTest.cs" />
     <Compile Include="KernelTest.cs" />
+    <Compile Include="FacturationTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SupErp.Entities\SupErp.Entities.csproj">

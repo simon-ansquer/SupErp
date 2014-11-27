@@ -41,7 +41,9 @@
   <ItemGroup>
     <Compile Include="FacturationBLL\BillCategoryBLL.cs" />
     <Compile Include="FacturationBLL\BillProductBLL.cs" />
+	<Compile Include="FacturationBLL\BillLineBillQuotationBLL.cs" />
     <Compile Include="FacturationBLL\BillQuotationBLL.cs" />
+    <Compile Include="GestionClientBLL\ClientBLL.cs" />
     <Compile Include="FacturationBLL\BillQuotationStatusBLL.cs" />
     <Compile Include="FacturationBLL\BillTransmitterBLL.cs" />
     <Compile Include="FacturationBLL\BillVatBLL.cs" />
