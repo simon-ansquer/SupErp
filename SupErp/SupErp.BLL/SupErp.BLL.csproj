@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FacturationBLL\BillQuotationBLL.cs" />
+    <Compile Include="GestionClientBLL\ClientBLL.cs" />
     <Compile Include="GestionSalaireBLL\SalaireBLL.cs" />
     <Compile Include="ModuleUser\UserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
