@@ -12,6 +12,31 @@ namespace SupErp.Tests
     [TestClass]
     public class KernelTest
     {
+        //[TestInitialize]
+        //public void Initialize()
+        //{
+        //    string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules");
+            
+        //    if (!Directory.Exists(directoryPath))
+        //    {
+        //        Directory.CreateDirectory(directoryPath);
+        //    }
+
+        //    CopyDll("SupErpModuleUser.dll");
+        //}
+
+        //private void CopyDll(string dllName)
+        //{
+        //    string destinationPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules");
+        //    string dllPath = Path.Combine(destinationPath, dllName);
+
+        //    if(!File.Exists(dllPath))
+        //    {
+        //        string sourcePath = Path.Combine(destinationPath, @"..\..\..\..\SupErp.Kernel\ModulesDlls");
+        //        File.Copy(sourcePath, dllPath);
+        //    }
+        //}
+
         [TestMethod]
         public void TestGetDllsPaths()
         {
