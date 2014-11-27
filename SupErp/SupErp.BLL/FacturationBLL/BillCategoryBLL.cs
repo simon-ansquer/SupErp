@@ -10,7 +10,7 @@ namespace SupErp.BLL.FacturationBLL
 {
     public class BillCategoryBLL
     {
-        private static BillCategoryDAL billCategoryDAL;
+        private static BillCategoryDAL billCategoryDAL { get; set; }
 
         #region Read
         public List<BILL_Category> GetBillCategory()
