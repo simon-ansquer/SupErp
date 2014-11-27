@@ -78,6 +78,7 @@
     <Compile Include="BILL_Vat.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="beans\User.cs" />
     <Compile Include="Company.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>

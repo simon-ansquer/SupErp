@@ -20,5 +20,14 @@ namespace SupErp.WCF.GestionSalaireWCF
 
         [OperationContract]
         User GetUserById(long userID);
+
+        [OperationContract]
+        bool UpdateUserSalaryById(long idUser, decimal newSalaryNet);
+
+        [OperationContract]
+        List<Status> GetState();
+
+        [OperationContract]
+        bool UpdateUserState(long idUser, long idState);
     }
 }
