@@ -41,7 +41,7 @@
                 <TextBox x:Name="LoginTbx" Margin="10,5,10,5" VerticalContentAlignment="Center" Foreground="#666666" FontFamily="Segoe UI" Text="{Binding Login}"></TextBox>
                 <TextBlock x:Name="PassTbl" Foreground="#FFFFFF" FontFamily="Segoe UI" Margin="10,5,0,0" FontWeight="Light">Password</TextBlock>
                 <PasswordBox x:Name="PassTbx" Margin="10,5,10,5" VerticalContentAlignment="Center" Foreground="#666666"></PasswordBox>
-                <Button x:Name="Connect" Background="#4388CC" BorderBrush="#FFFFFF" BorderThickness="2" Foreground="#FFFFFF" Margin="10,10,10,5" FontFamily="Segoe UI" Command="{Binding ConnectCommandHandler}">Connect</Button>
+                <Button x:Name="Connect" Background="#4388CC" BorderBrush="#FFFFFF" BorderThickness="2" Foreground="#FFFFFF" Margin="10,10,10,5" FontFamily="Segoe UI" Command="{Binding ConnectCommandHandler}" CommandParameter="{Binding ElementName=PassTbx}">Connect</Button>
             </StackPanel>
         </Grid>
 
