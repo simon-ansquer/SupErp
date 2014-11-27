@@ -10,7 +10,8 @@ namespace SupErp.BLL.FacturationBLL
 {
     public class BillCategoryBLL
     {
-        private static BillCategoryDAL billCategoryDAL { get; set; }
+        private static readonly Lazy<BillCategoryDAL> LazyBillCategoryDAL = new Lazy<BillCategoryDAL>(() => new BillCategoryDAL());
+        private static BillCategoryDAL billCategoryDAL { get { return LazyBillCategoryDAL.Value; } }
 
         #region Read
         public List<BILL_Category> GetBillCategory()
