@@ -11,6 +11,9 @@ namespace SupErp.WCF.GestionClientWCF
     [ServiceContract]
     interface IServiceGestionClient
     {
+        //////////////////////////////
+        //  COMPANY
+        //////////////////////////////
         [OperationContract]
         bool CreateCompany(Company company);
 
@@ -19,5 +22,22 @@ namespace SupErp.WCF.GestionClientWCF
 
         [OperationContract]
         List<Company> GetListCompany();
+        List<Company> GetCompany(int idCustomer);
+
+
+        //////////////////////////////
+        //  COMPANY_CONTACT
+        //////////////////////////////
+        [OperationContract]
+        bool CreateCompany_Contact(Company_Contact contact);
+
+        [OperationContract]
+        Company_Contact GetCompany_Contact(int idContact);
+
+        [OperationContract]
+        List<Company_Contact> GetListCompany_Contact();
+
+        [OperationContract]
+        List<Company_Contact> GetListCompany_Contact(int idCompany);
     }
 }

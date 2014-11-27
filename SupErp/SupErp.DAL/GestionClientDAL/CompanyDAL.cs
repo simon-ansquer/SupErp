@@ -11,7 +11,7 @@ namespace SupErp.DAL.GestionClientDAL
     {
         public bool CreateCompany(Company compa)
         {
-            using (SUPERPEntities sup = new SUPERPEntities())
+            using (SUPERPEntities sup = new SUPERPEntities(false))
             {
                 sup.Companies.Add(compa);
                 sup.SaveChanges();
@@ -22,7 +22,7 @@ namespace SupErp.DAL.GestionClientDAL
         public Company GetCompany(int idCompany)
         {
             Company com = new Company();
-            using (SUPERPEntities sup = new SUPERPEntities ())
+            using (SUPERPEntities sup = new SUPERPEntities(false))
             {
                 com = sup.Companies.Where(o => o.id == idCompany).FirstOrDefault();
             }
@@ -32,7 +32,7 @@ namespace SupErp.DAL.GestionClientDAL
         public List<Company> GetListCompany ()
         {
          List<Company> com1 = new List<Company>();
-            using ( SUPERPEntities sup = new SUPERPEntities ())
+         using (SUPERPEntities sup = new SUPERPEntities(false))
             {
                 com1 = sup.Companies.ToList();
             }
