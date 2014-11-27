@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SupErp.DAL
+namespace SupErp.DAL.GestionClientDAL
 {
-    class Company_ContactDAL
+    public class Company_ContactDAL
     {
     }
 }

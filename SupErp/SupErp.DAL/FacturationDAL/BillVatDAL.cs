@@ -7,67 +7,67 @@ using SupErp.Entities;
 
 namespace SupErp.DAL.FacturationDAL
 {
-    class BillCategory
+    public class BillVatDAL
     {
         #region Read
-        public List<BILL_Category> GetBillCategory()
+        public List<BILL_Vat> GetBillVat()
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                return context.BILL_Category.ToList();
+                return context.BILL_Vat.ToList();
             }
         }
 
-        public BILL_Category GetBillCategory(String nameBillCategory)
+        public BILL_Vat GetBillVat(Double rateBillVat)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                return context.BILL_Category.SingleOrDefault(c => c.Name == nameBillCategory);
+                return context.BILL_Vat.SingleOrDefault(v => v.Rate == rateBillVat);
             }
         }
 
-        public BILL_Category GetBillCategoryByDescription(string descriptionBillCategory)
+        public BILL_Vat GetBillVat(DateTime dateBillVat)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                return context.BILL_Category.SingleOrDefault(c => c.DescriptionCat == descriptionBillCategory);
+                return context.BILL_Vat.SingleOrDefault(c => c.DateVat == dateBillVat);
             }
         }
         #endregion
 
         #region Create
-        public BILL_Category CreateBillCategory(BILL_Category billCategoryToAdd)
+        public BILL_Vat CreateBillVat(BILL_Vat billVatToAdd)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                var c = context.BILL_Category.Add(billCategoryToAdd);
+                var v = context.BILL_Vat.Add(billVatToAdd);
                 context.SaveChanges();
-                return c;
+                return v;
             }
         }
         #endregion
 
         #region Edit
-        public BILL_Category EditBillCategory(BILL_Category billCategoryToEdit)
+        public BILL_Vat EditBillVat(BILL_Vat billVatToEdit)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                var c = context.BILL_Category.Find(billCategoryToEdit.Category_Id);
-                c = billCategoryToEdit;
+                var v = context.BILL_Vat.Find(billVatToEdit.Vat_Id);
+                v = billVatToEdit;
                 context.SaveChanges();
-                return c;
+                return v;
             }
         }
         #endregion
 
         #region Delete
-        public bool DeleteBillCategory(BILL_Category billCategoryToDelete)
+        public bool DeleteBillVat(BILL_Vat billVatToDelete)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
                 try
                 {
-                    context.BILL_Category.Remove(billCategoryToDelete);
+                    context.BILL_Vat.Remove(billVatToDelete);
                     context.SaveChanges();
                     return true;
                 }
@@ -78,6 +78,5 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
         #endregion
-
     }
 }

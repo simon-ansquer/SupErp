@@ -11,7 +11,7 @@ namespace SupErp.DAL.FacturationDAL
     {
           #region Read
 
-        public List<BILL_LineBillQuotation> GetLineBillQuotation(BILL_BillQuotation billQuotation)
+        public IEnumerable<BILL_LineBillQuotation> GetLineBillQuotation(BILL_BillQuotation billQuotation)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {

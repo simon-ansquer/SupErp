@@ -7,67 +7,51 @@ using SupErp.Entities;
 
 namespace SupErp.DAL.FacturationDAL
 {
-    class BillVat
+    public class BillTransmitterDAL
     {
         #region Read
-        public List<BILL_Vat> GetBillVat()
+        public List<BILL_Transmitter> GetBillTrans()
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                return context.BILL_Vat.ToList();
-            }
-        }
-
-        public BILL_Vat GetBillVat(Double rateBillVat)
-        {
-            using (SUPERPEntities context = new SUPERPEntities())
-            {
-                return context.BILL_Vat.SingleOrDefault(v => v.Rate == rateBillVat);
-            }
-        }
-
-        public BILL_Vat GetBillVat(DateTime dateBillVat)
-        {
-            using (SUPERPEntities context = new SUPERPEntities())
-            {
-                return context.BILL_Vat.SingleOrDefault(c => c.DateVat == dateBillVat);
+                return context.BILL_Transmitter.ToList();
             }
         }
         #endregion
 
         #region Create
-        public BILL_Vat CreateBillVat(BILL_Vat billVatToAdd)
+        public BILL_Transmitter CreateBillTrans(BILL_Transmitter billVTransToAdd)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                var v = context.BILL_Vat.Add(billVatToAdd);
+                var t = context.BILL_Transmitter.Add(billVTransToAdd);
                 context.SaveChanges();
-                return v;
+                return t;
             }
         }
         #endregion
 
         #region Edit
-        public BILL_Vat EditBillVat(BILL_Vat billVatToEdit)
+        public BILL_Transmitter EditBillTrans(BILL_Transmitter billTransToEdit)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                var v = context.BILL_Vat.Find(billVatToEdit.Vat_Id);
-                v = billVatToEdit;
+                var t = context.BILL_Transmitter.Find(billTransToEdit.Transmitter_Id);
+                t = billTransToEdit;
                 context.SaveChanges();
-                return v;
+                return t;
             }
         }
         #endregion
 
         #region Delete
-        public bool DeleteBillVat(BILL_Vat billVatToDelete)
+        public bool DeleteBillTrans(BILL_Transmitter billTransToDelete)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
                 try
                 {
-                    context.BILL_Vat.Remove(billVatToDelete);
+                    context.BILL_Transmitter.Remove(billTransToDelete);
                     context.SaveChanges();
                     return true;
                 }
