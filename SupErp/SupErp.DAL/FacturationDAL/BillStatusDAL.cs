@@ -7,27 +7,35 @@ using SupErp.Entities;
 
 namespace SupErp.DAL.FacturationDAL
 {
-    public class LineBillQuotationDAL
+    public class BillStatusDAL
     {
-          #region Read
+        #region Read
 
-        public List<BILL_LineBillQuotation> GetLineBillQuotation(BILL_BillQuotation billQuotation)
+        public List<BILL_Status> GetStatus()
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                return context.BILL_LineBillQuotation.Where(line => line.BILL_BillQuotation == billQuotation).ToList();
+                return context.BILL_Status.ToList();
             }
         }
 
+        public BILL_Status GetStatusById(int id)
+        {
+            using (SUPERPEntities context = new SUPERPEntities())
+            {
+                return context.BILL_Status.SingleOrDefault(s => s.Status_Id == id);
+            }
+        }
+        
         #endregion
 
         #region Create
 
-        public BILL_LineBillQuotation CreateLineBillQuotation(BILL_LineBillQuotation billLineToAdd)
+        public BILL_Status CreateStatus(BILL_Status billStatusToAdd)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                var s = context.BILL_LineBillQuotation.Add(billLineToAdd);
+                var s = context.BILL_Status.Add(billStatusToAdd);
                 context.SaveChanges();
                 return s;
             }
@@ -37,14 +45,14 @@ namespace SupErp.DAL.FacturationDAL
 
         #region Edit
 
-        public BILL_LineBillQuotation EditLineBillQuotation(BILL_LineBillQuotation LineBillQuotationToEdit)
+        public BILL_Status EditBillQuotation(BILL_Status billStatusToEdit)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                var l = context.BILL_LineBillQuotation.Find(LineBillQuotationToEdit.LineBillQuotation_Id);
-                l = LineBillQuotationToEdit;
+                var b = context.BILL_Status.Find(billStatusToEdit.Status_Id);
+                b = billStatusToEdit;
                 context.SaveChanges();
-                return l;
+                return b;
             }
         }
 
@@ -52,13 +60,13 @@ namespace SupErp.DAL.FacturationDAL
 
         #region Delete
 
-        public bool DeleteLineBillQuotation(BILL_LineBillQuotation lineBillQuotationToDelete)
+        public bool DeleteStatus(BILL_Status billStatusToDelete)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
                 try
                 {
-                    context.BILL_LineBillQuotation.Remove(lineBillQuotationToDelete);
+                    context.BILL_Status.Remove(billStatusToDelete);
                     context.SaveChanges();
                     return true;
                 }
@@ -71,6 +79,4 @@ namespace SupErp.DAL.FacturationDAL
 
         #endregion
     }
-
-
 }

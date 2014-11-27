@@ -26,7 +26,7 @@ namespace SupErp.Tests
             lst = clientService.GetUser();
             Assert.AreNotEqual(lst.Count, 0);
 
-            lst = clientService.GetUser("del");
+            lst = clientService.SearchUser("del");
             Assert.AreEqual(lst.Count, 1);
 
         }
