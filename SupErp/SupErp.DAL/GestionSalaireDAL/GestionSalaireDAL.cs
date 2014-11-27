@@ -144,6 +144,13 @@ namespace SupErp.DAL.GestionSalaireDAL
         }
 
 
+        public bool updateUserSalaire(long idUser, decimal newSalary)
+        {
+
+            return true;
+        }
+
+
         #endregion
     }
 }
