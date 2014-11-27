@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SupErp.DAL.FacturationDAL;
 using SupErp.Entities;
+using SupErp.Entities.FacturationModele;
 
 namespace SupErp.BLL.FacturationBLL
 {
@@ -20,9 +21,11 @@ namespace SupErp.BLL.FacturationBLL
             return billQuotationDAL.GetBillQuotation();
         }
 
-        public BILL_BillQuotation GetBillByNum(string numBill)
+        public BillQuotationLight GetBillByNum(string numBill)
         {
-            return billQuotationDAL.GetBillByNum(numBill);
+            var tmp = billQuotationDAL.GetBillByNum(numBill);
+
+            return new BillQuotationLight(tmp);
         }
 
         public IEnumerable<BILL_BillQuotation> GetBills()
@@ -62,9 +65,9 @@ namespace SupErp.BLL.FacturationBLL
 
         #region Delete
 
-        public bool DeleteBillQuotation(BILL_BillQuotation billQuotationToDelete)
+        public bool DeleteBillQuotation(long id)
         {
-            return billQuotationDAL.DeleteBillQuotation(billQuotationToDelete);
+            return billQuotationDAL.DeleteBillQuotation(id);
         }
 
         #endregion

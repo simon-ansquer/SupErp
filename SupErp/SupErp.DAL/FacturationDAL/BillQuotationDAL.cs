@@ -35,6 +35,14 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
+        public BILL_BillQuotation GetBillQuotationsById(long id)
+        {
+            using (SUPERPEntities context = new SUPERPEntities())
+            {
+                return context.BILL_BillQuotation.SingleOrDefault(b => b.BillQuotation_Id == id);
+            }
+        }
+
         public BILL_BillQuotation GetBillByNum(string numBill)
         {
             using (SUPERPEntities context = new SUPERPEntities())
@@ -84,13 +92,14 @@ namespace SupErp.DAL.FacturationDAL
 
         #region Delete
 
-        public bool DeleteBillQuotation(BILL_BillQuotation billQuotationToDelete)
+        public bool DeleteBillQuotation(long id)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
                 try
                 {
-                    context.BILL_BillQuotation.Remove(billQuotationToDelete);
+                    var b = context.BILL_BillQuotation.Find(id);
+                    context.BILL_BillQuotation.Remove(b);
                     context.SaveChanges();
                     return true;
                 }

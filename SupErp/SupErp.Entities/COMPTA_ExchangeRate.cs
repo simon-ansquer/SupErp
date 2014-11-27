@@ -12,22 +12,14 @@ namespace SupErp.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Company
+    public partial class COMPTA_ExchangeRate
     {
-        public Company()
-        {
-            this.Company_Contact = new HashSet<Company_Contact>();
-            this.BILL_BillQuotation = new HashSet<BILL_BillQuotation>();
-        }
-    
         public long id { get; set; }
-        public string name { get; set; }
-        public string siret { get; set; }
-        public string address { get; set; }
-        public int postalcode { get; set; }
-        public string city { get; set; }
-    
-        public virtual ICollection<Company_Contact> Company_Contact { get; set; }
-        public virtual ICollection<BILL_BillQuotation> BILL_BillQuotation { get; set; }
+        public Nullable<System.DateTime> updatedDate { get; set; }
+        public Nullable<double> EURO_USD { get; set; }
+        public Nullable<double> EURO_GBP { get; set; }
+        public Nullable<double> EURO_AUD { get; set; }
+        public Nullable<double> EURO_ZAR { get; set; }
+        public Nullable<double> USD_EURO { get; set; }
     }
 }

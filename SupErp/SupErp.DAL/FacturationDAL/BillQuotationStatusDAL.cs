@@ -11,28 +11,28 @@ namespace SupErp.DAL.FacturationDAL
     {
         #region Read
 
-        public List<BILL_BillQuotationStatus> GetBillQuotationStatusByBillQuotation(BILL_BillQuotation billQuotation)
+        public List<BILL_BillQuotationStatus> GetBillQuotationStatusByBillQuotation(long billQuotation_id)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                return context.BILL_BillQuotationStatus.Where(bqs => bqs.BILL_BillQuotation == billQuotation).ToList();
+                return context.BILL_BillQuotationStatus.Where(bqs => bqs.BillQuotation_Id == billQuotation_id).ToList();
             }
         }
 
-        public BILL_BillQuotationStatus GetCurrentStatusBillQuotation(BILL_BillQuotation billQuotation)
+        public BILL_BillQuotationStatus GetCurrentStatusBillQuotation(long billQuotation_id)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                var listStatus = GetBillQuotationStatusByBillQuotation(billQuotation).OrderByDescending(x => x.DateAdvancement);
+                var listStatus = GetBillQuotationStatusByBillQuotation(billQuotation_id).OrderByDescending(x => x.DateAdvancement);
                 return listStatus.First();
             }
         }
 
-        public List<BILL_BillQuotation> GetBillQuotationByStatus(BILL_Status status)
+        public List<BILL_BillQuotation> GetBillQuotationByStatus(long status_id)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                return context.BILL_BillQuotationStatus.Where(bqs => bqs.BILL_Status == status).Select(s => s.BILL_BillQuotation).ToList();
+                return context.BILL_BillQuotationStatus.Where(bqs => bqs.Status_Id == status_id).Select(s => s.BILL_BillQuotation).ToList();
             }
         }
 
@@ -69,13 +69,14 @@ namespace SupErp.DAL.FacturationDAL
 
         #region Delete
 
-        public bool DeleteBillQuotationStatus(BILL_BillQuotationStatus BillQuotationStatusToDelete)
+        public bool DeleteBillQuotationStatus(long billQuotationStatus_id)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
                 try
                 {
-                    context.BILL_BillQuotationStatus.Remove(BillQuotationStatusToDelete);
+                    var bqs = context.BILL_BillQuotationStatus.Find(billQuotationStatus_id);
+                    context.BILL_BillQuotationStatus.Remove(bqs);
                     context.SaveChanges();
                     return true;
                 }

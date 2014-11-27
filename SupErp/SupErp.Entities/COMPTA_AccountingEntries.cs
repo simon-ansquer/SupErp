@@ -12,22 +12,12 @@ namespace SupErp.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Company
+    public partial class COMPTA_AccountingEntries
     {
-        public Company()
-        {
-            this.Company_Contact = new HashSet<Company_Contact>();
-            this.BILL_BillQuotation = new HashSet<BILL_BillQuotation>();
-        }
-    
         public long id { get; set; }
-        public string name { get; set; }
-        public string siret { get; set; }
-        public string address { get; set; }
-        public int postalcode { get; set; }
-        public string city { get; set; }
-    
-        public virtual ICollection<Company_Contact> Company_Contact { get; set; }
-        public virtual ICollection<BILL_BillQuotation> BILL_BillQuotation { get; set; }
+        public Nullable<bool> direction { get; set; }
+        public Nullable<decimal> amount { get; set; }
+        public Nullable<System.DateTime> postingDate { get; set; }
+        public Nullable<long> chartOfAccount_id { get; set; }
     }
 }

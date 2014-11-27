@@ -45,13 +45,14 @@ namespace SupErp.DAL.FacturationDAL
         #endregion
 
         #region Delete
-        public bool DeleteBillTrans(BILL_Transmitter billTransToDelete)
+        public bool DeleteBillTrans(long id)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
                 try
                 {
-                    context.BILL_Transmitter.Remove(billTransToDelete);
+                    var t = context.BILL_Transmitter.Find(id);
+                    context.BILL_Transmitter.Remove(t);
                     context.SaveChanges();
                     return true;
                 }

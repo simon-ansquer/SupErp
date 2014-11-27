@@ -22,11 +22,11 @@ namespace SupErp.Entities
     
         public long BillQuotation_Id { get; set; }
         public string NBill { get; set; }
-        public Nullable<bool> Vat { get; set; }
-        public int AmountDF { get; set; }
+        public bool Vat { get; set; }
+        public double AmountDF { get; set; }
         public System.DateTime DateBillQuotation { get; set; }
-        public Nullable<long> Transmitter_Id { get; set; }
-        public Nullable<long> Company_Id { get; set; }
+        public long Transmitter_Id { get; set; }
+        public long Company_Id { get; set; }
     
         public virtual ICollection<BILL_BillQuotationStatus> BILL_BillQuotationStatus { get; set; }
         public virtual BILL_Transmitter BILL_Transmitter { get; set; }

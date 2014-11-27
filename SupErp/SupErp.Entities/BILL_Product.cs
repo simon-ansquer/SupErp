@@ -23,8 +23,8 @@ namespace SupErp.Entities
         public string Name { get; set; }
         public string DescriptionPro { get; set; }
         public double Price { get; set; }
-        public Nullable<long> Category_Id { get; set; }
-        public Nullable<long> Vat_Id { get; set; }
+        public long Category_Id { get; set; }
+        public long Vat_Id { get; set; }
     
         public virtual BILL_Category BILL_Category { get; set; }
         public virtual ICollection<BILL_LineBillQuotation> BILL_LineBillQuotation { get; set; }

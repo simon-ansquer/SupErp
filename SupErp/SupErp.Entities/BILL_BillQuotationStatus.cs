@@ -16,8 +16,8 @@ namespace SupErp.Entities
     {
         public long BillQuotationStatus_Id { get; set; }
         public System.DateTime DateAdvancement { get; set; }
-        public Nullable<long> Status_Id { get; set; }
-        public Nullable<long> BillQuotation_Id { get; set; }
+        public long Status_Id { get; set; }
+        public long BillQuotation_Id { get; set; }
     
         public virtual BILL_BillQuotation BILL_BillQuotation { get; set; }
         public virtual BILL_Status BILL_Status { get; set; }

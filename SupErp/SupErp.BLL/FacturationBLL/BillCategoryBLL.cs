@@ -10,7 +10,8 @@ namespace SupErp.BLL.FacturationBLL
 {
     public class BillCategoryBLL
     {
-        private static BillCategoryDAL billCategoryDAL;
+        private static readonly Lazy<BillCategoryDAL> LazyCategoryDAL = new Lazy<BillCategoryDAL>(() => new BillCategoryDAL());
+        private static BillCategoryDAL billCategoryDAL { get { return LazyCategoryDAL.Value; } }
 
         #region Read
         public List<BILL_Category> GetBillCategory()
@@ -44,9 +45,9 @@ namespace SupErp.BLL.FacturationBLL
         #endregion
 
         #region Delete
-        public bool DeleteBillCategory(BILL_Category billCategoryToDelete)
+        public bool DeleteBillCategory(long id)
         {
-            return billCategoryDAL.DeleteBillCategory(billCategoryToDelete);
+            return billCategoryDAL.DeleteBillCategory(id);
         }
         #endregion
     }

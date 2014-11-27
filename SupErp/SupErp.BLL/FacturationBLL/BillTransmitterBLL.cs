@@ -34,9 +34,9 @@ namespace SupErp.BLL.FacturationBLL
         #endregion
 
         #region Delete
-        public bool DeleteBillTrans(BILL_Transmitter billTransToDelete)
+        public bool DeleteBillTrans(long id)
         {
-            return billTransDAL.DeleteBillTrans(billTransToDelete);
+            return billTransDAL.DeleteBillTrans(id);
         }
         #endregion
     }
