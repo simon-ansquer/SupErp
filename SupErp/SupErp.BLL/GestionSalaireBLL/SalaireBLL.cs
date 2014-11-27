@@ -48,7 +48,20 @@ namespace SupErp.BLL.GestionSalaireBLL
             return salaireDAL.UpdateUserState(idUser, idState);
         }
 
+        public bool addPrime(long idUser, Prime prime)
+        {
+            return salaireDAL.addPrime(idUser, prime);
+        }
 
+        public List<Prime> GetPrimesByUserId(long id)
+        {
+            return salaireDAL.GetPrimesByUserId(id);
+        }
+
+        public bool addAbsence(long idUser, Absence absence)
+        {
+            return salaireDAL.addAbsence(idUser, absence);
+        }
 
 
 

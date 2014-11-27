@@ -29,5 +29,14 @@ namespace SupErp.WCF.GestionSalaireWCF
 
         [OperationContract]
         bool UpdateUserState(long idUser, long idState);
+
+        [OperationContract]
+        bool addPrime(long idUser, Prime prime);
+
+        [OperationContract]
+        List<Prime> GetPrimesByUserId(long id);
+
+        [OperationContract]
+        bool addAbsence(long idUser, Absence absence);
     }
 }

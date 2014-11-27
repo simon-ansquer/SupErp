@@ -68,10 +68,15 @@ namespace SupErp.DAL.GestionSalaireDAL
             if (user == null)
                 return false;
 
+            if (prime == null)
+                return false;
 
+            prime.User_id = idUser;
 
+            Entities.Primes.Add(prime);
+            Entities.SaveChanges();
 
-            return false;
+            return true;
         }
 
 
@@ -107,6 +112,25 @@ namespace SupErp.DAL.GestionSalaireDAL
         public List<Absence> GetAbsenses()
         {
             return Entities.Absences.ToList();
+        }
+
+        public bool addAbsence(long idUser, Absence absence)
+        {
+
+            User user = Entities.Users.First(i => i.Id == idUser);
+
+            if (user == null)
+                return false;
+
+            if (absence == null)
+                return false;
+
+            absence.User_id = idUser;
+
+            Entities.Absences.Add(absence);
+            Entities.SaveChanges();
+
+            return true;
         }
         #endregion
 

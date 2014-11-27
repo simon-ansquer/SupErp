@@ -68,7 +68,7 @@ namespace SupErp.Tests
                 User me = lst[0];
 
                 int stateCount = clientService.GetState().Count;
-                long state = ((int)(me.Status_id == null ? 0 : me.Status_id) + 1) % stateCount;
+                long state = ((int)(me.Status_id == null ? 1 : me.Status_id) + 1) % stateCount + 1;
 
                 Assert.IsTrue(clientService.UpdateUserState(me.Id, state));
 
@@ -76,6 +76,66 @@ namespace SupErp.Tests
                 me = lst[0];
 
                 Assert.AreEqual(state, me.Status_id);
+            }
+        }
+
+
+        [TestMethod]
+        public void TestAddPrime()
+        {
+            List<User> lst = clientService.SearchUser("del");
+
+
+
+            if (lst.Count >= 1)
+            {
+                User me = lst[0];
+
+                Prime prime = new Prime()
+                {
+                    User_id = me.Id,
+                    Price = 2000,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                    Label = "Yolo prime"
+                };
+
+                Assert.IsTrue(clientService.addPrime(me.Id,prime));
+
+                lst = clientService.SearchUser("del");
+                me = lst[0];
+
+                int nbPrime = clientService.GetPrimesByUserId(me.Id).Count;
+
+                Assert.AreEqual(me.Primes.Count,nbPrime);
+            }
+        }
+
+        [TestMethod]
+        public void TestAddAbsence()
+        {
+            List<User> lst = clientService.SearchUser("del");
+
+           
+
+            if (lst.Count >= 1)
+            {
+                User me = lst[0];
+                int count = me.Absences.Count;
+                Absence absence = new Absence()
+                {
+                    User_id = me.Id,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now
+                };
+
+                Assert.IsTrue(clientService.addAbsence(me.Id, absence));
+
+                lst = clientService.SearchUser("del");
+                me = lst[0];
+
+
+                Assert.AreEqual(me.Absences.Count, count+1);
             }
         }
     }
