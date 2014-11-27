@@ -18,5 +18,25 @@ namespace SupErp.DAL.GestionClientDAL
             }
             return true;
         }
+
+        public Company GetCompany(int idCompany)
+        {
+            Company com = new Company();
+            using (SUPERPEntities sup = new SUPERPEntities ())
+            {
+                com = sup.Companies.Where(o => o.id == idCompany).FirstOrDefault();
+            }
+            return com;
+        }
+
+        public List<Company> GetListCompany ()
+        {
+         List<Company> com1 = new List<Company>();
+            using ( SUPERPEntities sup = new SUPERPEntities ())
+            {
+                com1 = sup.Companies.ToList();
+            }
+            return com1;
+        }
     }
 }
