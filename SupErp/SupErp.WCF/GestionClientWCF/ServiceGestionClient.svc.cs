@@ -20,7 +20,7 @@ namespace SupErp.WCF.GestionClientWCF
         private static readonly Lazy<ClientBLL> LazyClientBLL = new Lazy<ClientBLL>(() => new ClientBLL());
         private static ClientBLL clientBLL { get { return LazyClientBLL.Value; } }
         
-        public bool CreateCompany(Company company)
+        public int CreateCompany(Company company)
         {
             return clientBLL.CreateCompany(company);
         }
@@ -40,6 +40,11 @@ namespace SupErp.WCF.GestionClientWCF
             return clientBLL.EditCompany(company);
         }
 
+        public bool DeleteCompany(int id)
+        {
+            return clientBLL.DeleteCompany(id);
+        }
+
 
         //////////////////////////////
         //  COMPANY_CONTACT
@@ -48,7 +53,7 @@ namespace SupErp.WCF.GestionClientWCF
         private static readonly Lazy<Company_ContactBLL> LazyContactBLL = new Lazy<Company_ContactBLL>(() => new Company_ContactBLL());
         private static Company_ContactBLL ContactBLL { get { return LazyContactBLL.Value; } }
 
-        public bool CreateCompany_Contact(Company_Contact contact)
+        public int CreateCompany_Contact(Company_Contact contact)
         {
             return ContactBLL.CreateCompany_Contact(contact);
         }
@@ -71,6 +76,11 @@ namespace SupErp.WCF.GestionClientWCF
         public bool EditCompany_Contact(Company_Contact contact)
         {
             return ContactBLL.EditCompany_Contact(contact);
+        }
+
+        public bool DeleteCompany_Contact(int id)
+        {
+            return ContactBLL.DeleteCompany_Contact(id);
         }
     }
 }

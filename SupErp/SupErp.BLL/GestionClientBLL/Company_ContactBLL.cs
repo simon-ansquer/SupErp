@@ -18,7 +18,7 @@ namespace SupErp.BLL.GestionClientBLL
             return contactDAL.GetCompany_Contact(idContact);
         }
 
-        public bool CreateCompany_Contact(Company_Contact contact)
+        public int CreateCompany_Contact(Company_Contact contact)
         {
             return contactDAL.CreateCompany_Contact(contact);
         }
@@ -38,6 +38,12 @@ namespace SupErp.BLL.GestionClientBLL
             return contactDAL.EditCompany_Contact(contact);
         }
 
-       
+
+
+
+        public bool DeleteCompany_Contact(int id)
+        {
+            return contactDAL.DeleteCompany_Contact(id);
+        }
     }
 }
