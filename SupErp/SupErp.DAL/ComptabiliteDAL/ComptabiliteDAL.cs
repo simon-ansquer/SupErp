@@ -7,7 +7,7 @@ using SupErp.Entities;
 
 namespace SupErp.DAL.GestionComptabilityDAL
 {
-    class ComptabilityDAL
+    class ComptabiliteDAL
     {
         #region Read
 
@@ -110,10 +110,50 @@ namespace SupErp.DAL.GestionComptabilityDAL
 
         #region Create
 
+        public COMPTA_ClassOfAccounts CreateClassOfAccounts ( COMPTA_ClassOfAccounts classOfAccountsToAdd )
+        {
+            using ( SUPERPEntities context = new SUPERPEntities(false) )
+            {
+                var classOfAccounts = context.COMPTA_ClassOfAccounts.Add(classOfAccountsToAdd);
+                context.SaveChanges();
+                return classOfAccounts;
+            }
+        }
+
+        public COMPTA_ChartOfAccounts CreateChartOfAccounts ( COMPTA_ChartOfAccounts chartOfAcountsToAdd )
+        {
+            using ( SUPERPEntities context = new SUPERPEntities(false) )
+            {
+                var chartOfAccounts = context.COMPTA_ChartOfAccounts.Add(chartOfAcountsToAdd);
+                context.SaveChanges();
+                return chartOfAccounts;
+            }
+        }
+
+        public COMPTA_ExchangeRate CreateExchangeRate ( COMPTA_ExchangeRate exchangeRateToAdd )
+        {
+            using ( SUPERPEntities context = new SUPERPEntities(false) )
+            {
+                var exchangeRate = context.COMPTA_ExchangeRate.Add(exchangeRateToAdd);
+                context.SaveChanges();
+                return exchangeRate;
+            }
+        }
+
+        public COMPTA_Currency CreateCurrency ( COMPTA_Currency currencyToAdd )
+        {
+            using ( SUPERPEntities context = new SUPERPEntities(false) )
+            {
+                var currency = context.COMPTA_Currency.Add(currencyToAdd);
+                context.SaveChanges();
+                return currency;
+            }
+        }
+
         public COMPTA_Bank CreateBank ( COMPTA_Bank bankToAdd )
         {
             using ( SUPERPEntities context = new SUPERPEntities(false) )
-            {              
+            {
                 var bank = context.COMPTA_Bank.Add(bankToAdd);
                 context.SaveChanges();
                 return bank;
@@ -130,13 +170,13 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        public COMPTA_Currency CreateCurrency ( COMPTA_Currency currencyToAdd )
+        public COMPTA_AccountingEntries CreateAccountingEntries ( COMPTA_AccountingEntries accountingEntriesToAdd )
         {
             using ( SUPERPEntities context = new SUPERPEntities(false) )
             {
-                var currency = context.COMPTA_Currency.Add(currencyToAdd);
+                var accountingEntries = context.COMPTA_AccountingEntries.Add(accountingEntriesToAdd);
                 context.SaveChanges();
-                return currency;
+                return accountingEntries;
             }
         }
 
@@ -150,33 +190,13 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        public COMPTA_ExchangeRate CreateExchangeRate ( COMPTA_ExchangeRate exchangeRateToAdd )
+        public COMPTA_CustomerJournalLine CreateCustomerJournalLine ( COMPTA_CustomerJournalLine customerJournalLineToAdd )
         {
             using ( SUPERPEntities context = new SUPERPEntities(false) )
             {
-                var exchangeRate = context.COMPTA_ExchangeRate.Add(exchangeRateToAdd);
+                var customerJournalLine = context.COMPTA_CustomerJournalLine.Add(customerJournalLineToAdd);
                 context.SaveChanges();
-                return exchangeRate;
-            }
-        }
-
-        public COMPTA_ChartOfAccounts CreateChartOfAccounts ( COMPTA_ChartOfAccounts chartOfAcountsToAdd )
-        {
-            using ( SUPERPEntities context = new SUPERPEntities(false) )
-            {
-                var chartOfAccounts = context.COMPTA_ChartOfAccounts.Add(chartOfAcountsToAdd);
-                context.SaveChanges();
-                return chartOfAccounts;
-            }
-        }
-
-        public COMPTA_ClassOfAccounts CreateClassOfAccounts ( COMPTA_ClassOfAccounts classOfAccountsToAdd )
-        {
-            using ( SUPERPEntities context = new SUPERPEntities(false) )
-            {
-                var classOfAccounts = context.COMPTA_ClassOfAccounts.Add(classOfAccountsToAdd);
-                context.SaveChanges();
-                return classOfAccounts;
+                return customerJournalLine;
             }
         }
 
@@ -190,26 +210,6 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        public COMPTA_CustomerJournalLine CreateCustomerJournalLine ( COMPTA_CustomerJournalLine customerJournalLineToAdd )
-        {
-            using ( SUPERPEntities context = new SUPERPEntities(false) )
-            {
-                var customerJournalLine = context.COMPTA_CustomerJournalLine.Add(customerJournalLineToAdd);
-                context.SaveChanges();
-                return customerJournalLine;
-            }
-        }
-
-        public COMPTA_AccountingEntries CreateAccountingEntries ( COMPTA_AccountingEntries accountingEntriesToAdd )
-        {
-            using ( SUPERPEntities context = new SUPERPEntities(false) )
-            {
-                var accountingEntries = context.COMPTA_AccountingEntries.Add(accountingEntriesToAdd);
-                context.SaveChanges();
-                return accountingEntries;
-            }
-        }
-
-        #endregion       
+        #endregion
     }
 }
