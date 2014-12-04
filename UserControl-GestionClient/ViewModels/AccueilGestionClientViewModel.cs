@@ -8,12 +8,12 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using UserControl_GestionClient.Helpers;
 using UserControl_GestionClient.Models;
+using UserControl_GestionClient.Views;
 
 namespace UserControl_GestionClient.ViewModels
 {
     class AccueilGestionClientViewModel : NotificationObject
     {
-
         public AccueilGestionClientViewModel()
         {
             //DisplayData();
@@ -52,7 +52,7 @@ namespace UserControl_GestionClient.ViewModels
         public ICommand AddCustomer { get { return new DelegateCommand(AddNewCustomer); } }
         private void AddNewCustomer()
         {
-
+            
         }
     }
 }
