@@ -12,7 +12,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Read
         public List<BILL_Transmitter> GetBillTrans()
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Transmitter.ToList();
             }
@@ -22,7 +22,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Create
         public BILL_Transmitter CreateBillTrans(BILL_Transmitter billVTransToAdd)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var t = context.BILL_Transmitter.Add(billVTransToAdd);
                 context.SaveChanges();
@@ -34,7 +34,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Edit
         public BILL_Transmitter EditBillTrans(BILL_Transmitter billTransToEdit)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var t = context.BILL_Transmitter.Find(billTransToEdit.Transmitter_Id);
                 t = billTransToEdit;
@@ -45,13 +45,14 @@ namespace SupErp.DAL.FacturationDAL
         #endregion
 
         #region Delete
-        public bool DeleteBillTrans(BILL_Transmitter billTransToDelete)
+        public bool DeleteBillTrans(long id)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 try
                 {
-                    context.BILL_Transmitter.Remove(billTransToDelete);
+                    var t = context.BILL_Transmitter.Find(id);
+                    context.BILL_Transmitter.Remove(t);
                     context.SaveChanges();
                     return true;
                 }

@@ -1,25 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WpfControlLibrarySalaire.Models
 {
-    class HistoriqueSalaire
+    public class HistoriqueSalaire
     {
-        DateTime DateSalaire;
-        Double Salaire;
+        private readonly  DateTime _dateSalaire;
+
+        public DateTime DateSalaire
+        {
+            get { return _dateSalaire; }
+        }
+
+        private readonly Double _salaire;
+
+        public Double Salaire
+        {
+            get { return _salaire; }
+        }
 
         public HistoriqueSalaire()
         {
 
         }
 
-        public HistoriqueSalaire(DateTime _dateSalaire, Double _Salaire)
+        public HistoriqueSalaire(DateTime dateSalaire, Double salaire)
         {
-            DateSalaire = _dateSalaire;
-            Salaire = _Salaire;
+            _dateSalaire = dateSalaire;
+            _salaire = salaire;
         }
 
     }

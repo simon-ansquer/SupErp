@@ -71,6 +71,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\CompabilityView\PlanComptable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Compile Include="Helpers\StaticParams.cs" />
     <Compile Include="Models\WindowParameters.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
@@ -95,6 +103,12 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
+    <Compile Include="Views\CompabilityView\PlanComptable.xaml.cs">
+      <DependentUpon>PlanComptable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\LoginPage.xaml">
       <SubType>Designer</SubType>

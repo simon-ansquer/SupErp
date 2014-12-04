@@ -47,6 +47,7 @@
     <Compile Include="FacturationBLL\BillQuotationStatusBLL.cs" />
     <Compile Include="FacturationBLL\BillTransmitterBLL.cs" />
     <Compile Include="FacturationBLL\BillVatBLL.cs" />
+    <Compile Include="GestionClientBLL\Company_ContactBLL.cs" />
 	<Compile Include="FacturationBLL\StatusBLL.cs" />
     <Compile Include="GestionSalaireBLL\SalaireBLL.cs" />
     <Compile Include="ModuleUser\UserBLL.cs" />

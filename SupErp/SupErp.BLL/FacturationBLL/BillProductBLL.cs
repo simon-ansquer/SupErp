@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SupErp.Entities;
 using SupErp.DAL.FacturationDAL;
+using SupErp.DAL.FacturationModele;
 
 namespace SupErp.BLL.FacturationBLL
 {
@@ -19,6 +20,11 @@ namespace SupErp.BLL.FacturationBLL
             return billProdDAL.GetBillProduct();
         }
 
+        public List<ProductExtended> getListProductIncludedOrNot(long billquotation_id)
+        {
+            return GetBillProduct().Select(p => new ProductExtended(p, billquotation_id)).ToList();
+        }
+
         public List<BILL_Product> GetProducts()
         {
             return billProdDAL.GetProducts();
@@ -29,9 +35,14 @@ namespace SupErp.BLL.FacturationBLL
             return billProdDAL.GetProductByName(nameProduct);
         }
 
-        public BILL_Product GetProductDescription(string descriptionProduct)
+        public BILL_Product GetProductByID(long id)
         {
-            return billProdDAL.GetProductDescription(descriptionProduct);
+            return billProdDAL.GetProductByID(id);
+        }
+
+        public IEnumerable<BILL_Product> GetProductByCategory(long category_id)
+        {
+            return billProdDAL.GetProductCategory(category_id);
         }
 
         public BILL_Product GetProductPrice(Double priceProduct)
@@ -56,9 +67,9 @@ namespace SupErp.BLL.FacturationBLL
         #endregion
 
         #region Delete
-        public bool DeleteBillProduct(BILL_Product billProductToDelete)
+        public bool DeleteBillProduct(long id)
         {
-            return billProdDAL.DeleteBillProduct(billProductToDelete);
+            return billProdDAL.DeleteBillProduct(id);
         }
         #endregion
     }

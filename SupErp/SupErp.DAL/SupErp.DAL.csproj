@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FacturationModele\BillQuotationComplete.cs" />
+    <Compile Include="FacturationModele\BillQuotationLight.cs" />
+    <Compile Include="FacturationModele\ProductExtended.cs" />
     <Compile Include="GestionClientDAL\CompanyDAL.cs" />
     <Compile Include="GestionClientDAL\Company_ContactDAL.cs" />
     <Compile Include="FacturationDAL\BillCategoryDAL.cs" />
@@ -57,6 +61,7 @@
     <Compile Include="FacturationDAL\LineBillQuotationDAL.cs" />
     <Compile Include="FacturationDAL\StatusDAL.cs" />
     <Compile Include="GestionSalaireDAL\GestionSalaireDAL.cs" />
+    <Compile Include="ModuleUser\Encrypt.cs" />
     <Compile Include="ModuleUser\UserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

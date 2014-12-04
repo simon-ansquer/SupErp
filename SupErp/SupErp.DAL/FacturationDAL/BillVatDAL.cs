@@ -12,15 +12,23 @@ namespace SupErp.DAL.FacturationDAL
         #region Read
         public List<BILL_Vat> GetBillVat()
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Vat.ToList();
             }
         }
 
+        public BILL_Vat GetBillVatByID(long id)
+        {
+            using (SUPERPEntities context = new SUPERPEntities(false))
+            {
+                return context.BILL_Vat.SingleOrDefault(v => v.Vat_Id == id);
+            }
+        }
+
         public BILL_Vat GetBillVat(Double rateBillVat)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Vat.SingleOrDefault(v => v.Rate == rateBillVat);
             }
@@ -28,7 +36,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_Vat GetBillVat(DateTime dateBillVat)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Vat.SingleOrDefault(c => c.DateVat == dateBillVat);
             }
@@ -38,7 +46,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Create
         public BILL_Vat CreateBillVat(BILL_Vat billVatToAdd)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var v = context.BILL_Vat.Add(billVatToAdd);
                 context.SaveChanges();
@@ -50,7 +58,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Edit
         public BILL_Vat EditBillVat(BILL_Vat billVatToEdit)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var v = context.BILL_Vat.Find(billVatToEdit.Vat_Id);
                 v = billVatToEdit;
@@ -61,13 +69,14 @@ namespace SupErp.DAL.FacturationDAL
         #endregion
 
         #region Delete
-        public bool DeleteBillVat(BILL_Vat billVatToDelete)
+        public bool DeleteBillVat(long id)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 try
                 {
-                    context.BILL_Vat.Remove(billVatToDelete);
+                    var v = context.BILL_Vat.Find(id);
+                    context.BILL_Vat.Remove(v);
                     context.SaveChanges();
                     return true;
                 }

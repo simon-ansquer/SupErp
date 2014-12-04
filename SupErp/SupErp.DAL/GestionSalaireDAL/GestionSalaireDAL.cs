@@ -17,7 +17,7 @@ namespace SupErp.DAL.GestionSalaireDAL
             get
             {
                 if (_entities == null)
-                    _entities = new SUPERPEntities();
+                    _entities = new SUPERPEntities(false);
                 return _entities;
             }
             set

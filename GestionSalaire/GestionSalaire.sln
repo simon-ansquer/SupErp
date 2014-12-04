@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfControlLibrarySalary", "WpfControlLibrarySalaire\WpfControlLibrarySalary.csproj", "{96AFC8B4-F382-42B1-A83D-6724888F9DF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestSalary", "UnitTestSalaire\UnitTestSalary.csproj", "{D75AF314-3E89-4892-B8B0-551D9A5E26EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplicationSalary", "WpfApplicationSalaire\WpfApplicationSalary.csproj", "{0FED60C9-9A66-4BAC-9E21-CA6B81761AF1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaryLibrary", "SalaryLibrary\SalaryLibrary.csproj", "{DFD99C5A-ECB1-447C-85D2-71E9BA194778}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{0FED60C9-9A66-4BAC-9E21-CA6B81761AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FED60C9-9A66-4BAC-9E21-CA6B81761AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FED60C9-9A66-4BAC-9E21-CA6B81761AF1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DFD99C5A-ECB1-447C-85D2-71E9BA194778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DFD99C5A-ECB1-447C-85D2-71E9BA194778}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFD99C5A-ECB1-447C-85D2-71E9BA194778}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFD99C5A-ECB1-447C-85D2-71E9BA194778}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

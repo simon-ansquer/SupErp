@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SupErp.WCF;
 using SupErp.Entities;
+using SupErp.WCF.FacturationWCF;
+using SupErp.DAL.FacturationModele;
 
 namespace SupErp.Tests
 {
@@ -22,7 +24,7 @@ namespace SupErp.Tests
         public void TestGetQuotations()
         {
             Init();
-            var lst = new List<BILL_BillQuotation>();
+            var lst = new List<BillQuotationLight>();
             lst = clientService.GetListQuotation();
             Assert.AreNotEqual(lst.Count, 0);
         }

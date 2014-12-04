@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.Web;
 using System.Web.Services;
 
-namespace SupErp.WCF.ModuleUser
+namespace SupErp.WCF
 {
     [ServiceContract]
     public interface IUserService

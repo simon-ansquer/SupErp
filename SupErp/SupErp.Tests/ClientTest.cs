@@ -80,5 +80,86 @@ namespace SupErp.Tests
 
             Assert.IsTrue(clientService.CreateCompany(comp));
         }
+
+        [TestMethod]
+        public void TestGetCompany()
+        {
+            Company comp = new Company();
+            comp = clientService.GetCompany(2);
+
+            Assert.AreEqual("testCreate", comp.name);
+        }
+
+        [TestMethod]
+        public void TestGetListCompany()
+        {
+            List<Company> comp = new List<Company> ();
+            comp = clientService.GetListCompany();
+
+            Assert.IsTrue(comp.Count > 1);
+        }
+
+        [TestMethod]
+        public void TestCreateCompany_Contact()
+        {
+            Company_Contact cont = new Company_Contact();
+            cont.firstname = "pierre";
+            cont.lastname = "Geogre";
+            cont.gender = 1;
+            cont.email = "pierre@geogre.fr";
+            cont.phone = "0506";
+            cont.company_id = 1;
+
+            Assert.IsTrue(clientService.CreateCompany_Contact(cont));
+        }
+
+        [TestMethod]
+        public void TestGetCompany_Contact()
+        {
+            Company_Contact cont;
+            cont = clientService.GetCompany_Contact(4);
+
+            Assert.AreEqual("pierre", cont.firstname);
+            Assert.AreEqual("Geogre", cont.lastname);
+            Assert.AreEqual(1, cont.gender);
+            Assert.AreEqual("pierre@geogre.fr", cont.email);
+            Assert.AreEqual("0506", cont.phone);
+            Assert.AreEqual(1, cont.company_id);
+        }
+
+        [TestMethod]
+        public void TestGetListCompany_Contact()
+        {
+            List<Company_Contact> lcont;
+            lcont = clientService.GetListCompany_Contact();
+
+            Assert.IsTrue(lcont.Count > 1);
+        }
+
+        [TestMethod]
+        public void TestGetListCompany_ContactByCompany()
+        {
+            List<Company_Contact> lcont;
+            lcont = clientService.GetListCompany_ContactById(2);
+
+            Assert.IsTrue(lcont.Count > 0);
+        }
+
+         [TestMethod]
+        public void testEditCompany_contact ()
+        {
+            Company_Contact cont = new Company_Contact();
+            cont.id = 4;
+            cont.firstname = "pierreT";
+            cont.lastname = "George";
+            cont.gender = 1;
+            cont.email = "pierre@geogre.fr";
+            cont.phone = "0506";
+            cont.company_id = 1;
+
+            Assert.IsTrue(clientService.EditCompany_Contact(cont));
+
+
+        }
     }
 }
