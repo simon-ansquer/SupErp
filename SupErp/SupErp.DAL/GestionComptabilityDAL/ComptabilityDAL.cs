@@ -7,7 +7,7 @@ using SupErp.Entities;
 
 namespace SupErp.DAL.GestionComptabilityDAL
 {
-    class ComptabilityDAL
+    public class ComptabilityDAL
     {
         #region Read
 
@@ -32,6 +32,14 @@ namespace SupErp.DAL.GestionComptabilityDAL
             using ( SUPERPEntities context = new SUPERPEntities(false) )
             {
                 return context.COMPTA_ChartOfAccounts.Include("COMPTA_ClassOfAccounts");
+            }
+        }
+
+        public IEnumerable<COMPTA_ClassOfAccounts> GetClassOfAccounts ()
+        {
+            using ( SUPERPEntities context = new SUPERPEntities(false) )
+            {
+                return context.COMPTA_ClassOfAccounts;
             }
         }
 

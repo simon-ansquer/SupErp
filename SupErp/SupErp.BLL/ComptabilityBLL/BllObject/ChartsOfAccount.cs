@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace SupErp.BLL.ComptabilityBLL.BllObject
 {
-    class ChartsOfAccount
-    {
+    public class ChartsOfAccount
+    {    
+        public long id { get; set; }
+        public Nullable<long> account_number { get; set; }
+        public string name { get; set; }
+        public Nullable<long> class_id { get; set; }
+        public IEnumerable<ChartsOfAccount> chartsOfAccount { get; set; }
     }
 }
