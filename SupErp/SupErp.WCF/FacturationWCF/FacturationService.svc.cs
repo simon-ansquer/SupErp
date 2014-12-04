@@ -22,5 +22,13 @@ namespace SupErp.WCF
         {
             return billQuotationBLL.GetBillQuotation().ToList<BILL_BillQuotation>();
         }
+
+        public List<BILL_BillQuotation> SearchBillQuotation(string nomClient, int? numFact, DateTime? dateDocument, long? status,int? MontantHTMin, int? MontantHTMax, int? MontantTTCMin, int? MontantTTCMax, bool? isBill)
+        {
+            var list = new List<BILL_BillQuotation>();
+
+            return list;
+        }
+
     }
 }

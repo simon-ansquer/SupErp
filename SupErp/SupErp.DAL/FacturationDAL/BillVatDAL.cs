@@ -18,6 +18,14 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
+        public BILL_Vat GetBillVatByID(long id)
+        {
+            using (SUPERPEntities context = new SUPERPEntities())
+            {
+                return context.BILL_Vat.SingleOrDefault(v => v.Vat_Id == id);
+            }
+        }
+
         public BILL_Vat GetBillVat(Double rateBillVat)
         {
             using (SUPERPEntities context = new SUPERPEntities())
@@ -61,13 +69,14 @@ namespace SupErp.DAL.FacturationDAL
         #endregion
 
         #region Delete
-        public bool DeleteBillVat(BILL_Vat billVatToDelete)
+        public bool DeleteBillVat(long id)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
                 try
                 {
-                    context.BILL_Vat.Remove(billVatToDelete);
+                    var v = context.BILL_Vat.Find(id);
+                    context.BILL_Vat.Remove(v);
                     context.SaveChanges();
                     return true;
                 }

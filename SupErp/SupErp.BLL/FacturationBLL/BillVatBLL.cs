@@ -49,9 +49,9 @@ namespace SupErp.BLL.FacturationBLL
         #endregion
 
         #region Delete
-        public bool DeleteBillVat(BILL_Vat billVatToDelete)
+        public bool DeleteBillVat(long id)
         {
-            return billVatDAL.DeleteBillVat(billVatToDelete);
+            return billVatDAL.DeleteBillVat(id);
         }
         #endregion
     }

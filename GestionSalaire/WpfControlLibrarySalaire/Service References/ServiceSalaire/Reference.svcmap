@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7c4bae30-1db0-4766-adea-99e570d63acc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:7880/GestionSalaireWCF/ServiceSalaire.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceSalaire.disco" MetadataType="Disco" ID="04361754-619d-4007-9bf0-aec28098afc6" SourceId="1" SourceUrl="http://localhost:7880/GestionSalaireWCF/ServiceSalaire.svc?disco" />
+    <MetadataFile FileName="ServiceSalaire.xsd" MetadataType="Schema" ID="a232e88b-0bab-4a75-bd2f-ea743df29b6f" SourceId="1" SourceUrl="http://localhost:7880/GestionSalaireWCF/ServiceSalaire.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceSalaire1.xsd" MetadataType="Schema" ID="785db718-f2c4-4040-bf0d-846c3cdc2b8a" SourceId="1" SourceUrl="http://localhost:7880/GestionSalaireWCF/ServiceSalaire.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceSalaire2.xsd" MetadataType="Schema" ID="26589e7d-5481-4f9a-96f9-33af9f7897f2" SourceId="1" SourceUrl="http://localhost:7880/GestionSalaireWCF/ServiceSalaire.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceSalaire.wsdl" MetadataType="Wsdl" ID="4e687003-6710-452c-b64d-3323541003fe" SourceId="1" SourceUrl="http://localhost:7880/GestionSalaireWCF/ServiceSalaire.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

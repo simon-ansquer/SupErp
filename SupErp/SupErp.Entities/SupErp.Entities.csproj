@@ -85,6 +85,12 @@
     <Compile Include="Company_Contact.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="COMPTA_AccountingEntries.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_ExchangeRate.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ConfigAbsence.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>

@@ -2,8 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModel="clr-namespace:WpfControlLibrarySalaire.ViewModels"
              mc:Ignorable="d" 
              Background="White"              
@@ -41,45 +40,45 @@
                 <Button Grid.Column="3" Background="#4388CC" Foreground="White" Content="Rechercher" FontSize="15" x:Name="searchButton" BorderThickness="0" Command="{Binding SearchCommand}" />
                 <Button Grid.Column="5" Background="#4388CC" Foreground="White" Content="Exporter PDF" FontSize="15" x:Name="exportButton" BorderThickness="0" Command="{Binding GeneratePDFCommand}"/>
             </Grid>
-            <DataGrid x:Name="datagridSalaries" ItemsSource="{Binding Employees}" Grid.Row="4" GridLinesVisibility="Horizontal" FontSize="13" HorizontalGridLinesBrush="Silver"  HorizontalAlignment="Stretch"
+            <DataGrid x:Name="datagridSalaries" ItemsSource="{Binding Path=Employees}" Grid.Row="4" GridLinesVisibility="Horizontal" FontSize="13" HorizontalGridLinesBrush="Silver"  HorizontalAlignment="Stretch"
                       AlternatingRowBackground="#FFCCCCCC" AlternationCount="1" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nom" Width ="1*" Binding="{Binding Name}" IsReadOnly="True" CanUserResize="False" >
+                    <DataGridTextColumn Header="Nom" Width ="1*" Binding="{Binding Lastname}" IsReadOnly="True" CanUserResize="False" >
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width ="1*" Header="Prénom" Binding="{Binding Surname}" IsReadOnly="True" CanUserResize="False">
+                    <DataGridTextColumn Width ="1*" Header="Prénom" Binding="{Binding Firstname}" IsReadOnly="True" CanUserResize="False">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width ="1*" Header="Date de naissance" Binding="{Binding Birthdate}" IsReadOnly="True" CanUserResize="False">
+                    <DataGridTextColumn Width ="1*" Header="Date d'arrivée" Binding="{Binding Date_arrival}" IsReadOnly="True" CanUserResize="False">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width ="1*" Header="Salaire brut annuel" IsReadOnly="True" Binding="{Binding AnualSalary}" CanUserResize="False">
+                    <DataGridTextColumn Width ="1*" Header="Salaire brut" IsReadOnly="True" Binding="{Binding Salaries.First().NetSalary}" CanUserResize="False">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width ="1*" Header="Absence" Binding="{Binding Absence}" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTextColumn Width ="1*" Header="Absence" Binding="{Binding Absences.Count}" CanUserResize="False" IsReadOnly="True">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTemplateColumn Width ="0.5*" Header="Générer PDF" CanUserSort="False" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTemplateColumn Width ="0.5*" Header="PDF" CanUserSort="False" CanUserResize="False" IsReadOnly="True">
                         <DataGridTemplateColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />

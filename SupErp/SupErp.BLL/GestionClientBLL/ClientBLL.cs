@@ -13,14 +13,18 @@ namespace SupErp.BLL.GestionClientBLL
         private static readonly Lazy<CompanyDAL> LazyCompanyDAL = new Lazy<CompanyDAL>(() => new CompanyDAL());
         private static CompanyDAL companyDAL { get { return LazyCompanyDAL.Value; } }
 
-        public List<Company> GetCompany(int idCustomer)
+        public Company GetCompany(int idCompany)
         {
-            return null;
+            return companyDAL.GetCompany(idCompany);
         }
 
         public bool CreateCompany(Company company)
         {
             return companyDAL.CreateCompany(company);
+        }
+        public List<Company> GetListCompany ()
+        {
+            return companyDAL.GetListCompany();
         }
     }
 }
