@@ -10,7 +10,14 @@
 namespace SupErp.Entities
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(BILL_BillQuotationStatus))]
+    [KnownType(typeof(BILL_Transmitter))]
+    [KnownType(typeof(BILL_LineBillQuotation))]
+    [KnownType(typeof(Company))]
     
     public partial class BILL_BillQuotation
     {
@@ -20,17 +27,28 @@ namespace SupErp.Entities
             this.BILL_LineBillQuotation = new HashSet<BILL_LineBillQuotation>();
         }
     
+    [DataMember]
         public long BillQuotation_Id { get; set; }
+    [DataMember]
         public string NBill { get; set; }
+    [DataMember]
         public bool Vat { get; set; }
+    [DataMember]
         public double AmountDF { get; set; }
+    [DataMember]
         public System.DateTime DateBillQuotation { get; set; }
+    [DataMember]
         public long Transmitter_Id { get; set; }
+    [DataMember]
         public long Company_Id { get; set; }
     
+    [DataMember]
         public virtual ICollection<BILL_BillQuotationStatus> BILL_BillQuotationStatus { get; set; }
+    [DataMember]
         public virtual BILL_Transmitter BILL_Transmitter { get; set; }
+    [DataMember]
         public virtual ICollection<BILL_LineBillQuotation> BILL_LineBillQuotation { get; set; }
+    [DataMember]
         public virtual Company Company { get; set; }
     }
 }

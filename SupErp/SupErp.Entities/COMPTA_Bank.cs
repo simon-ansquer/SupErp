@@ -14,22 +14,37 @@ namespace SupErp.Entities
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
+    [KnownType(typeof(COMPTA_BankAccount))]
     
-    public partial class COMPTA_ExchangeRate
+    public partial class COMPTA_Bank
     {
+        public COMPTA_Bank()
+        {
+            this.COMPTA_BankAccount = new HashSet<COMPTA_BankAccount>();
+        }
+    
     [DataMember]
         public long id { get; set; }
     [DataMember]
-        public Nullable<System.DateTime> updatedDate { get; set; }
+        public string name { get; set; }
     [DataMember]
-        public Nullable<double> EURO_USD { get; set; }
+        public string address1 { get; set; }
     [DataMember]
-        public Nullable<double> EURO_GBP { get; set; }
+        public string address2 { get; set; }
     [DataMember]
-        public Nullable<double> EURO_AUD { get; set; }
+        public string address3 { get; set; }
     [DataMember]
-        public Nullable<double> EURO_ZAR { get; set; }
+        public string zipCode { get; set; }
     [DataMember]
-        public Nullable<double> USD_EURO { get; set; }
+        public string city { get; set; }
+    [DataMember]
+        public string codeBank { get; set; }
+    [DataMember]
+        public string codeGuichet { get; set; }
+    [DataMember]
+        public string phoneNumber { get; set; }
+    
+    [DataMember]
+        public virtual ICollection<COMPTA_BankAccount> COMPTA_BankAccount { get; set; }
     }
 }
