@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SupErp.Entities;
 using SupErp.Shared;
+using SupErp.Kernel.Exceptions;
 
 namespace SupErp.Tests
 {
@@ -38,14 +39,6 @@ namespace SupErp.Tests
         }
 
         [TestMethod]
-        public void TestGetDllsPaths()
-        {
-            DllManager dllManager = new DllManager();
-            IEnumerable<string> paths = dllManager.GetDllsPaths();
-            Assert.IsTrue(paths.Count() > 0);
-        }
-
-        [TestMethod]
         public void TestGetMainMenus()
         {
             DllManager dllManager = new DllManager();
@@ -66,6 +59,50 @@ namespace SupErp.Tests
             List<IMainMenu> mainMenus = dllManager.GetMainMenus(role);
             Assert.IsNotNull(mainMenus);
             Assert.AreEqual(1, mainMenus.Count);
+            Assert.AreEqual("Administration", mainMenus[0].MenuName);
+            Assert.IsTrue(mainMenus[0].SubMenus.Count > 0);
+        }
+
+        [TestMethod]
+        public void TestGetMainMenusNotImplemented()
+        {
+            CopyDll("MainMenuNotImplemented.dll");
+
+            DllManager dllManager = new DllManager();
+            Role role = new Role()
+            {
+                RoleModules = new List<RoleModule>()
+                {
+                    new RoleModule()
+                    {
+                        Module = new Module()
+                        {
+                            Name = "MainMenuNotImplemented"
+                        }
+                    }
+                }
+            };
+
+            try
+            {
+                List<IMainMenu> mainMenus = dllManager.GetMainMenus(role);
+            }
+            catch (MainMenuNotImplementedException e1)
+            {
+                Assert.IsNotNull(e1);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public void TestGetMainMenusBadImplementation()
+        {
+
         }
     }
 }
