@@ -23,6 +23,10 @@ namespace SupErp.WCF.GestionClientWCF
         [OperationContract]
         List<Company> GetListCompany();
 
+        [OperationContract]
+        bool EditCompany(Company company);
+
+
 
         //////////////////////////////
         //  COMPANY_CONTACT
@@ -38,5 +42,9 @@ namespace SupErp.WCF.GestionClientWCF
 
         [OperationContract]
         List<Company_Contact> GetListCompany_ContactById(int idCompany);
+
+        [OperationContract]
+        bool EditCompany_Contact(Company_Contact contact);
+
     }
 }

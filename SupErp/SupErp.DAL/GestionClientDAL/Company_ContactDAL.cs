@@ -57,11 +57,13 @@ namespace SupErp.DAL.GestionClientDAL
                 if (contactBdd != null)
                 {
                     sup.Entry(contactBdd).CurrentValues.SetValues(contact);
+                    sup.SaveChanges();  
                 }
 
             }
             return true;
 
         }
+
     }
 }

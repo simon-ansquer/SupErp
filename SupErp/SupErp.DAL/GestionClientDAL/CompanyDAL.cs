@@ -39,14 +39,19 @@ namespace SupErp.DAL.GestionClientDAL
             return com1;
         }
 
+        public bool EditCompany(Company company)
+        {
+            using (SUPERPEntities sup = new SUPERPEntities(false))
+            {
+                Company contactBdd = sup.Companies.Where(p => p.id == company.id).FirstOrDefault();
+                if (contactBdd != null)
+                {
+                    sup.Entry(contactBdd).CurrentValues.SetValues(company);
+                    sup.SaveChanges();
+                }
 
-        //public Company EditCompany_Contact(Company compa, string idCompany)
-        //{
-        //    using (SUPERPEntities sup = new SUPERPEntities (false))
-        //    {
-
-        //    }
-
-        //}
+            }
+            return true;
+        }
     }
 }

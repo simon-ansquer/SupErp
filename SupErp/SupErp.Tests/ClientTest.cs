@@ -100,6 +100,21 @@ namespace SupErp.Tests
         }
 
         [TestMethod]
+        public void testEditCompany()
+        {
+            Company comp = new Company();
+            comp.name = "testEditComp";
+            comp.siret = "3333";
+            comp.city = "Bordeaux1";
+            comp.address = "Saint Louis RPZ";
+            comp.postalcode = 33300;
+            comp.id = 2;
+
+            Assert.IsTrue(clientService.EditCompany(comp));
+
+        }
+
+        [TestMethod]
         public void TestCreateCompany_Contact()
         {
             Company_Contact cont = new Company_Contact();
@@ -161,5 +176,7 @@ namespace SupErp.Tests
 
 
         }
+
+        
     }
 }

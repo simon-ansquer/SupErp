@@ -26,5 +26,10 @@ namespace SupErp.BLL.GestionClientBLL
         {
             return companyDAL.GetListCompany();
         }
+
+        public bool EditCompany(Company company)
+        {
+            return companyDAL.EditCompany(company);
+        }
     }
 }

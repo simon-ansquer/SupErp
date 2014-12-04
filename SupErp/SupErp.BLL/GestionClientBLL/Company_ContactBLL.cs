@@ -37,5 +37,7 @@ namespace SupErp.BLL.GestionClientBLL
         {
             return contactDAL.EditCompany_Contact(contact);
         }
+
+       
     }
 }
