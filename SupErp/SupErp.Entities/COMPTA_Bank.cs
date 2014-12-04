@@ -14,35 +14,37 @@ namespace SupErp.Entities
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(BILL_Category))]
-    [KnownType(typeof(BILL_LineBillQuotation))]
-    [KnownType(typeof(BILL_Vat))]
+    [KnownType(typeof(COMPTA_BankAccount))]
     
-    public partial class BILL_Product
+    public partial class COMPTA_Bank
     {
-        public BILL_Product()
+        public COMPTA_Bank()
         {
-            this.BILL_LineBillQuotation = new HashSet<BILL_LineBillQuotation>();
+            this.COMPTA_BankAccount = new HashSet<COMPTA_BankAccount>();
         }
     
     [DataMember]
-        public long Product_Id { get; set; }
+        public long id { get; set; }
     [DataMember]
-        public string Name { get; set; }
+        public string name { get; set; }
     [DataMember]
-        public string DescriptionPro { get; set; }
+        public string address1 { get; set; }
     [DataMember]
-        public double Price { get; set; }
+        public string address2 { get; set; }
     [DataMember]
-        public long Category_Id { get; set; }
+        public string address3 { get; set; }
     [DataMember]
-        public long Vat_Id { get; set; }
+        public string zipCode { get; set; }
+    [DataMember]
+        public string city { get; set; }
+    [DataMember]
+        public string codeBank { get; set; }
+    [DataMember]
+        public string codeGuichet { get; set; }
+    [DataMember]
+        public string phoneNumber { get; set; }
     
     [DataMember]
-        public virtual BILL_Category BILL_Category { get; set; }
-    [DataMember]
-        public virtual ICollection<BILL_LineBillQuotation> BILL_LineBillQuotation { get; set; }
-    [DataMember]
-        public virtual BILL_Vat BILL_Vat { get; set; }
+        public virtual ICollection<COMPTA_BankAccount> COMPTA_BankAccount { get; set; }
     }
 }

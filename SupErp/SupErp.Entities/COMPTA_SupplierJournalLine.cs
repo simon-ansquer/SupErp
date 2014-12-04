@@ -14,25 +14,22 @@ namespace SupErp.Entities
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(BILL_Product))]
-    [KnownType(typeof(BILL_BillQuotation))]
+    [KnownType(typeof(Company))]
     
-    public partial class BILL_LineBillQuotation
+    public partial class COMPTA_SupplierJournalLine
     {
     [DataMember]
-        public long LineBillQuotation_Id { get; set; }
+        public long id { get; set; }
     [DataMember]
-        public System.DateTime DateLine { get; set; }
+        public Nullable<bool> direction { get; set; }
     [DataMember]
-        public double Quantite { get; set; }
+        public Nullable<decimal> amount { get; set; }
     [DataMember]
-        public Nullable<long> BillQuotation_Id { get; set; }
+        public Nullable<System.DateTime> postingDate { get; set; }
     [DataMember]
-        public Nullable<long> Product_Id { get; set; }
+        public Nullable<long> SupplierAccount_id { get; set; }
     
     [DataMember]
-        public virtual BILL_Product BILL_Product { get; set; }
-    [DataMember]
-        public virtual BILL_BillQuotation BILL_BillQuotation { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

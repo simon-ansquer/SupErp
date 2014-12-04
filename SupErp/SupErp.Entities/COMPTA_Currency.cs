@@ -14,25 +14,23 @@ namespace SupErp.Entities
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(BILL_Product))]
-    [KnownType(typeof(BILL_BillQuotation))]
+    [KnownType(typeof(COMPTA_BankAccount))]
     
-    public partial class BILL_LineBillQuotation
+    public partial class COMPTA_Currency
     {
-    [DataMember]
-        public long LineBillQuotation_Id { get; set; }
-    [DataMember]
-        public System.DateTime DateLine { get; set; }
-    [DataMember]
-        public double Quantite { get; set; }
-    [DataMember]
-        public Nullable<long> BillQuotation_Id { get; set; }
-    [DataMember]
-        public Nullable<long> Product_Id { get; set; }
+        public COMPTA_Currency()
+        {
+            this.COMPTA_BankAccount = new HashSet<COMPTA_BankAccount>();
+        }
     
     [DataMember]
-        public virtual BILL_Product BILL_Product { get; set; }
+        public long id { get; set; }
     [DataMember]
-        public virtual BILL_BillQuotation BILL_BillQuotation { get; set; }
+        public string name { get; set; }
+    [DataMember]
+        public string symbol { get; set; }
+    
+    [DataMember]
+        public virtual ICollection<COMPTA_BankAccount> COMPTA_BankAccount { get; set; }
     }
 }
