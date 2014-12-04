@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.Web;
 using System.Web.Services;
 
-namespace SupErp.WCF.ModuleUser
+namespace SupErp.WCF
 {
     [ServiceContract]
     public interface IUserService
@@ -29,6 +29,9 @@ namespace SupErp.WCF.ModuleUser
 
         [OperationContract]
         IEnumerable<Role> GetRoles();
+
+        [OperationContract]
+        IEnumerable<Module> GetModules();
 
         [OperationContract]
         Role GetRoleByUserId(int userId);

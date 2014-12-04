@@ -38,5 +38,15 @@ namespace SupErp.DAL.GestionClientDAL
             }
             return com1;
         }
+
+
+        //public Company EditCompany_Contact(Company compa, string idCompany)
+        //{
+        //    using (SUPERPEntities sup = new SUPERPEntities (false))
+        //    {
+
+        //    }
+
+        //}
     }
 }
