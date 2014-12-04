@@ -9,7 +9,7 @@ using SupErp.DAL.FacturationModele;
 
 namespace SupErp.BLL.FacturationBLL
 {
-    class BillProductBLL
+    public class BillProductBLL
     {
         private static readonly Lazy<BillProductDAL> LazyBillProdDAL = new Lazy<BillProductDAL>(() => new BillProductDAL());
         private static BillProductDAL billProdDAL { get { return LazyBillProdDAL.Value; } }
