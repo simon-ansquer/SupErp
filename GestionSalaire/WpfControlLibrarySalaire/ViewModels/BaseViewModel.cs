@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using WpfControlLibrarySalaire.ServiceSalaire;
 
 namespace WpfControlLibrarySalaire.ViewModels
@@ -13,9 +9,9 @@ namespace WpfControlLibrarySalaire.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        internal ServiceSalaireClient serviceSalaire;
-        internal ObservableCollection<ServiceSalaire.User> _employees;
-        public ObservableCollection<ServiceSalaire.User> Employees
+        internal readonly ServiceSalaireClient ServiceSalaire;
+        ObservableCollection<User> _employees;
+        public ObservableCollection<User> Employees
         {
             get
             {
@@ -31,12 +27,12 @@ namespace WpfControlLibrarySalaire.ViewModels
             }
         }
 
-        public BaseViewModel()
+        protected BaseViewModel()
         {
-            serviceSalaire = new ServiceSalaireClient();
+            ServiceSalaire = new ServiceSalaireClient();
         }
 
-        protected void RaisePropertyChanged<T>(Expression<Func<T>> action)
+        private void RaisePropertyChanged<T>(Expression<Func<T>> action)
         {
             var propertyName = GetPropertyName(action);
             RaisePropertyChanged(propertyName);

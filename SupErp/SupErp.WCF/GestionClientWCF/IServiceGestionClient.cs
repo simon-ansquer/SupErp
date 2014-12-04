@@ -22,7 +22,6 @@ namespace SupErp.WCF.GestionClientWCF
 
         [OperationContract]
         List<Company> GetListCompany();
-        List<Company> GetCompany(int idCustomer);
 
 
         //////////////////////////////

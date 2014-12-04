@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using WpfControlLibrarySalaire.Views;
 
 namespace WpfApplicationSalaire
@@ -7,12 +6,12 @@ namespace WpfApplicationSalaire
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
-            Frame uneFrame = new Frame();
+            var uneFrame = new Frame();
             MainGrid.Children.Add(uneFrame);
             uneFrame.Navigate(new EmployeesList());
         }
