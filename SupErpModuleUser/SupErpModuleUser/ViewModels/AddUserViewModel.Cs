@@ -14,10 +14,15 @@ namespace SupErpModuleUser.ViewModels
     public class AddUserViewModel
     {
         public IHMUser User { get; set; }
+        public IEnumerable<IHMRole> Roles { get; set; }
 
         public AddUserViewModel()
         {
             User = new IHMUser();
+            //using (UserServiceClient wcf = new UserServiceClient())
+            //{
+            //    Roles = wcf.GetRoles().ToRoles();
+            //}
         }
 
         public AddUserViewModel(User user)
@@ -35,11 +40,13 @@ namespace SupErpModuleUser.ViewModels
         #region Command Handlers
         private void OnAddOrUpdate()
         { 
-            
+        
         }
 
         private void OnCancel()
-        { }
+        { 
+
+        }
 
         #endregion
     }

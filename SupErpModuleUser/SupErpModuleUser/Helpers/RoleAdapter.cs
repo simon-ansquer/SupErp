@@ -24,5 +24,21 @@ namespace SupErpModuleUser.Helpers
                 RoleModules = role.GetRoleModules().ToList()
             };
         }
+
+        public static IEnumerable<IHMRole> ToRoles(this IEnumerable<Role> roles)
+        {
+            foreach (var r in roles)
+            {
+                yield return r.ToIHMRole();
+            }
+        }
+
+        public static IEnumerable<Role> ToRoles(this IEnumerable<IHMRole> roles)
+        {
+            foreach (var r in roles)
+            {
+                yield return r.ToRole();
+            }
+        }
     }
 }
