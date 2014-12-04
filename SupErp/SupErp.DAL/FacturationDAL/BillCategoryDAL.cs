@@ -12,7 +12,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Read
         public List<BILL_Category> GetBillCategory()
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Category.ToList();
             }
@@ -20,7 +20,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_Category GetBillCategory(String nameBillCategory)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Category.SingleOrDefault(c => c.Name == nameBillCategory);
             }
@@ -28,7 +28,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_Category GetBillCategoryByDescription(string descriptionBillCategory)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Category.SingleOrDefault(c => c.DescriptionCat == descriptionBillCategory);
             }
@@ -38,7 +38,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Create
         public BILL_Category CreateBillCategory(BILL_Category billCategoryToAdd)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var c = context.BILL_Category.Add(billCategoryToAdd);
                 context.SaveChanges();
@@ -50,7 +50,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Edit
         public BILL_Category EditBillCategory(BILL_Category billCategoryToEdit)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var c = context.BILL_Category.Find(billCategoryToEdit.Category_Id);
                 c = billCategoryToEdit;
@@ -63,7 +63,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Delete
         public bool DeleteBillCategory(long billCategory_id)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 try
                 {

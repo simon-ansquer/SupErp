@@ -16,9 +16,9 @@ namespace SupErp.BLL.FacturationBLL
 
         #region Read
 
-        public IEnumerable<BILL_BillQuotation> GetBillQuotation()
+        public IEnumerable<BillQuotationLight> GetBillQuotation()
         {
-            return billQuotationDAL.GetBillQuotation();
+            return billQuotationDAL.GetBillQuotation().Select(b => new BillQuotationLight(b));
         }
 
         public BillQuotationLight GetBillByNum(string numBill)
@@ -28,19 +28,24 @@ namespace SupErp.BLL.FacturationBLL
             return new BillQuotationLight(tmp);
         }
 
-        public IEnumerable<BILL_BillQuotation> GetBills()
+        public IEnumerable<BillQuotationLight> GetBills()
         {
-            return billQuotationDAL.GetBills();
+            return billQuotationDAL.GetBills().Select(b => new BillQuotationLight(b));
         }
 
-        public IEnumerable<BILL_BillQuotation> GetQuotations()
+        public IEnumerable<BillQuotationLight> GetQuotations()
         {
-            return billQuotationDAL.GetQuotations();
+            return billQuotationDAL.GetQuotations().Select(b => new BillQuotationLight(b));
         }
-        
-        public BILL_BillQuotation GetBillQuotation(DateTime dateBillQuotation)
+
+        public BillQuotationLight GetBillQuotation(DateTime dateBillQuotation)
         {
-            return billQuotationDAL.GetBillQuotation(dateBillQuotation);
+            return new BillQuotationLight(billQuotationDAL.GetBillQuotation(dateBillQuotation));
+        }
+
+        public BillQuotationComplete GetBillQuotationsById(long id)
+        {
+            return new BillQuotationComplete(billQuotationDAL.GetBillQuotationsById(id));
         }
 
         #endregion
