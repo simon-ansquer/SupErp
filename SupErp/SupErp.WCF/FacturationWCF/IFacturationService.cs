@@ -29,6 +29,6 @@ namespace SupErp.WCF.FacturationWCF
         bool CreateBillQuotation(BillQuotationComplete billQuotation);
 
         [OperationContract]
-        public bool ModifyBillQuotation(BillQuotationComplete billQuotation);
+        bool ModifyBillQuotation(BillQuotationComplete billQuotation);
     }
 }
