@@ -19,9 +19,9 @@ namespace SupErp.WCF.FacturationWCF
         private static readonly Lazy<BillQuotationBLL> lazyBillQuotationBLL = new Lazy<BillQuotationBLL>(() => new BillQuotationBLL());
         private static BillQuotationBLL billQuotationBLL { get { return lazyBillQuotationBLL.Value; } }
 
-        public List<BILL_BillQuotation> GetListQuotation()
+        public List<BillQuotationLight> GetListQuotation()
         {
-            return billQuotationBLL.GetBillQuotation().ToList<BILL_BillQuotation>();
+            return billQuotationBLL.GetBillQuotation().OrderBy(b => b.DateBillQuotation).ToList();
         }
 
         public List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, long? status,int? MontantHTMin, int? MontantHTMax, int? MontantTTCMin, int? MontantTTCMax, bool? isBill)
