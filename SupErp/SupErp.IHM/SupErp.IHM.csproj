@@ -128,6 +128,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\SupErp.Entities.Module.datasource" />
     <None Include="Properties\DataSources\SupErp.Entities.Role.datasource" />
     <None Include="Properties\DataSources\SupErp.Entities.User.datasource" />
     <None Include="Properties\Settings.settings">
@@ -162,16 +163,21 @@
       <Project>{aed44877-9636-4e8c-95a3-722d99f6260b}</Project>
       <Name>SupErp.Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SupErp.WCF\SupErp.WCF.csproj">
+      <Project>{dddb3846-f079-4103-b316-1eb8edb76090}</Project>
+      <Name>SupErp.WCF</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Content\Img\LogOut.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\UserServices\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\UserServices\UserService.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\UserServices\configuration91.svcinfo" />
@@ -184,6 +190,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\UserServices\UserService.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
