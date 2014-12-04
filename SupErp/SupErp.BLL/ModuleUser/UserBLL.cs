@@ -40,6 +40,11 @@ namespace SupErp.BLL.ModuleUser
             return userDAL.GetRoles();
         }
 
+        public IEnumerable<Module> GetModules()
+        {
+            return userDAL.GetModules();
+        }
+
         public Role GetRoleByUserId(int userId)
         {
             return userDAL.GetRoleByUserId(userId);
