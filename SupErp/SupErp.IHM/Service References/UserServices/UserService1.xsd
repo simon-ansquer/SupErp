@@ -173,10 +173,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfRole" nillable="true" type="tns:ArrayOfRole" />
-  <xs:complexType name="ArrayOfModule">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Module" nillable="true" type="tns:Module" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfModule" nillable="true" type="tns:ArrayOfModule" />
 </xs:schema>

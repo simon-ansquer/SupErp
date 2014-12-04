@@ -35,10 +35,6 @@ namespace SupErp.WCF.GestionClientWCF
             return clientBLL.GetListCompany();
         }
 
-        public bool EditCompany(Company company)
-        {
-            return clientBLL.EditCompany(company);
-        }
 
         public bool DeleteCompany(int id)
         {
