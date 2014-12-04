@@ -31,6 +31,9 @@ namespace SupErp.WCF.ModuleUser
         IEnumerable<Role> GetRoles();
 
         [OperationContract]
+        IEnumerable<Module> GetModules();
+
+        [OperationContract]
         Role GetRoleByUserId(int userId);
 
         #endregion
