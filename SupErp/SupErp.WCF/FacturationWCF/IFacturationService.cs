@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using SupErp.Entities;
 
-namespace SupErp.WCF
+namespace SupErp.WCF.FacturationWCF
 {
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom d'interface "IFacturationService" à la fois dans le code et le fichier de configuration.
     [ServiceContract]

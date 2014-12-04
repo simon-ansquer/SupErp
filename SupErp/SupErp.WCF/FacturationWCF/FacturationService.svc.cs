@@ -8,7 +8,7 @@ using System.Text;
 using SupErp.Entities;
 using SupErp.BLL.FacturationBLL;
 
-namespace SupErp.WCF
+namespace SupErp.WCF.FacturationWCF
 {
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "FacturationService" à la fois dans le code, le fichier svc et le fichier de configuration.
     // REMARQUE : pour lancer le client test WCF afin de tester ce service, sélectionnez FacturationService.svc ou FacturationService.svc.cs dans l'Explorateur de solutions et démarrez le débogage.

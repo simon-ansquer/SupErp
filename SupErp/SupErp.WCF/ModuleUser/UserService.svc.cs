@@ -1,6 +1,5 @@
 ﻿using SupErp.BLL.ModuleUser;
 using SupErp.Entities;
-using SupErp.WCF.ModuleUser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 
-namespace SupErp.WCF
+namespace SupErp.WCF.ModuleUser
 {
     public class UserService : IUserService
     {
