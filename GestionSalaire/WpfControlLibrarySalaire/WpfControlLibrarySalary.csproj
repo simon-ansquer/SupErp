@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -63,7 +64,6 @@
     </Page>
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Models\HistoriqueSalaire.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Service References\ServiceSalaire\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

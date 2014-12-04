@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SupErp.Entities;
 
-namespace SupErp.Entities.FacturationModele
+namespace SupErp.DAL.FacturationModele
 {
     public class BillQuotationLight : BILL_BillQuotation
     {
