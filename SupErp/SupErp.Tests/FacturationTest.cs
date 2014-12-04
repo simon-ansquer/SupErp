@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SupErp.WCF;
 using SupErp.Entities;
+using SupErp.WCF.FacturationWCF;
 
 namespace SupErp.Tests
 {
