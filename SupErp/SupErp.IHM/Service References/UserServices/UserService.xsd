@@ -54,6 +54,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetModules">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetModulesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="GetModulesResult" nillable="true" type="q5:ArrayOfModule" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetRoleByUserId">
     <xs:complexType>
       <xs:sequence>
@@ -64,63 +76,63 @@
   <xs:element name="GetRoleByUserIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="GetRoleByUserIdResult" nillable="true" type="q5:Role" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="GetRoleByUserIdResult" nillable="true" type="q6:Role" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="userToAdd" nillable="true" type="q6:User" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="userToAdd" nillable="true" type="q7:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="CreateUserResult" nillable="true" type="q7:User" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="CreateUserResult" nillable="true" type="q8:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateRole">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="roleToAdd" nillable="true" type="q8:Role" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="roleToAdd" nillable="true" type="q9:Role" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateRoleResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="CreateRoleResult" nillable="true" type="q9:Role" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="CreateRoleResult" nillable="true" type="q10:Role" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EditUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="userToEdit" nillable="true" type="q10:User" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="userToEdit" nillable="true" type="q11:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EditUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="EditUserResult" nillable="true" type="q11:User" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="EditUserResult" nillable="true" type="q12:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EditRole">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="roleToEdit" nillable="true" type="q12:Role" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="roleToEdit" nillable="true" type="q13:Role" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EditRoleResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="EditRoleResult" nillable="true" type="q13:Role" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="EditRoleResult" nillable="true" type="q14:Role" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

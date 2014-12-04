@@ -31,6 +31,12 @@
   <wsdl:message name="IUserService_GetRoles_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRolesResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_GetModules_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetModules" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetModules_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetModulesResponse" />
+  </wsdl:message>
   <wsdl:message name="IUserService_GetRoleByUserId_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRoleByUserId" />
   </wsdl:message>
@@ -89,6 +95,10 @@
     <wsdl:operation name="GetRoles">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetRoles" message="tns:IUserService_GetRoles_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetRolesResponse" message="tns:IUserService_GetRoles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModules">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetModules" message="tns:IUserService_GetModules_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetModulesResponse" message="tns:IUserService_GetModules_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetRoleByUserId">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetRoleByUserId" message="tns:IUserService_GetRoleByUserId_InputMessage" />
@@ -150,6 +160,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetRoles">
       <soap:operation soapAction="http://tempuri.org/IUserService/GetRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModules">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetModules" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

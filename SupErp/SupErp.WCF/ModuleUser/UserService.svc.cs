@@ -8,7 +8,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 
-namespace SupErp.WCF.ModuleUser
+namespace SupErp.WCF
 {
     public class UserService : IUserService
     {
@@ -34,6 +34,11 @@ namespace SupErp.WCF.ModuleUser
         public IEnumerable<Role> GetRoles()
         {
             return userBLL.GetRoles();
+        }
+
+        public IEnumerable<Module> GetModules()
+        {
+            return userBLL.GetModules();
         }
 
         public Role GetRoleByUserId(int userId)

@@ -63,6 +63,7 @@
     <Compile Include="SalaireTest.cs" />
     <Compile Include="KernelTest.cs" />
     <Compile Include="FacturationTest.cs" />
+    <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SupErp.DAL\SupErp.DAL.csproj">
