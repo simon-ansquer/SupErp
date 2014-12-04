@@ -32,5 +32,10 @@ namespace SupErp.BLL.GestionClientBLL
         {
             return contactDAL.GetListCompanyContact(idCompany);
         }
+
+        public bool EditCompany_Contact(Company_Contact contact)
+        {
+            return contactDAL.EditCompany_Contact(contact);
+        }
     }
 }
