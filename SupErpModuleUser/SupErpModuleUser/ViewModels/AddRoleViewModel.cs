@@ -15,16 +15,37 @@ namespace SupErpModuleUser.ViewModels
     {
         public IHMRole Role { get; set; }
 
-        public IEnumerable<IHMModule> Modules { get; set; }
+        public List<IHMModule> Modules { get; set; }
 
         public AddRoleViewModel()
         {
             Role = new IHMRole();
+            //Modules = new UserService.UserServiceClient().GetModules();
+
+            IHMModule module1 = new IHMModule();
+            module1.Name = "Utilisateur";
+            IHMModule module2 = new IHMModule();
+            module2.Name = "Salaire";
+
+            Modules = new List<IHMModule>();
+            Modules.Add(module1);
+            Modules.Add(module2);
         }
 
         public AddRoleViewModel(Role role)
         {
             Role = role.ToIHMRole();
+
+            //Modules = new UserService.UserServiceClient().GetModules();
+
+            IHMModule module1 = new IHMModule();
+            module1.Name = "Utilisateur";
+            IHMModule module2 = new IHMModule();
+            module2.Name = "Salaire";
+
+            Modules = new List<IHMModule>();
+            Modules.Add(module1);
+            Modules.Add(module2);
         }
 
         #region Commands
