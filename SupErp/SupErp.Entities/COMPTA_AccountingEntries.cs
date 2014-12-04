@@ -10,14 +10,26 @@
 namespace SupErp.Entities
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(COMPTA_ChartOfAccounts))]
     
     public partial class COMPTA_AccountingEntries
     {
+    [DataMember]
         public long id { get; set; }
+    [DataMember]
         public Nullable<bool> direction { get; set; }
+    [DataMember]
         public Nullable<decimal> amount { get; set; }
+    [DataMember]
         public Nullable<System.DateTime> postingDate { get; set; }
+    [DataMember]
         public Nullable<long> chartOfAccount_id { get; set; }
+    
+    [DataMember]
+        public virtual COMPTA_ChartOfAccounts COMPTA_ChartOfAccounts { get; set; }
     }
 }

@@ -88,7 +88,31 @@
     <Compile Include="COMPTA_AccountingEntries.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="COMPTA_Bank.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_BankAccount.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_BankJournalLine.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_ChartOfAccounts.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_ClassOfAccounts.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_Currency.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_CustomerJournalLine.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="COMPTA_ExchangeRate.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_SupplierJournalLine.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ConfigAbsence.cs">

@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SupErp.Entities;
+using System.Runtime.Serialization;
 
-namespace SupErp.Entities.FacturationModele
+namespace SupErp.DAL.FacturationModele
 {
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(BILL_BillQuotation))]
     public class BillQuotationLight : BILL_BillQuotation
     {
         public BillQuotationLight(BILL_BillQuotation bill_billQuotation)
@@ -25,6 +29,7 @@ namespace SupErp.Entities.FacturationModele
             CalculateTTC();
         }
 
+        [DataMember]
         public double AmountTTC{ get; private set;}
 
         private void CalculateTTC()

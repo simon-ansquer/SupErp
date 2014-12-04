@@ -58,6 +58,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ModulesDlls\MainMenuBadImplementation.dll" />
     <Content Include="ModulesDlls\MainMenuNotImplemented.dll" />
     <Content Include="ModulesDlls\SupErpModuleUser.dll" />
   </ItemGroup>

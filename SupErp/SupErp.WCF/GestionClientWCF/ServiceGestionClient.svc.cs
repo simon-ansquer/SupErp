@@ -9,7 +9,6 @@ using System.Collections.Generic;
 
 namespace SupErp.WCF.GestionClientWCF
 {
-    [ServiceContract(Namespace = "")]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class ServiceGestionClient : IServiceGestionClient
     {
@@ -21,19 +20,16 @@ namespace SupErp.WCF.GestionClientWCF
         private static readonly Lazy<ClientBLL> LazyClientBLL = new Lazy<ClientBLL>(() => new ClientBLL());
         private static ClientBLL clientBLL { get { return LazyClientBLL.Value; } }
         
-        [OperationContract]
         public bool CreateCompany(Company company)
         {
             return clientBLL.CreateCompany(company);
         }
 
-        [OperationContract]
         public Company GetCompany(int idCompany)
         {
             return clientBLL.GetCompany(idCompany);
         }
 
-        [OperationContract]
         public List<Company> GetListCompany()
         {
             return clientBLL.GetListCompany();
@@ -63,7 +59,7 @@ namespace SupErp.WCF.GestionClientWCF
             return ContactBLL.GetListCompany_Contact();
         }
 
-        public List<Company_Contact> GetListCompany_Contact(int idCompany)
+        public List<Company_Contact> GetListCompany_ContactById(int idCompany)
         {
             return ContactBLL.GetListCompany_Contact(idCompany);
         }

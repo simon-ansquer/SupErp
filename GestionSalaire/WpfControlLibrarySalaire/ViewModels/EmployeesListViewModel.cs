@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WpfControlLibrarySalaire.Helpers;
-using WpfControlLibrarySalaire.Models;
 using WpfControlLibrarySalaire.ServiceSalaire;
 
 
@@ -15,36 +11,71 @@ namespace WpfControlLibrarySalaire.ViewModels
 {
     public class EmployeesListViewModel : BaseViewModel
     {
+        private readonly DelegateCommand<string> _searchClickCommand;
+        private string _inputSearch;
+        public string InputSearch
+        {
+            get { return _inputSearch; }
+            set
+            {
+                _inputSearch = value;
+                _searchClickCommand.RaiseCanExecuteChanged();
+            }
+        }
+
         public EmployeesListViewModel()
         {
-            InitializeUsers();            
+            InitializeUsers();
+            _searchClickCommand = new DelegateCommand<string>(
+                s => OnSearchButtonClick()
+            );
+
         }
 
         private async void InitializeUsers()
         {
             try
             {
-                var employees = await serviceSalaire.GetUserAsync();
-                Employees = new ObservableCollection<ServiceSalaire.User>(employees);
-                //EmployeesView();
+                var employees = await ServiceSalaire.GetUserAsync();
+                Employees = new ObservableCollection<User>((IEnumerable<User>) employees);
             }
-            catch(Exception)
+            catch (Exception)
             {
-                serviceSalaire.Close();
+                ServiceSalaire.Close();
             }
         }
 
-        private void EmployeesView()
+        #region DelegateCommand
+        public DelegateCommand<string> ButtonSearchClickCommand
         {
-            foreach (ServiceSalaire.User employee in Employees)
-            {
-                
-            }
+            get { return _searchClickCommand; }
         }
+        #endregion
+
 
         #region Commands
-        public ICommand SearchCommand { get { return new DelegateCommand(OnSearchButtonClick); } }
-        public ICommand GeneratePDFCommand { get { return new DelegateCommand(OnGeneratePDFClick); } } 
+        public ICommand GeneratePdfCommand
+        {
+            get
+            {
+                return new DelegateCommand<string>(
+                    s => OnGeneratePDFClick()
+                    );
+            }
+        }
+
+        public ICommand DetailsCommand
+        {
+            get
+            {
+                return new DelegateCommand<int>(OnDetailsClick);
+            }
+        }
+
+        public ICommand PdfCommand
+        {
+            get { return new DelegateCommand<int>(OnPdfClick); }
+        }
         #endregion
 
         #region Command Handlers
@@ -53,10 +84,26 @@ namespace WpfControlLibrarySalaire.ViewModels
             MessageBox.Show("PDF");
         }
 
-        private void OnSearchButtonClick()
+        private async void OnSearchButtonClick()
         {
-            MessageBox.Show("Search");
-        } 
+            List<User> employees;
+            if (_inputSearch == string.Empty)
+                employees = await ServiceSalaire.GetUserAsync();
+            else
+                employees = await ServiceSalaire.SearchUserAsync(_inputSearch);
+            Employees.Clear();
+            Employees = new ObservableCollection<User>((IEnumerable<User>)employees);
+        }
+
+        private void OnDetailsClick(int index)
+        {
+            
+        }
+
+        private void OnPdfClick(int index)
+        {
+            
+        }
         #endregion
     }
 }

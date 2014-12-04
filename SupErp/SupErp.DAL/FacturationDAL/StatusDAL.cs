@@ -13,7 +13,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public List<BILL_Status> GetStatus()
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Status.ToList();
             }
@@ -21,7 +21,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_Status GetStatusById(int id)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Status.SingleOrDefault(s => s.Status_Id == id);
             }
@@ -33,7 +33,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_Status CreateStatus(BILL_Status billStatusToAdd)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var s = context.BILL_Status.Add(billStatusToAdd);
                 context.SaveChanges();
@@ -47,7 +47,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_Status EditBillQuotation(BILL_Status billStatusToEdit)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var b = context.BILL_Status.Find(billStatusToEdit.Status_Id);
                 b = billStatusToEdit;
@@ -62,7 +62,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public bool DeleteStatus(long id)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 try
                 {

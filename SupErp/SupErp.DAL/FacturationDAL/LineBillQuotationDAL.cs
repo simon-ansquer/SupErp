@@ -13,9 +13,17 @@ namespace SupErp.DAL.FacturationDAL
 
         public IEnumerable<BILL_LineBillQuotation> GetLineBillQuotation(long billQuotation_id)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_LineBillQuotation.Where(line => line.BillQuotation_Id == billQuotation_id).ToList();
+            }
+        }
+
+        public IEnumerable<BILL_Product> productsIncludedInBill(long billquotation_id)
+        {
+            using (SUPERPEntities context = new SUPERPEntities(false))
+            {
+                return context.BILL_LineBillQuotation.Where(line => line.BillQuotation_Id == billquotation_id).Select(l => l.BILL_Product);
             }
         }
 
@@ -25,7 +33,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_LineBillQuotation CreateLineBillQuotation(BILL_LineBillQuotation billLineToAdd)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var s = context.BILL_LineBillQuotation.Add(billLineToAdd);
                 context.SaveChanges();
@@ -39,7 +47,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_LineBillQuotation EditLineBillQuotation(BILL_LineBillQuotation LineBillQuotationToEdit)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var l = context.BILL_LineBillQuotation.Find(LineBillQuotationToEdit.LineBillQuotation_Id);
                 l = LineBillQuotationToEdit;
@@ -54,7 +62,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public bool DeleteLineBillQuotation(long id)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 try
                 {

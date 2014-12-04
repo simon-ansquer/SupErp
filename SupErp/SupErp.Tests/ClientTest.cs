@@ -140,7 +140,7 @@ namespace SupErp.Tests
         public void TestGetListCompany_ContactByCompany()
         {
             List<Company_Contact> lcont;
-            lcont = clientService.GetListCompany_Contact(2);
+            lcont = clientService.GetListCompany_ContactById(2);
 
             Assert.IsTrue(lcont.Count > 0);
         }
