@@ -15,9 +15,9 @@ namespace SupErp.BLL.FacturationBLL
 
         #region Read
 
-        public IEnumerable<BILL_LineBillQuotation> GetLineBillQuotation(BILL_BillQuotation billQuotation)
+        public IEnumerable<BILL_LineBillQuotation> GetLineBillQuotation(long billQuotation_id)
         {
-            return DAL.GetLineBillQuotation(billQuotation);
+            return DAL.GetLineBillQuotation(billQuotation_id);
         }
 
         #endregion
@@ -42,9 +42,9 @@ namespace SupErp.BLL.FacturationBLL
 
         #region Delete
 
-        public bool DeleteLineBillQuotation(BILL_LineBillQuotation lineBillQuotationToDelete)
+        public bool DeleteLineBillQuotation(long id)
         {
-            return DAL.DeleteLineBillQuotation(lineBillQuotationToDelete);
+            return DAL.DeleteLineBillQuotation(id);
         }
 
         #endregion

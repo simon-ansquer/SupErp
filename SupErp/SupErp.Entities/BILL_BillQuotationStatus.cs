@@ -23,10 +23,8 @@ namespace SupErp.Entities
         public long BillQuotationStatus_Id { get; set; }
     [DataMember]
         public System.DateTime DateAdvancement { get; set; }
-    [DataMember]
-        public Nullable<long> Status_Id { get; set; }
-    [DataMember]
-        public Nullable<long> BillQuotation_Id { get; set; }
+        public long Status_Id { get; set; }
+        public long BillQuotation_Id { get; set; }
     
     [DataMember]
         public virtual BILL_BillQuotation BILL_BillQuotation { get; set; }

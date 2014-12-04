@@ -18,6 +18,14 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
+        public BILL_Product GetBillProduct(long id)
+        {
+            using (SUPERPEntities context = new SUPERPEntities())
+            {
+                return context.BILL_Product.Single(p => p.Product_Id == id);
+            }
+        }
+
         public List<BILL_Product> GetProducts()
         {
             using (SUPERPEntities context = new SUPERPEntities())
@@ -25,6 +33,15 @@ namespace SupErp.DAL.FacturationDAL
                 return context.BILL_Product.Where(p => p.Name != null).ToList();
             }
         }
+
+        public BILL_Product GetProductByID(long id)
+        {
+            using (SUPERPEntities context = new SUPERPEntities())
+            {
+                return context.BILL_Product.SingleOrDefault(p => p.Product_Id == id);
+            }
+        }
+
 
         public BILL_Product GetProductByName(string nameProduct)
         {
@@ -34,11 +51,11 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        public BILL_Product GetProductDescription(string descriptionProduct)
+        public IEnumerable<BILL_Product> GetProductCategory(long idCategory)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                return context.BILL_Product.SingleOrDefault(p => p.DescriptionPro == descriptionProduct);
+                return context.BILL_Product.Where(p => p.Category_Id == idCategory);
             }
         }
 
@@ -78,13 +95,14 @@ namespace SupErp.DAL.FacturationDAL
         #endregion
 
         #region Delete
-        public bool DeleteBillProduct(BILL_Product billProductToDelete)
+        public bool DeleteBillProduct(long billProduct_id)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
                 try
                 {
-                    context.BILL_Product.Remove(billProductToDelete);
+                    var p = context.BILL_Product.Find(billProduct_id);
+                    context.BILL_Product.Remove(p);
                     context.SaveChanges();
                     return true;
                 }

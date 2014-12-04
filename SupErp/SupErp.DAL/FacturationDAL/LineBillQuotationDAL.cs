@@ -11,11 +11,11 @@ namespace SupErp.DAL.FacturationDAL
     {
           #region Read
 
-        public IEnumerable<BILL_LineBillQuotation> GetLineBillQuotation(BILL_BillQuotation billQuotation)
+        public IEnumerable<BILL_LineBillQuotation> GetLineBillQuotation(long billQuotation_id)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
-                return context.BILL_LineBillQuotation.Where(line => line.BILL_BillQuotation == billQuotation).ToList();
+                return context.BILL_LineBillQuotation.Where(line => line.BillQuotation_Id == billQuotation_id).ToList();
             }
         }
 
@@ -52,13 +52,14 @@ namespace SupErp.DAL.FacturationDAL
 
         #region Delete
 
-        public bool DeleteLineBillQuotation(BILL_LineBillQuotation lineBillQuotationToDelete)
+        public bool DeleteLineBillQuotation(long id)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
                 try
                 {
-                    context.BILL_LineBillQuotation.Remove(lineBillQuotationToDelete);
+                    var l = context.BILL_LineBillQuotation.Find(id);
+                    context.BILL_LineBillQuotation.Remove(l);
                     context.SaveChanges();
                     return true;
                 }

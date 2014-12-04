@@ -21,8 +21,8 @@ namespace SupErp.Entities
     {
         public Company()
         {
-            this.BILL_BillQuotation = new HashSet<BILL_BillQuotation>();
             this.Company_Contact = new HashSet<Company_Contact>();
+            this.BILL_BillQuotation = new HashSet<BILL_BillQuotation>();
         }
     
     [DataMember]

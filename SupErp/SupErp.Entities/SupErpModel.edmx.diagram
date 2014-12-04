@@ -7,10 +7,7 @@
       <Diagram DiagramId="ec3fdf7f8a9b44a5b9eb18a1fd9dab4b" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="SUPERPModel.Absence" Width="1.5" PointX="11.25" PointY="5.625" />
         <EntityTypeShape EntityType="SUPERPModel.AbsenceType" Width="1.5" PointX="9" PointY="8" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotation" Width="2.25" PointX="12.25" PointY="1" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotationStatus" Width="2.125" PointX="15.25" PointY="1.25" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_Category" Width="1.5" PointX="0.75" PointY="13.375" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_Product" Width="1.5" PointX="3" PointY="10" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_Status" Width="1.5" PointX="13" PointY="9.5" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_Transmitter" Width="1.875" PointX="9.375" PointY="1" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_Vat" Width="1.5" PointX="0.75" PointY="10.375" />
@@ -28,14 +25,6 @@
         <AssociationConnector Association="SUPERPModel.FK__Absence__Absence__4F7CD00D" />
         <AssociationConnector Association="SUPERPModel.FK__Absence__User_id__5070F446" />
         <AssociationConnector Association="SUPERPModel.FK__ConfigAbs__Absen__571DF1D5" />
-        <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__BillQ__5441852A" />
-        <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__Trans__52593CB8" />
-        <AssociationConnector Association="SUPERPModel.FK__BILL_Line__BillQ__66603565" />
-        <AssociationConnector Association="SUPERPModel.FK_BillQuotation_Company" />
-        <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__Statu__534D60F1" />
-        <AssociationConnector Association="SUPERPModel.FK__BILL_Prod__Categ__5535A963" />
-        <AssociationConnector Association="SUPERPModel.FK__BILL_Line__Produ__6754599E" />
-        <AssociationConnector Association="SUPERPModel.FK__BILL_Prod__Vat_I__5629CD9C" />
         <AssociationConnector Association="SUPERPModel.FK__Company_C__compa__6383C8BA" />
         <AssociationConnector Association="SUPERPModel.FK_RoleModule_Module" />
         <AssociationConnector Association="SUPERPModel.FK__Prime__User_id__5812160E" />
@@ -44,6 +33,19 @@
         <AssociationConnector Association="SUPERPModel.FK__Salary__User_id__5AEE82B9" />
         <AssociationConnector Association="SUPERPModel.FK__User__Status_id__5BE2A6F2" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_LineBillQuotation" Width="1.5" PointX="15.25" PointY="5.75" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_AccountingEntries" Width="1.5" PointX="5.375" PointY="10.75" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_ExchangeRate" Width="1.5" PointX="7.375" PointY="13.75" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotation" Width="1.5" PointX="13" PointY="1.25" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotationStatus" Width="1.5" PointX="16.875" PointY="2.375" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__BillQ__5441852A" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__Trans__52593CB8" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Line__BillQ__66603565" />
+        <AssociationConnector Association="SUPERPModel.FK_BillQuotation_Company" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__Statu__534D60F1" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_Product" Width="1.5" PointX="3" PointY="10.375" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Prod__Categ__5535A963" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Line__Produ__6754599E" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Prod__Vat_I__5629CD9C" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

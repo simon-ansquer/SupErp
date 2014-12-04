@@ -60,13 +60,14 @@ namespace SupErp.DAL.FacturationDAL
 
         #region Delete
 
-        public bool DeleteStatus(BILL_Status billStatusToDelete)
+        public bool DeleteStatus(long id)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
                 try
                 {
-                    context.BILL_Status.Remove(billStatusToDelete);
+                    var l = context.BILL_Status.Find(id);
+                    context.BILL_Status.Remove(l);
                     context.SaveChanges();
                     return true;
                 }
