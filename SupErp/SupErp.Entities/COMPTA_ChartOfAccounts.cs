@@ -14,21 +14,28 @@ namespace SupErp.Entities
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(Module))]
-    [KnownType(typeof(Role))]
+    [KnownType(typeof(COMPTA_AccountingEntries))]
+    [KnownType(typeof(COMPTA_ClassOfAccounts))]
     
-    public partial class RoleModule
+    public partial class COMPTA_ChartOfAccounts
     {
-    [DataMember]
-        public long Id { get; set; }
-    [DataMember]
-        public long Module_id { get; set; }
-    [DataMember]
-        public long Role_id { get; set; }
+        public COMPTA_ChartOfAccounts()
+        {
+            this.COMPTA_AccountingEntries = new HashSet<COMPTA_AccountingEntries>();
+        }
     
     [DataMember]
-        public virtual Module Module { get; set; }
+        public long id { get; set; }
     [DataMember]
-        public virtual Role Role { get; set; }
+        public Nullable<long> account_number { get; set; }
+    [DataMember]
+        public string name { get; set; }
+    [DataMember]
+        public Nullable<long> class_id { get; set; }
+    
+    [DataMember]
+        public virtual ICollection<COMPTA_AccountingEntries> COMPTA_AccountingEntries { get; set; }
+    [DataMember]
+        public virtual COMPTA_ClassOfAccounts COMPTA_ClassOfAccounts { get; set; }
     }
 }

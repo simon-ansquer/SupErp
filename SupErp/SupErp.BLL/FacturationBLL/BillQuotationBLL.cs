@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SupErp.DAL.FacturationDAL;
 using SupErp.Entities;
-using SupErp.Entities.FacturationModele;
+using SupErp.DAL.FacturationModele;
 
 namespace SupErp.BLL.FacturationBLL
 {

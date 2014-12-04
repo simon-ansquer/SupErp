@@ -7,6 +7,7 @@ using System.Text;
 
 using SupErp.Entities;
 using SupErp.BLL.FacturationBLL;
+using SupErp.DAL.FacturationModele;
 
 namespace SupErp.WCF.FacturationWCF
 {
@@ -23,9 +24,9 @@ namespace SupErp.WCF.FacturationWCF
             return billQuotationBLL.GetBillQuotation().ToList<BILL_BillQuotation>();
         }
 
-        public List<BILL_BillQuotation> SearchBillQuotation(string nomClient, int? numFact, DateTime? dateDocument, long? status,int? MontantHTMin, int? MontantHTMax, int? MontantTTCMin, int? MontantTTCMax, bool? isBill)
+        public List<BillQuotationLight> SearchBillQuotation(string nomClient, int? numFact, DateTime? dateDocument, long? status,int? MontantHTMin, int? MontantHTMax, int? MontantTTCMin, int? MontantTTCMax, bool? isBill)
         {
-            var list = new List<BILL_BillQuotation>();
+            var list = new List<BillQuotationLight>();
 
             return list;
         }

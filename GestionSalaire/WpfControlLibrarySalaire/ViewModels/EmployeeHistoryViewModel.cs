@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfControlLibrarySalaire.Models;
 
 namespace WpfControlLibrarySalaire.ViewModels
 {
     public class EmployeeHistoryViewModel
     {
-        List<HistoriqueSalaire> ListHistoriqueSalaire;
+        private List<HistoriqueSalaire> _listHistoriqueSalaire;
+
+        public List<HistoriqueSalaire> ListHistoriqueSalaire
+        {
+            get { return _listHistoriqueSalaire; }
+            set { if(value != null) _listHistoriqueSalaire = value;}
+        }
         
         public EmployeeHistoryViewModel()
         {
