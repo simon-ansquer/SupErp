@@ -15,7 +15,9 @@ namespace SupErp.WCF.FacturationWCF
     // REMARQUE : pour lancer le client test WCF afin de tester ce service, sélectionnez FacturationService.svc ou FacturationService.svc.cs dans l'Explorateur de solutions et démarrez le débogage.
     public class FacturationService : IFacturationService
     {
-        //Conservation de l'instance au sein de la BLL, qui sera chargée à sa première utilisation
+        /**************************/
+        /*    FACTURE / DEVIS     */
+        /**************************/
         private static readonly Lazy<BillQuotationBLL> lazyBillQuotationBLL = new Lazy<BillQuotationBLL>(() => new BillQuotationBLL());
         private static BillQuotationBLL billQuotationBLL { get { return lazyBillQuotationBLL.Value; } }
 
@@ -92,6 +94,38 @@ namespace SupErp.WCF.FacturationWCF
             
             return list;
         }
+
+
+        /**************************/
+        /* LIGNE FACTURE / DEVIS  */
+        /**************************/
+
+        private static readonly Lazy<LineBillQuotationBLL> lazyLineBLL = new Lazy<LineBillQuotationBLL>(() => new LineBillQuotationBLL());
+        private static LineBillQuotationBLL lineBLL { get { return lazyLineBLL.Value; } }
+
+
+        public List<LineExtended> GetAllLines(long billQuotation_id)
+        {
+            var listLineExtended = lineBLL.GetLineBillQuotation(billQuotation_id).Select(l => new LineExtended(l, true)).ToList();
+
+
+            var listProductNotIncluded = productBLL.getListProductIncludedOrNot(billQuotation_id).Where(p => !p.included);
+            foreach (var p in listProductNotIncluded)
+            {
+                var line = new BILL_LineBillQuotation { BILL_Product = p, Quantite = 0, BillQuotation_Id = billQuotation_id };
+                listLineExtended.Add(new LineExtended(line, false));
+            }
+
+            return listLineExtended;
+        }
+
+
+        /**************************/
+        /*        PRODUIT         */
+        /**************************/
+
+        private static readonly Lazy<BillProductBLL> lazyProductBLL = new Lazy<BillProductBLL>(() => new BillProductBLL());
+        private static BillProductBLL productBLL { get { return lazyProductBLL.Value; } }
 
     }
 }
