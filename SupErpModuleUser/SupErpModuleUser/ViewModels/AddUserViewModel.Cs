@@ -5,27 +5,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using SupErpModuleUser.UserService;
+using SupErpModuleUser.Helpers;
+using SupErpModuleUser.Models;
 
 namespace SupErpModuleUser.ViewModels
 {
     public class AddUserViewModel
     {
+        public IHMUser User { get; set; }
+
+        public AddUserViewModel()
+        {
+            User = new IHMUser();
+        }
+
+        public AddUserViewModel(User user)
+        {
+            User = user.ToIHMUser();
+        }
+
         #region Commands
 
-        public ICommand AddCommand { get { return new DelegateCommand(OnAdd); } }
+        public ICommand AddOrUpdateCommand { get { return new DelegateCommand(OnAddOrUpdate); } }
         public ICommand CancelCommand { get { return new DelegateCommand(OnCancel); } }
-        public ICommand UpdateCommand { get { return new DelegateCommand(OnUpdate); } }
 
         #endregion
 
         #region Command Handlers
-        private void OnAdd()
+        private void OnAddOrUpdate()
         { }
 
         private void OnCancel()
-        { }
-
-        private void OnUpdate()
         { }
 
         #endregion
