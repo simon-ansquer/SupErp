@@ -8,7 +8,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 
-namespace SupErp.WCF.ModuleUser
+namespace SupErp.WCF
 {
     public class UserService : IUserService
     {
