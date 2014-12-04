@@ -15,6 +15,8 @@ namespace SupErp.DAL.FacturationModele
     {
         [DataMember]
         public List<BILL_LineBillQuotation> lines { get; private set; }
+
+        [DataMember]
         public List<BILL_Status> statusPossible { get; set; }
         public BillQuotationComplete(BILL_BillQuotation bill_billQuotation): base(bill_billQuotation)
         {

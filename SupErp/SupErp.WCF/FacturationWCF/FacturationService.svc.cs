@@ -95,6 +95,10 @@ namespace SupErp.WCF.FacturationWCF
             return list;
         }
 
+        public BillQuotationComplete GetBillQuotation(long billQuotation_id)
+        {
+            return billQuotationBLL.GetBillQuotationsById(billQuotation_id);
+        }
 
         /**************************/
         /* LIGNE FACTURE / DEVIS  */
@@ -126,7 +130,7 @@ namespace SupErp.WCF.FacturationWCF
         /*    CREATION FACTURE    */
         /**************************/
 
-        public bool createBillQuotation(BillQuotationComplete billQuotation)
+        public bool CreateBillQuotation(BillQuotationComplete billQuotation)
         {
             var res = true;
            try
@@ -147,9 +151,33 @@ namespace SupErp.WCF.FacturationWCF
            return res;
 
         }
-        
 
+        /******************************/
+        /*    MODIFICATION FACTURE    */
+        /******************************/
 
+        public bool ModifyBillQuotation(BillQuotationComplete billQuotation)
+        {
+            var res = true;
+            try
+            {
+                /*** Modification de la facture/devis ***/
+                billQuotationBLL.EditBillQuotation(billQuotation);
+
+                /*** Modification des lignes de facture ***/
+                var lineBDD = lineBLL.GetLineBillQuotation(billQuotation.BillQuotation_Id);
+                var lineModif = billQuotation.lines;
+
+                /* TODO: METTRE A JOUR LES LIGNES FACTURES */
+
+            }
+            catch (Exception)
+            {
+                res = false;
+            }
+            return res;
+
+        }
 
     }
 }
