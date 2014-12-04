@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComptabilityDAL\ComptabilityDAL.cs" />
     <Compile Include="GestionClientDAL\CompanyDAL.cs" />
     <Compile Include="GestionClientDAL\Company_ContactDAL.cs" />
     <Compile Include="FacturationDAL\BillCategoryDAL.cs" />
