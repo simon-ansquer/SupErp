@@ -47,9 +47,9 @@ namespace SupErp.BLL.FacturationBLL
 
         #region Delete
 
-        public bool DeleteStatus(BILL_Status billStatusToDelete)
+        public bool DeleteStatus(long id)
         {
-            return DAL.DeleteStatus(billStatusToDelete);
+            return DAL.DeleteStatus(id);
         }
 
         #endregion

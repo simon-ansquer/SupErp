@@ -15,19 +15,19 @@ namespace SupErp.BLL.FacturationBLL
 
         #region Read
 
-        public List<BILL_BillQuotationStatus> GetStatusByBillQuotation(BILL_BillQuotation billQuotation)
+        public List<BILL_BillQuotationStatus> GetStatusByBillQuotation(long billQuotation_id)
         {
-            return DAL.GetBillQuotationStatusByBillQuotation(billQuotation);
+            return DAL.GetBillQuotationStatusByBillQuotation(billQuotation_id);
         }
 
-        public BILL_BillQuotationStatus GetCurrentStatus(BILL_BillQuotation billQuotation)
+        public BILL_BillQuotationStatus GetCurrentStatus(long billQuotation_id)
         {
-            return DAL.GetCurrentStatusBillQuotation(billQuotation);
+            return DAL.GetCurrentStatusBillQuotation(billQuotation_id);
         }
 
-        public List<BILL_BillQuotation> GetBillQuotationStatusByStatus(BILL_Status status)
+        public List<BILL_BillQuotation> GetBillQuotationStatusByStatus(long status_id)
         {
-            return DAL.GetBillQuotationByStatus(status);
+            return DAL.GetBillQuotationByStatus(status_id);
         }
 
         #endregion
@@ -52,9 +52,9 @@ namespace SupErp.BLL.FacturationBLL
 
         #region Delete
 
-        public bool DeleteBillQuotationStatus(BILL_BillQuotationStatus BillQuotationStatusToDelete)
+        public bool DeleteBillQuotationStatus(long id)
         {
-            return DAL.DeleteBillQuotationStatus(BillQuotationStatusToDelete);
+            return DAL.DeleteBillQuotationStatus(id);
         }
 
         #endregion

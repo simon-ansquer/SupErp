@@ -33,10 +33,8 @@ namespace SupErp.Entities
         public string DescriptionPro { get; set; }
     [DataMember]
         public double Price { get; set; }
-    [DataMember]
-        public Nullable<long> Category_Id { get; set; }
-    [DataMember]
-        public Nullable<long> Vat_Id { get; set; }
+        public long Category_Id { get; set; }
+        public long Vat_Id { get; set; }
     
     [DataMember]
         public virtual BILL_Category BILL_Category { get; set; }

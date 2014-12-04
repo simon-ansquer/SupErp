@@ -13,7 +13,7 @@ namespace SupErp.Kernel
 {
     public class DllManager
     {
-        public IEnumerable<string> GetDllsPaths()
+        private IEnumerable<string> GetDllsPaths()
         {
             string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules");
             return Directory.GetFiles(directoryPath, "*.dll");

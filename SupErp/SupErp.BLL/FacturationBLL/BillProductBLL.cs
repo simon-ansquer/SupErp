@@ -29,9 +29,14 @@ namespace SupErp.BLL.FacturationBLL
             return billProdDAL.GetProductByName(nameProduct);
         }
 
-        public BILL_Product GetProductDescription(string descriptionProduct)
+        public BILL_Product GetProductByID(long id)
         {
-            return billProdDAL.GetProductDescription(descriptionProduct);
+            return billProdDAL.GetProductByID(id);
+        }
+
+        public IEnumerable<BILL_Product> GetProductByCategory(long category_id)
+        {
+            return billProdDAL.GetProductCategory(category_id);
         }
 
         public BILL_Product GetProductPrice(Double priceProduct)
@@ -56,9 +61,9 @@ namespace SupErp.BLL.FacturationBLL
         #endregion
 
         #region Delete
-        public bool DeleteBillProduct(BILL_Product billProductToDelete)
+        public bool DeleteBillProduct(long id)
         {
-            return billProdDAL.DeleteBillProduct(billProductToDelete);
+            return billProdDAL.DeleteBillProduct(id);
         }
         #endregion
     }

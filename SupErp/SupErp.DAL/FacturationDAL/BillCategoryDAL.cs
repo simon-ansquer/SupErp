@@ -61,13 +61,14 @@ namespace SupErp.DAL.FacturationDAL
         #endregion
 
         #region Delete
-        public bool DeleteBillCategory(BILL_Category billCategoryToDelete)
+        public bool DeleteBillCategory(long billCategory_id)
         {
             using (SUPERPEntities context = new SUPERPEntities())
             {
                 try
                 {
-                    context.BILL_Category.Remove(billCategoryToDelete);
+                    var c = context.BILL_Category.Find(billCategory_id);
+                    context.BILL_Category.Remove(c);
                     context.SaveChanges();
                     return true;
                 }
