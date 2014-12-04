@@ -15,6 +15,8 @@ namespace SupErpModuleUser.ViewModels
     {
         public IHMRole Role { get; set; }
 
+        public IEnumerable<IHMModule> Modules { get; set; }
+
         public AddRoleViewModel()
         {
             Role = new IHMRole();

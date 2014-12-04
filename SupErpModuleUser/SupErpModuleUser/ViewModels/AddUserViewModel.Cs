@@ -34,7 +34,9 @@ namespace SupErpModuleUser.ViewModels
 
         #region Command Handlers
         private void OnAddOrUpdate()
-        { }
+        { 
+            
+        }
 
         private void OnCancel()
         { }

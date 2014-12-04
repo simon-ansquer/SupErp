@@ -83,6 +83,21 @@
                 Margin="0, 10, 10, 10"
                 Text="{Binding Path=Role.Label, Mode=TwoWay}"/>
 
+            <DataGrid
+                Grid.Column="1"
+                Grid.Row="2"
+                ItemsSource="{Binding }">
+                <DataGrid.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel
+                            Orientation="Horizontal">
+                            <CheckBox/>
+                            <CheckBox/>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGrid.ItemTemplate>
+            </DataGrid>
+            
             <Grid
                 Grid.Column="0"
                 Grid.Row="3"
