@@ -37,7 +37,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_BillQuotation GetBillQuotationsById(long id)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_BillQuotation.SingleOrDefault(b => b.BillQuotation_Id == id);
             }

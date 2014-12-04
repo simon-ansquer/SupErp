@@ -9,7 +9,7 @@ namespace SupErp.DAL.FacturationModele
 {
     public class ProductExtended:  BILL_Product
     {
-        private bool included { get; private set; }
+        public bool included { get; private set; }
         public ProductExtended (BILL_Product product, long billQuotation_id)
         {
             base.BILL_Category = product.BILL_Category;

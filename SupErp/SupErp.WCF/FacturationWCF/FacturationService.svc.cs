@@ -24,10 +24,72 @@ namespace SupErp.WCF
             return billQuotationBLL.GetBillQuotation().ToList<BILL_BillQuotation>();
         }
 
-        public List<BillQuotationLight> SearchBillQuotation(string nomClient, int? numFact, DateTime? dateDocument, long? status,int? MontantHTMin, int? MontantHTMax, int? MontantTTCMin, int? MontantTTCMax, bool? isBill)
+        public List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, long? status,int? MontantHTMin, int? MontantHTMax, int? MontantTTCMin, int? MontantTTCMax, bool? isBill)
         {
             var list = new List<BillQuotationLight>();
 
+            /*** Filtre client ***/
+            if (nomClient != null)
+                list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.Company.name == nomClient).ToList());
+
+            /*** Filtre numero ***/
+            if (numFact != null)
+                if (list.Count == 0)
+                    list.Add(billQuotationBLL.GetBillByNum(numFact));
+                else
+                    list.Where(b => b.NBill == numFact);
+
+            /*** Filtre date du document ***/
+            if (dateDocument != null)
+            {
+                if (list.Count == 0)
+                    list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.DateBillQuotation.Date == dateDocument.Value.Date).ToList());
+                else
+                    list.Where(b => b.DateBillQuotation.Date == dateDocument.Value.Date);
+            }
+                
+
+            /*** Filtre MontantHTMin ***/
+            if (MontantHTMin != null)
+                if (list.Count == 0)
+                    list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountDF > MontantHTMin).ToList());
+                else
+                    list.Where(b => b.AmountDF > MontantHTMin);
+
+            /*** Filtre MontantHTMax ***/
+            if (MontantHTMax != null)
+                if (list.Count == 0)
+                    list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountDF < MontantHTMax).ToList());
+                else
+                    list.Where(b => b.AmountDF < MontantHTMax);
+
+            /*** Filtre MontantTTCMin ***/
+            if (MontantTTCMin != null)
+                if (list.Count == 0)
+                    list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC > MontantTTCMin).ToList());
+                else
+                    list.Where(b => b.AmountTTC > MontantTTCMin);
+
+            /*** Filtre MontantTTCMax ***/
+            if (MontantTTCMax != null)
+                if (list.Count == 0)
+                    list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC < MontantTTCMax).ToList());
+                else
+                    list.Where(b => b.AmountTTC < MontantTTCMax);
+
+            /*** Filtre isbill ***/
+            if (isBill != null)
+                if(Convert.ToBoolean(isBill))
+                    if (list.Count == 0)
+                        list.AddRange(billQuotationBLL.GetBills().ToList());
+                    else
+                        list.Where(b => b.NBill == null);
+                else
+                    if (list.Count == 0)
+                        list.AddRange(billQuotationBLL.GetQuotations().ToList());
+                    else
+                        list.Where(b => b.NBill != null);
+            
             return list;
         }
 
