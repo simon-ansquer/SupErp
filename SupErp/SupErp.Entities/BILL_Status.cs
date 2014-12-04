@@ -15,12 +15,15 @@ namespace SupErp.Entities
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(BILL_BillQuotationStatus))]
+    [KnownType(typeof(BILL_StatusChain))]
     
     public partial class BILL_Status
     {
         public BILL_Status()
         {
             this.BILL_BillQuotationStatus = new HashSet<BILL_BillQuotationStatus>();
+            this.BILL_StatusChain = new HashSet<BILL_StatusChain>();
+            this.BILL_StatusChain1 = new HashSet<BILL_StatusChain>();
         }
     
     [DataMember]
@@ -30,5 +33,9 @@ namespace SupErp.Entities
     
     [DataMember]
         public virtual ICollection<BILL_BillQuotationStatus> BILL_BillQuotationStatus { get; set; }
+    [DataMember]
+        public virtual ICollection<BILL_StatusChain> BILL_StatusChain { get; set; }
+    [DataMember]
+        public virtual ICollection<BILL_StatusChain> BILL_StatusChain1 { get; set; }
     }
 }

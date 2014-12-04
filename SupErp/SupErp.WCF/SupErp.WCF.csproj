@@ -39,7 +39,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -59,6 +68,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ComptabilityWCF\ComptabilityService.svc" />
     <Content Include="GestionClientWCF\ServiceGestionClient.svc" />
     <Content Include="FacturationWCF\FacturationService.svc" />
     <Content Include="GestionSalaireWCF\ServiceSalaire.svc" />
@@ -68,6 +78,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComptabilityWCF\ComptabilityService.svc.cs">
+      <DependentUpon>ComptabilityService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="ComptabilityWCF\IComptabilityService.cs" />
     <Compile Include="GestionClientWCF\IServiceGestionClient.cs" />
     <Compile Include="GestionClientWCF\ServiceGestionClient.svc.cs">
       <DependentUpon>ServiceGestionClient.svc</DependentUpon>
@@ -90,6 +104,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

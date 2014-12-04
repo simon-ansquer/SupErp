@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using SupErp.Entities;
+using SupErp.DAL.FacturationModele;
 
 namespace SupErp.WCF.FacturationWCF
 {
@@ -13,6 +14,21 @@ namespace SupErp.WCF.FacturationWCF
     public interface IFacturationService
     {
         [OperationContract]
-        List<BILL_BillQuotation> GetListQuotation();
+        List<BillQuotationLight> GetListQuotation();
+
+        [OperationContract]
+        List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, long? status, int? MontantHTMin, int? MontantHTMax, int? MontantTTCMin, int? MontantTTCMax, bool? isBill);
+
+        [OperationContract]
+        BillQuotationComplete GetBillQuotation(long billQuotation_id);
+
+        [OperationContract]
+        List<LineExtended> GetAllLines(long billQuotation_id);
+
+        [OperationContract]
+        bool CreateBillQuotation(BillQuotationComplete billQuotation);
+
+        [OperationContract]
+        bool ModifyBillQuotation(BillQuotationComplete billQuotation);
     }
 }

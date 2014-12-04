@@ -15,13 +15,15 @@ namespace SupErp.WCF.FacturationWCF
     // REMARQUE : pour lancer le client test WCF afin de tester ce service, sélectionnez FacturationService.svc ou FacturationService.svc.cs dans l'Explorateur de solutions et démarrez le débogage.
     public class FacturationService : IFacturationService
     {
-        //Conservation de l'instance au sein de la BLL, qui sera chargée à sa première utilisation
+        /**************************/
+        /*    FACTURE / DEVIS     */
+        /**************************/
         private static readonly Lazy<BillQuotationBLL> lazyBillQuotationBLL = new Lazy<BillQuotationBLL>(() => new BillQuotationBLL());
         private static BillQuotationBLL billQuotationBLL { get { return lazyBillQuotationBLL.Value; } }
 
-        public List<BILL_BillQuotation> GetListQuotation()
+        public List<BillQuotationLight> GetListQuotation()
         {
-            return billQuotationBLL.GetBillQuotation().ToList<BILL_BillQuotation>();
+            return billQuotationBLL.GetBillQuotation().OrderBy(b => b.DateBillQuotation).ToList();
         }
 
         public List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, long? status,int? MontantHTMin, int? MontantHTMax, int? MontantTTCMin, int? MontantTTCMax, bool? isBill)
@@ -91,6 +93,90 @@ namespace SupErp.WCF.FacturationWCF
                         list.Where(b => b.NBill != null);
             
             return list;
+        }
+
+        public BillQuotationComplete GetBillQuotation(long billQuotation_id)
+        {
+            return billQuotationBLL.GetBillQuotationsById(billQuotation_id);
+        }
+
+        /**************************/
+        /* LIGNE FACTURE / DEVIS  */
+        /**************************/
+
+        private static readonly Lazy<LineBillQuotationBLL> lazyLineBLL = new Lazy<LineBillQuotationBLL>(() => new LineBillQuotationBLL());
+        private static LineBillQuotationBLL lineBLL { get { return lazyLineBLL.Value; } }
+
+        private static readonly Lazy<BillProductBLL> lazyProductBLL = new Lazy<BillProductBLL>(() => new BillProductBLL());
+        private static BillProductBLL productBLL { get { return lazyProductBLL.Value; } }
+
+        public List<LineExtended> GetAllLines(long billQuotation_id)
+        {
+            var listLineExtended = lineBLL.GetLineBillQuotation(billQuotation_id).Select(l => new LineExtended(l, true)).ToList();
+
+
+            var listProductNotIncluded = productBLL.getListProductIncludedOrNot(billQuotation_id).Where(p => !p.included);
+            foreach (var p in listProductNotIncluded)
+            {
+                var line = new BILL_LineBillQuotation { BILL_Product = p, Quantite = 0, BillQuotation_Id = billQuotation_id };
+                listLineExtended.Add(new LineExtended(line, false));
+            }
+
+            return listLineExtended;
+        }
+
+
+        /**************************/
+        /*    CREATION FACTURE    */
+        /**************************/
+
+        public bool CreateBillQuotation(BillQuotationComplete billQuotation)
+        {
+            var res = true;
+           try
+           {
+               var bill = billQuotationBLL.CreateBillQutotation(billQuotation);
+               foreach(var l in billQuotation.lines)
+               {
+                   l.BILL_BillQuotation = bill;
+                   l.BillQuotation_Id = bill.BillQuotation_Id;
+
+                   lineBLL.CreateLineBillQuotation(l);
+               }
+           }
+           catch(Exception)
+           {
+               res = false;
+           }
+           return res;
+
+        }
+
+        /******************************/
+        /*    MODIFICATION FACTURE    */
+        /******************************/
+
+        public bool ModifyBillQuotation(BillQuotationComplete billQuotation)
+        {
+            var res = true;
+            try
+            {
+                /*** Modification de la facture/devis ***/
+                billQuotationBLL.EditBillQuotation(billQuotation);
+
+                /*** Modification des lignes de facture ***/
+                var lineBDD = lineBLL.GetLineBillQuotation(billQuotation.BillQuotation_Id);
+                var lineModif = billQuotation.lines;
+
+                /* TODO: METTRE A JOUR LES LIGNES FACTURES */
+
+            }
+            catch (Exception)
+            {
+                res = false;
+            }
+            return res;
+
         }
 
     }

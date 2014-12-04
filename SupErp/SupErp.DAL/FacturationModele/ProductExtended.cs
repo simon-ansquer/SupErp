@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SupErp.Entities;
+using System.Runtime.Serialization;
 
 namespace SupErp.DAL.FacturationModele
 {
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(BILL_Product))]
     public class ProductExtended:  BILL_Product
     {
+        [DataMember]
         public bool included { get; private set; }
         public ProductExtended (BILL_Product product, long billQuotation_id)
         {

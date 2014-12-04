@@ -15,7 +15,7 @@ namespace SupErp.WCF.GestionClientWCF
         //  COMPANY
         //////////////////////////////
         [OperationContract]
-        bool CreateCompany(Company company);
+        int CreateCompany(Company company);
 
         [OperationContract]
         Company GetCompany(int idCustomer);
@@ -23,12 +23,18 @@ namespace SupErp.WCF.GestionClientWCF
         [OperationContract]
         List<Company> GetListCompany();
 
+        [OperationContract]
+        bool EditCompany(Company company);
+
+        [OperationContract]
+        bool DeleteCompany(int id);
+
 
         //////////////////////////////
         //  COMPANY_CONTACT
         //////////////////////////////
         [OperationContract]
-        bool CreateCompany_Contact(Company_Contact contact);
+        int CreateCompany_Contact(Company_Contact contact);
 
         [OperationContract]
         Company_Contact GetCompany_Contact(int idContact);
@@ -38,5 +44,13 @@ namespace SupErp.WCF.GestionClientWCF
 
         [OperationContract]
         List<Company_Contact> GetListCompany_ContactById(int idCompany);
+
+        [OperationContract]
+        bool EditCompany_Contact(Company_Contact contact);
+
+        [OperationContract]
+        bool DeleteCompany_Contact(int id);
+
+
     }
 }

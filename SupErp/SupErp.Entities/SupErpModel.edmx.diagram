@@ -35,7 +35,7 @@
         <EntityTypeShape EntityType="SUPERPModel.BILL_LineBillQuotation" Width="1.5" PointX="15.25" PointY="5.75" />
         <EntityTypeShape EntityType="SUPERPModel.COMPTA_AccountingEntries" Width="1.5" PointX="5.375" PointY="10.75" />
         <EntityTypeShape EntityType="SUPERPModel.COMPTA_ExchangeRate" Width="1.5" PointX="7.375" PointY="13.75" />
-        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotation" Width="1.5" PointX="13" PointY="1.25" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotation" Width="1.875" PointX="13" PointY="1.25" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotationStatus" Width="1.5" PointX="16.875" PointY="2.375" />
         <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__BillQ__5441852A" />
         <AssociationConnector Association="SUPERPModel.FK__BILL_Bill__Trans__52593CB8" />
@@ -61,6 +61,9 @@
         <AssociationConnector Association="SUPERPModel.FK__COMPTA_Ba__bankA__123EB7A3" />
         <AssociationConnector Association="SUPERPModel.FK__COMPTA_Ba__curre__0E6E26BF" />
         <AssociationConnector Association="SUPERPModel.FK__COMPTA_Ch__class__7C4F7684" />
+        <EntityTypeShape EntityType="SUPERPModel.BILL_StatusChain" Width="1.5" PointX="15.25" PointY="9.5" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Stat__NextS__2A164134" />
+        <AssociationConnector Association="SUPERPModel.FK__BILL_Stat__Statu__29221CFB" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
