@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A11A9E2D-75AC-4E97-B28A-DA6BA10D5637}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SupErp.Entities</RootNamespace>
+    <AssemblyName>SupErp.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Absence.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AbsenceType.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BILL_BillQuotation.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BILL_BillQuotationStatus.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BILL_Category.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BILL_LineBillQuotation.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BILL_Product.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BILL_Status.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BILL_Transmitter.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BILL_Vat.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="beans\User.cs" />
+    <Compile Include="Company.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Company_Contact.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_AccountingEntries.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_Bank.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_BankAccount.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_BankJournalLine.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_ChartOfAccounts.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_ClassOfAccounts.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_Currency.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_CustomerJournalLine.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_ExchangeRate.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_SupplierJournalLine.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigAbsence.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Module.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Prime.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoleModule.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Salary.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SUPERPEntities.cs" />
+    <Compile Include="Status.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupErpModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupErpModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupErpModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupErpModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupErpModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="TicketRestaurant.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="SupErpModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SupErpModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <None Include="SupErpModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SupErpModel.edmx</DependentUpon>
+      <LastGenOutput>SupErpModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="SupErpModel.edmx.diagram">
+      <DependentUpon>SupErpModel.edmx</DependentUpon>
+    </None>
+    <None Include="SupErpModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SupErpModel.edmx</DependentUpon>
+      <LastGenOutput>SupErpModel.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

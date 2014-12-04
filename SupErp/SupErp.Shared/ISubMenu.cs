@@ -12,13 +12,18 @@ namespace SupErp.Shared
     public interface ISubMenu
     {
         /// <summary>
-        /// Nom du sous-menu qui sera affiché dans l'application
+        /// Nom du sous-menu qui sera affiché dans l'application.
         /// </summary>
         string SubMenuName { get; }
 
         /// <summary>
-        /// Liste des sous-menus de ce sous-menu
+        /// Liste des sous-menus de ce sous-menu.
         /// </summary>
-        List<ISubMenu> SubMenus { get; set; }
+        List<ISubMenu> SubMenus { get; }
+
+        /// <summary>
+        /// Booléen qui indique si ce sous-menu necessite les droits en écriture pour être affiché dans le menu.
+        /// </summary>
+        bool CanWrite { get; }
     }
 }
