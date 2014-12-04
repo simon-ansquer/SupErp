@@ -18,7 +18,7 @@ namespace SupErp.BLL.GestionClientBLL
             return companyDAL.GetCompany(idCompany);
         }
 
-        public bool CreateCompany(Company company)
+        public int CreateCompany(Company company)
         {
             return companyDAL.CreateCompany(company);
         }
@@ -30,6 +30,11 @@ namespace SupErp.BLL.GestionClientBLL
         public bool EditCompany(Company company)
         {
             return companyDAL.EditCompany(company);
+        }
+
+        public bool DeleteCompany(int id)
+        {
+            return companyDAL.DeleteCompany(id);
         }
     }
 }

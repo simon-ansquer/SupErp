@@ -78,7 +78,7 @@ namespace SupErp.Tests
             comp.address = "lol";
             comp.postalcode = 33300;
 
-            Assert.IsTrue(clientService.CreateCompany(comp));
+            Assert.IsTrue(clientService.CreateCompany(comp) > 0);
         }
 
         [TestMethod]
@@ -125,7 +125,43 @@ namespace SupErp.Tests
             cont.phone = "0506";
             cont.company_id = 1;
 
-            Assert.IsTrue(clientService.CreateCompany_Contact(cont));
+            Assert.IsTrue(clientService.CreateCompany_Contact(cont) > 0);
+        }
+
+        [TestMethod]
+        public void TestDeleteCompany_Contact()
+        {
+
+            Company_Contact cont = new Company_Contact();
+            cont.firstname = "pierre";
+            cont.lastname = "Geogre";
+            cont.gender = 1;
+            cont.email = "pierre@geogre.fr";
+            cont.phone = "0506";
+            cont.company_id = 1;
+
+            int id =  clientService.CreateCompany_Contact(cont);
+
+            Assert.IsTrue(clientService.DeleteCompany_Contact(id));
+
+            
+        }
+
+        [TestMethod]
+        public void TestDeleteCompany()
+        {
+
+            Company comp = new Company();
+            comp.name = "testsupprComp";
+            comp.siret = "3333";
+            comp.city = "Bordeaux1";
+            comp.address = "Saint Louis RPZ";
+            comp.postalcode = 33300;
+            comp.id = 2;
+
+            int id = clientService.CreateCompany(comp);
+
+            Assert.IsTrue(clientService.DeleteCompany(id));
         }
 
         [TestMethod]
