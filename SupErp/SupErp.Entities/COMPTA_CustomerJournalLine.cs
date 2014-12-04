@@ -14,21 +14,22 @@ namespace SupErp.Entities
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(Module))]
-    [KnownType(typeof(Role))]
+    [KnownType(typeof(Company))]
     
-    public partial class RoleModule
+    public partial class COMPTA_CustomerJournalLine
     {
     [DataMember]
-        public long Id { get; set; }
+        public long id { get; set; }
     [DataMember]
-        public long Module_id { get; set; }
+        public Nullable<bool> direction { get; set; }
     [DataMember]
-        public long Role_id { get; set; }
+        public Nullable<decimal> amount { get; set; }
+    [DataMember]
+        public Nullable<System.DateTime> postingDate { get; set; }
+    [DataMember]
+        public Nullable<long> clientAccount_id { get; set; }
     
     [DataMember]
-        public virtual Module Module { get; set; }
-    [DataMember]
-        public virtual Role Role { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

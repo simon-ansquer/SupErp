@@ -37,6 +37,6 @@ namespace SupErp.WCF.GestionClientWCF
         List<Company_Contact> GetListCompany_Contact();
 
         [OperationContract]
-        List<Company_Contact> GetListCompany_Contact(int idCompany);
+        List<Company_Contact> GetListCompany_ContactById(int idCompany);
     }
 }

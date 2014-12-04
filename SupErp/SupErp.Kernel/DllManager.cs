@@ -26,8 +26,8 @@ namespace SupErp.Kernel
             Type[] types = assembly.GetTypes();
 
             IEnumerable<Type> mainMenus = from t in types
-                                     where t.IsClass && t.GetInterfaces().Contains(typeof(IMainMenu))
-                                     select t;
+                                          where t.IsClass && t.GetInterfaces().Any(x => x.FullName == "SupErp.Shared.IMainMenu")
+                                          select t;
 
             if (mainMenus.Count() == 0)
             {
@@ -48,7 +48,7 @@ namespace SupErp.Kernel
         /// <returns>Liste de IMainMenu</returns>
         public List<IMainMenu> GetMainMenus(Role userRole)
         {
-            List<IMainMenu> mainMenus = new List<IMainMenu>(); 
+            List<IMainMenu> mainMenus = new List<IMainMenu>();
             IEnumerable<string> paths = GetDllsPaths();
 
             foreach (string p in paths)

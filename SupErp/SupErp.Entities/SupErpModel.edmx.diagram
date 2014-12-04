@@ -46,6 +46,21 @@
         <AssociationConnector Association="SUPERPModel.FK__BILL_Prod__Categ__5535A963" />
         <AssociationConnector Association="SUPERPModel.FK__BILL_Line__Produ__6754599E" />
         <AssociationConnector Association="SUPERPModel.FK__BILL_Prod__Vat_I__5629CD9C" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_Bank" Width="1.5" PointX="13.375" PointY="13.25" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_BankAccount" Width="1.5" PointX="15.625" PointY="13" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_BankJournalLine" Width="1.5" PointX="17.875" PointY="13.75" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_ChartOfAccounts" Width="1.5" PointX="3.75" PointY="17.625" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_ClassOfAccounts" Width="1.5" PointX="0.875" PointY="18" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_Currency" Width="1.5" PointX="13.375" PointY="18" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_CustomerJournalLine" Width="1.5" PointX="5" PointY="23.875" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_SupplierJournalLine" Width="1.5" PointX="5" PointY="20.875" />
+        <AssociationConnector Association="SUPERPModel.FK__COMPTA_Cu__clien__151B244E" />
+        <AssociationConnector Association="SUPERPModel.FK__COMPTA_Su__Suppl__17F790F9" />
+        <AssociationConnector Association="SUPERPModel.FK__COMPTA_Ac__chart__1CBC4616" />
+        <AssociationConnector Association="SUPERPModel.FK__COMPTA_Ba__bank___0F624AF8" />
+        <AssociationConnector Association="SUPERPModel.FK__COMPTA_Ba__bankA__123EB7A3" />
+        <AssociationConnector Association="SUPERPModel.FK__COMPTA_Ba__curre__0E6E26BF" />
+        <AssociationConnector Association="SUPERPModel.FK__COMPTA_Ch__class__7C4F7684" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
