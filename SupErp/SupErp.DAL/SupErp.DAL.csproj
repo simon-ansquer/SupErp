@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="FacturationModele\BillQuotationComplete.cs" />
     <Compile Include="FacturationModele\BillQuotationLight.cs" />
+    <Compile Include="FacturationModele\LineBillQuotationExtended.cs" />
     <Compile Include="FacturationModele\ProductExtended.cs" />
     <Compile Include="GestionClientDAL\CompanyDAL.cs" />
     <Compile Include="GestionClientDAL\Company_ContactDAL.cs" />
