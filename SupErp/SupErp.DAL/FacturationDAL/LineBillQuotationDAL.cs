@@ -19,6 +19,14 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
+        public IEnumerable<BILL_Product> productsIncludedInBill(long billquotation_id)
+        {
+            using (SUPERPEntities context = new SUPERPEntities())
+            {
+                return context.BILL_LineBillQuotation.Where(line => line.BillQuotation_Id == billquotation_id).Select(l => l.BILL_Product);
+            }
+        }
+
         #endregion
 
         #region Create
