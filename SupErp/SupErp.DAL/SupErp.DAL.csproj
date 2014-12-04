@@ -58,6 +58,7 @@
     <Compile Include="FacturationDAL\LineBillQuotationDAL.cs" />
     <Compile Include="FacturationDAL\StatusDAL.cs" />
     <Compile Include="GestionSalaireDAL\GestionSalaireDAL.cs" />
+    <Compile Include="ModuleUser\Encrypt.cs" />
     <Compile Include="ModuleUser\UserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
