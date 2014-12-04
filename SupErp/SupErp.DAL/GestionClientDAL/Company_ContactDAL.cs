@@ -48,5 +48,20 @@ namespace SupErp.DAL.GestionClientDAL
             }
             return lcontact;
         }
+
+        public bool EditCompany_Contact(Company_Contact contact)
+        {
+            using (SUPERPEntities sup = new SUPERPEntities(false))
+            {
+                Company_Contact contactBdd = sup.Company_Contact.Where(p => p.id == contact.id).FirstOrDefault();
+                if (contactBdd != null)
+                {
+                    sup.Entry(contactBdd).CurrentValues.SetValues(contact);
+                }
+
+            }
+            return true;
+
+        }
     }
 }

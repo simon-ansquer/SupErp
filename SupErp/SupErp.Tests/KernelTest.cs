@@ -64,7 +64,7 @@ namespace SupErp.Tests
         }
 
         [TestMethod]
-        public void TestGetMainMenusNotImplemented()
+        public void TestGetMainMenuNotImplemented()
         {
             CopyDll("MainMenuNotImplemented.dll");
 
@@ -86,6 +86,7 @@ namespace SupErp.Tests
             try
             {
                 List<IMainMenu> mainMenus = dllManager.GetMainMenus(role);
+                Assert.Fail();
             }
             catch (MainMenuNotImplementedException e1)
             {
@@ -95,14 +96,41 @@ namespace SupErp.Tests
             {
                 Assert.Fail();
             }
-
-            Assert.Fail();
         }
 
         [TestMethod]
-        public void TestGetMainMenusBadImplementation()
+        public void TestGetMainMenuBadImplementation()
         {
+            CopyDll("MainMenuBadImplementation.dll");
 
+            DllManager dllManager = new DllManager();
+            Role role = new Role()
+            {
+                RoleModules = new List<RoleModule>()
+                {
+                    new RoleModule()
+                    {
+                        Module = new Module()
+                        {
+                            Name = "MainMenuBadImplementation"
+                        }
+                    }
+                }
+            };
+
+            try
+            {
+                List<IMainMenu> mainMenus = dllManager.GetMainMenus(role);
+                Assert.Fail();
+            }
+            catch (MainMenuImplementationException e1)
+            {
+                Assert.IsNotNull(e1);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
         }
     }
 }

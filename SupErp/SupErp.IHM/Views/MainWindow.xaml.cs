@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SupErp.IHM.Helpers;
+using SupErp.IHM.Models;
+using SupErp.IHM.ViewModels;
 
 namespace SupErp.IHM
 {
@@ -22,52 +25,23 @@ namespace SupErp.IHM
     {
         public double ScreenWidth { get; set; }
         public double ScreenHeight { get; set; }
+        public static Frame MainFrame;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            ScreenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
-            ScreenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+            StaticParams.ScreenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            StaticParams.ScreenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
 
             Main.Width = ScreenWidth;
             Main.Height = ScreenHeight;
+            MainFrame = new Frame();
+            MainFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden; 
 
-            SetTextSize();
-        }
+            Main.AddChild(MainFrame);
 
-        private void Main_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            SetTextSize();                                //Si taille de la fenêtre change, on appelle la méthode qui redimentionne les éléments.
-        }
-
-        private void Main_StateChanged(object sender, EventArgs e)
-        {
-            if(Main.WindowState == WindowState.Maximized)
-            {
-                Main.Width = ScreenWidth;
-                Main.Height = ScreenHeight;
-            }
-            SetTextSize();
-        }
-
-        private void SetTextSize()
-        {
-            Logo.FontSize = Main.Height / 20;
-
-            Connexion.FontSize = Main.Height / 35;
-
-            LoginTbl.FontSize = Main.Height / 45;
-            LoginTbx.Height = Main.Height / 30;
-            LoginTbx.FontSize = Main.Height / 50;
-            LoginTbx.Focus();
-
-            PassTbl.FontSize = Main.Height / 45;
-            PassTbx.Height = Main.Height / 30;
-            PassTbx.FontSize = Main.Height / 50;
-
-            Connect.Height = Main.Height / 25;
-            Connect.Width = (Main.Width * 0.4) * 0.3;
-            Connect.FontSize = Main.Height / 50;
+            MainFrame.Navigate(new LoginPage());
         }
     }
 }

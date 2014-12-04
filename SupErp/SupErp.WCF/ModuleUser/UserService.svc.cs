@@ -1,6 +1,5 @@
 ﻿using SupErp.BLL.ModuleUser;
 using SupErp.Entities;
-using SupErp.WCF.ModuleUser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
