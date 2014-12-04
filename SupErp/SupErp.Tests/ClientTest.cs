@@ -144,5 +144,22 @@ namespace SupErp.Tests
 
             Assert.IsTrue(lcont.Count > 0);
         }
+
+         [TestMethod]
+        public void testEditCompany_contact ()
+        {
+            Company_Contact cont = new Company_Contact();
+            cont.id = 4;
+            cont.firstname = "pierreT";
+            cont.lastname = "George";
+            cont.gender = 1;
+            cont.email = "pierre@geogre.fr";
+            cont.phone = "0506";
+            cont.company_id = 1;
+
+            Assert.IsTrue(clientService.EditCompany_Contact(cont));
+
+
+        }
     }
 }

@@ -67,5 +67,10 @@ namespace SupErp.WCF.GestionClientWCF
         {
             return ContactBLL.GetListCompany_Contact(idCompany);
         }
+
+        public bool EditCompany_Contact(Company_Contact contact)
+        {
+            return ContactBLL.EditCompany_Contact(contact);
+        }
     }
 }
