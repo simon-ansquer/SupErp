@@ -14,28 +14,20 @@ namespace SupErp.Entities
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(BILL_BillQuotationStatus))]
-    [KnownType(typeof(BILL_StatusChain))]
+    [KnownType(typeof(BILL_Status))]
     
-    public partial class BILL_Status
+    public partial class BILL_StatusChain
     {
-        public BILL_Status()
-        {
-            this.BILL_BillQuotationStatus = new HashSet<BILL_BillQuotationStatus>();
-            this.BILL_StatusChain = new HashSet<BILL_StatusChain>();
-            this.BILL_StatusChain1 = new HashSet<BILL_StatusChain>();
-        }
-    
+    [DataMember]
+        public long StatusChain_Id { get; set; }
     [DataMember]
         public long Status_Id { get; set; }
     [DataMember]
-        public string Libel { get; set; }
+        public Nullable<long> NextStatus_Id { get; set; }
     
     [DataMember]
-        public virtual ICollection<BILL_BillQuotationStatus> BILL_BillQuotationStatus { get; set; }
+        public virtual BILL_Status BILL_Status { get; set; }
     [DataMember]
-        public virtual ICollection<BILL_StatusChain> BILL_StatusChain { get; set; }
-    [DataMember]
-        public virtual ICollection<BILL_StatusChain> BILL_StatusChain1 { get; set; }
+        public virtual BILL_Status BILL_Status1 { get; set; }
     }
 }

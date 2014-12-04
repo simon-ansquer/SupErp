@@ -103,6 +103,8 @@ namespace SupErp.WCF.FacturationWCF
         private static readonly Lazy<LineBillQuotationBLL> lazyLineBLL = new Lazy<LineBillQuotationBLL>(() => new LineBillQuotationBLL());
         private static LineBillQuotationBLL lineBLL { get { return lazyLineBLL.Value; } }
 
+        private static readonly Lazy<BillProductBLL> lazyProductBLL = new Lazy<BillProductBLL>(() => new BillProductBLL());
+        private static BillProductBLL productBLL { get { return lazyProductBLL.Value; } }
 
         public List<LineExtended> GetAllLines(long billQuotation_id)
         {
@@ -121,11 +123,33 @@ namespace SupErp.WCF.FacturationWCF
 
 
         /**************************/
-        /*        PRODUIT         */
+        /*    CREATION FACTURE    */
         /**************************/
 
-        private static readonly Lazy<BillProductBLL> lazyProductBLL = new Lazy<BillProductBLL>(() => new BillProductBLL());
-        private static BillProductBLL productBLL { get { return lazyProductBLL.Value; } }
+        public bool createBillQuotation(BillQuotationComplete billQuotation)
+        {
+            var res = true;
+           try
+           {
+               var bill = billQuotationBLL.CreateBillQutotation(billQuotation);
+               foreach(var l in billQuotation.lines)
+               {
+                   l.BILL_BillQuotation = bill;
+                   l.BillQuotation_Id = bill.BillQuotation_Id;
+
+                   lineBLL.CreateLineBillQuotation(l);
+               }
+           }
+           catch(Exception)
+           {
+               res = false;
+           }
+           return res;
+
+        }
+        
+
+
 
     }
 }
