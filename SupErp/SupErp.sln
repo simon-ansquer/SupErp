@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupERP.WPF.Comptabiity", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupERP.WPF.Comptability.Library", "SupERP.WPF.Comptability.Library\SupERP.WPF.Comptability.Library.csproj", "{85EA25D3-0E14-4E4D-8F82-10C424D006A8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SupERPMaster", "SupERPMaster", "{E3AEA888-92BB-484B-9F1D-F379EC5EEFBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
