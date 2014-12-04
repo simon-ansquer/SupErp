@@ -1,9 +1,0 @@
-﻿<Window x:Class="SupErp.IHM.Views.ComptabilityView.PlanComptable"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="PlanComptable" Height="300" Width="300">
-    <Grid>
-        <TreeView x:Name="PlanComptableTreeView" HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" VerticalAlignment="Top" Width="272"/>
-
-    </Grid>
-</Window>
