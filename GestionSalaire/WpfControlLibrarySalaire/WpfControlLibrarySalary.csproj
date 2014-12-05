@@ -138,6 +138,12 @@
     <None Include="Service References\ServiceSalaire\ServiceSalaire2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceSalaire\WpfControlLibrarySalaire.ServiceSalaire.Prime.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceSalaire\WpfControlLibrarySalaire.ServiceSalaire.Status.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ServiceSalaire\WpfControlLibrarySalaire.ServiceSalaire.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

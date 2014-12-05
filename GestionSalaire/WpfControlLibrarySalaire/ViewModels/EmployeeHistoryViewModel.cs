@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using WpfControlLibrarySalaire.Helpers;
-using WpfControlLibrarySalaire.Models;
 using WpfControlLibrarySalaire.Views;
+using WpfControlLibrarySalaire.ServiceSalaire;
 
 namespace WpfControlLibrarySalaire.ViewModels
 {
     public class EmployeeHistoryViewModel
     {
-        private ServiceSalaire.User _employee;
+        private User _employee;
 
-        public ServiceSalaire.User Employee
+        public User Employee
         {
             get { return _employee; }
         }
 
-        public EmployeeHistoryViewModel(ServiceSalaire.User employee)
+        public EmployeeHistoryViewModel(User employee)
         {
             _employee = employee;
         }

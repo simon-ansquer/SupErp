@@ -6,14 +6,12 @@ using System.Windows.Input;
 using WpfControlLibrarySalaire.Helpers;
 using WpfControlLibrarySalaire.ServiceSalaire;
 using WpfControlLibrarySalaire.Views;
-using MessageBox = System.Windows.MessageBox;
 
 
 namespace WpfControlLibrarySalaire.ViewModels
 {
     public class EmployeesListViewModel : BaseViewModel
     {
-        private readonly DelegateCommand<string> _searchClickCommand;
         private string _inputSearch;
         public string InputSearch
         {
@@ -48,6 +46,7 @@ namespace WpfControlLibrarySalaire.ViewModels
         }
 
         #region DelegateCommand
+        private readonly DelegateCommand<string> _searchClickCommand;
         public DelegateCommand<string> ButtonSearchClickCommand
         {
             get { return _searchClickCommand; }
@@ -108,7 +107,7 @@ namespace WpfControlLibrarySalaire.ViewModels
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
-            //PDFGenerator.generate(Employees[index], fbd.SelectedPath);
+            PDFGenerator.generate(Employees[index], fbd.SelectedPath);
         }
         #endregion
     }
