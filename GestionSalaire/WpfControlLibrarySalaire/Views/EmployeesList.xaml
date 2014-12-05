@@ -7,146 +7,141 @@
              mc:Ignorable="d" 
              Background="White"              
              FontFamily="Segoe UI" 
-             d:DesignHeight="800" d:DesignWidth="1000"
+             d:DesignHeight="800" d:DesignWidth="1000" x:Name="EmployeeListUserControl"
              ><!--xmlns:l="clr-namespace:UIControls;assembly=UIControls"-->
     <UserControl.Resources>
         <viewModel:EmployeesListViewModel x:Key="ListViewModel" />
     </UserControl.Resources>
     <Grid DataContext="{StaticResource ListViewModel}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*" />
-                <RowDefinition Height="0.05*" />
-                <RowDefinition Height="0.1*" />
-                <RowDefinition Height="0.05*" />
-                <RowDefinition Height="2*" />
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.05*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.05*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*" />
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Left" Foreground="#C0C0C0" TextWrapping="Wrap" Text="Salaire" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" FontSize="30" Grid.ColumnSpan="2" Margin="0,-2,0,15" Grid.RowSpan="2"/>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0*" />
-                <ColumnDefinition/>
+                <ColumnDefinition Width="0.05*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="0.05*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="0.05*" />
             </Grid.ColumnDefinitions>
-            <TextBlock HorizontalAlignment="Left" Foreground="#C0C0C0" TextWrapping="Wrap" Text="Salaire" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" FontSize="30" Grid.ColumnSpan="2" Margin="0,-2,0,15" Grid.RowSpan="2"/>
-            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.05*" />
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="0.05*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="0.5*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="0.05*" />
-                </Grid.ColumnDefinitions>
-                <!--<l:SearchTextBox SearchMode="Instant" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.Column="1" Search="{Binding ButtonSearchClickCommand}" />-->
-                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+            <!--<l:SearchTextBox SearchMode="Instant" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.Column="1" Search="{Binding ButtonSearchClickCommand}" />-->
+            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                          Grid.Column="1" FontSize="15" Text="{Binding InputSearch, UpdateSourceTrigger=PropertyChanged}"
                          BorderBrush="Black">
-                    <TextBox.InputBindings>
-                        <KeyBinding Gesture="Enter" Command="{Binding ButtonSearchClickCommand}"/>
-                    </TextBox.InputBindings>
-                </TextBox>
-                <Button Grid.Column="3" Background="#4388CC" Foreground="White" Content="Rechercher" FontSize="15"
+                <TextBox.InputBindings>
+                    <KeyBinding Gesture="Enter" Command="{Binding ButtonSearchClickCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+            <Button Grid.Column="3" Background="#4388CC" Foreground="White" Content="Rechercher" FontSize="15"
                         BorderThickness="0" Command="{Binding ButtonSearchClickCommand}" />
-                <Button Grid.Column="5" Background="#4388CC" Foreground="White" Content="Exporter PDF" FontSize="15"
+            <Button Grid.Column="5" Background="#4388CC" Foreground="White" Content="Exporter PDF" FontSize="15"
                         BorderThickness="0" Command="{Binding GeneratePdfCommand}"/>
-            </Grid>
-            <DataGrid x:Name="DataGridEmployees" ItemsSource="{Binding Path=Employees}" Grid.Row="4" GridLinesVisibility="Horizontal" FontSize="15" HorizontalGridLinesBrush="Silver"  HorizontalAlignment="Stretch" SelectionMode="Single"
+        </Grid>
+        <DataGrid x:Name="DataGridEmployees" ItemsSource="{Binding Path=Employees}" Grid.Row="4" GridLinesVisibility="Horizontal" FontSize="15" HorizontalGridLinesBrush="Silver"  HorizontalAlignment="Stretch" SelectionMode="Single"
                       AlternatingRowBackground="#FFCCCCCC" AlternationCount="1" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"
                       Grid.Column="0" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False" CanUserAddRows="False">
-                
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nom" Width ="1*" Binding="{Binding Lastname}" IsReadOnly="True" CanUserResize="False" >
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Width ="1*" Header="Prénom" Binding="{Binding Firstname}" IsReadOnly="True" CanUserResize="False">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Width ="1*" Header="Date d'arrivée" Binding="{Binding Date_arrival, StringFormat={}{0:dd MMMM yyyy}}" IsReadOnly="True" CanUserResize="False">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Width ="1*" Header="Salaire brut" IsReadOnly="True" Binding="{Binding Salaries[0].NetSalary}" CanUserResize="False">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Width ="0.5*" Header="Absence(s)" Binding="{Binding Absences.Count}" CanUserResize="False" IsReadOnly="True">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
-                    <DataGridTemplateColumn Width ="0.5*" Header="Détails" CanUserSort="False" CanUserResize="False" >
-                        
-                        <DataGridTemplateColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTemplateColumn.HeaderStyle>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <!--<Button Content="Détails" />-->
-                                <Button 
-                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DetailsCommand}" 
-                                    CommandParameter="{Binding ElementName=DataGridEmployees, Path=SelectedIndex}" >
-                                    <!--Command="{Binding DetailsCommand}" CommandParameter="{Binding SelectedItem, ElementName=DataGridEmployees}"-->
-                                    <Button.Template>
-                                        <ControlTemplate>
-                                            <Image Source="../Assets/details.png" Width="30" Height="30" />
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width ="0.3*" Header="PDF" CanUserSort="False" CanUserResize="False" IsReadOnly="True">
-                        <DataGridTemplateColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTemplateColumn.HeaderStyle>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button 
-                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DetailsCommand}" 
-                                    CommandParameter="{Binding ElementName=DataGridEmployees, Path=SelectedIndex}" >
-                                    <!--Command="{Binding DetailsCommand}" CommandParameter="{Binding SelectedItem, ElementName=DataGridEmployees}"-->
-                                    <Button.Template>
-                                        <ControlTemplate>
-                                            <Image Source="../Assets/pdf.png" Width="30" Height="30" />
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
 
-        </Grid>
-        <Grid/>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom" Width ="1*" Binding="{Binding Lastname}" IsReadOnly="True" CanUserResize="False" >
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width ="1*" Header="Prénom" Binding="{Binding Firstname}" IsReadOnly="True" CanUserResize="False">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width ="1*" Header="Date d'arrivée" Binding="{Binding Date_arrival, StringFormat={}{0:dd MMMM yyyy}}" IsReadOnly="True" CanUserResize="False">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width ="1*" Header="Salaire brut" IsReadOnly="True" Binding="{Binding Salaries[0].NetSalary}" CanUserResize="False">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width ="0.5*" Header="Absence(s)" Binding="{Binding Absences.Count}" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Width ="0.5*" Header="Détails" CanUserSort="False" CanUserResize="False" >
+
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!--<Button Content="Détails" />-->
+                            <Button 
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DetailsCommand}" 
+                                    CommandParameter="{Binding ElementName=DataGridEmployees, Path=SelectedIndex}"
+                                    >
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Image Source="../Assets/details.png" Width="30" Height="30" />
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width ="0.3*" Header="PDF" CanUserSort="False" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button 
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PdfCommand}" 
+                                    CommandParameter="{Binding ElementName=DataGridEmployees, Path=SelectedIndex}" >
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Image Source="../Assets/pdf.png" Width="30" Height="30" />
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

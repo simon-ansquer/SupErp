@@ -32,7 +32,7 @@ namespace WpfControlLibrarySalaire.ViewModels
             ServiceSalaire = new ServiceSalaireClient();
         }
 
-        private void RaisePropertyChanged<T>(Expression<Func<T>> action)
+        protected void RaisePropertyChanged<T>(Expression<Func<T>> action)
         {
             var propertyName = GetPropertyName(action);
             RaisePropertyChanged(propertyName);

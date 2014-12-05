@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using WpfControlLibrarySalaire.Helpers;
 using WpfControlLibrarySalaire.ServiceSalaire;
+using WpfControlLibrarySalaire.Views;
 
 
 namespace WpfControlLibrarySalaire.ViewModels
@@ -86,6 +87,7 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         private async void OnSearchButtonClick()
         {
+            if (Employees == null) return;
             List<User> employees;
             if (_inputSearch == string.Empty)
                 employees = await ServiceSalaire.GetUserAsync();
@@ -97,7 +99,8 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         private void OnDetailsClick(int index)
         {
-            
+            var employeeDetails = new EmployeeDetails(new EmployeeDetailsViewModel(Employees[index]));
+            Switcher.Switch(employeeDetails);
         }
 
         private void OnPdfClick(int index)
