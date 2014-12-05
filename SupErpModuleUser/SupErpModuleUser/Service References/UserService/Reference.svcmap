@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5f3a30b7-a53d-48d4-bb2d-28f3d3c5af36" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e625dcbf-f6b1-43e5-81a7-fcee35c6c23a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -21,14 +21,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:7880/ModuleUser/UserService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://superpwcf.azurewebsites.net/ModuleUser/UserService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="UserService.xsd" MetadataType="Schema" ID="bb1386b1-f065-4ad1-bb36-728172b1f920" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?xsd=xsd0" />
-    <MetadataFile FileName="UserService1.xsd" MetadataType="Schema" ID="5ebe7e87-6a97-43c7-b51b-664b594bc527" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?xsd=xsd2" />
-    <MetadataFile FileName="UserService.disco" MetadataType="Disco" ID="7b024972-49af-4923-85d7-5a30d4f91d56" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?disco" />
-    <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="42b3322a-3f7c-4809-9596-3dd2d6574aa8" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?xsd=xsd1" />
-    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="edebe50f-d10a-4bf4-a89a-97f2cd324034" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?wsdl" />
+    <MetadataFile FileName="UserService.xsd" MetadataType="Schema" ID="b002e345-fac2-490e-bdba-fc4cacf8463a" SourceId="1" SourceUrl="http://superpwcf.azurewebsites.net/ModuleUser/UserService.svc?xsd=xsd0" />
+    <MetadataFile FileName="UserService.disco" MetadataType="Disco" ID="6e80afda-a80b-495b-81b0-6789f8f3a2b4" SourceId="1" SourceUrl="http://superpwcf.azurewebsites.net/ModuleUser/UserService.svc?disco" />
+    <MetadataFile FileName="UserService1.xsd" MetadataType="Schema" ID="fe07a678-4b59-4a7f-9742-c79fd0fc68ce" SourceId="1" SourceUrl="http://superpwcf.azurewebsites.net/ModuleUser/UserService.svc?xsd=xsd2" />
+    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="4525113a-2088-4906-90ba-c47219995328" SourceId="1" SourceUrl="http://superpwcf.azurewebsites.net/ModuleUser/UserService.svc?wsdl" />
+    <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="2d859aa1-0d6f-4c9d-be1e-7011c87be207" SourceId="1" SourceUrl="http://superpwcf.azurewebsites.net/ModuleUser/UserService.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

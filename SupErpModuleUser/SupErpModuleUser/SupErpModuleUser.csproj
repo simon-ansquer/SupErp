@@ -51,6 +51,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\ActionCommand.cs" />
+    <Compile Include="Helpers\Converters\RoleButtonTextConverter.cs" />
+    <Compile Include="Helpers\Converters\RoleTitleConverter.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Helpers\ModuleAdapter.cs" />
     <Compile Include="Helpers\RoleAdapter.cs" />
@@ -66,6 +69,7 @@
     </Compile>
     <Compile Include="ViewModels\AddRoleViewModel.cs" />
     <Compile Include="ViewModels\AddUserViewModel.cs" />
+    <Compile Include="ViewModels\ListRoleViewModel.cs" />
     <Compile Include="Views\AddRoleUserControl.xaml.cs">
       <DependentUpon>AddRoleUserControl.xaml</DependentUpon>
     </Compile>
@@ -184,6 +188,11 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\Images\edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -27,7 +27,7 @@ namespace SupErpIHMUser
 
             Frame uneFrame = new Frame();
             MainGrid.Children.Add(uneFrame);
-            uneFrame.Navigate(new AddRoleUserControl());
+            uneFrame.Navigate(new ListRoleUserControl());
 
             
         }

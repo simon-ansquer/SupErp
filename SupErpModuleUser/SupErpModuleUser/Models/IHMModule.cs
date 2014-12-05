@@ -9,6 +9,12 @@ namespace SupErpModuleUser.Models
 {
     public class IHMModule : IHMModel
     {
+        private long id;
+        private string name;
+        private long idRoleModule;
+        private bool isSelected;
+        private bool isWritingSelected;
+
         public IHMModule()
         { }
 
@@ -19,8 +25,25 @@ namespace SupErpModuleUser.Models
             IdRoleModule = roleModule.Id;
         }
 
-        public long Id { get{ return Id; } set { Id = value; OnPropertyChanged("Id"); } }
-        public string Name { get; set; }
-        public long IdRoleModule { get; set; }
+        public long Id { 
+            get{ return id; } 
+            set { id = value; OnPropertyChanged("Id"); } 
+        }
+        public string Name { 
+            get { return name; } 
+            set { name = value; OnPropertyChanged("Name"); } 
+        }
+        public long IdRoleModule { 
+            get {return idRoleModule; } 
+            set {idRoleModule = value; OnPropertyChanged("IdRoleModule"); } 
+        }
+        public bool IsSelected { 
+            get { return isSelected; } 
+            set { isSelected = value; OnPropertyChanged("IsSelected"); } 
+        }
+        public bool IsWritingSelected { 
+            get { return isWritingSelected; } 
+            set { isWritingSelected = value; OnPropertyChanged("IsWritingSelected"); } 
+        }
     }
 }

@@ -11,14 +11,24 @@ namespace SupErpModuleUser.Models
 {
     public class IHMRole : IHMModel
     {
+
+        private long id;
+        private string label;
+        private IEnumerable<IHMModule> modules;
+        private bool isNew;
+        private string listModules;
+
         public IHMRole()
-        { }
+        {
+            isNew = true;
+        }
 
         public IHMRole(Role role)
         {
             Id = role.Id;
             Label = role.Label;
             Modules = GetModules(role.RoleModules);
+            isNew = false;
         }
 
         private IEnumerable<IHMModule> GetModules(IEnumerable<RoleModule> roleModules)
@@ -29,26 +39,59 @@ namespace SupErpModuleUser.Models
             }
         }
 
-        private long id;
-        private string label;
-        private IEnumerable<IHMModule> modules;
-
         public long Id
         {
             get { return id; }
-            set { id = value; }
+            set { 
+                id = value;
+                OnPropertyChanged("Id");
+            }
         }
 
         public string Label
         {
             get { return label; }
-            set { label = value; }
+            set { 
+                label = value;
+                OnPropertyChanged("Label");
+            }
         }
 
         public IEnumerable<IHMModule> Modules
         {
             get { return modules; }
-            set { modules = value; }
+            set { 
+                modules = value;
+
+                string listModule = string.Empty;
+                foreach (IHMModule module in Modules)
+                {
+                    listModule += module.Name;
+                }
+
+                ListModules = listModule;
+
+                OnPropertyChanged("Modules");
+            }
+        }
+
+        public bool IsNew
+        {
+            get { return isNew; }
+            set { 
+                isNew = value;
+                OnPropertyChanged("IsNew");
+            }
+        }
+
+        public string ListModules
+        {
+            get { return listModules; }
+            set
+            {
+                listModules = value;
+                OnPropertyChanged("ListModules");
+            }
         }
 
     }
