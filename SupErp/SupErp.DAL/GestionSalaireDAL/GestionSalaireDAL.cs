@@ -170,9 +170,9 @@ namespace SupErp.DAL.GestionSalaireDAL
                 //sb.Append(")?");
                 //Regex regex = new Regex(sb.ToString(), RegexOptions.IgnoreCase);
                 var query = q.Split(' ');
-                return Entities.Users.Include("Salaries").Include("Absences").Where(x => query.Contains(x.Lastname) || query.Contains(x.Firstname) || x.Lastname.Contains(q) || x.Firstname.Contains(q)).ToList();
+                return Entities.Users.Include("Salaries").Include("Absences").Include("Status").Where(x => query.Contains(x.Lastname) || query.Contains(x.Firstname) || x.Lastname.Contains(q) || x.Firstname.Contains(q)).ToList();
             }
-            return Entities.Users.Include("Salaries").Include("Absences").ToList();
+            return Entities.Users.Include("Salaries").Include("Absences").Include("Status").ToList();
             
         }
 

@@ -39,7 +39,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -59,8 +68,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ComptabilityWCF\ComptabilityService.svc" />
     <Content Include="GestionClientWCF\ServiceGestionClient.svc" />
-	<Content Include="FacturationWCF\FacturationService.svc" />
+    <Content Include="FacturationWCF\FacturationService.svc" />
     <Content Include="GestionSalaireWCF\ServiceSalaire.svc" />
     <Content Include="ModuleUser\UserService.svc" />
     <Content Include="Web.config">
@@ -68,11 +78,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComptabilityWCF\ComptabilityService.svc.cs">
+      <DependentUpon>ComptabilityService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="ComptabilityWCF\IComptabilityService.cs" />
     <Compile Include="GestionClientWCF\IServiceGestionClient.cs" />
     <Compile Include="GestionClientWCF\ServiceGestionClient.svc.cs">
       <DependentUpon>ServiceGestionClient.svc</DependentUpon>
     </Compile>
-	<Compile Include="FacturationWCF\FacturationService.svc.cs">
+    <Compile Include="FacturationWCF\FacturationService.svc.cs">
       <DependentUpon>FacturationService.svc</DependentUpon>
     </Compile>
     <Compile Include="FacturationWCF\IFacturationService.cs" />
@@ -90,6 +104,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -101,6 +116,10 @@
     <ProjectReference Include="..\SupErp.BLL\SupErp.BLL.csproj">
       <Project>{aa5a818d-cd76-4958-9282-66b0f1ce29ba}</Project>
       <Name>SupErp.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SupErp.DAL\SupErp.DAL.csproj">
+      <Project>{369107f3-119a-4358-86bf-23bb9e74018f}</Project>
+      <Name>SupErp.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\SupErp.Entities\SupErp.Entities.csproj">
       <Project>{a11a9e2d-75ac-4e97-b28a-da6ba10d5637}</Project>

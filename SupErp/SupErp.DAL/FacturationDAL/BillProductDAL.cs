@@ -12,7 +12,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Read
         public List<BILL_Product> GetBillProduct()
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Product.ToList();
             }
@@ -20,7 +20,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_Product GetBillProduct(long id)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Product.Single(p => p.Product_Id == id);
             }
@@ -28,7 +28,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public List<BILL_Product> GetProducts()
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Product.Where(p => p.Name != null).ToList();
             }
@@ -36,7 +36,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_Product GetProductByID(long id)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Product.SingleOrDefault(p => p.Product_Id == id);
             }
@@ -45,7 +45,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_Product GetProductByName(string nameProduct)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Product.SingleOrDefault(p => p.Name == nameProduct);
             }
@@ -53,7 +53,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public IEnumerable<BILL_Product> GetProductCategory(long idCategory)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Product.Where(p => p.Category_Id == idCategory);
             }
@@ -61,7 +61,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_Product GetProductPrice(Double priceProduct)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.BILL_Product.SingleOrDefault(p => p.Price == priceProduct);
             }
@@ -72,7 +72,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Create
         public BILL_Product CreateBillProduct(BILL_Product billProductToAdd)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var p = context.BILL_Product.Add(billProductToAdd);
                 context.SaveChanges();
@@ -84,7 +84,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Edit
         public BILL_Product EditBillProduct(BILL_Product billProductToEdit)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var p = context.BILL_Product.Find(billProductToEdit.Product_Id);
                 p = billProductToEdit;
@@ -97,7 +97,7 @@ namespace SupErp.DAL.FacturationDAL
         #region Delete
         public bool DeleteBillProduct(long billProduct_id)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 try
                 {

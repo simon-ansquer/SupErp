@@ -1,6 +1,5 @@
 ﻿using SupErp.BLL.ModuleUser;
 using SupErp.Entities;
-using SupErp.WCF.ModuleUser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +34,11 @@ namespace SupErp.WCF
         public IEnumerable<Role> GetRoles()
         {
             return userBLL.GetRoles();
+        }
+
+        public IEnumerable<Module> GetModules()
+        {
+            return userBLL.GetModules();
         }
 
         public Role GetRoleByUserId(int userId)

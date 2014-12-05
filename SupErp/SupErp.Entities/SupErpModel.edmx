@@ -79,6 +79,14 @@
           <Property Name="Status_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Libel" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="BILL_StatusChain">
+          <Key>
+            <PropertyRef Name="StatusChain_Id" />
+          </Key>
+          <Property Name="StatusChain_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status_Id" Type="bigint" Nullable="false" />
+          <Property Name="NextStatus_Id" Type="bigint" />
+        </EntityType>
         <EntityType Name="BILL_Transmitter">
           <Key>
             <PropertyRef Name="Transmitter_Id" />
@@ -133,6 +141,82 @@
           <Property Name="postingDate" Type="datetime2" Precision="7" />
           <Property Name="chartOfAccount_id" Type="bigint" />
         </EntityType>
+        <EntityType Name="COMPTA_Bank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="address1" Type="varchar" MaxLength="50" />
+          <Property Name="address2" Type="varchar" MaxLength="50" />
+          <Property Name="address3" Type="varchar" MaxLength="50" />
+          <Property Name="zipCode" Type="varchar" MaxLength="10" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="codeBank" Type="varchar" MaxLength="5" />
+          <Property Name="codeGuichet" Type="varchar" MaxLength="5" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="COMPTA_BankAccount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fullName" Type="varchar" MaxLength="50" />
+          <Property Name="shortName" Type="varchar" MaxLength="50" />
+          <Property Name="swiftCode" Type="varchar" MaxLength="11" />
+          <Property Name="IBAN" Type="varchar" MaxLength="31" />
+          <Property Name="ABA" Type="varchar" MaxLength="14" />
+          <Property Name="accountNumber" Type="varchar" MaxLength="11" />
+          <Property Name="RIB" Type="varchar" MaxLength="23" />
+          <Property Name="keyRIB" Type="varchar" MaxLength="2" />
+          <Property Name="currency_id" Type="bigint" />
+          <Property Name="bank_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="COMPTA_BankJournalLine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="direction" Type="bit" />
+          <Property Name="amount" Type="money" />
+          <Property Name="postingDate" Type="datetime2" Precision="7" />
+          <Property Name="bankAccount_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="COMPTA_ChartOfAccounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="account_number" Type="bigint" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="class_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="COMPTA_ClassOfAccounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number" Type="bigint" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="COMPTA_Currency">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="symbol" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="COMPTA_CustomerJournalLine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="direction" Type="bit" />
+          <Property Name="amount" Type="money" />
+          <Property Name="postingDate" Type="datetime2" Precision="7" />
+          <Property Name="clientAccount_id" Type="bigint" />
+        </EntityType>
         <EntityType Name="COMPTA_ExchangeRate">
           <Key>
             <PropertyRef Name="id" />
@@ -144,6 +228,16 @@
           <Property Name="EURO_AUD" Type="float" />
           <Property Name="EURO_ZAR" Type="float" />
           <Property Name="USD_EURO" Type="float" />
+        </EntityType>
+        <EntityType Name="COMPTA_SupplierJournalLine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="direction" Type="bit" />
+          <Property Name="amount" Type="money" />
+          <Property Name="postingDate" Type="datetime2" Precision="7" />
+          <Property Name="SupplierAccount_id" Type="bigint" />
         </EntityType>
         <EntityType Name="ConfigAbsence">
           <Key>
@@ -158,7 +252,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Prime">
           <Key>
@@ -338,6 +432,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__BILL_Stat__NextS__2A164134">
+          <End Role="BILL_Status" Type="Self.BILL_Status" Multiplicity="0..1" />
+          <End Role="BILL_StatusChain" Type="Self.BILL_StatusChain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILL_Status">
+              <PropertyRef Name="Status_Id" />
+            </Principal>
+            <Dependent Role="BILL_StatusChain">
+              <PropertyRef Name="NextStatus_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BILL_Stat__Statu__29221CFB">
+          <End Role="BILL_Status" Type="Self.BILL_Status" Multiplicity="1" />
+          <End Role="BILL_StatusChain" Type="Self.BILL_StatusChain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILL_Status">
+              <PropertyRef Name="Status_Id" />
+            </Principal>
+            <Dependent Role="BILL_StatusChain">
+              <PropertyRef Name="Status_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Company_C__compa__6383C8BA">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Company_Contact" Type="Self.Company_Contact" Multiplicity="*" />
@@ -347,6 +465,90 @@
             </Principal>
             <Dependent Role="Company_Contact">
               <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Ac__chart__1CBC4616">
+          <End Role="COMPTA_ChartOfAccounts" Type="Self.COMPTA_ChartOfAccounts" Multiplicity="0..1" />
+          <End Role="COMPTA_AccountingEntries" Type="Self.COMPTA_AccountingEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_ChartOfAccounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_AccountingEntries">
+              <PropertyRef Name="chartOfAccount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Ba__bank___0F624AF8">
+          <End Role="COMPTA_Bank" Type="Self.COMPTA_Bank" Multiplicity="0..1" />
+          <End Role="COMPTA_BankAccount" Type="Self.COMPTA_BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_Bank">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_BankAccount">
+              <PropertyRef Name="bank_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Ba__bankA__123EB7A3">
+          <End Role="COMPTA_BankAccount" Type="Self.COMPTA_BankAccount" Multiplicity="0..1" />
+          <End Role="COMPTA_BankJournalLine" Type="Self.COMPTA_BankJournalLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_BankAccount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_BankJournalLine">
+              <PropertyRef Name="bankAccount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Ba__curre__0E6E26BF">
+          <End Role="COMPTA_Currency" Type="Self.COMPTA_Currency" Multiplicity="0..1" />
+          <End Role="COMPTA_BankAccount" Type="Self.COMPTA_BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_Currency">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_BankAccount">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Ch__class__7C4F7684">
+          <End Role="COMPTA_ClassOfAccounts" Type="Self.COMPTA_ClassOfAccounts" Multiplicity="0..1" />
+          <End Role="COMPTA_ChartOfAccounts" Type="Self.COMPTA_ChartOfAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_ClassOfAccounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_ChartOfAccounts">
+              <PropertyRef Name="class_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Cu__clien__151B244E">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="COMPTA_CustomerJournalLine" Type="Self.COMPTA_CustomerJournalLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_CustomerJournalLine">
+              <PropertyRef Name="clientAccount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Su__Suppl__17F790F9">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="COMPTA_SupplierJournalLine" Type="Self.COMPTA_SupplierJournalLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_SupplierJournalLine">
+              <PropertyRef Name="SupplierAccount_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -455,12 +657,21 @@
           <EntitySet Name="BILL_LineBillQuotation" EntityType="Self.BILL_LineBillQuotation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BILL_Product" EntityType="Self.BILL_Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BILL_Status" EntityType="Self.BILL_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BILL_StatusChain" EntityType="Self.BILL_StatusChain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BILL_Transmitter" EntityType="Self.BILL_Transmitter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BILL_Vat" EntityType="Self.BILL_Vat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company_Contact" EntityType="Self.Company_Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMPTA_AccountingEntries" EntityType="Self.COMPTA_AccountingEntries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPTA_Bank" EntityType="Self.COMPTA_Bank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPTA_BankAccount" EntityType="Self.COMPTA_BankAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPTA_BankJournalLine" EntityType="Self.COMPTA_BankJournalLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPTA_ChartOfAccounts" EntityType="Self.COMPTA_ChartOfAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPTA_ClassOfAccounts" EntityType="Self.COMPTA_ClassOfAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPTA_Currency" EntityType="Self.COMPTA_Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPTA_CustomerJournalLine" EntityType="Self.COMPTA_CustomerJournalLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMPTA_ExchangeRate" EntityType="Self.COMPTA_ExchangeRate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPTA_SupplierJournalLine" EntityType="Self.COMPTA_SupplierJournalLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConfigAbsence" EntityType="Self.ConfigAbsence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prime" EntityType="Self.Prime" Schema="dbo" store:Type="Tables" />
@@ -506,9 +717,45 @@
             <End Role="BILL_Vat" EntitySet="BILL_Vat" />
             <End Role="BILL_Product" EntitySet="BILL_Product" />
           </AssociationSet>
+          <AssociationSet Name="FK__BILL_Stat__NextS__2A164134" Association="Self.FK__BILL_Stat__NextS__2A164134">
+            <End Role="BILL_Status" EntitySet="BILL_Status" />
+            <End Role="BILL_StatusChain" EntitySet="BILL_StatusChain" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL_Stat__Statu__29221CFB" Association="Self.FK__BILL_Stat__Statu__29221CFB">
+            <End Role="BILL_Status" EntitySet="BILL_Status" />
+            <End Role="BILL_StatusChain" EntitySet="BILL_StatusChain" />
+          </AssociationSet>
           <AssociationSet Name="FK__Company_C__compa__6383C8BA" Association="Self.FK__Company_C__compa__6383C8BA">
             <End Role="Company" EntitySet="Company" />
             <End Role="Company_Contact" EntitySet="Company_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ac__chart__1CBC4616" Association="Self.FK__COMPTA_Ac__chart__1CBC4616">
+            <End Role="COMPTA_ChartOfAccounts" EntitySet="COMPTA_ChartOfAccounts" />
+            <End Role="COMPTA_AccountingEntries" EntitySet="COMPTA_AccountingEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ba__bank___0F624AF8" Association="Self.FK__COMPTA_Ba__bank___0F624AF8">
+            <End Role="COMPTA_Bank" EntitySet="COMPTA_Bank" />
+            <End Role="COMPTA_BankAccount" EntitySet="COMPTA_BankAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ba__bankA__123EB7A3" Association="Self.FK__COMPTA_Ba__bankA__123EB7A3">
+            <End Role="COMPTA_BankAccount" EntitySet="COMPTA_BankAccount" />
+            <End Role="COMPTA_BankJournalLine" EntitySet="COMPTA_BankJournalLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ba__curre__0E6E26BF" Association="Self.FK__COMPTA_Ba__curre__0E6E26BF">
+            <End Role="COMPTA_Currency" EntitySet="COMPTA_Currency" />
+            <End Role="COMPTA_BankAccount" EntitySet="COMPTA_BankAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ch__class__7C4F7684" Association="Self.FK__COMPTA_Ch__class__7C4F7684">
+            <End Role="COMPTA_ClassOfAccounts" EntitySet="COMPTA_ClassOfAccounts" />
+            <End Role="COMPTA_ChartOfAccounts" EntitySet="COMPTA_ChartOfAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Cu__clien__151B244E" Association="Self.FK__COMPTA_Cu__clien__151B244E">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="COMPTA_CustomerJournalLine" EntitySet="COMPTA_CustomerJournalLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Su__Suppl__17F790F9" Association="Self.FK__COMPTA_Su__Suppl__17F790F9">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="COMPTA_SupplierJournalLine" EntitySet="COMPTA_SupplierJournalLine" />
           </AssociationSet>
           <AssociationSet Name="FK__ConfigAbs__Absen__571DF1D5" Association="Self.FK__ConfigAbs__Absen__571DF1D5">
             <End Role="AbsenceType" EntitySet="AbsenceType" />
@@ -643,6 +890,51 @@
             <End Role="BILL_Vat" EntitySet="BILL_Vat" />
             <End Role="BILL_Product" EntitySet="BILL_Product" />
           </AssociationSet>
+          <EntitySet Name="COMPTA_Bank" EntityType="SUPERPModel.COMPTA_Bank" />
+          <EntitySet Name="COMPTA_BankAccount" EntityType="SUPERPModel.COMPTA_BankAccount" />
+          <EntitySet Name="COMPTA_BankJournalLine" EntityType="SUPERPModel.COMPTA_BankJournalLine" />
+          <EntitySet Name="COMPTA_ChartOfAccounts" EntityType="SUPERPModel.COMPTA_ChartOfAccounts" />
+          <EntitySet Name="COMPTA_ClassOfAccounts" EntityType="SUPERPModel.COMPTA_ClassOfAccounts" />
+          <EntitySet Name="COMPTA_Currency" EntityType="SUPERPModel.COMPTA_Currency" />
+          <EntitySet Name="COMPTA_CustomerJournalLine" EntityType="SUPERPModel.COMPTA_CustomerJournalLine" />
+          <EntitySet Name="COMPTA_SupplierJournalLine" EntityType="SUPERPModel.COMPTA_SupplierJournalLine" />
+          <AssociationSet Name="FK__COMPTA_Cu__clien__151B244E" Association="SUPERPModel.FK__COMPTA_Cu__clien__151B244E">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="COMPTA_CustomerJournalLine" EntitySet="COMPTA_CustomerJournalLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Su__Suppl__17F790F9" Association="SUPERPModel.FK__COMPTA_Su__Suppl__17F790F9">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="COMPTA_SupplierJournalLine" EntitySet="COMPTA_SupplierJournalLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ac__chart__1CBC4616" Association="SUPERPModel.FK__COMPTA_Ac__chart__1CBC4616">
+            <End Role="COMPTA_ChartOfAccounts" EntitySet="COMPTA_ChartOfAccounts" />
+            <End Role="COMPTA_AccountingEntries" EntitySet="COMPTA_AccountingEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ba__bank___0F624AF8" Association="SUPERPModel.FK__COMPTA_Ba__bank___0F624AF8">
+            <End Role="COMPTA_Bank" EntitySet="COMPTA_Bank" />
+            <End Role="COMPTA_BankAccount" EntitySet="COMPTA_BankAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ba__bankA__123EB7A3" Association="SUPERPModel.FK__COMPTA_Ba__bankA__123EB7A3">
+            <End Role="COMPTA_BankAccount" EntitySet="COMPTA_BankAccount" />
+            <End Role="COMPTA_BankJournalLine" EntitySet="COMPTA_BankJournalLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ba__curre__0E6E26BF" Association="SUPERPModel.FK__COMPTA_Ba__curre__0E6E26BF">
+            <End Role="COMPTA_Currency" EntitySet="COMPTA_Currency" />
+            <End Role="COMPTA_BankAccount" EntitySet="COMPTA_BankAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ch__class__7C4F7684" Association="SUPERPModel.FK__COMPTA_Ch__class__7C4F7684">
+            <End Role="COMPTA_ClassOfAccounts" EntitySet="COMPTA_ClassOfAccounts" />
+            <End Role="COMPTA_ChartOfAccounts" EntitySet="COMPTA_ChartOfAccounts" />
+          </AssociationSet>
+          <EntitySet Name="BILL_StatusChain" EntityType="SUPERPModel.BILL_StatusChain" />
+          <AssociationSet Name="FK__BILL_Stat__NextS__2A164134" Association="SUPERPModel.FK__BILL_Stat__NextS__2A164134">
+            <End Role="BILL_Status" EntitySet="BILL_Status" />
+            <End Role="BILL_StatusChain" EntitySet="BILL_StatusChain" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL_Stat__Statu__29221CFB" Association="SUPERPModel.FK__BILL_Stat__Statu__29221CFB">
+            <End Role="BILL_Status" EntitySet="BILL_Status" />
+            <End Role="BILL_StatusChain" EntitySet="BILL_StatusChain" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Absence">
           <Key>
@@ -693,6 +985,8 @@
           <Property Name="Status_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Libel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BILL_BillQuotationStatus" Relationship="SUPERPModel.FK__BILL_Bill__Statu__534D60F1" FromRole="BILL_Status" ToRole="BILL_BillQuotationStatus" />
+          <NavigationProperty Name="BILL_StatusChain" Relationship="SUPERPModel.FK__BILL_Stat__NextS__2A164134" FromRole="BILL_Status" ToRole="BILL_StatusChain" />
+          <NavigationProperty Name="BILL_StatusChain1" Relationship="SUPERPModel.FK__BILL_Stat__Statu__29221CFB" FromRole="BILL_Status" ToRole="BILL_StatusChain" />
         </EntityType>
         <EntityType Name="BILL_Transmitter">
           <Key>
@@ -729,6 +1023,8 @@
           <Property Name="city" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Company_Contact" Relationship="SUPERPModel.FK__Company_C__compa__6383C8BA" FromRole="Company" ToRole="Company_Contact" />
           <NavigationProperty Name="BILL_BillQuotation" Relationship="SUPERPModel.FK_BillQuotation_Company" FromRole="Company" ToRole="BILL_BillQuotation" />
+          <NavigationProperty Name="COMPTA_CustomerJournalLine" Relationship="SUPERPModel.FK__COMPTA_Cu__clien__151B244E" FromRole="Company" ToRole="COMPTA_CustomerJournalLine" />
+          <NavigationProperty Name="COMPTA_SupplierJournalLine" Relationship="SUPERPModel.FK__COMPTA_Su__Suppl__17F790F9" FromRole="Company" ToRole="COMPTA_SupplierJournalLine" />
         </EntityType>
         <EntityType Name="Company_Contact">
           <Key>
@@ -757,7 +1053,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RoleModules" Relationship="SUPERPModel.FK_RoleModule_Module" FromRole="Module" ToRole="RoleModule" />
         </EntityType>
         <EntityType Name="Prime">
@@ -971,6 +1267,7 @@
           <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="postingDate" Type="DateTime" Precision="7" />
           <Property Name="chartOfAccount_id" Type="Int64" />
+          <NavigationProperty Name="COMPTA_ChartOfAccounts" Relationship="SUPERPModel.FK__COMPTA_Ac__chart__1CBC4616" FromRole="COMPTA_AccountingEntries" ToRole="COMPTA_ChartOfAccounts" />
         </EntityType>
         <EntityType Name="COMPTA_ExchangeRate">
           <Key>
@@ -1118,6 +1415,221 @@
             </Principal>
             <Dependent Role="BILL_Product">
               <PropertyRef Name="Vat_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="COMPTA_Bank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codeBank" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="codeGuichet" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COMPTA_BankAccount" Relationship="SUPERPModel.FK__COMPTA_Ba__bank___0F624AF8" FromRole="COMPTA_Bank" ToRole="COMPTA_BankAccount" />
+        </EntityType>
+        <EntityType Name="COMPTA_BankAccount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="swiftCode" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="IBAN" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="ABA" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="accountNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="RIB" Type="String" MaxLength="23" FixedLength="false" Unicode="false" />
+          <Property Name="keyRIB" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="currency_id" Type="Int64" />
+          <Property Name="bank_id" Type="Int64" />
+          <NavigationProperty Name="COMPTA_Bank" Relationship="SUPERPModel.FK__COMPTA_Ba__bank___0F624AF8" FromRole="COMPTA_BankAccount" ToRole="COMPTA_Bank" />
+          <NavigationProperty Name="COMPTA_BankJournalLine" Relationship="SUPERPModel.FK__COMPTA_Ba__bankA__123EB7A3" FromRole="COMPTA_BankAccount" ToRole="COMPTA_BankJournalLine" />
+          <NavigationProperty Name="COMPTA_Currency" Relationship="SUPERPModel.FK__COMPTA_Ba__curre__0E6E26BF" FromRole="COMPTA_BankAccount" ToRole="COMPTA_Currency" />
+        </EntityType>
+        <EntityType Name="COMPTA_BankJournalLine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="direction" Type="Boolean" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="postingDate" Type="DateTime" Precision="7" />
+          <Property Name="bankAccount_id" Type="Int64" />
+          <NavigationProperty Name="COMPTA_BankAccount" Relationship="SUPERPModel.FK__COMPTA_Ba__bankA__123EB7A3" FromRole="COMPTA_BankJournalLine" ToRole="COMPTA_BankAccount" />
+        </EntityType>
+        <EntityType Name="COMPTA_ChartOfAccounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="account_number" Type="Int64" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="class_id" Type="Int64" />
+          <NavigationProperty Name="COMPTA_AccountingEntries" Relationship="SUPERPModel.FK__COMPTA_Ac__chart__1CBC4616" FromRole="COMPTA_ChartOfAccounts" ToRole="COMPTA_AccountingEntries" />
+          <NavigationProperty Name="COMPTA_ClassOfAccounts" Relationship="SUPERPModel.FK__COMPTA_Ch__class__7C4F7684" FromRole="COMPTA_ChartOfAccounts" ToRole="COMPTA_ClassOfAccounts" />
+        </EntityType>
+        <EntityType Name="COMPTA_ClassOfAccounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number" Type="Int64" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="COMPTA_ChartOfAccounts" Relationship="SUPERPModel.FK__COMPTA_Ch__class__7C4F7684" FromRole="COMPTA_ClassOfAccounts" ToRole="COMPTA_ChartOfAccounts" />
+        </EntityType>
+        <EntityType Name="COMPTA_Currency">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="symbol" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="COMPTA_BankAccount" Relationship="SUPERPModel.FK__COMPTA_Ba__curre__0E6E26BF" FromRole="COMPTA_Currency" ToRole="COMPTA_BankAccount" />
+        </EntityType>
+        <EntityType Name="COMPTA_CustomerJournalLine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="direction" Type="Boolean" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="postingDate" Type="DateTime" Precision="7" />
+          <Property Name="clientAccount_id" Type="Int64" />
+          <NavigationProperty Name="Company" Relationship="SUPERPModel.FK__COMPTA_Cu__clien__151B244E" FromRole="COMPTA_CustomerJournalLine" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="COMPTA_SupplierJournalLine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="direction" Type="Boolean" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="postingDate" Type="DateTime" Precision="7" />
+          <Property Name="SupplierAccount_id" Type="Int64" />
+          <NavigationProperty Name="Company" Relationship="SUPERPModel.FK__COMPTA_Su__Suppl__17F790F9" FromRole="COMPTA_SupplierJournalLine" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK__COMPTA_Cu__clien__151B244E">
+          <End Type="SUPERPModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SUPERPModel.COMPTA_CustomerJournalLine" Role="COMPTA_CustomerJournalLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_CustomerJournalLine">
+              <PropertyRef Name="clientAccount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Su__Suppl__17F790F9">
+          <End Type="SUPERPModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SUPERPModel.COMPTA_SupplierJournalLine" Role="COMPTA_SupplierJournalLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_SupplierJournalLine">
+              <PropertyRef Name="SupplierAccount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Ac__chart__1CBC4616">
+          <End Type="SUPERPModel.COMPTA_ChartOfAccounts" Role="COMPTA_ChartOfAccounts" Multiplicity="0..1" />
+          <End Type="SUPERPModel.COMPTA_AccountingEntries" Role="COMPTA_AccountingEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_ChartOfAccounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_AccountingEntries">
+              <PropertyRef Name="chartOfAccount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Ba__bank___0F624AF8">
+          <End Type="SUPERPModel.COMPTA_Bank" Role="COMPTA_Bank" Multiplicity="0..1" />
+          <End Type="SUPERPModel.COMPTA_BankAccount" Role="COMPTA_BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_Bank">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_BankAccount">
+              <PropertyRef Name="bank_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Ba__bankA__123EB7A3">
+          <End Type="SUPERPModel.COMPTA_BankAccount" Role="COMPTA_BankAccount" Multiplicity="0..1" />
+          <End Type="SUPERPModel.COMPTA_BankJournalLine" Role="COMPTA_BankJournalLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_BankAccount">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_BankJournalLine">
+              <PropertyRef Name="bankAccount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Ba__curre__0E6E26BF">
+          <End Type="SUPERPModel.COMPTA_Currency" Role="COMPTA_Currency" Multiplicity="0..1" />
+          <End Type="SUPERPModel.COMPTA_BankAccount" Role="COMPTA_BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_Currency">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_BankAccount">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Ch__class__7C4F7684">
+          <End Type="SUPERPModel.COMPTA_ClassOfAccounts" Role="COMPTA_ClassOfAccounts" Multiplicity="0..1" />
+          <End Type="SUPERPModel.COMPTA_ChartOfAccounts" Role="COMPTA_ChartOfAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_ClassOfAccounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_ChartOfAccounts">
+              <PropertyRef Name="class_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BILL_StatusChain">
+          <Key>
+            <PropertyRef Name="StatusChain_Id" />
+          </Key>
+          <Property Name="StatusChain_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status_Id" Type="Int64" Nullable="false" />
+          <Property Name="NextStatus_Id" Type="Int64" />
+          <NavigationProperty Name="BILL_Status" Relationship="SUPERPModel.FK__BILL_Stat__NextS__2A164134" FromRole="BILL_StatusChain" ToRole="BILL_Status" />
+          <NavigationProperty Name="BILL_Status1" Relationship="SUPERPModel.FK__BILL_Stat__Statu__29221CFB" FromRole="BILL_StatusChain" ToRole="BILL_Status" />
+        </EntityType>
+        <Association Name="FK__BILL_Stat__NextS__2A164134">
+          <End Type="SUPERPModel.BILL_Status" Role="BILL_Status" Multiplicity="0..1" />
+          <End Type="SUPERPModel.BILL_StatusChain" Role="BILL_StatusChain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILL_Status">
+              <PropertyRef Name="Status_Id" />
+            </Principal>
+            <Dependent Role="BILL_StatusChain">
+              <PropertyRef Name="NextStatus_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BILL_Stat__Statu__29221CFB">
+          <End Type="SUPERPModel.BILL_Status" Role="BILL_Status" Multiplicity="1" />
+          <End Type="SUPERPModel.BILL_StatusChain" Role="BILL_StatusChain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILL_Status">
+              <PropertyRef Name="Status_Id" />
+            </Principal>
+            <Dependent Role="BILL_StatusChain">
+              <PropertyRef Name="Status_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1372,6 +1884,109 @@
                 <ScalarProperty Name="DescriptionPro" ColumnName="DescriptionPro" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPTA_Bank">
+            <EntityTypeMapping TypeName="SUPERPModel.COMPTA_Bank">
+              <MappingFragment StoreEntitySet="COMPTA_Bank">
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="codeGuichet" ColumnName="codeGuichet" />
+                <ScalarProperty Name="codeBank" ColumnName="codeBank" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+                <ScalarProperty Name="address3" ColumnName="address3" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="address1" ColumnName="address1" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPTA_BankAccount">
+            <EntityTypeMapping TypeName="SUPERPModel.COMPTA_BankAccount">
+              <MappingFragment StoreEntitySet="COMPTA_BankAccount">
+                <ScalarProperty Name="bank_id" ColumnName="bank_id" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="keyRIB" ColumnName="keyRIB" />
+                <ScalarProperty Name="RIB" ColumnName="RIB" />
+                <ScalarProperty Name="accountNumber" ColumnName="accountNumber" />
+                <ScalarProperty Name="ABA" ColumnName="ABA" />
+                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+                <ScalarProperty Name="swiftCode" ColumnName="swiftCode" />
+                <ScalarProperty Name="shortName" ColumnName="shortName" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPTA_BankJournalLine">
+            <EntityTypeMapping TypeName="SUPERPModel.COMPTA_BankJournalLine">
+              <MappingFragment StoreEntitySet="COMPTA_BankJournalLine">
+                <ScalarProperty Name="bankAccount_id" ColumnName="bankAccount_id" />
+                <ScalarProperty Name="postingDate" ColumnName="postingDate" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="direction" ColumnName="direction" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPTA_ChartOfAccounts">
+            <EntityTypeMapping TypeName="SUPERPModel.COMPTA_ChartOfAccounts">
+              <MappingFragment StoreEntitySet="COMPTA_ChartOfAccounts">
+                <ScalarProperty Name="class_id" ColumnName="class_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPTA_ClassOfAccounts">
+            <EntityTypeMapping TypeName="SUPERPModel.COMPTA_ClassOfAccounts">
+              <MappingFragment StoreEntitySet="COMPTA_ClassOfAccounts">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPTA_Currency">
+            <EntityTypeMapping TypeName="SUPERPModel.COMPTA_Currency">
+              <MappingFragment StoreEntitySet="COMPTA_Currency">
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPTA_CustomerJournalLine">
+            <EntityTypeMapping TypeName="SUPERPModel.COMPTA_CustomerJournalLine">
+              <MappingFragment StoreEntitySet="COMPTA_CustomerJournalLine">
+                <ScalarProperty Name="clientAccount_id" ColumnName="clientAccount_id" />
+                <ScalarProperty Name="postingDate" ColumnName="postingDate" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="direction" ColumnName="direction" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPTA_SupplierJournalLine">
+            <EntityTypeMapping TypeName="SUPERPModel.COMPTA_SupplierJournalLine">
+              <MappingFragment StoreEntitySet="COMPTA_SupplierJournalLine">
+                <ScalarProperty Name="SupplierAccount_id" ColumnName="SupplierAccount_id" />
+                <ScalarProperty Name="postingDate" ColumnName="postingDate" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="direction" ColumnName="direction" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BILL_StatusChain">
+            <EntityTypeMapping TypeName="SUPERPModel.BILL_StatusChain">
+              <MappingFragment StoreEntitySet="BILL_StatusChain">
+                <ScalarProperty Name="NextStatus_Id" ColumnName="NextStatus_Id" />
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+                <ScalarProperty Name="StatusChain_Id" ColumnName="StatusChain_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

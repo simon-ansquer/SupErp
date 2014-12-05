@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SupErp.DAL.FacturationDAL;
 using SupErp.Entities;
+using SupErp.DAL.FacturationModele;
 
 namespace SupErp.BLL.FacturationBLL
 {
@@ -13,13 +14,14 @@ namespace SupErp.BLL.FacturationBLL
         private static readonly Lazy<LineBillQuotationDAL> LazyLineDAL = new Lazy<LineBillQuotationDAL>(() => new LineBillQuotationDAL());
         private static LineBillQuotationDAL DAL { get { return LazyLineDAL.Value; } }
 
+
         #region Read
 
-        public IEnumerable<BILL_LineBillQuotation> GetLineBillQuotation(long billQuotation_id)
+        public List<BILL_LineBillQuotation> GetLineBillQuotation(long billQuotation_id)
         {
-            return DAL.GetLineBillQuotation(billQuotation_id);
+            return DAL.GetLineBillQuotation(billQuotation_id).ToList();
         }
-
+        
         #endregion
 
         #region Create

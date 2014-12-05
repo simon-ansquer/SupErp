@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using SupErp.Entities;
 using SupErp.DAL.FacturationDAL;
+using SupErp.DAL.FacturationModele;
 
 namespace SupErp.BLL.FacturationBLL
 {
-    class BillProductBLL
+    public class BillProductBLL
     {
         private static readonly Lazy<BillProductDAL> LazyBillProdDAL = new Lazy<BillProductDAL>(() => new BillProductDAL());
         private static BillProductDAL billProdDAL { get { return LazyBillProdDAL.Value; } }
@@ -17,6 +18,11 @@ namespace SupErp.BLL.FacturationBLL
         public List<BILL_Product> GetBillProduct()
         {
             return billProdDAL.GetBillProduct();
+        }
+
+        public List<ProductExtended> getListProductIncludedOrNot(long billquotation_id)
+        {
+            return GetBillProduct().Select(p => new ProductExtended(p, billquotation_id)).ToList();
         }
 
         public List<BILL_Product> GetProducts()
