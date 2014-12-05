@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using WpfControlLibrarySalaire.Helpers;
 using WpfControlLibrarySalaire.ServiceSalaire;
 using WpfControlLibrarySalaire.Views;
+using MessageBox = System.Windows.MessageBox;
 
 
 namespace WpfControlLibrarySalaire.ViewModels
@@ -82,7 +83,7 @@ namespace WpfControlLibrarySalaire.ViewModels
         #region Command Handlers
         private void OnGeneratePDFClick()
         {
-            MessageBox.Show("PDF");
+            // TODO
         }
 
         private async void OnSearchButtonClick()
@@ -105,7 +106,9 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         private void OnPdfClick(int index)
         {
-            
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            DialogResult result = fbd.ShowDialog();
+            //PDFGenerator.generate(Employees[index], fbd.SelectedPath);
         }
         #endregion
     }
