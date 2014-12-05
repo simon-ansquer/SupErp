@@ -15,6 +15,8 @@ namespace SupErpModuleUser.ViewModels
 
         public ListRoleViewModel()
         {
+            //Roles = new UserService.UserServiceClient().GetRoles().ToRoles().ToList();
+
             IHMRole role1 = new IHMRole();
             role1.Id = 1;
             role1.Label = "Role 1";

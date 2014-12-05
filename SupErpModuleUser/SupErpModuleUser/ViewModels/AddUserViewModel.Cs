@@ -19,6 +19,7 @@ namespace SupErpModuleUser.ViewModels
         public AddUserViewModel()
         {
             User = new IHMUser();
+            User.IsNew = false;
             //using (UserServiceClient wcf = new UserServiceClient())
             //{
             //    Roles = wcf.GetRoles().ToRoles();

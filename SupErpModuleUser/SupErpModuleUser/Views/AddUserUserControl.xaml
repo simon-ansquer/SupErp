@@ -4,9 +4,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:c="clr-namespace:SupErpModuleUser.Helpers.Converters"
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="700" d:DesignWidth="500">
+    
+    <UserControl.Resources>
+        <c:UserButtonTextConverter x:Key="UserButtonTextConverter"/>
+        <c:UserTitleConverter x:Key="UserTitleConverer"/>
+    </UserControl.Resources>
     
     <UserControl.DataContext>
         <viewModels:AddUserViewModel/>
@@ -58,7 +64,7 @@
                 Grid.Column="0"
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
-                Text="Nouveau Utilisateur"
+                    Text="{Binding Path=User.IsNew, Converter={StaticResource ResourceKey=UserTitleConverer}}"
                 Foreground="Blue"
                 FontSize="20"
                 HorizontalAlignment="Center"
@@ -252,6 +258,7 @@
                         <Button
                     Grid.Column="1"
                     Grid.Row="0"
+                            Content="{Binding Path=User.IsNew, Converter={StaticResource ResourceKey=UserButtonTextConverter}}"
                     FontSize="18"
                     Foreground="Blue"
                     Background="White"

@@ -54,6 +54,8 @@
     <Compile Include="Helpers\ActionCommand.cs" />
     <Compile Include="Helpers\Converters\RoleButtonTextConverter.cs" />
     <Compile Include="Helpers\Converters\RoleTitleConverter.cs" />
+    <Compile Include="Helpers\Converters\UserButtonTextConverter.cs" />
+    <Compile Include="Helpers\Converters\UserTitleConverter.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Helpers\ModuleAdapter.cs" />
     <Compile Include="Helpers\RoleAdapter.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="ViewModels\AddRoleViewModel.cs" />
     <Compile Include="ViewModels\AddUserViewModel.cs" />
     <Compile Include="ViewModels\ListRoleViewModel.cs" />
+    <Compile Include="ViewModels\ListUserViewModel.cs" />
     <Compile Include="Views\AddRoleUserControl.xaml.cs">
       <DependentUpon>AddRoleUserControl.xaml</DependentUpon>
     </Compile>

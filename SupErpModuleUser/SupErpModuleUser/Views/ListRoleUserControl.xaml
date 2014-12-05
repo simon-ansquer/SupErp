@@ -33,7 +33,7 @@
                 FontSize="20"/>
             
             <TextBlock
-                Text=" Rôle"
+                Text=" Rôles"
                 Foreground="Blue"
                 VerticalAlignment="Center"/>
             

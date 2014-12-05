@@ -28,5 +28,13 @@ namespace SupErpModuleUser.Helpers
                 Role_id = user.Role.Id
             };
         }
+
+        public static IEnumerable<IHMUser> ToIHMUser(this IEnumerable<User> users)
+        {
+            foreach(User user in users)
+            {
+                yield return user.ToIHMUser();
+            }
+        }
     }
 }
