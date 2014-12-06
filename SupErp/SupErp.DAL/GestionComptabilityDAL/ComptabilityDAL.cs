@@ -229,6 +229,168 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
+        public bool DeleteChartOfAccounts(int id)
+        {
+            using(SUPERPEntities context = new SUPERPEntities(false))
+            {
+                try
+                {
+                    context.COMPTA_ChartOfAccounts.Remove(context.COMPTA_ChartOfAccounts.Find(id));
+                    context.SaveChanges();
+                    return true;
+                }
+                catch(Exception e)
+                {
+                    Debug.WriteLine("Echec de suppression du compte comptable : " + e.Message);
+                    return false;
+                }
+            }
+        }
+
+        public bool DeleteExchangeRate(int id)
+        {
+            using(SUPERPEntities context = new SUPERPEntities(false))
+            {
+                try
+                {
+                    context.COMPTA_ExchangeRate.Remove(context.COMPTA_ExchangeRate.Find(id));
+                    context.SaveChanges();
+                    return true;
+                }
+                catch(Exception e)
+                {
+                    Debug.WriteLine("Echec de suppression du taux de change : " + e.Message);
+                    return false;
+                }
+            }
+        }
+
+        public bool DeleteCurrency(int id)
+        {
+            using(SUPERPEntities context = new SUPERPEntities(false))
+            {
+                try
+                {
+                    context.COMPTA_Currency.Remove(context.COMPTA_Currency.Find(id));
+                    context.SaveChanges();
+                    return true;
+                }
+                catch(Exception e)
+                {
+                    Debug.WriteLine("Echec de suppression de la devise : " + e.Message);
+                    return false;
+                }
+            }
+        }
+
+        public bool DeleteBank(int id)
+        {
+            using(SUPERPEntities context = new SUPERPEntities(false))
+            {
+                try
+                {
+                    context.COMPTA_Bank.Remove(context.COMPTA_Bank.Find(id));
+                    context.SaveChanges();
+                    return true;
+                }
+                catch(Exception e)
+                {
+                    Debug.WriteLine("Echec de suppression de la banque : " + e.Message);
+                    return false;
+                }
+            }
+        }
+
+        public bool DeleteBankAccount(int id)
+        {
+            using(SUPERPEntities context = new SUPERPEntities(false))
+            {
+                try
+                {
+                    context.COMPTA_BankAccount.Remove(context.COMPTA_BankAccount.Find(id));
+                    context.SaveChanges();
+                    return true;
+                }
+                catch(Exception e)
+                {
+                    Debug.WriteLine("Echec de suppression du compte bancaire : " + e.Message);
+                    return false;
+                }
+            }
+        }
+
+        public bool DeleteAccountingEntry(int id)
+        {
+            using(SUPERPEntities context = new SUPERPEntities(false))
+            {
+                try
+                {
+                    context.COMPTA_AccountingEntries.Remove(context.COMPTA_AccountingEntries.Find(id));
+                    context.SaveChanges();
+                    return true;
+                }
+                catch(Exception e)
+                {
+                    Debug.WriteLine("Echec de suppression de la ligne du journal général : " + e.Message);
+                    return false;
+                }
+            }
+        }
+
+        public bool DeleteBankJournalLine(int id)
+        {
+            using(SUPERPEntities context = new SUPERPEntities(false))
+            {
+                try
+                {
+                    context.COMPTA_BankJournalLine.Remove(context.COMPTA_BankJournalLine.Find(id));
+                    context.SaveChanges();
+                    return true;
+                }
+                catch(Exception e)
+                {
+                    Debug.WriteLine("Echec de suppression de la ligne du journal de banque " + e.Message);
+                    return false;
+                }
+            }
+        }
+
+        public bool DeleteCustomerJournalLine(int id)
+        {
+            using(SUPERPEntities context = new SUPERPEntities(false))
+            {
+                try
+                {
+                    context.COMPTA_CustomerJournalLine.Remove(context.COMPTA_CustomerJournalLine.Find(id));
+                    context.SaveChanges();
+                    return true;
+                }
+                catch(Exception e)
+                {
+                    Debug.WriteLine("Echec de suppression de la ligne du journal client : " + e.Message);                    
+                    return false;
+                }
+            }
+        }
+
+        public bool DeleteSupplierJournalLine(int id)
+        {
+            using(SUPERPEntities context = new SUPERPEntities(false))
+            {
+                try
+                {
+                    context.COMPTA_SupplierJournalLine.Remove(context.COMPTA_SupplierJournalLine.Find(id));
+                    context.SaveChanges();
+                    return true;
+                }
+                catch(Exception e)
+                {
+                    Debug.WriteLine("Echec de suppression de la ligne du journal fournisseur : " + e.Message);
+                    return false;
+                }
+            }
+        }
+
         #endregion
     }
 }
