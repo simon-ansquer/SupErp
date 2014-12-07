@@ -38,18 +38,32 @@ namespace SupErpModuleUser.ViewModels
         public AddUpdateRoleViewModel(int roleId)
         {
             //Role = role.ToIHMRole();
-            Role = new IHMRole();
-            Role.Label = "Test";
-            //Modules = new UserService.UserServiceClient().GetModules();
+            //Role = new IHMRole();
+            //Role.Label = "Test";
+            ////Modules = new UserService.UserServiceClient().GetModules();
 
-            IHMModule module1 = new IHMModule();
-            module1.Name = "Utilisateur";
-            IHMModule module2 = new IHMModule();
-            module2.Name = "Salaire";
+            //IHMModule module1 = new IHMModule();
+            //module1.Name = "Utilisateur";
+            //IHMModule module2 = new IHMModule();
+            //module2.Name = "Salaire";
 
-            Modules = new List<IHMModule>();
-            Modules.Add(module1);
-            Modules.Add(module2);
+            //Modules = new List<IHMModule>();
+            //Modules.Add(module1);
+            //Modules.Add(module2);
+
+            using(UserServiceClient ws = new UserServiceClient())
+            {
+                var rep = ws.GetRoleById(roleId);
+                if (rep != null)
+                {
+                    Role = rep.ToIHMRole();
+                    if (Role.Modules != null)
+                        Modules = Role.Modules.ToList();
+                    else
+                        Modules = new List<IHMModule>();
+                }
+                Role = new IHMRole();
+            }
         }
 
         #region Commands
