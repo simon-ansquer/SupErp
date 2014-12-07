@@ -46,7 +46,7 @@ namespace SupErp.DAL.ModuleUser
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.Roles.Include("RoleModules").ToList();
+                return context.Roles.Include("RoleModules").Include("RoleModules.Module").Include("RoleModules.Role").ToList();
             }
         }
 
