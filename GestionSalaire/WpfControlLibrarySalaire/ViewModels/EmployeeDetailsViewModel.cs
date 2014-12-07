@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.ServiceModel.Channels;
+using System.Windows;
 using System.Windows.Input;
 using WpfControlLibrarySalaire.Helpers;
 using System.Collections.ObjectModel;
@@ -10,6 +13,7 @@ namespace WpfControlLibrarySalaire.ViewModels
 {
     public class EmployeeDetailsViewModel : BaseViewModel
     {
+        #region Properties
         private User _employee;
         public User Employee
         {
@@ -26,7 +30,6 @@ namespace WpfControlLibrarySalaire.ViewModels
         }
 
         private ObservableCollection<Status> _listStatus;
-
         public ObservableCollection<Status> ListStatus
         {
             get { return _listStatus; }
@@ -60,21 +63,56 @@ namespace WpfControlLibrarySalaire.ViewModels
             }
         }
 
-        private readonly DelegateCommand<object> _addPrimeClickCommand;
-        public DelegateCommand<object> ButtonAddPrimeClickCommand
+        private DateTime _inputAbscenceStart;
+        public DateTime InputAbscenceStart
         {
-            get { return _addPrimeClickCommand; }
+            get { return _inputAbscenceStart; }
+            set
+            {
+                _inputAbscenceStart = value;
+                _addAbscenceClickCommand.RaiseCanExecuteChanged();
+            }
         }
+
+        private DateTime _inputAbscenceEnd;
+        public DateTime InputAbscenceEnd
+        {
+            get { return _inputAbscenceEnd; }
+            set
+            {
+                _inputAbscenceEnd = value;
+                _addAbscenceClickCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        private Status _userStatus;
+
+        public Status UserStatus
+        {
+            get { return _userStatus; }
+            set
+            {
+                _userStatus = value;
+                RaisePropertyChanged(() => UserStatus);
+            }
+        }
+        #endregion
 
         public EmployeeDetailsViewModel(User employee)
         {
             Employee = employee;
+            UserStatus = employee.Status;
+            if(UserStatus == null)
+                UserStatus = new Status(){id = -1};
+            else
+                UserStatus.id -= 1;
             InitializeStatus();
-            _addPrimeClickCommand = new DelegateCommand<object>(
+            _addPrimeClickCommand = new DelegateCommand<string>(
                 OnAddPrimeButtonClick
             );
+            _addAbscenceClickCommand = new DelegateCommand<string>(OnAddAbscenceButtonClick);
+
         }
-        
 
         private async void InitializeStatus()
         {
@@ -83,6 +121,18 @@ namespace WpfControlLibrarySalaire.ViewModels
         }
 
         #region Commands
+        private readonly DelegateCommand<string> _addAbscenceClickCommand;
+        public DelegateCommand<string> ButtonAddAbsenceClickCommand
+        {
+            get { return _addAbscenceClickCommand; }
+        }
+
+        private readonly DelegateCommand<string> _addPrimeClickCommand;
+        public DelegateCommand<string> ButtonAddPrimeClickCommand
+        {
+            get { return _addPrimeClickCommand; }
+        }
+
         public ICommand PreviousCommand
         {
             get
@@ -100,10 +150,15 @@ namespace WpfControlLibrarySalaire.ViewModels
                 return new DelegateCommand<User>(OnHistoryClick);
             }
         }
+
+        public ICommand SaveCommand
+        {
+            get { return new DelegateCommand<string>(OnSaveClick); }
+        }
         #endregion
 
         #region Command Handlers
-        
+
         private void OnPreviousClick()
         {
             Switcher.Switch(new EmployeesList());
@@ -115,11 +170,66 @@ namespace WpfControlLibrarySalaire.ViewModels
             Switcher.Switch(employeeHistory);
         }
 
-        private void OnAddPrimeButtonClick(object values)
+        private void OnAddPrimeButtonClick(string s)
         {
-            var input = InputPrimeName + InputPrimePrice;
-            //ServiceSalaire.addPrime(Employee.Id, new Prime());
+            try
+            {
+                int primePrice = int.Parse(InputPrimePrice);
+                if (InputPrimeName == string.Empty)
+                    throw new ArgumentNullException();
+                //ServiceSalaire.addPrime(Employee.Id, new Prime());
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("Les paramètres sont invalides, recommencer", "Erreur de paramètres",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Merci d'indiquer un nombre pour le montant.", "Erreur de montant", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
         }
+
+        private void OnAddAbscenceButtonClick(string s)
+        {
+            try
+            {
+                var absenceStart = InputAbscenceStart;
+                var absenceEnd = InputAbscenceEnd;
+
+                //ServiceSalaire.addPrime(Employee.Id, new Prime());
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("Les paramètres sont invalides, recommencer", "Erreur de paramètres",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Merci d'indiquer un nombre pour le montant.", "Erreur de montant", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+
+        private void OnSaveClick(string s)
+        {
+            if (UserStatus.id == -1) return;
+            try
+            {
+                if (!ServiceSalaire.UpdateUserState(Employee.Id, UserStatus.id))
+                {
+                    MessageBox.Show("Erreur pendant la mise à jour du statut,\nVeuillez réessayer.",
+                        "Erreur mise à jour statut", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Le service n'est pas disponible pour le moment", "Service non disponible",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         #endregion
 
     }
