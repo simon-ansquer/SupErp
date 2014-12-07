@@ -15,6 +15,8 @@ namespace SupErp.DAL.ModuleUser
 
         public User Login(string email, string password)
         {
+            if (email == null || password == null)
+                return null;
 
             using (var context = new SUPERPEntities(false))
             {
@@ -28,6 +30,9 @@ namespace SupErp.DAL.ModuleUser
 
         public User GetUserById(int id)
         {
+            if (id < 0)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.Users.Include("Role").FirstOrDefault(x => x.Id == id);
@@ -52,6 +57,9 @@ namespace SupErp.DAL.ModuleUser
 
         public Role GetRoleById(int roleId)
         {
+            if (roleId < 0)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 return context.Roles.Include("RoleModules").FirstOrDefault(x => x.Id == roleId);
@@ -68,11 +76,15 @@ namespace SupErp.DAL.ModuleUser
 
         public Role GetRoleByUserId(int userId)
         {
+            if (userId < 0)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var r = context.Users.Find(userId);
                 if(r == null)
                     return null;
+
                 return r.Role;
             }
         }
@@ -83,6 +95,9 @@ namespace SupErp.DAL.ModuleUser
 
         public User CreateUser(User userToAdd)
         {
+            if (userToAdd == null)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 userToAdd.Passwordhash = Encrypt.hashSHA256(userToAdd.Passwordhash);
@@ -94,6 +109,9 @@ namespace SupErp.DAL.ModuleUser
 
         public Role CreateRole(Role roleToAdd)
         {
+            if (roleToAdd == null)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var r = context.Roles.Add(roleToAdd);
@@ -108,6 +126,9 @@ namespace SupErp.DAL.ModuleUser
 
         public User EditUser(User userToEdit)
         {
+            if (userToEdit == null)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var u = context.Users.Find(userToEdit.Id);
@@ -123,6 +144,9 @@ namespace SupErp.DAL.ModuleUser
 
         public Role EditRole(Role roleToEdit)
         {
+            if (roleToEdit == null)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var r = context.Roles.Find(roleToEdit.Id);

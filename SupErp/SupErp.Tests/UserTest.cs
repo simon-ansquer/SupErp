@@ -22,6 +22,13 @@ namespace SupErp.Tests
         [TestMethod]
         public void TestLogin()
         {
+            Assert.IsNotNull(userService.Login("", ""));
+        }
+
+        [TestMethod]
+        public void TestLoginError()
+        {
+            Assert.IsNull(userService.Login(null, null));
         }
 
         [TestMethod]
@@ -37,15 +44,39 @@ namespace SupErp.Tests
         }
 
         [TestMethod]
+        public void TestGetUserByIdError()
+        {
+            Assert.IsNull(userService.GetUserById(-1));
+        }
+
+        [TestMethod]
         public void TestGetRoleByUserId()
         {
             Assert.IsNotNull(userService.GetRoleByUserId(0));
         }
 
         [TestMethod]
+        public void TestGetRoleByUserIdError()
+        {
+            Assert.IsNull(userService.GetRoleByUserId(-1));
+        }
+
+        [TestMethod]
         public void TestGetRoles()
         {
             Assert.IsTrue(userService.GetRoles().ToList().Count > 0);
+        }
+
+        [TestMethod]
+        public void TestGetRoleById()
+        {
+            Assert.IsNotNull(userService.GetRoleById(0));
+        }
+
+        [TestMethod]
+        public void TestGetRoleByIdError()
+        {
+            Assert.IsNull(userService.GetRoleById(-1));
         }
 
         [TestMethod]
@@ -71,6 +102,12 @@ namespace SupErp.Tests
         }
 
         [TestMethod]
+        public void TestCreateUserNull()
+        {
+            Assert.IsNull(userService.CreateUser(null));
+        }
+
+        [TestMethod]
         public void TestCreateRole()
         {
             Role newRole = new Role();
@@ -80,12 +117,24 @@ namespace SupErp.Tests
         }
 
         [TestMethod]
+        public void TestCreateRoleNull()
+        {
+            Assert.IsNull(userService.CreateRole(null));
+        }
+
+        [TestMethod]
         public void TestEditUser()
         {
             User editUser = userService.GetUserById(0);
-            editUser.Firstname += " - Test de modification";
+            editUser.Firstname += " - Text de modification";
 
             Assert.IsNotNull(userService.EditUser(editUser));
+        }
+
+        [TestMethod]
+        public void TestEditUserNull()
+        {
+            Assert.IsNull(userService.EditUser(null));
         }
 
         [TestMethod]
@@ -98,15 +147,33 @@ namespace SupErp.Tests
         }
 
         [TestMethod]
+        public void TestEditRoleNull()
+        {
+            Assert.IsNull(userService.EditRole(null));
+        }
+
+        [TestMethod]
         public void TestDeleteUser()
         {
             Assert.IsTrue(userService.DeleteUser((int) userService.GetUserById(1).Id));
         }
 
         [TestMethod]
+        public void TestDeleteUserException()
+        {
+            Assert.IsFalse(userService.DeleteUser(-1));
+        }
+
+        [TestMethod]
         public void TestDeleteRole()
         {
             Assert.IsTrue(userService.DeleteRole((int) (userService.GetRoles().ToList())[0].Id));
+        }
+
+        [TestMethod]
+        public void TestDeleteRoleException()
+        {
+            Assert.IsFalse(userService.DeleteRole(-1));
         }
     }
 }
