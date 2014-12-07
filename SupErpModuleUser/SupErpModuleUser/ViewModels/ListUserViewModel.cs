@@ -70,7 +70,9 @@ namespace SupErpModuleUser.ViewModels
         #region Command Handlers
 
         private void OnImageClicked(object id)
-        { }
+        {
+            Switcher.Switch(new AddUpdateUserUserControl(new AddUpdateUserViewModel(int.Parse(id.ToString()))));
+        }
 
         #endregion
     }

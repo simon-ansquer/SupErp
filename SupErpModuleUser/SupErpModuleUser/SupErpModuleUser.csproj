@@ -52,13 +52,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\ActionCommand.cs" />
+    <Compile Include="Helpers\Converters\PasswordVisibilityConverter.cs" />
     <Compile Include="Helpers\Converters\RoleButtonTextConverter.cs" />
     <Compile Include="Helpers\Converters\RoleTitleConverter.cs" />
     <Compile Include="Helpers\Converters\UserButtonTextConverter.cs" />
     <Compile Include="Helpers\Converters\UserTitleConverter.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Helpers\ModuleAdapter.cs" />
+    <Compile Include="Helpers\PageSwitcher.cs" />
     <Compile Include="Helpers\RoleAdapter.cs" />
+    <Compile Include="Helpers\Switcher.cs" />
     <Compile Include="Helpers\UserAdapter.cs" />
     <Compile Include="Models\IHMModel.cs" />
     <Compile Include="Models\IHMRole.cs" />
@@ -69,15 +72,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\AddRoleViewModel.cs" />
-    <Compile Include="ViewModels\AddUserViewModel.cs" />
+    <Compile Include="ViewModels\AddUpdateRoleViewModel.cs" />
+    <Compile Include="ViewModels\AddUpdateUserViewModel.cs" />
     <Compile Include="ViewModels\ListRoleViewModel.cs" />
     <Compile Include="ViewModels\ListUserViewModel.cs" />
-    <Compile Include="Views\AddRoleUserControl.xaml.cs">
-      <DependentUpon>AddRoleUserControl.xaml</DependentUpon>
+    <Compile Include="Views\AddUpdateRoleUserControl.xaml.cs">
+      <DependentUpon>AddUpdateRoleUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AddUserUserControl.xaml.cs">
-      <DependentUpon>AddUserUserControl.xaml</DependentUpon>
+    <Compile Include="Views\AddUpdateUserUserControl.xaml.cs">
+      <DependentUpon>AddUpdateUserUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ListRoleUserControl.xaml.cs">
       <DependentUpon>ListRoleUserControl.xaml</DependentUpon>
@@ -85,17 +88,20 @@
     <Compile Include="Views\ListUserUserControl.xaml.cs">
       <DependentUpon>ListUserUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PageSwitcher.xaml.cs">
+      <DependentUpon>PageSwitcher.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RoleUserControl.xaml.cs">
       <DependentUpon>RoleUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserUserControl.xaml.cs">
       <DependentUpon>UserUserControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\AddRoleUserControl.xaml">
+    <Page Include="Views\AddUpdateRoleUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddUserUserControl.xaml">
+    <Page Include="Views\AddUpdateUserUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ListUserUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PageSwitcher.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

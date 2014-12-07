@@ -1,4 +1,5 @@
 ﻿using SupErp.Shared;
+using SupErpModuleUser.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,19 +18,24 @@ using System.Windows.Shapes;
 namespace SupErpModuleUser
 {
     /// <summary>
-    /// Logique d'interaction pour AddUserUserControl.xaml
+    /// Logique d'interaction pour AddRoleUserControl.xaml
     /// </summary>
-    public partial class AddUserUserControl : UserControl, ISubMenu
+    public partial class AddUpdateRoleUserControl : UserControl, ISubMenu
     {
-
-        public AddUserUserControl()
+        public AddUpdateRoleUserControl()
         {
             InitializeComponent();
         }
 
+        public AddUpdateRoleUserControl(AddUpdateRoleViewModel viewModel)
+        {
+            InitializeComponent();
+            this.DataContext = viewModel;
+        }
+
         public string SubMenuName
         {
-            get { return "Ajouter utilisateur"; }
+            get { return "Ajouter un rôle"; }
         }
 
         public List<ISubMenu> SubMenus

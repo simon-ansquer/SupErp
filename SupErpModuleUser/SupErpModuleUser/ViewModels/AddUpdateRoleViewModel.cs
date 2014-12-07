@@ -11,12 +11,12 @@ using SupErpModuleUser.UserService;
 
 namespace SupErpModuleUser.ViewModels
 {
-    public class AddRoleViewModel
+    public class AddUpdateRoleViewModel
     {
         public IHMRole Role { get; set; }
         public List<IHMModule> Modules { get; set; }
 
-        public AddRoleViewModel()
+        public AddUpdateRoleViewModel()
         {
             Role = new IHMRole();
 
@@ -35,10 +35,11 @@ namespace SupErpModuleUser.ViewModels
             Modules.Add(module3);
         }
 
-        public AddRoleViewModel(Role role)
+        public AddUpdateRoleViewModel(int roleId)
         {
-            Role = role.ToIHMRole();
-
+            //Role = role.ToIHMRole();
+            Role = new IHMRole();
+            Role.Label = "Test";
             //Modules = new UserService.UserServiceClient().GetModules();
 
             IHMModule module1 = new IHMModule();
@@ -74,10 +75,14 @@ namespace SupErpModuleUser.ViewModels
                 new UserService.UserServiceClient().CreateRole(Role.ToRole());
             else
                 new UserService.UserServiceClient().EditRole(Role.ToRole());
+
+            Switcher.Switch(new ListRoleUserControl());
         }
 
         private void OnCancel() 
-        { }
+        {
+            Switcher.Switch(new ListRoleUserControl());
+        }
 
         #endregion
     }

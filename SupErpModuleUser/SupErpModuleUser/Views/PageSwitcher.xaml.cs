@@ -1,5 +1,4 @@
-﻿using SupErpModuleUser;
-using SupErpModuleUser.Views;
+﻿using SupErpModuleUser.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,21 +14,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SupErpIHMUser
+namespace SupErpModuleUser.Views
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour PageSwitcher.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PageSwitcher : UserControl
     {
-        public MainWindow()
+        public PageSwitcher()
         {
             InitializeComponent();
+            Switcher.PageSwitcher = this;
+            Switcher.Switch(new ListUserUserControl());
+        }
 
-            Frame uneFrame = new Frame();
-            MainGrid.Children.Add(uneFrame);
-            uneFrame.Navigate(new PageSwitcher());
-            
+        internal void Navigate(UserControl goToUserControl)
+        {
+            this.Content = goToUserControl;
         }
     }
 }

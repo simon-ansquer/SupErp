@@ -44,7 +44,9 @@ namespace SupErpModuleUser.ViewModels
         #region Command Handlers
 
         private void OnImageClicked(object id)
-        { }
+        {
+            Switcher.Switch(new AddUpdateRoleUserControl(new AddUpdateRoleViewModel(int.Parse(id.ToString())))); 
+        }
 
         #endregion
 
