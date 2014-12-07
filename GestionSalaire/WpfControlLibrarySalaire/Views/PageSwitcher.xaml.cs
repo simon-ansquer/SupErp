@@ -1,5 +1,6 @@
 ﻿using SupErp.Shared;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using WpfControlLibrarySalaire.Helpers;
@@ -22,11 +23,6 @@ namespace WpfControlLibrarySalaire.Views
         internal void Navigate(UserControl newPage)
         {
             Content = newPage;
-        }
-
-        internal void Navigate(UserControl newPage)
-        {
-            this.Content = newPage;
         }
 
         public string MenuName
