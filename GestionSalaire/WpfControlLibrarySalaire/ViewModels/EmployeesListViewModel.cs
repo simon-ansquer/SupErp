@@ -44,6 +44,7 @@ namespace WpfControlLibrarySalaire.ViewModels
                     employee.Lastname = employee.Lastname.Trim();
                     employee.Firstname = employee.Firstname.Trim();
                     employee.Salaries.Reverse();
+                    employee.Absences.Reverse();
                     Employees.Add(employee);
                 }
             }
