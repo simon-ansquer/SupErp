@@ -17,7 +17,7 @@ namespace SupErp.WCF.FacturationWCF
         List<BillQuotationLight> GetListQuotation();
 
         [OperationContract]
-        List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, long? status, int? MontantHTMin, int? MontantHTMax, int? MontantTTCMin, int? MontantTTCMax, bool? isBill);
+        List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, long? status, int? MontantHTMin, int? MontantHTMax, bool? isBill);
 
         [OperationContract]
         BillQuotationComplete GetBillQuotation(long billQuotation_id);

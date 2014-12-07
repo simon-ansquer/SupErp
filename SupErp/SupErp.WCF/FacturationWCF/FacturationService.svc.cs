@@ -26,7 +26,7 @@ namespace SupErp.WCF.FacturationWCF
             return billQuotationBLL.GetBillQuotation().OrderBy(b => b.DateBillQuotation).ToList();
         }
 
-        public List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, long? status,int? MontantHTMin, int? MontantHTMax, int? MontantTTCMin, int? MontantTTCMax, bool? isBill)
+        public List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, long? status,int? MontantHTMin, int? MontantHTMax, bool? isBill)
         {
             var list = new List<BillQuotationLight>();
 
@@ -65,19 +65,19 @@ namespace SupErp.WCF.FacturationWCF
                 else
                     list.Where(b => b.AmountDF < MontantHTMax);
 
-            /*** Filtre MontantTTCMin ***/
-            if (MontantTTCMin != null)
-                if (list.Count == 0)
-                    list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC > MontantTTCMin).ToList());
-                else
-                    list.Where(b => b.AmountTTC > MontantTTCMin);
+            ///*** Filtre MontantTTCMin ***/
+            //if (MontantTTCMin != null)
+            //    if (list.Count == 0)
+            //        list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC > MontantTTCMin).ToList());
+            //    else
+            //        list.Where(b => b.AmountTTC > MontantTTCMin);
 
-            /*** Filtre MontantTTCMax ***/
-            if (MontantTTCMax != null)
-                if (list.Count == 0)
-                    list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC < MontantTTCMax).ToList());
-                else
-                    list.Where(b => b.AmountTTC < MontantTTCMax);
+            ///*** Filtre MontantTTCMax ***/
+            //if (MontantTTCMax != null)
+            //    if (list.Count == 0)
+            //        list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC < MontantTTCMax).ToList());
+            //    else
+            //        list.Where(b => b.AmountTTC < MontantTTCMax);
 
             /*** Filtre isbill ***/
             if (isBill != null)
