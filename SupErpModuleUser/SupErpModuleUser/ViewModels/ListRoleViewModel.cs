@@ -51,7 +51,7 @@ namespace SupErpModuleUser.ViewModels
 
         private void OnImageClicked(object id)
         {
-            Switcher.Switch(new AddUpdateRoleUserControl(new AddUpdateRoleViewModel((int) id))); 
+            Switcher.Switch(new AddUpdateRoleUserControl(new AddUpdateRoleViewModel(int.Parse(id.ToString())))); 
         }
 
         #endregion

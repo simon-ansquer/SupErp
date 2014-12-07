@@ -75,6 +75,8 @@ namespace SupErpModuleUser.ViewModels
                 new UserService.UserServiceClient().CreateRole(Role.ToRole());
             else
                 new UserService.UserServiceClient().EditRole(Role.ToRole());
+
+            Switcher.Switch(new ListRoleUserControl());
         }
 
         private void OnCancel() 

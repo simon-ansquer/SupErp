@@ -237,7 +237,8 @@
                     Foreground="Blue"
                     BorderBrush="Blue"
                     Margin="0, 10, 10, 10"
-                    ItemsSource="{Binding Roles}">
+                    ItemsSource="{Binding Roles}"
+                    SelectedItem="{Binding SelectedRole}">
 
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
