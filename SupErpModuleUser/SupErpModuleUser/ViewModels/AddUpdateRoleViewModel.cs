@@ -22,17 +22,24 @@ namespace SupErpModuleUser.ViewModels
 
             //Modules = new UserService.UserServiceClient().GetModules();
 
-            IHMModule module1 = new IHMModule();
-            module1.Name = "Utilisateur";
-            IHMModule module2 = new IHMModule();
-            module2.Name = "Salaire";
-            IHMModule module3 = new IHMModule();
-            module3.Name = "LOL";
+            //IHMModule module1 = new IHMModule();
+            //module1.Name = "Utilisateur";
+            //IHMModule module2 = new IHMModule();
+            //module2.Name = "Salaire";
+            //IHMModule module3 = new IHMModule();
+            //module3.Name = "LOL";
 
-            Modules = new List<IHMModule>();
-            Modules.Add(module1);
-            Modules.Add(module2);
-            Modules.Add(module3);
+            //Modules = new List<IHMModule>();
+            //Modules.Add(module1);
+            //Modules.Add(module2);
+            //Modules.Add(module3);
+
+            using (UserServiceClient ws = new UserServiceClient())
+            {
+                var rep = ws.GetModules();
+                if (rep != null)
+                    Modules = rep.ToIHMModules().ToList();
+            }
         }
 
         public AddUpdateRoleViewModel(int roleId)

@@ -33,5 +33,13 @@ namespace SupErpModuleUser.Helpers
                 };
             }
         }
+
+        public static IEnumerable<IHMModule> ToIHMModules(this IEnumerable<Module> modules)
+        {
+            foreach (var m in modules)
+            {
+                yield return new IHMModule(m);
+            }
+        }
     }
 }
