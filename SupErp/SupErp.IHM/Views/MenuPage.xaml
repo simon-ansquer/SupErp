@@ -27,10 +27,13 @@
                 <RowDefinition Height="0.1" />
             </Grid.RowDefinitions>
 
-            <ListBox x:Name="Menus" Grid.Column="1" Grid.Row="2" Background="Transparent" BorderThickness="0">
+            <ListBox x:Name="Menus" Grid.Column="1" Grid.Row="2" Background="Transparent" BorderThickness="0" SelectionChanged="MainMenuClicked">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock x:Name="MenuItem" Text="{Binding MenuName}" Foreground="White" VerticalAlignment="Center" Margin="0 0 0 10" Loaded="MenuItem_Loaded"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="MenuItem" Text="{Binding MenuName}" Foreground="White" VerticalAlignment="Center" Margin="0 0 0 10" Loaded="MenuItem_Loaded"/>
+                            <!--<TextBlock x:Name="ArrowMainMenu" Text=">" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 0 10" Loaded="MenuItem_Loaded"/>-->
+                        </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

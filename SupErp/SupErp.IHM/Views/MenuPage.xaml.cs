@@ -89,6 +89,21 @@ namespace SupErp.IHM.Views
             }
         }
 
+        private void MainMenuClicked(object sender, SelectionChangedEventArgs e)
+        {
+            IMainMenu item = (Menus.SelectedItem as IMainMenu);
+
+            if (item.SubMenus != null && item.SubMenus.Count > 0)
+            {
+                // Generate Submenu
+            }
+            else
+            {
+                RightTape.Children.Clear();
+                RightTape.Children.Add(item as UserControl);
+            }
+        }
+
         
     }
 }
