@@ -90,8 +90,6 @@
     <Compile Include="Views\EmployeeHistory.xaml.cs">
       <DependentUpon>EmployeeHistory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IMainMenu.cs" />
-    <Compile Include="Interfaces\ISubMenu.cs" />
     <Compile Include="Views\EmployeesList.xaml.cs">
       <DependentUpon>EmployeesList.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -183,6 +181,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SupErp\SupErp.Shared\SupErp.Shared.csproj">
+      <Project>{aed44877-9636-4e8c-95a3-722d99f6260b}</Project>
+      <Name>SupErp.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
