@@ -1316,6 +1316,12 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/addAbsence", ReplyAction="http://tempuri.org/IServiceSalaire/addAbsenceResponse")]
         System.Threading.Tasks.Task<bool> addAbsenceAsync(long idUser, WpfControlLibrarySalaire.ServiceSalaire.Absence absence);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/GetAbsenceTypes", ReplyAction="http://tempuri.org/IServiceSalaire/GetAbsenceTypesResponse")]
+        System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.AbsenceType> GetAbsenceTypes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/GetAbsenceTypes", ReplyAction="http://tempuri.org/IServiceSalaire/GetAbsenceTypesResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.AbsenceType>> GetAbsenceTypesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1415,6 +1421,14 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
         
         public System.Threading.Tasks.Task<bool> addAbsenceAsync(long idUser, WpfControlLibrarySalaire.ServiceSalaire.Absence absence) {
             return base.Channel.addAbsenceAsync(idUser, absence);
+        }
+        
+        public System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.AbsenceType> GetAbsenceTypes() {
+            return base.Channel.GetAbsenceTypes();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.AbsenceType>> GetAbsenceTypesAsync() {
+            return base.Channel.GetAbsenceTypesAsync();
         }
     }
 }

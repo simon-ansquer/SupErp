@@ -78,5 +78,11 @@ namespace SupErp.WCF.GestionClientWCF
         {
             return ContactBLL.DeleteCompany_Contact(id);
         }
+
+
+        public bool EditCompany(Company company)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

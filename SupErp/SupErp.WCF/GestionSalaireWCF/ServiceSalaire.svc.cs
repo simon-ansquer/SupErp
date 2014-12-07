@@ -65,5 +65,13 @@ namespace SupErp.WCF.GestionSalaireWCF
         {
             return salaireBLL.addAbsence(idUser, absence);
         }
+
+
+
+
+        public List<Entities.AbsenceType> GetAbsenceTypes()
+        {
+            return salaireBLL.GetAbsenceTypes();
+        }
     }
 }

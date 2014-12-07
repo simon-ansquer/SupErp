@@ -122,15 +122,16 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         public EmployeeDetailsViewModel(User employee)
         {
-            InitializeStatus();
             Employee = employee;
             UserStatus = employee.Status;
             if(UserStatus == null)
-                UserStatus = new Status(){id = -1};
+                UserStatus = new Status {id = -1};
             else
                 UserStatus.id -= 1;
-            //var listAbsenceType = ServiceSalaire.GetAbsenceTypes();
-            //AbsenceTypes = new ObservableCollection(listAbsenceType);
+            if(Employee.Salaries.Count == 0)
+                Employee.Salaries.Add(new Salary());
+            InitializeStatus();
+            InitializeAbsenceTypes();
             _addPrimeClickCommand = new DelegateCommand<string>(
                 OnAddPrimeButtonClick,
                 s => !string.IsNullOrEmpty(InputPrimeName) && !string.IsNullOrEmpty(InputPrimePrice)
@@ -145,6 +146,12 @@ namespace WpfControlLibrarySalaire.ViewModels
         {
             var status = await ServiceSalaire.GetStateAsync();
             if (ServiceSalaire != null) ListStatus = new ObservableCollection<Status>((IEnumerable<Status>)status);
+        }
+
+        private async void InitializeAbsenceTypes()
+        {
+            var listAbsencetypes = await ServiceSalaire.GetAbsenceTypesAsync();
+            AbsenceTypes = new ObservableCollection<AbsenceType>(listAbsencetypes);
         }
 
         #region Commands
@@ -204,7 +211,7 @@ namespace WpfControlLibrarySalaire.ViewModels
                 decimal primePrice = decimal.Parse(InputPrimePrice);
                 if (InputPrimeName == string.Empty)
                     throw new ArgumentNullException();
-                var newPrime = new Prime()
+                var newPrime = new Prime
                 {
                     Label = InputPrimeName,
                     Price = primePrice,
@@ -236,11 +243,11 @@ namespace WpfControlLibrarySalaire.ViewModels
         {
             try
             {
-                var newAbsence = new Absence()
+                var newAbsence = new Absence
                 {
                     StartDate = InputAbsenceStart,
                     EndDate = InputAbsenceEnd,
-                    AbsenceType = AbsenceType
+                    AbsenceType_id = AbsenceType.id
                 };
                 var userId = Employee.Id;
                 ServiceSalaire.addAbsence(userId, newAbsence);

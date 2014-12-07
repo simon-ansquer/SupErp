@@ -74,7 +74,6 @@
     </Page>
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Helpers\PDFGenerator.cs" />
-    <Compile Include="Models\HistoriqueSalaire.cs" />
     <Compile Include="Service References\ServiceSalaire\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -136,6 +135,9 @@
     <None Include="Service References\ServiceSalaire\ServiceSalaire2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceSalaire\WpfControlLibrarySalaire.ServiceSalaire.AbsenceType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ServiceSalaire\WpfControlLibrarySalaire.ServiceSalaire.Prime.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -187,6 +189,9 @@
       <Project>{aed44877-9636-4e8c-95a3-722d99f6260b}</Project>
       <Name>SupErp.Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

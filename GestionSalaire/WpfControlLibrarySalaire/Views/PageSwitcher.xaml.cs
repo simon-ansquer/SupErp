@@ -1,6 +1,7 @@
 ﻿using SupErp.Shared;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using WpfControlLibrarySalaire.Helpers;
 
 namespace WpfControlLibrarySalaire.Views
@@ -13,8 +14,14 @@ namespace WpfControlLibrarySalaire.Views
         public PageSwitcher()
         {
             InitializeComponent();
+            Language = XmlLanguage.GetLanguage(Thread.CurrentThread.CurrentCulture.Name);
             Switcher.PageSwitcher = this;
             Switcher.Switch(new EmployeesList());
+        }
+
+        internal void Navigate(UserControl newPage)
+        {
+            Content = newPage;
         }
 
         internal void Navigate(UserControl newPage)
@@ -24,7 +31,7 @@ namespace WpfControlLibrarySalaire.Views
 
         public string MenuName
         {
-            get { return "Salaire"; }
+            get { return "Salaires"; }
         }
 
         public List<ISubMenu> SubMenus

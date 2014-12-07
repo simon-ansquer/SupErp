@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using System.Windows.Markup;
-
-namespace WpfControlLibrarySalaire.Views
+﻿namespace WpfControlLibrarySalaire.Views
 {
     /// <summary>
     /// Logique d'interaction pour UserControl1.xaml
@@ -11,7 +8,6 @@ namespace WpfControlLibrarySalaire.Views
         public EmployeesList()
         {
             InitializeComponent();
-            Language = XmlLanguage.GetLanguage(Thread.CurrentThread.CurrentCulture.Name);
         }
     }
 }
