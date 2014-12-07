@@ -31,7 +31,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
         {
             using ( SUPERPEntities context = new SUPERPEntities(false) )
             {
-                return context.COMPTA_ChartOfAccounts.Include("COMPTA_ClassOfAccounts");
+                return context.COMPTA_ChartOfAccounts.Include("COMPTA_ClassOfAccounts").ToList();
             }
         }
 
@@ -39,7 +39,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
         {
             using ( SUPERPEntities context = new SUPERPEntities(false) )
             {
-                return context.COMPTA_ClassOfAccounts;
+                return context.COMPTA_ClassOfAccounts.ToList();
             }
         }
 
