@@ -15,11 +15,15 @@ namespace SupErp.DAL.ModuleUser
 
         public User Login(string email, string password)
         {
-
-            using (var context = new SUPERPEntities(false))
+            if(email != null && password != null)
             {
-                return context.Users.Include("Role").Include("Role.RoleModules").Include("Role.RoleModules.Module").FirstOrDefault(x => x.Email == email && x.Passwordhash == password);
+                using (var context = new SUPERPEntities(false))
+                {
+                    password = Encrypt.hashSHA256(password);
+                    return context.Users.Include("Role").Include("Role.RoleModules").Include("Role.RoleModules.Module").FirstOrDefault(x => x.Email == email && x.Passwordhash == password);
+                }
             }
+            return null;
         }
 
         #endregion
@@ -30,7 +34,7 @@ namespace SupErp.DAL.ModuleUser
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.Users.Include("Role").FirstOrDefault(x => x.Id == id);
+                return context.Users.Include("Role").Include("Role.RoleModules").Include("Role.RoleModules.Module").FirstOrDefault(x => x.Id == id);
             }
         }
 
@@ -38,7 +42,7 @@ namespace SupErp.DAL.ModuleUser
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.Users.Include("Role").ToList();
+                return context.Users.Include("Role").Include("Role.RoleModules").Include("Role.RoleModules.Module").ToList();
             }
         }
 
@@ -46,7 +50,7 @@ namespace SupErp.DAL.ModuleUser
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.Roles.Include("RoleModules").ToList();
+                return context.Roles.Include("RoleModules").Include("RoleModules.Module").Include("RoleModules.Role").ToList();
             }
         }
 
@@ -54,7 +58,7 @@ namespace SupErp.DAL.ModuleUser
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.Roles.Include("RoleModules").FirstOrDefault(x => x.Id == roleId);
+                return context.Roles.Include("RoleModules").Include("RoleModules.Module").Include("RoleModules.Role").FirstOrDefault(x => x.Id == roleId);
             }
         }
 
@@ -62,7 +66,7 @@ namespace SupErp.DAL.ModuleUser
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.Modules.ToList();
+                return context.Modules.Include("RoleModules").Include("RoleModules.Module").Include("RoleModules.Role").ToList();
             }
         }
 
