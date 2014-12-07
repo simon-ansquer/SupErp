@@ -144,7 +144,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
         public COMPTA_Bank CreateBank(COMPTA_Bank bankToAdd)
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
-            {
+            {              
                 var bank = context.COMPTA_Bank.Add(bankToAdd);
                 context.SaveChanges();
                 return bank;
@@ -506,11 +506,11 @@ namespace SupErp.DAL.GestionComptabilityDAL
         public bool DeleteCustomerJournalLine(int id)
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
-            {
+        {
                 try
-                {
+            {
                     context.COMPTA_CustomerJournalLine.Remove(context.COMPTA_CustomerJournalLine.Find(id));
-                    context.SaveChanges();
+                context.SaveChanges();
                     return true;
                 }
                 catch(Exception e)
@@ -524,11 +524,11 @@ namespace SupErp.DAL.GestionComptabilityDAL
         public bool DeleteSupplierJournalLine(int id)
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
-            {
+        {
                 try
-                {
+            {
                     context.COMPTA_SupplierJournalLine.Remove(context.COMPTA_SupplierJournalLine.Find(id));
-                    context.SaveChanges();
+                context.SaveChanges();
                     return true;
                 }
                 catch(Exception e)
@@ -539,6 +539,6 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        #endregion
+        #endregion       
     }
 }
