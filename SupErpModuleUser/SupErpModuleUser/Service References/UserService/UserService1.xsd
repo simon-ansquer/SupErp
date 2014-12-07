@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SupErp.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SupErp.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/SupErp.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SupErp.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://superpwcf.azurewebsites.net/ModuleUser/UserService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="User">
     <xs:sequence>
       <xs:element minOccurs="0" name="Absences" nillable="true" type="tns:ArrayOfAbsence" />
@@ -20,6 +21,8 @@
       <xs:element minOccurs="0" name="Status_id" nillable="true" type="xs:long" />
       <xs:element minOccurs="0" name="Zip_code" nillable="true" type="xs:string" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="User" nillable="true" type="tns:User" />
   <xs:complexType name="ArrayOfAbsence">
@@ -38,6 +41,8 @@
       <xs:element minOccurs="0" name="User_id" nillable="true" type="xs:long" />
       <xs:element minOccurs="0" name="id" type="xs:long" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Absence" nillable="true" type="tns:Absence" />
   <xs:complexType name="AbsenceType">
@@ -47,6 +52,8 @@
       <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="id" type="xs:long" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="AbsenceType" nillable="true" type="tns:AbsenceType" />
   <xs:complexType name="ArrayOfConfigAbsence">
@@ -62,26 +69,10 @@
       <xs:element minOccurs="0" name="MaximumHalfDayAbsence" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="id" type="xs:long" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="ConfigAbsence" nillable="true" type="tns:ConfigAbsence" />
-  <xs:complexType name="ArrayOfPrime">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Prime" nillable="true" type="tns:Prime" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPrime" nillable="true" type="tns:ArrayOfPrime" />
-  <xs:complexType name="Prime">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
-      <xs:element minOccurs="0" name="User_id" nillable="true" type="xs:long" />
-      <xs:element minOccurs="0" name="id" type="xs:long" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Prime" nillable="true" type="tns:Prime" />
   <xs:complexType name="Role">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:long" />
@@ -89,6 +80,8 @@
       <xs:element minOccurs="0" name="RoleModules" nillable="true" type="tns:ArrayOfRoleModule" />
       <xs:element minOccurs="0" name="Users" nillable="true" type="tns:ArrayOfUser" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Role" nillable="true" type="tns:Role" />
   <xs:complexType name="ArrayOfRoleModule">
@@ -105,6 +98,8 @@
       <xs:element minOccurs="0" name="Role" nillable="true" type="tns:Role" />
       <xs:element minOccurs="0" name="Role_id" type="xs:long" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="RoleModule" nillable="true" type="tns:RoleModule" />
   <xs:complexType name="Module">
@@ -113,20 +108,10 @@
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RoleModules" nillable="true" type="tns:ArrayOfRoleModule" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Module" nillable="true" type="tns:Module" />
-  <xs:complexType name="ArrayOfUser">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
-  <xs:complexType name="ArrayOfSalary">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Salary" nillable="true" type="tns:Salary" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSalary" nillable="true" type="tns:ArrayOfSalary" />
   <xs:complexType name="Salary">
     <xs:sequence>
       <xs:element minOccurs="0" name="Date" nillable="true" type="xs:dateTime" />
@@ -135,6 +120,8 @@
       <xs:element minOccurs="0" name="User_id" nillable="true" type="xs:long" />
       <xs:element minOccurs="0" name="id" type="xs:long" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Salary" nillable="true" type="tns:Salary" />
   <xs:complexType name="Status">
@@ -144,12 +131,52 @@
       <xs:element minOccurs="0" name="Users" nillable="true" type="tns:ArrayOfUser" />
       <xs:element minOccurs="0" name="id" type="xs:long" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Status" nillable="true" type="tns:Status" />
+  <xs:complexType name="ArrayOfUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
+  <xs:complexType name="Prime">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="User_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Prime" nillable="true" type="tns:Prime" />
+  <xs:complexType name="ArrayOfPrime">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Prime" nillable="true" type="tns:Prime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPrime" nillable="true" type="tns:ArrayOfPrime" />
+  <xs:complexType name="ArrayOfSalary">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Salary" nillable="true" type="tns:Salary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSalary" nillable="true" type="tns:ArrayOfSalary" />
   <xs:complexType name="ArrayOfRole">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Role" nillable="true" type="tns:Role" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfRole" nillable="true" type="tns:ArrayOfRole" />
+  <xs:complexType name="ArrayOfModule">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Module" nillable="true" type="tns:Module" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfModule" nillable="true" type="tns:ArrayOfModule" />
 </xs:schema>

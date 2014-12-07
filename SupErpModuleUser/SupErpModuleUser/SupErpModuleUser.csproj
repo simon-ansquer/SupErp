@@ -148,6 +148,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\UserService\SupErpModuleUser.UserService.Module.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\UserService\SupErpModuleUser.UserService.Role.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
