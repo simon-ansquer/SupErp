@@ -127,4 +127,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAbsenceTypes">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAbsenceTypesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="GetAbsenceTypesResult" nillable="true" type="q8:ArrayOfAbsenceType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

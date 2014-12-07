@@ -7,7 +7,7 @@ namespace WpfControlLibrarySalaire.ViewModels
 {
     public class EmployeeHistoryViewModel
     {
-        private User _employee;
+        private readonly User _employee;
 
         public User Employee
         {
