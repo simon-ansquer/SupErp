@@ -11,24 +11,40 @@ using SupErpModuleUser.Models;
 
 namespace SupErpModuleUser.ViewModels
 {
-    public class AddUserViewModel
+    public class AddUpdateUserViewModel
     {
         public IHMUser User { get; set; }
-        public IEnumerable<IHMRole> Roles { get; set; }
+        public List<IHMRole> Roles { get; set; }
 
-        public AddUserViewModel()
+        public AddUpdateUserViewModel()
         {
             User = new IHMUser();
-            User.IsNew = false;
+            User.IsNew = true;
             //using (UserServiceClient wcf = new UserServiceClient())
             //{
             //    Roles = wcf.GetRoles().ToRoles();
             //}
         }
 
-        public AddUserViewModel(User user)
+        public AddUpdateUserViewModel(int userId)
         {
-            User = user.ToIHMUser();
+            //User = new UserServiceClient().GetUserById(userId).ToIHMUser();
+
+            IHMRole role1 = new IHMRole();
+            role1.Label = "Role1";
+
+            User = new IHMUser();
+            User.Id = 1;
+            User.Role = role1;
+            User.Firstname = "Eliott";
+            User.Lastname = "Lujan";
+            User.Email = "eliott.lujan@gmail.com";
+            User.Address = "179 rue Camille Godard";
+            User.IsNew = false;
+
+            Roles = new List<IHMRole>();
+            Roles.Add(role1);
+            Roles.Add(role1);
         }
 
         #region Commands
@@ -45,8 +61,8 @@ namespace SupErpModuleUser.ViewModels
         }
 
         private void OnCancel()
-        { 
-
+        {
+            Switcher.Switch(new ListUserUserControl());
         }
 
         #endregion

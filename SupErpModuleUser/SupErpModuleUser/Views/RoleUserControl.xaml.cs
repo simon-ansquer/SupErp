@@ -28,7 +28,7 @@ namespace SupErpModuleUser
             InitializeComponent();
 
             subMenus = new List<ISubMenu>();
-            subMenus.Add(new AddRoleUserControl());
+            subMenus.Add(new AddUpdateRoleUserControl());
             subMenus.Add(new ListRoleUserControl());
         }
 

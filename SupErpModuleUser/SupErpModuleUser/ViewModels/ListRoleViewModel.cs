@@ -1,5 +1,6 @@
 ﻿using SupErpModuleUser.Helpers;
 using SupErpModuleUser.Models;
+using SupErpModuleUser.UserService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,9 @@ namespace SupErpModuleUser.ViewModels
         #region Command Handlers
 
         private void OnImageClicked(object id)
-        { }
+        {
+            Switcher.Switch(new AddUpdateRoleUserControl(new AddUpdateRoleViewModel((int) id))); 
+        }
 
         #endregion
 
