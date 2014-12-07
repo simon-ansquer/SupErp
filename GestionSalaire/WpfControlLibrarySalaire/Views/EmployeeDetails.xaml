@@ -85,7 +85,7 @@
                         <ColumnDefinition Width="0.3*" />
                         <ColumnDefinition Width="0.3*" />
                     </Grid.ColumnDefinitions>
-                    <DataGrid Grid.Row="0" Grid.ColumnSpan="3" ItemsSource="{Binding Employee.Primes}" GridLinesVisibility="Horizontal" FontSize="13" HorizontalGridLinesBrush="Silver"  HorizontalAlignment="Stretch"
+                    <DataGrid Grid.Row="0" Grid.ColumnSpan="3" ItemsSource="{Binding Employee.Primes, Mode=OneWay}" GridLinesVisibility="Horizontal" FontSize="13" HorizontalGridLinesBrush="Silver"  HorizontalAlignment="Stretch"
                       AlternatingRowBackground="#FFCCCCCC" AlternationCount="1" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Nom" Width ="1*" Binding="{Binding Label}" CanUserResize="False" >
@@ -104,8 +104,8 @@
                             </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <TextBox Grid.Column="0" Grid.Row="1" BorderBrush="Black" Foreground="Black" FontSize="15" Text="{Binding InputPrimeName, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                    <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="Black" Foreground="Black" FontSize="15" Text="{Binding InputPrimePrice, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                    <TextBox Grid.Column="0" Grid.Row="1" BorderBrush="Black" Foreground="Black" FontSize="15" Text="{Binding InputPrimeName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="Black" Foreground="Black" FontSize="15" Text="{Binding InputPrimePrice, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                     <Button Background="#4388CC" Grid.Row="1"  Grid.Column="2" Foreground="White" Content="Ajouter" FontSize="15"
                             BorderThickness="0" Command="{Binding ButtonAddPrimeClickCommand}" />
                 </Grid>

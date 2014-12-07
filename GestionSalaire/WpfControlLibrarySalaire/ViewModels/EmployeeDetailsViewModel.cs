@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using WpfControlLibrarySalaire.Helpers;
@@ -50,13 +51,14 @@ namespace WpfControlLibrarySalaire.ViewModels
             }
         }
 
+        private Regex _regex;
         private string _inputPrimePrice;
         public string InputPrimePrice
         {
             get { return _inputPrimePrice; }
             set
             {
-                _inputPrimePrice = value;
+                _inputPrimePrice = !_regex.IsMatch(value) ? value : _inputPrimePrice;
                 _addPrimeClickCommand.RaiseCanExecuteChanged();
             }
         }
@@ -106,10 +108,11 @@ namespace WpfControlLibrarySalaire.ViewModels
                 UserStatus.id -= 1;
             InitializeStatus();
             _addPrimeClickCommand = new DelegateCommand<string>(
-                OnAddPrimeButtonClick
+                OnAddPrimeButtonClick,
+                s => !string.IsNullOrEmpty(InputPrimeName) && !string.IsNullOrEmpty(InputPrimePrice)
             );
             _addAbscenceClickCommand = new DelegateCommand<string>(OnAddAbscenceButtonClick);
-
+            _regex = new Regex(@"[^0-9.,]+");
         }
 
         private async void InitializeStatus()
@@ -172,10 +175,19 @@ namespace WpfControlLibrarySalaire.ViewModels
         {
             try
             {
-                int primePrice = int.Parse(InputPrimePrice);
+                decimal primePrice = decimal.Parse(InputPrimePrice);
                 if (InputPrimeName == string.Empty)
                     throw new ArgumentNullException();
-                //ServiceSalaire.addPrime(Employee.Id, new Prime());
+                var newPrime = new Prime()
+                {
+                    Label = InputPrimeName,
+                    Price = primePrice,
+                    StartDate = DateTime.Now
+                };
+                ServiceSalaire.addPrime(Employee.Id, newPrime);
+                // Update the employee
+                var userId = Employee.Id;
+                Employee = ServiceSalaire.GetUserById(userId);
             }
             catch (ArgumentNullException)
             {
@@ -186,6 +198,11 @@ namespace WpfControlLibrarySalaire.ViewModels
             {
                 MessageBox.Show("Merci d'indiquer un nombre pour le montant.", "Erreur de montant", MessageBoxButton.OK,
                     MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Le service n'est pas disponible pour le moment", "Service non disponible",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -227,7 +244,8 @@ namespace WpfControlLibrarySalaire.ViewModels
             try
             {
                 // check if status is changed
-                if (UserStatus.Label != Employee.Status.Label)
+                var currentUserStatus = Employee.Status != null ? Employee.Status.Label : string.Empty;
+                if (UserStatus.Label != currentUserStatus)
                 {
                     if (!ServiceSalaire.UpdateUserState(Employee.Id, UserStatus.id))
                     {

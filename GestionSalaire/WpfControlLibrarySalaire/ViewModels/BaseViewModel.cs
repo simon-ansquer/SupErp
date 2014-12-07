@@ -29,7 +29,8 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         protected BaseViewModel()
         {
-            ServiceSalaire = new ServiceSalaireClient();
+            if(ServiceSalaire == null)
+                ServiceSalaire = new ServiceSalaireClient();
         }
 
         protected void RaisePropertyChanged<T>(Expression<Func<T>> action)
