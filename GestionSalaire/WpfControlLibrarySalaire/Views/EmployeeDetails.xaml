@@ -68,11 +68,11 @@
                     <ColumnDefinition Width="0.75*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Salaire brut" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                <TextBox Grid.Row="1" Grid.Column="2" MaxLength="6" Width="100" MaxWidth="200" MaxHeight="30" BorderBrush="Black" VerticalAlignment="Center" HorizontalAlignment="Left" 
-                         Text="{Binding Employee.Salaries[0].NetSalary}" FontSize="15"/>
+                <TextBox Grid.Row="1" Grid.Column="2" MaxLength="10" Width="100" MaxWidth="200" MaxHeight="30" BorderBrush="Black" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                         Text="{Binding Employee.Salaries[0].NetSalary, Mode=TwoWay}" FontSize="15" PreviewTextInput="UIElement_OnPreviewTextInput"/>
                 <TextBlock Text="Statut" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <ComboBox Grid.Row="3" Grid.Column="2" MaxHeight="30" MaxWidth="200" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" SelectedIndex="{Binding UserStatus.id}"
-                          MaxDropDownHeight="50" ItemsSource="{Binding ListStatus}" DisplayMemberPath="Label" SelectedItem="{Binding UserStatus, Mode=TwoWay}"
+                          MaxDropDownHeight="50" FontSize="15"  ItemsSource="{Binding ListStatus}" DisplayMemberPath="Label" SelectedItem="{Binding UserStatus, Mode=TwoWay}"
                           />
                 <TextBlock Text="Primes" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <Grid Grid.Row="5" Grid.Column="2" >

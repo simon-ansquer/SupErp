@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.ServiceModel.Channels;
 using System.Windows;
 using System.Windows.Input;
 using WpfControlLibrarySalaire.Helpers;
@@ -214,14 +212,33 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         private void OnSaveClick(string s)
         {
-            if (UserStatus.id == -1) return;
+            // update the net salary and the status
+            decimal newSalary;
+            if (!decimal.TryParse(Employee.Salaries[0].NetSalary.ToString(), out newSalary))
+            {
+                MessageBox.Show("Mauvaise valeur entrée pour le salaire.", "Mauvais salaire", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+            if (UserStatus.id == -1)
+            {
+                return;
+            }
             try
             {
-                if (!ServiceSalaire.UpdateUserState(Employee.Id, UserStatus.id))
+                // check if status is changed
+                if (UserStatus.Label != Employee.Status.Label)
                 {
-                    MessageBox.Show("Erreur pendant la mise à jour du statut,\nVeuillez réessayer.",
-                        "Erreur mise à jour statut", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (!ServiceSalaire.UpdateUserState(Employee.Id, UserStatus.id))
+                    {
+                        MessageBox.Show(
+                            "Une erreur est survenue pendant la mise à jour du statut,\nVeuillez réessayer.",
+                            "Erreur mise à jour statut", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
+                if (!ServiceSalaire.UpdateUserSalaryById(Employee.Id, newSalary))
+                    MessageBox.Show("Une erreur est survenue pendant la mise à jour du salaire,\nVeuillez réessayer.",
+                        "Erreur mise à jour salaire", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception)
             {

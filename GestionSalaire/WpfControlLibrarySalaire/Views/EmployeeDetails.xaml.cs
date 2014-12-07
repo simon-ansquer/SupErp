@@ -1,4 +1,6 @@
-﻿using WpfControlLibrarySalaire.ViewModels;
+﻿using System.Text.RegularExpressions;
+using System.Windows.Input;
+using WpfControlLibrarySalaire.ViewModels;
 
 namespace WpfControlLibrarySalaire.Views
 {
@@ -11,6 +13,12 @@ namespace WpfControlLibrarySalaire.Views
         {
             InitializeComponent();
             this.DataContext = viewModel;
+        }
+
+        private void UIElement_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"[^0-9.,]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
