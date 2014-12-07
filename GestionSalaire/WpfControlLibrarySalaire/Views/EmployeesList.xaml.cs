@@ -19,5 +19,6 @@ namespace WpfControlLibrarySalaire.Views
         {
             get { return "Salaires"; }
         }
+
     }
 }

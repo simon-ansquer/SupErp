@@ -29,10 +29,11 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         protected BaseViewModel()
         {
-            ServiceSalaire = new ServiceSalaireClient();
+            if(ServiceSalaire == null)
+                ServiceSalaire = new ServiceSalaireClient();
         }
 
-        private void RaisePropertyChanged<T>(Expression<Func<T>> action)
+        protected void RaisePropertyChanged<T>(Expression<Func<T>> action)
         {
             var propertyName = GetPropertyName(action);
             RaisePropertyChanged(propertyName);
