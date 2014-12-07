@@ -95,7 +95,14 @@ namespace WpfControlLibrarySalaire.Helpers
             // Ajout du titre principal
             tableTitle.AddCell(getTitle());
 
-            Paragraph titleAbs = new Paragraph("Liste des abscences", titleFont);
+
+
+            //******************************************************************************/
+            //***********************   ABSENCES   *****************************************/
+            //******************************************************************************/
+
+
+            Paragraph titleAbs = new Paragraph("Liste des abscences", subTitleFont);
             titleAbs.Alignment = Element.ALIGN_LEFT;
             PdfPCell cellTitleAbs = new PdfPCell(titleAbs);
             cellTitleAbs.PaddingBottom = 5;
@@ -115,7 +122,7 @@ namespace WpfControlLibrarySalaire.Helpers
             {
                 tableAbs.AddCell(a.StartDate.ToString());
                 tableAbs.AddCell(a.EndDate.ToString());
-                //tableAbs.AddCell(a.AbsenceType.ToString());
+                tableAbs.AddCell("non justifiée"); // a.AbsenceType.ToString()
             }
 
             PdfPCell cellAbs = new PdfPCell(tableAbs);
@@ -143,7 +150,7 @@ namespace WpfControlLibrarySalaire.Helpers
         {
             string[] mois = new string[]{"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"};
 
-            Paragraph paragraph = new Paragraph(mois[DateTime.Now.Month - 1], titleFont);
+            Paragraph paragraph = new Paragraph(mois[DateTime.Now.Month - 1] + " " + DateTime.Now.Year, titleFont);
             paragraph.Alignment = Element.ALIGN_CENTER;
 
             PdfPCell cell = new PdfPCell(paragraph);
