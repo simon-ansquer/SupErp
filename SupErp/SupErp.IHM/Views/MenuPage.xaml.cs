@@ -16,6 +16,7 @@ using SupErp.IHM.Helpers;
 using SupErp.IHM.Models;
 using SupErp.IHM.ViewModels;
 using SupErp.Shared;
+using System.Linq;
 
 namespace SupErp.IHM.Views
 {
@@ -32,9 +33,11 @@ namespace SupErp.IHM.Views
         {           
             InitializeComponent();
 
-            MainMenus = MainMenus;
+            MainMenus = mainMenus;
             ScreenHeight = StaticParams.ScreenHeight;
             ScreenWidth = StaticParams.ScreenWidth;
+            Menus.ItemsSource = MainMenus;
+
             SetTextSize();
         }
 
@@ -44,6 +47,7 @@ namespace SupErp.IHM.Views
             LogOut.FontSize = ScreenHeight/40;
             LogOutImage.Width = ScreenHeight/25;
             LogOutImage.Height = ScreenHeight/25;
+
             //Connexion.FontSize = ScreenHeight / 35;
 
             //LoginTbl.FontSize = ScreenHeight / 45;
@@ -72,6 +76,17 @@ namespace SupErp.IHM.Views
         private void LogOutClicked(object sender, MouseButtonEventArgs e)
         {
             MainWindow.MainFrame.Navigate(new LoginPage());
+        }
+
+        private void MenuItem_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBlock t = (sender as TextBlock);
+
+            if (t != null)
+            {
+                t.FontSize = ScreenHeight / 38;
+                t.Height = ScreenHeight / 35;
+            }
         }
 
         

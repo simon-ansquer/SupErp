@@ -15,9 +15,9 @@
 
         <Grid x:Name="LeftTape" Background="#4388CC" Grid.Column="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.1*"/>
-                <ColumnDefinition Width="0.8*"/>
-                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.05*"/>
+                <ColumnDefinition Width="0.9*"/>
+                <ColumnDefinition Width="0.05*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.05*" />
@@ -26,22 +26,22 @@
                 <RowDefinition Height="0.1*" />
                 <RowDefinition Height="0.1" />
             </Grid.RowDefinitions>
-            
-            <ListBoxItem x:Name="Menus" Grid.Column="1" Grid.Row="2">
-                <ListBoxItem.Template>
-                    <ControlTemplate>
-                        <StackPanel></StackPanel>
-                    </ControlTemplate>
-                </ListBoxItem.Template>
-            </ListBoxItem>
-            
+
+            <ListBox x:Name="Menus" Grid.Column="1" Grid.Row="2" Background="Transparent" BorderThickness="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock x:Name="MenuItem" Text="{Binding MenuName}" Foreground="White" VerticalAlignment="Center" Margin="0 0 0 10" Loaded="MenuItem_Loaded"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
             <TextBlock x:Name="Logo" Grid.Column="1" Grid.Row="1" Foreground="#FFFFFF" FontFamily="Segoe UI">SupERP</TextBlock>
             <StackPanel x:Name="LogOutPanel" Grid.Column="1" Grid.Row="3" Orientation="Horizontal" Cursor="Hand" MouseEnter="LogOutPanel_MouseEnter" MouseLeftButtonDown="LogOutClicked" MouseLeave="LogOutPanel_MouseLeave">
                 <Image x:Name="LogOutImage" Source="../Content/Img/LogOut.png" Stretch="Uniform"></Image>
                 <TextBlock x:Name="LogOut" Foreground="#FFFFFF" FontFamily="Segoe UI" VerticalAlignment="Center">LogOut</TextBlock>
             </StackPanel>
-            
-            
+
+
         </Grid>
         <Grid x:Name="RightTape" Background="#FFFFFF" Grid.Column="1">
         </Grid>
