@@ -37,7 +37,14 @@ namespace WpfControlLibrarySalaire.ViewModels
             try
             {
                 var employees = await ServiceSalaire.GetUserAsync();
-                Employees = new ObservableCollection<User>((IEnumerable<User>) employees);
+                
+                Employees = new ObservableCollection<User>();
+                foreach (var employee in employees)
+                {
+                    employee.Lastname = employee.Lastname.Trim();
+                    employee.Firstname = employee.Firstname.Trim();
+                    Employees.Add(employee);
+                }
             }
             catch (Exception)
             {
@@ -69,20 +76,23 @@ namespace WpfControlLibrarySalaire.ViewModels
         {
             get
             {
-                return new DelegateCommand<int>(OnDetailsClick);
+                return new DelegateCommand<User>(OnDetailsClick);
             }
         }
 
         public ICommand PdfCommand
         {
-            get { return new DelegateCommand<int>(OnPdfClick); }
+            get { return new DelegateCommand<User>(OnPdfClick); }
         }
         #endregion
 
         #region Command Handlers
         private void OnGeneratePDFClick()
         {
-            // TODO
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            DialogResult result = fbd.ShowDialog();
+            foreach (User employee in Employees)
+                PDFGenerator.generate(employee, fbd.SelectedPath);
         }
 
         private async void OnSearchButtonClick()
@@ -97,17 +107,17 @@ namespace WpfControlLibrarySalaire.ViewModels
             Employees = new ObservableCollection<User>((IEnumerable<User>)employees);
         }
 
-        private void OnDetailsClick(int index)
+        private void OnDetailsClick(User userSelected)
         {
-            var employeeDetails = new EmployeeDetails(new EmployeeDetailsViewModel(Employees[index]));
+            var employeeDetails = new EmployeeDetails(new EmployeeDetailsViewModel(userSelected));
             Switcher.Switch(employeeDetails);
         }
 
-        private void OnPdfClick(int index)
+        private void OnPdfClick(User userSelected)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
-            PDFGenerator.generate(Employees[index], fbd.SelectedPath);
+            PDFGenerator.generate(userSelected, fbd.SelectedPath);
         }
         #endregion
     }

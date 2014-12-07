@@ -50,56 +50,70 @@
         </Grid>
         <DataGrid x:Name="DataGridEmployees" ItemsSource="{Binding Path=Employees}" Grid.Row="4" GridLinesVisibility="Horizontal" FontSize="15" HorizontalGridLinesBrush="Silver"  HorizontalAlignment="Stretch" SelectionMode="Single"
                       AlternatingRowBackground="#FFCCCCCC" AlternationCount="1" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"
-                      Grid.Column="0" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False" CanUserAddRows="False">
+                      Grid.Column="0" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="True" CanUserResizeRows="False" CanUserAddRows="False">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nom" Width ="1*" Binding="{Binding Lastname}" IsReadOnly="True" CanUserResize="False" >
-                    <DataGridTextColumn.HeaderStyle>
+                <DataGridTemplateColumn Width ="1*" Header="Nom" CanUserSort="True" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTemplateColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                    <DataGridTextColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.CellStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width ="1*" Header="Prénom" Binding="{Binding Firstname}" IsReadOnly="True" CanUserResize="False">
-                    <DataGridTextColumn.HeaderStyle>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Text="{Binding Lastname}" Height="Auto" Width="Auto" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width ="1*" Header="Prénom" CanUserSort="True" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTemplateColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                    <DataGridTextColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.CellStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width ="1*" Header="Date d'arrivée" Binding="{Binding Date_arrival, StringFormat={}{0:dd MMMM yyyy}}" IsReadOnly="True" CanUserResize="False">
-                    <DataGridTextColumn.HeaderStyle>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Text="{Binding Firstname}" Height="Auto" Width="Auto" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width ="1*" Header="Date d'arrivée" CanUserSort="True" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTemplateColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width ="1*" Header="Salaire brut" IsReadOnly="True" Binding="{Binding Salaries[0].NetSalary}" CanUserResize="False">
-                    <DataGridTextColumn.HeaderStyle>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Text="{Binding Date_arrival, StringFormat={}{0:dd MMMM yyyy}}" Height="Auto" Width="Auto" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width ="0.7*" Header="Salaire" CanUserSort="True" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTemplateColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width ="0.5*" Header="Absence(s)" Binding="{Binding Absences.Count}" CanUserResize="False" IsReadOnly="True">
-                    <DataGridTextColumn.HeaderStyle>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Text="{Binding Salaries[0].NetSalary}" Height="Auto" Width="Auto" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width ="0.5*" Header="Absence(s)" CanUserSort="True" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTemplateColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Text="{Binding Absences.Count}" Height="Auto" Width="Auto" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width ="0.5*" Header="Détails" CanUserSort="False" CanUserResize="False" >
-
                     <DataGridTemplateColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -110,7 +124,7 @@
                             <!--<Button Content="Détails" />-->
                             <Button 
                                     Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DetailsCommand}" 
-                                    CommandParameter="{Binding ElementName=DataGridEmployees, Path=SelectedIndex}"
+                                    CommandParameter="{Binding ElementName=DataGridEmployees, Path=SelectedItem}"
                                     >
                                 <Button.Template>
                                     <ControlTemplate>
@@ -131,7 +145,7 @@
                         <DataTemplate>
                             <Button 
                                     Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.PdfCommand}" 
-                                    CommandParameter="{Binding ElementName=DataGridEmployees, Path=SelectedIndex}" >
+                                    CommandParameter="{Binding ElementName=DataGridEmployees, Path=SelectedItem}" >
                                 <Button.Template>
                                     <ControlTemplate>
                                         <Image Source="../Assets/pdf.png" Width="30" Height="30" />
