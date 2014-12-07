@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComptabilityBLL\Assembleur\ComptabilityAssembleur.cs" />
     <Compile Include="ComptabilityBLL\BllObject\ChartsOfAccount.cs" />
     <Compile Include="ComptabilityBLL\BllObject\ClassOfAccount.cs" />
     <Compile Include="ComptabilityBLL\PlanComptableBLL.cs" />

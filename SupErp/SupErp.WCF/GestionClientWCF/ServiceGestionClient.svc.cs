@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace SupErp.WCF.GestionClientWCF
 {
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class ServiceGestionClient : IServiceGestionClient
+    public class ServiceGestionClient //: IServiceGestionClient
     {
 
         //////////////////////////////

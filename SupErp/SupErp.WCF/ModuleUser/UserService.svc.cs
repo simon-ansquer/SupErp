@@ -36,6 +36,11 @@ namespace SupErp.WCF
             return userBLL.GetRoles();
         }
 
+        public Role GetRoleById(int roleId)
+        {
+            return userBLL.GetRoleById(roleId);
+        }
+
         public IEnumerable<Module> GetModules()
         {
             return userBLL.GetModules();

@@ -50,6 +50,14 @@ namespace SupErp.DAL.ModuleUser
             }
         }
 
+        public Role GetRoleById(int roleId)
+        {
+            using (SUPERPEntities context = new SUPERPEntities(false))
+            {
+                return context.Roles.Include("RoleModules").FirstOrDefault(x => x.Id == roleId);
+            }
+        }
+
         public IEnumerable<Module> GetModules()
         {
             using(SUPERPEntities context = new SUPERPEntities(false))

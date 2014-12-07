@@ -25,6 +25,42 @@
   <wsdl:message name="IServiceSalaire_GetUserById_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserByIdResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceSalaire_UpdateUserSalaryById_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserSalaryById" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSalaire_UpdateUserSalaryById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserSalaryByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSalaire_GetState_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetState" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSalaire_GetState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSalaire_UpdateUserState_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserState" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSalaire_UpdateUserState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSalaire_addPrime_InputMessage">
+    <wsdl:part name="parameters" element="tns:addPrime" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSalaire_addPrime_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addPrimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSalaire_GetPrimesByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrimesByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSalaire_GetPrimesByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrimesByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSalaire_addAbsence_InputMessage">
+    <wsdl:part name="parameters" element="tns:addAbsence" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSalaire_addAbsence_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addAbsenceResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceSalaire">
     <wsdl:operation name="GetUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSalaire/GetUser" message="tns:IServiceSalaire_GetUser_InputMessage" />
@@ -37,6 +73,30 @@
     <wsdl:operation name="GetUserById">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSalaire/GetUserById" message="tns:IServiceSalaire_GetUserById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceSalaire/GetUserByIdResponse" message="tns:IServiceSalaire_GetUserById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserSalaryById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSalaire/UpdateUserSalaryById" message="tns:IServiceSalaire_UpdateUserSalaryById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSalaire/UpdateUserSalaryByIdResponse" message="tns:IServiceSalaire_UpdateUserSalaryById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetState">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSalaire/GetState" message="tns:IServiceSalaire_GetState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSalaire/GetStateResponse" message="tns:IServiceSalaire_GetState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserState">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSalaire/UpdateUserState" message="tns:IServiceSalaire_UpdateUserState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSalaire/UpdateUserStateResponse" message="tns:IServiceSalaire_UpdateUserState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addPrime">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSalaire/addPrime" message="tns:IServiceSalaire_addPrime_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSalaire/addPrimeResponse" message="tns:IServiceSalaire_addPrime_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrimesByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSalaire/GetPrimesByUserId" message="tns:IServiceSalaire_GetPrimesByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSalaire/GetPrimesByUserIdResponse" message="tns:IServiceSalaire_GetPrimesByUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addAbsence">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSalaire/addAbsence" message="tns:IServiceSalaire_addAbsence_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSalaire/addAbsenceResponse" message="tns:IServiceSalaire_addAbsence_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceSalaire" type="tns:IServiceSalaire">
@@ -61,6 +121,60 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserById">
       <soap:operation soapAction="http://tempuri.org/IServiceSalaire/GetUserById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserSalaryById">
+      <soap:operation soapAction="http://tempuri.org/IServiceSalaire/UpdateUserSalaryById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetState">
+      <soap:operation soapAction="http://tempuri.org/IServiceSalaire/GetState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserState">
+      <soap:operation soapAction="http://tempuri.org/IServiceSalaire/UpdateUserState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addPrime">
+      <soap:operation soapAction="http://tempuri.org/IServiceSalaire/addPrime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrimesByUserId">
+      <soap:operation soapAction="http://tempuri.org/IServiceSalaire/GetPrimesByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addAbsence">
+      <soap:operation soapAction="http://tempuri.org/IServiceSalaire/addAbsence" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

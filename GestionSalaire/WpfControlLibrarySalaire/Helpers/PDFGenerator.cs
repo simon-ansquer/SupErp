@@ -3,9 +3,6 @@ using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfControlLibrarySalaire.ServiceSalaire;
 
 namespace WpfControlLibrarySalaire.Helpers
@@ -26,14 +23,14 @@ namespace WpfControlLibrarySalaire.Helpers
         {
             DateTime now = DateTime.Now;
 
-            string subPath = "BS-"+now.Month + "-" + now.Year;
+            string subPath = "BS-" + now.Month + "-" + now.Year;
 
             bool exists = System.IO.Directory.Exists(path + subPath);
 
             if (!exists)
                 System.IO.Directory.CreateDirectory(path + subPath);
 
-            foreach(User u in lstUser)
+            foreach (User u in lstUser)
             {
                 generate(u, path + subPath);
             }
@@ -45,15 +42,15 @@ namespace WpfControlLibrarySalaire.Helpers
         {
 
 
-           
+
             var document = new Document(PageSize.A4, 50, 50, 25, 25);
 
             var output = new MemoryStream();
-            var writer = PdfWriter.GetInstance(document, new FileStream(path +"/BS-"+DateTime.Now.Month+"-"+DateTime.Now.Year+"-"+user.Firstname+"-"+user.Lastname+".pdf", FileMode.Create));
+            var writer = PdfWriter.GetInstance(document, new FileStream(path + "/BS-" + DateTime.Now.Month + "-" + DateTime.Now.Year + "-" + user.Firstname + "-" + user.Lastname + ".pdf", FileMode.Create));
 
             document.Open();
-            
-            
+
+
 
             // création du logo
             Image logo = iTextSharp.text.Image.GetInstance("logo.png");
@@ -79,7 +76,7 @@ namespace WpfControlLibrarySalaire.Helpers
             cellAdresseSuperp.HorizontalAlignment = 0;
             cellAdresseSuperp.Border = Rectangle.NO_BORDER;
 
-            PdfPCell cellDUMec = new PdfPCell(new Paragraph( user.Lastname + " " + user.Firstname + "\n" + user.Address, subTitleFont));
+            PdfPCell cellDUMec = new PdfPCell(new Paragraph(user.Lastname + " " + user.Firstname + "\n" + user.Address, subTitleFont));
             cellDUMec.HorizontalAlignment = 2;
             cellDUMec.Border = Rectangle.NO_BORDER;
 
@@ -138,7 +135,7 @@ namespace WpfControlLibrarySalaire.Helpers
 
 
 
-           
+
 
             document.Close();
             return true;
@@ -148,7 +145,7 @@ namespace WpfControlLibrarySalaire.Helpers
 
         private static PdfPCell getTitle()
         {
-            string[] mois = new string[]{"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"};
+            string[] mois = new string[] { "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" };
 
             Paragraph paragraph = new Paragraph(mois[DateTime.Now.Month - 1] + " " + DateTime.Now.Year, titleFont);
             paragraph.Alignment = Element.ALIGN_CENTER;

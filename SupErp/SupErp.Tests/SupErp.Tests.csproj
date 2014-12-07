@@ -63,9 +63,14 @@
     <Compile Include="SalaireTest.cs" />
     <Compile Include="KernelTest.cs" />
     <Compile Include="FacturationTest.cs" />
+    <Compile Include="ComptabiliteTest.cs" />
     <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SupErp.BLL\SupErp.BLL.csproj">
+      <Project>{aa5a818d-cd76-4958-9282-66b0f1ce29ba}</Project>
+      <Name>SupErp.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SupErp.DAL\SupErp.DAL.csproj">
       <Project>{369107f3-119a-4358-86bf-23bb9e74018f}</Project>
       <Name>SupErp.DAL</Name>
@@ -81,10 +86,6 @@
     <ProjectReference Include="..\SupErp.Shared\SupErp.Shared.csproj">
       <Project>{aed44877-9636-4e8c-95a3-722d99f6260b}</Project>
       <Name>SupErp.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SupErp.WCF\SupErp.WCF.csproj">
-      <Project>{dddb3846-f079-4103-b316-1eb8edb76090}</Project>
-      <Name>SupErp.WCF</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

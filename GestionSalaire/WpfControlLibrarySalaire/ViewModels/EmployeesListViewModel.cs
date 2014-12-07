@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using WpfControlLibrarySalaire.Helpers;
 using WpfControlLibrarySalaire.ServiceSalaire;
-
-using System.Windows.Forms;
-using System.IO;
+using WpfControlLibrarySalaire.Views;
 
 
 namespace WpfControlLibrarySalaire.ViewModels
 {
     public class EmployeesListViewModel : BaseViewModel
     {
-        private readonly DelegateCommand<string> _searchClickCommand;
         private string _inputSearch;
         public string InputSearch
         {
@@ -40,7 +37,16 @@ namespace WpfControlLibrarySalaire.ViewModels
             try
             {
                 var employees = await ServiceSalaire.GetUserAsync();
-                Employees = new ObservableCollection<User>((IEnumerable<User>) employees);
+                
+                Employees = new ObservableCollection<User>();
+                foreach (var employee in employees)
+                {
+                    employee.Lastname = employee.Lastname.Trim();
+                    employee.Firstname = employee.Firstname.Trim();
+                    employee.Salaries.Reverse();
+                    employee.Absences.Reverse();
+                    Employees.Add(employee);
+                }
             }
             catch (Exception)
             {
@@ -49,6 +55,7 @@ namespace WpfControlLibrarySalaire.ViewModels
         }
 
         #region DelegateCommand
+        private readonly DelegateCommand<string> _searchClickCommand;
         public DelegateCommand<string> ButtonSearchClickCommand
         {
             get { return _searchClickCommand; }
@@ -71,25 +78,28 @@ namespace WpfControlLibrarySalaire.ViewModels
         {
             get
             {
-                return new DelegateCommand<int>(OnDetailsClick);
+                return new DelegateCommand<User>(OnDetailsClick);
             }
         }
 
         public ICommand PdfCommand
         {
-            get { return new DelegateCommand<int>(OnPdfClick); }
+            get { return new DelegateCommand<User>(OnPdfClick); }
         }
         #endregion
 
         #region Command Handlers
         private void OnGeneratePDFClick()
         {
-
-            System.Windows.MessageBox.Show("PDF");
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            DialogResult result = fbd.ShowDialog();
+            foreach (User employee in Employees)
+                PDFGenerator.generate(employee, fbd.SelectedPath);
         }
 
         private async void OnSearchButtonClick()
         {
+            if (Employees == null) return;
             List<User> employees;
             if (_inputSearch == string.Empty)
                 employees = await ServiceSalaire.GetUserAsync();
@@ -99,17 +109,17 @@ namespace WpfControlLibrarySalaire.ViewModels
             Employees = new ObservableCollection<User>((IEnumerable<User>)employees);
         }
 
-        private void OnDetailsClick(int index)
+        private void OnDetailsClick(User userSelected)
+        {
+            var employeeDetails = new EmployeeDetails(new EmployeeDetailsViewModel(userSelected));
+            Switcher.Switch(employeeDetails);
+        }
+
+        private void OnPdfClick(User userSelected)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
-
-
-            PDFGenerator.generate(Employees[index], fbd.SelectedPath);
-        }
-
-        private void OnPdfClick(int index)
-        {
+            PDFGenerator.generate(userSelected, fbd.SelectedPath);
         }
         #endregion
     }
