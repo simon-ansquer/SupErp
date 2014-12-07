@@ -7,7 +7,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="MenuPage">
 
-    <Grid x:Name="MainGrid">
+    <Grid x:Name="MainGrid" MouseLeftButtonDown="MainGridClicked">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.15*"/>
             <ColumnDefinition Width="*"/>

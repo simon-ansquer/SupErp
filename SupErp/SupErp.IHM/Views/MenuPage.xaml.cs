@@ -30,7 +30,7 @@ namespace SupErp.IHM.Views
         public IEnumerable<IMainMenu> MainMenus { get; set; }
 
         public MenuPage(IEnumerable<IMainMenu> mainMenus)
-        {           
+        {
             InitializeComponent();
 
             MainMenus = mainMenus;
@@ -44,9 +44,9 @@ namespace SupErp.IHM.Views
         private void SetTextSize()
         {
             Logo.FontSize = ScreenHeight / 20;
-            LogOut.FontSize = ScreenHeight/40;
-            LogOutImage.Width = ScreenHeight/25;
-            LogOutImage.Height = ScreenHeight/25;
+            LogOut.FontSize = ScreenHeight / 40;
+            LogOutImage.Width = ScreenHeight / 25;
+            LogOutImage.Height = ScreenHeight / 25;
 
             //Connexion.FontSize = ScreenHeight / 35;
 
@@ -95,7 +95,9 @@ namespace SupErp.IHM.Views
 
             if (item.SubMenus != null && item.SubMenus.Count > 0)
             {
-                // Generate Submenu
+                ListBoxItem listBoxItem = (Menus.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem);
+                Point position = listBoxItem.TransformToVisual((Visual)(Menus.Parent)).Transform(new Point(listBoxItem.ActualWidth, 0));
+                GenerateSubMenus(item.SubMenus, position, false);
             }
             else
             {
@@ -104,6 +106,38 @@ namespace SupErp.IHM.Views
             }
         }
 
-        
+        private void GenerateSubMenus(IEnumerable<ISubMenu> submenus, Point position, bool dark)
+        {
+            Grid grid = new Grid();
+            grid.Name = "SubMenu";
+            grid.Margin = new Thickness(position.X, position.Y, 0, 0);
+            grid.Background = new SolidColorBrush(dark ? Color.FromArgb(255, 67, 136, 204) : Color.FromArgb(255, 51, 122, 204));
+            grid.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+            grid.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            ListBox listBox = new ListBox();
+            listBox.Background = new SolidColorBrush(Colors.Transparent);
+
+            foreach (ISubMenu sm in submenus)
+            {
+                ListBoxItem item = new ListBoxItem();
+                TextBlock txtBlock = new TextBlock();
+                txtBlock.FontSize = ScreenHeight / 38;
+                txtBlock.Height = ScreenHeight / 35;
+                txtBlock.Foreground = new SolidColorBrush(Colors.White);
+                txtBlock.Margin = new Thickness(0, 0, 0, 10);
+                txtBlock.Text = sm.SubMenuName;
+                item.Content = txtBlock;
+                listBox.Items.Add(item);
+            }
+            
+            grid.Children.Add(listBox);
+            MainGrid.Children.Add(grid);
+            Grid.SetColumnSpan(grid, 2);
+        }
+
+        private void MainGridClicked(object sender, MouseButtonEventArgs e)
+        {
+            // TO DO Ajouter une liste pour pouvoir disposer les grid des sous menus
+        }
     }
 }
