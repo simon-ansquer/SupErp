@@ -68,7 +68,7 @@ namespace SupErp.IHM.Views
 
         private void LogOutPanel_MouseEnter(object sender, MouseEventArgs e)
         {
-            LogOut.Foreground = new SolidColorBrush(Color.FromArgb(255, 127, 127, 127));
+            LogOut.Foreground = new SolidColorBrush(Color.FromArgb(255, 204, 204, 204));
         }
         private void LogOutPanel_MouseLeave(object sender, MouseEventArgs e)
         {
@@ -95,16 +95,20 @@ namespace SupErp.IHM.Views
         {
             IMainMenu item = (Menus.SelectedItem as IMainMenu);
 
-            if (item.SubMenus != null && item.SubMenus.Count > 0)
+            if (item != null)
             {
-                ListBoxItem listBoxItem = (Menus.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem);
-                Point position = listBoxItem.TransformToVisual((Visual)(Menus.Parent)).Transform(new Point(listBoxItem.ActualWidth, 0));
-                GenerateSubMenus(item.SubMenus, position, false);
-            }
-            else
-            {
-                RightTape.Children.Clear();
-                RightTape.Children.Add(item as UserControl);
+                if (item.SubMenus != null && item.SubMenus.Count > 0)
+                {
+                    ClearSubMenus(false);
+                    ListBoxItem listBoxItem = (Menus.ItemContainerGenerator.ContainerFromIndex(((ListBox)sender).SelectedIndex) as ListBoxItem);
+                    Point position = listBoxItem.TransformToVisual((Visual) (Menus.Parent)).Transform(new Point(listBoxItem.ActualWidth, 0));
+                    GenerateSubMenus(item.SubMenus, position, false);
+                }
+                else
+                {
+                    RightTape.Children.Clear();
+                    RightTape.Children.Add(item as UserControl);
+                }
             }
         }
 
@@ -118,6 +122,7 @@ namespace SupErp.IHM.Views
             grid.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             ListBox listBox = new ListBox();
             listBox.Background = new SolidColorBrush(Colors.Transparent);
+            listBox.BorderThickness = new Thickness(0);
             listBox.SelectionChanged += listBox_SelectionChanged;
 
             Binding binding = new Binding();
@@ -152,9 +157,9 @@ namespace SupErp.IHM.Views
 
             if (item.SubMenus != null && item.SubMenus.Count > 0)
             {
-                ListBoxItem listBoxItem = (Menus.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem);
+                ListBoxItem listBoxItem = (((ListBox)sender).ItemContainerGenerator.ContainerFromIndex(((ListBox)sender).SelectedIndex) as ListBoxItem);
                 Point position = listBoxItem.TransformToVisual((Visual)(Menus.Parent)).Transform(new Point(listBoxItem.ActualWidth, 0));
-                GenerateSubMenus(item.SubMenus, position, false);
+                GenerateSubMenus(item.SubMenus, position, ((SolidColorBrush)(((Grid)(((ListBox)sender).Parent)).Background)).Color.Equals(Color.FromArgb(255, 51, 122, 204)));
             }
             else
             {
@@ -165,10 +170,16 @@ namespace SupErp.IHM.Views
 
         private void MainGridClicked(object sender, MouseButtonEventArgs e)
         {
+            ClearSubMenus(true);
+        }
+
+        private void ClearSubMenus(bool unselectAll)
+        {
+            if(unselectAll)
+                Menus.UnselectAll();
+
             for (int i = 0; i < SubMenus.Count(); i++)
-            {
                 MainGrid.Children.Remove(SubMenus[i]);
-            }
 
             SubMenus.Clear();
         }

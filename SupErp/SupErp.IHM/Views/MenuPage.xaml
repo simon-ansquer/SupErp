@@ -41,12 +41,12 @@
             <TextBlock x:Name="Logo" Grid.Column="1" Grid.Row="1" Foreground="#FFFFFF" FontFamily="Segoe UI">SupERP</TextBlock>
             <StackPanel x:Name="LogOutPanel" Grid.Column="1" Grid.Row="3" Orientation="Horizontal" Cursor="Hand" MouseEnter="LogOutPanel_MouseEnter" MouseLeftButtonDown="LogOutClicked" MouseLeave="LogOutPanel_MouseLeave">
                 <Image x:Name="LogOutImage" Source="../Content/Img/LogOut.png" Stretch="Uniform"></Image>
-                <TextBlock x:Name="LogOut" Foreground="#FFFFFF" FontFamily="Segoe UI" VerticalAlignment="Center">LogOut</TextBlock>
+                <TextBlock x:Name="LogOut" Foreground="#FFFFFF" FontFamily="Segoe UI" VerticalAlignment="Center">Déconnexion</TextBlock>
             </StackPanel>
 
 
         </Grid>
-        <Grid x:Name="RightTape" Background="#FFFFFF" Grid.Column="1">
+        <Grid x:Name="RightTape" Background="#FFFFFF" Grid.Column="1" Margin="10">
         </Grid>
     </Grid>
 </Page>
