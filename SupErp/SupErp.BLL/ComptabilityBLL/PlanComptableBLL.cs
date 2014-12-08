@@ -22,9 +22,9 @@ namespace SupErp.BLL.ComptabilityBLL
         /// <returns>Plan Comptable sous forme de Liste</returns>
         public IEnumerable<ClassOfAccount> GetPlanComptable()
         {
-            List<ClassOfAccount> classAccount = new List<ClassOfAccount>(comptabilityDal.GetClassOfAccounts().ToClassOfAccount());
+            List<ClassOfAccount> classAccount = new List<ClassOfAccount>(comptabilityDal.GetAccountingClasses().ToClassOfAccount());
 
-            List<ChartsOfAccount> chartsAccount = new List<ChartsOfAccount>(comptabilityDal.GetChartOfAccounts().ToChartsOfAccount());
+            List<ChartsOfAccount> chartsAccount = new List<ChartsOfAccount>(comptabilityDal.GetAccountingAccounts().ToChartsOfAccount());
 
             foreach ( var _class in classAccount )
             {
@@ -87,7 +87,7 @@ namespace SupErp.BLL.ComptabilityBLL
         /// <returns></returns>
         public IEnumerable<COMPTA_Currency> GetCurrency ()
         {
-            var result = comptabilityDal.GetCurrency();
+            var result = comptabilityDal.GetCurrencies();
 
             if ( result == null )
                 return null;
@@ -101,7 +101,7 @@ namespace SupErp.BLL.ComptabilityBLL
         /// <returns></returns>
         public IEnumerable<COMPTA_Bank> GetBank ()
         {
-            var result = comptabilityDal.GetBank();
+            var result = comptabilityDal.GetBanks();
 
             if ( result == null )
                 return null;
@@ -115,7 +115,7 @@ namespace SupErp.BLL.ComptabilityBLL
         /// <returns></returns>
         public IEnumerable<COMPTA_BankAccount> GetBankAccount ()
         {
-            var result = comptabilityDal.GetBankAccount();
+            var result = comptabilityDal.GetBankAccounts();
 
             if ( result == null )
                 return null;
