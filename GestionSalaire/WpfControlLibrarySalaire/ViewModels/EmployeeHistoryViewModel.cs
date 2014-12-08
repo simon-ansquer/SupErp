@@ -1,36 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using WpfControlLibrarySalaire.Models;
+﻿using System.Windows.Input;
+using WpfControlLibrarySalaire.Helpers;
+using WpfControlLibrarySalaire.Views;
+using WpfControlLibrarySalaire.ServiceSalaire;
 
 namespace WpfControlLibrarySalaire.ViewModels
 {
     public class EmployeeHistoryViewModel
     {
-        private List<HistoriqueSalaire> _listHistoriqueSalaire;
+        private readonly User _employee;
 
-        public List<HistoriqueSalaire> ListHistoriqueSalaire
+        public User Employee
         {
-            get { return _listHistoriqueSalaire; }
-            set { if(value != null) _listHistoriqueSalaire = value;}
+            get { return _employee; }
         }
-        
+
+        public EmployeeHistoryViewModel(User employee)
+        {
+            _employee = employee;
+        }
+
         public EmployeeHistoryViewModel()
         {
-            RandomizeData();
+            
         }
- 
-    
-    
-    private void RandomizeData()
-    {
-        ListHistoriqueSalaire = new List<HistoriqueSalaire>();
 
-        for (int i = 0; i < 10; i++)
+        public ICommand PreviousCommand
         {
-            ListHistoriqueSalaire.Add(new HistoriqueSalaire(DateTime.Now, Convert.ToDouble(i)));
+            get
+            {
+                return new DelegateCommand<string>(
+                    s => OnPreviousClick()
+                    );
+            }
         }
 
-    } 
-    }   
+        private void OnPreviousClick()
+        {
+            Switcher.Switch(new EmployeeDetails(new EmployeeDetailsViewModel(Employee)));
+        }
+    }
 
 }
