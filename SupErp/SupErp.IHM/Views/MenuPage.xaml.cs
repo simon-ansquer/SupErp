@@ -94,12 +94,12 @@ namespace SupErp.IHM.Views
         private void MainMenuClicked(object sender, SelectionChangedEventArgs e)
         {
             IMainMenu item = (Menus.SelectedItem as IMainMenu);
+            ClearSubMenus(false);
 
             if (item != null)
             {
                 if (item.SubMenus != null && item.SubMenus.Count > 0)
                 {
-                    ClearSubMenus(false);
                     ListBoxItem listBoxItem = (Menus.ItemContainerGenerator.ContainerFromIndex(((ListBox)sender).SelectedIndex) as ListBoxItem);
                     Point position = listBoxItem.TransformToVisual((Visual) (Menus.Parent)).Transform(new Point(listBoxItem.ActualWidth, 0));
                     GenerateSubMenus(item.SubMenus, position, false);
