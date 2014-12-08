@@ -103,6 +103,8 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
+
+    </Compile>
     <Compile Include="Views\CompabilityView\PlanComptable.xaml.cs">
       <DependentUpon>PlanComptable.xaml</DependentUpon>
     </Compile>
