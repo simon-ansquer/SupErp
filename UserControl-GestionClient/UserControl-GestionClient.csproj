@@ -67,6 +67,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewModels\AccueilGestionClientViewModel.cs" />
+    <Compile Include="ViewModels\CreateContactViewModel.cs" />
+    <Compile Include="ViewModels\CreateViewModel.cs" />
     <Compile Include="Views\AccueilGestionClient.xaml.cs">
       <DependentUpon>AccueilGestionClient.xaml</DependentUpon>
     </Compile>

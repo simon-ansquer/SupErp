@@ -5,20 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModels="clr-namespace:UserControl_GestionClient.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="800" d:DesignWidth="1000">
     <UserControl.Resources>
         <viewModels:AccueilGestionClientViewModel x:Key="AccueilViewModel" />
     </UserControl.Resources>
-    <Grid Margin="0,0,-396,0" DataContext="{StaticResource AccueilViewModel}">
-        <StackPanel Orientation="Vertical"
-                    Margin="-270,0,166,-100"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top" Width="800" Height="400">
-            <Button Content="Ajouter un client"
-        		Command="{Binding AddCustomer}" Margin="75,20,587,20" />
-            <DataGrid ItemsSource="{Binding CompanyCollection}"
+    
+       
+
+        <Grid DataContext="{StaticResource AccueilViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.01*"/>
+            <RowDefinition Height="0.3*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Ajouter un client"
+        		Command="{Binding AddCustomer}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="Ajouter un contact"
+        		Command="{Binding AddCustomer}" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+
+        <DataGrid ItemsSource="{Binding CompanyCollection}"
             	AutoGenerateColumns="False"
-            	CanUserAddRows="False" Height="300" Width="650" Margin="75,20,75,20">
+            	CanUserAddRows="False"  Grid.Row="1">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding name}"
                         IsReadOnly="True"
@@ -37,6 +43,7 @@
             			Header="Siret" />
                 </DataGrid.Columns>
             </DataGrid>
-        </StackPanel>
-    </Grid>
+
+        </Grid>
+    
 </UserControl>
