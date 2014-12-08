@@ -5,20 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModels="clr-namespace:UserControl_GestionClient.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="800" d:DesignWidth="1000">
     <UserControl.Resources>
-        <viewModels:AccueilGestionClientViewModel x:Key="AccueilViewModel" />
+        <viewModels:CreateContactViewModel x:Key="ViewModel" />
     </UserControl.Resources>
-    <Grid Margin="0,0,-396,0" DataContext="{StaticResource AccueilViewModel}">
-        <StackPanel Orientation="Vertical"
-                    Margin="-270,0,166,-100"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.3"/>
-                </Grid.RowDefinitions>
-            </Grid>
-        </StackPanel>
+    <Grid DataContext="{StaticResource ViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="1" Content="Nom Entreprise"/>
+        <TextBox Height="35" Width="200" Grid.Row="1"/>
+        <Label Content="Nom Entreprise"/><TextBox Grid.Row="2"/>
+        <Label Content="Nom Entreprise"/><TextBox Grid.Row="3"/>
+        <Label Content="Nom Entreprise"/><TextBox Grid.Row="4"/>
+        <Label Content="Nom Entreprise"/><TextBox Grid.Row="5"/>
+        <Label Content="Nom Entreprise"/><TextBox Grid.Row="1"/>
+        <Label Content="Nom Entreprise"/><TextBox Grid.Row="2"/>
+        <Label Content="Nom Entreprise"/><TextBox Grid.Row="3"/>
+        <Label Content="Nom Entreprise"/><TextBox Grid.Row="4"/>
+        <Label Content="Nom Entreprise"/><TextBox Grid.Row="5"/>
+        <Label Content="Nom Entreprise"/><TextBox Grid.Row="6"/>
+        <Button Content="Ajouter un client"
+        		Command="{Binding AddCustomer}" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
     </Grid>
 </UserControl>

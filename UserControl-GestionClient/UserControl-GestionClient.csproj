@@ -53,6 +53,7 @@
     <Compile Include="Helpers\NotificationObject.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Company_Contact.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

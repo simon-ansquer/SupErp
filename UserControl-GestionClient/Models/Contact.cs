@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 namespace UserControl_GestionClient.Models
 {
-    class Company_Contact
+    class Contact
     {
-        public string name { get; set; }
-        public string siret { get; set; }
-        public string address { get; set; }
-        public int postalcode { get; set; }
-        public string city { get; set; }
+        public long id { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
         public int gender { get; set; }
         public string email { get; set; }
         public string phone { get; set; }
+        public long company_id { get; set; }
+        public virtual Company Company { get; set; }
     }
 }
