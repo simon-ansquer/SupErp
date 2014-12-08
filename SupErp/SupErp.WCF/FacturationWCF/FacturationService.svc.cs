@@ -26,7 +26,7 @@ namespace SupErp.WCF.FacturationWCF
             return billQuotationBLL.GetBillQuotation().OrderBy(b => b.DateBillQuotation).ToList();
         }
 
-        public List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, long? status,int? MontantHTMin, int? MontantHTMax, bool? isBill)
+        public List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, BILL_Status status,int? MontantHTMin, int? MontantHTMax, bool? isBill)
         {
             var list = new List<BillQuotationLight>();
 
@@ -40,6 +40,13 @@ namespace SupErp.WCF.FacturationWCF
                     list.Add(billQuotationBLL.GetBillByNum(numFact));
                 else
                     list.Where(b => b.NBill == numFact);
+
+            /*** Filtre status ***/
+            if (status != null)
+                if (list.Count == 0)
+                    list.AddRange(billQuotationBLL.GetBillQuotationByStatus(status));
+                else
+                    list.Where(b => b.BillStatus.Status_Id == status.Status_Id);
 
             /*** Filtre date du document ***/
             if (dateDocument != null)
@@ -178,6 +185,28 @@ namespace SupErp.WCF.FacturationWCF
             return res;
 
         }
+
+
+        /***********************/
+        /*    TRANSMITTER      */
+        /**********************/
+
+        private static readonly Lazy<BillTransmitterBLL> lazyTransmitterBLL = new Lazy<BillTransmitterBLL>(() => new BillTransmitterBLL());
+        private static BillTransmitterBLL transmitterBLL { get { return lazyTransmitterBLL.Value; } }
+
+        public List<BILL_Transmitter> GetTransmitter()
+        {
+            try
+            {
+                return transmitterBLL.GetBillTrans();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("FacturationService >> GetTransmitter :" + ex.Message);
+            }
+        }
+
+       
 
     }
 }

@@ -26,11 +26,16 @@ namespace SupErp.DAL.FacturationModele
             base.Transmitter_Id = bill_billQuotation.Transmitter_Id;
             base.Vat = bill_billQuotation.Vat;
 
+            BillStatus = bill_billQuotation.BILL_BillQuotationStatus.OrderByDescending(s => s.DateAdvancement).First().BILL_Status;
+
             CalculateTTC();
         }
 
         [DataMember]
         public double AmountTTC{ get; private set;}
+
+        [DataMember]
+        public BILL_Status BillStatus { get; private set; }
 
         private void CalculateTTC()
         {
