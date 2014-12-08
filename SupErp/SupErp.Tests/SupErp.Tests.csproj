@@ -87,6 +87,10 @@
       <Project>{aed44877-9636-4e8c-95a3-722d99f6260b}</Project>
       <Name>SupErp.Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SupErp.WCF\SupErp.WCF.csproj">
+      <Project>{DDDB3846-F079-4103-B316-1EB8EDB76090}</Project>
+      <Name>SupErp.WCF</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

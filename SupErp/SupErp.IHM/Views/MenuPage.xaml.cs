@@ -28,12 +28,14 @@ namespace SupErp.IHM.Views
         public double ScreenWidth { get; set; }
         public double ScreenHeight { get; set; }
         public IEnumerable<IMainMenu> MainMenus { get; set; }
+        public List<Grid> SubMenus { get; set; }
 
         public MenuPage(IEnumerable<IMainMenu> mainMenus)
         {
             InitializeComponent();
 
             MainMenus = mainMenus;
+            SubMenus = new List<Grid>();
             ScreenHeight = StaticParams.ScreenHeight;
             ScreenWidth = StaticParams.ScreenWidth;
             Menus.ItemsSource = MainMenus;
@@ -116,28 +118,59 @@ namespace SupErp.IHM.Views
             grid.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             ListBox listBox = new ListBox();
             listBox.Background = new SolidColorBrush(Colors.Transparent);
+            listBox.SelectionChanged += listBox_SelectionChanged;
 
-            foreach (ISubMenu sm in submenus)
-            {
-                ListBoxItem item = new ListBoxItem();
-                TextBlock txtBlock = new TextBlock();
-                txtBlock.FontSize = ScreenHeight / 38;
-                txtBlock.Height = ScreenHeight / 35;
-                txtBlock.Foreground = new SolidColorBrush(Colors.White);
-                txtBlock.Margin = new Thickness(0, 0, 0, 10);
-                txtBlock.Text = sm.SubMenuName;
-                item.Content = txtBlock;
-                listBox.Items.Add(item);
-            }
+            Binding binding = new Binding();
+            binding.Path = new PropertyPath("SubMenuName");
+
+            var textBlockFactory = new FrameworkElementFactory(typeof(TextBlock));
+            textBlockFactory.SetValue(TextBlock.TextProperty, binding);
+            textBlockFactory.SetValue(TextBlock.ForegroundProperty, Brushes.White);
+            textBlockFactory.SetValue(TextBlock.FontSizeProperty, ScreenHeight / 38);
+            textBlockFactory.SetValue(TextBlock.HeightProperty, ScreenHeight / 35);
+            textBlockFactory.SetValue(TextBlock.MarginProperty, new Thickness(0,0,0,10));
+
+            var stackPanel = new FrameworkElementFactory(typeof(StackPanel));
+            stackPanel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
+            stackPanel.AppendChild(textBlockFactory);
+
+            DataTemplate dataTemplate = new DataTemplate();
+            dataTemplate.VisualTree = stackPanel;
+
+            listBox.ItemTemplate = dataTemplate;
+            listBox.ItemsSource = submenus;          
             
             grid.Children.Add(listBox);
+            SubMenus.Add(grid);
             MainGrid.Children.Add(grid);
             Grid.SetColumnSpan(grid, 2);
         }
 
+        void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ISubMenu item = (((ListBox)sender).SelectedItem as ISubMenu);
+
+            if (item.SubMenus != null && item.SubMenus.Count > 0)
+            {
+                ListBoxItem listBoxItem = (Menus.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem);
+                Point position = listBoxItem.TransformToVisual((Visual)(Menus.Parent)).Transform(new Point(listBoxItem.ActualWidth, 0));
+                GenerateSubMenus(item.SubMenus, position, false);
+            }
+            else
+            {
+                RightTape.Children.Clear();
+                RightTape.Children.Add(item as UserControl);
+            }
+        }
+
         private void MainGridClicked(object sender, MouseButtonEventArgs e)
         {
-            // TO DO Ajouter une liste pour pouvoir disposer les grid des sous menus
+            for (int i = 0; i < SubMenus.Count(); i++)
+            {
+                MainGrid.Children.Remove(SubMenus[i]);
+            }
+
+            SubMenus.Clear();
         }
     }
 }
