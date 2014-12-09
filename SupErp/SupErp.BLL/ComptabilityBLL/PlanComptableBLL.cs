@@ -144,8 +144,132 @@ namespace SupErp.BLL.ComptabilityBLL
 
             return result;
         }
-        
-        public IEnumerable<>
+
+        public IEnumerable<Entries> GetEntries ( EntriesTypeEnum? type, bool? paye, bool? impaye, DateTime? Debut, DateTime? Fin )
+        {
+            var bankResult = comptabilityDal.GetBankJournalLines();
+            var supplierResult = comptabilityDal.GetSupplierJournalLines();
+            var customerResult = comptabilityDal.GetCustomerJournalLines();
+            var accountingResult = comptabilityDal.GetAccountingEntries();
+
+            List<COMPTA_BankJournalLine> resultBank = new List<COMPTA_BankJournalLine>();
+            List<COMPTA_CustomerJournalLine> resultCustomer = new List<COMPTA_CustomerJournalLine>();
+            List<COMPTA_SupplierJournalLine> resultSupplier = new List<COMPTA_SupplierJournalLine>();
+            List<COMPTA_AccountingEntries> resultAccounting = new List<COMPTA_AccountingEntries>();
+
+            #region Bank Journal
+
+            if ( resultBank != null )
+            {
+                if(type.HasValue)
+                {
+                    switch(type)
+                    {
+                        case EntriesTypeEnum.Credit:
+                            resultBank.AddRange(bankResult.Where(x => x.direction.Value == true));
+                            break;
+                        case EntriesTypeEnum.Debit:
+                            resultBank.AddRange(bankResult.Where(x => x.direction.Value == false));
+                            break;
+                    }
+                }
+
+                if ( Debut.HasValue && Fin.HasValue )
+                    resultBank.AddRange(bankResult.Where(x => Debut.Value < x.postingDate.Value && x.postingDate.Value < Fin.Value));
+                else if ( Debut.HasValue )
+                    resultBank.AddRange(bankResult.Where(x => Debut.Value < x.postingDate.Value));
+                else if ( Fin.HasValue )
+                    resultBank.AddRange(bankResult.Where(x => x.postingDate.Value < Fin.Value));
+            }
+
+            #endregion
+
+            #region Customer Journal
+
+            if ( customerResult != null )
+            {
+                if ( type.HasValue )
+                {
+                    switch ( type )
+                    {
+                        case EntriesTypeEnum.Credit:
+                            resultCustomer.AddRange(customerResult.Where(x => x.direction.Value == true));
+                            break;
+                        case EntriesTypeEnum.Debit:
+                            resultCustomer.AddRange(customerResult.Where(x => x.direction.Value == false));
+                            break;
+                    }
+                }
+
+                if ( Debut.HasValue && Fin.HasValue )
+                    resultCustomer.AddRange(customerResult.Where(x => Debut.Value < x.postingDate.Value && x.postingDate.Value < Fin.Value));
+                else if ( Debut.HasValue )
+                    resultCustomer.AddRange(customerResult.Where(x => Debut.Value < x.postingDate.Value));
+                else if ( Fin.HasValue )
+                    resultCustomer.AddRange(customerResult.Where(x => x.postingDate.Value < Fin.Value));
+            }
+
+            #endregion
+
+            #region  Supplier Journal
+
+            if ( supplierResult != null )
+            {
+                if ( type.HasValue )
+                {
+                    switch ( type )
+                    {
+                        case EntriesTypeEnum.Credit:
+                            resultSupplier.AddRange(supplierResult.Where(x => x.direction.Value == true));
+                            break;
+                        case EntriesTypeEnum.Debit:
+                            resultSupplier.AddRange(supplierResult.Where(x => x.direction.Value == false));
+                            break;
+                    }
+                }
+
+                if ( Debut.HasValue && Fin.HasValue )
+                    resultSupplier.AddRange(supplierResult.Where(x => Debut.Value < x.postingDate.Value && x.postingDate.Value < Fin.Value));
+                else if ( Debut.HasValue )
+                    resultSupplier.AddRange(supplierResult.Where(x => Debut.Value < x.postingDate.Value));
+                else if ( Fin.HasValue )
+                    resultSupplier.AddRange(supplierResult.Where(x => x.postingDate.Value < Fin.Value));
+            }
+
+            #endregion
+
+            #region Accounting Journal
+
+            if ( resultBank != null )
+            {
+                if ( type.HasValue )
+                {
+                    switch ( type )
+                    {
+                        case EntriesTypeEnum.Credit:
+                            resultAccounting.AddRange(accountingResult.Where(x => x.direction.Value == true));
+                            break;
+                        case EntriesTypeEnum.Debit:
+                            resultAccounting.AddRange(accountingResult.Where(x => x.direction.Value == false));
+                            break;
+                    }
+                }
+
+                if ( Debut.HasValue && Fin.HasValue )
+                    resultAccounting.AddRange(accountingResult.Where(x => Debut.Value < x.postingDate.Value && x.postingDate.Value < Fin.Value));
+                else if ( Debut.HasValue )
+                    resultAccounting.AddRange(accountingResult.Where(x => Debut.Value < x.postingDate.Value));
+                else if ( Fin.HasValue )
+                    resultAccounting.AddRange(accountingResult.Where(x => x.postingDate.Value < Fin.Value));
+            }
+
+            #endregion
+
+            
+
+            return null;
+
+        }
 
         /*
         public IEnumerable<COMPTA_AccountingEntries> GetAccountingEntries()

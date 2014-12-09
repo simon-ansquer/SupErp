@@ -17,7 +17,7 @@ namespace SupErp.WCF.ComptabilityWCF
         private static readonly Lazy<PlanComptableBLL> LazyComptabiliteBLL = new Lazy<PlanComptableBLL>(() => new PlanComptableBLL());
         private static PlanComptableBLL comptabiliteBLL { get { return LazyComptabiliteBLL.Value; } }
 
-        public IEnumerable<ClassOfAccount> IComptabilityService.GetPlanComptable ()
+        IEnumerable<ClassOfAccount> IComptabilityService.GetPlanComptable ()
         {
             return comptabiliteBLL.GetPlanComptable();
         }
@@ -25,6 +25,11 @@ namespace SupErp.WCF.ComptabilityWCF
         Entities.COMPTA_ExchangeRate IComptabilityService.GetExhangeRate ()
         {
             return comptabiliteBLL.GetLastExchangeRate();
+        }
+
+        IEnumerable<Entries> IComptabilityService.GetEntries ( EntriesTypeEnum? type, bool? paye, bool? impaye, DateTime? Debut, DateTime? Fin )
+        {
+            return comptabiliteBLL.GetEntries(type, paye, impaye, Debut, Fin);
         }
     }
 }

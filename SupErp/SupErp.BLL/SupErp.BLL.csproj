@@ -45,6 +45,8 @@
     <Compile Include="ComptabilityBLL\BllObject\ChartsOfAccount.cs" />
     <Compile Include="ComptabilityBLL\BllObject\ClassOfAccount.cs" />
     <Compile Include="ComptabilityBLL\BllObject\Entries.cs" />
+    <Compile Include="ComptabilityBLL\BllObject\EntriesTypeEnum.cs" />
+    <Compile Include="ComptabilityBLL\BllObject\SourceEntriesEnum.cs" />
     <Compile Include="ComptabilityBLL\PlanComptableBLL.cs" />
     <Compile Include="FacturationBLL\BillCategoryBLL.cs" />
     <Compile Include="FacturationBLL\BillProductBLL.cs" />
