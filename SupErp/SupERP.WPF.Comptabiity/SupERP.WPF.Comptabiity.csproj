@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ChartsOfAccount.cs" />
+    <Compile Include="Model\ClassOfAccount.cs" />
     <Compile Include="Model\TransactionWPF.cs" />
     <Compile Include="PlanComptableWPF.xaml.cs">
       <DependentUpon>PlanComptableWPF.xaml</DependentUpon>
@@ -113,6 +115,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SupErp.WCF\SupErp.WCF.csproj">
+      <Project>{dddb3846-f079-4103-b316-1eb8edb76090}</Project>
+      <Name>SupErp.WCF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SupERP.WPF.Comptability.Library\SupERP.WPF.Comptability.Library.csproj">
       <Project>{85ea25d3-0e14-4e4d-8f82-10c424d006a8}</Project>
       <Name>SupERP.WPF.Comptability.Library</Name>
