@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UserControl_GestionClient.Models
 {
-    class Company_Contact
+    public class Company_Contact
     {
         public string name { get; set; }
         public string siret { get; set; }

@@ -50,7 +50,7 @@ namespace UserControl_GestionClient.ViewModels
         }
 
         public ICommand AddCustomer { get { return new DelegateCommand(AddNewCustomer); } }
-        private void AddNewCustomer()
+        private void AddNewCustomer(object parameter)
         {
             
         }

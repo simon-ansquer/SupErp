@@ -26,7 +26,8 @@ namespace TestApplication
             InitializeComponent();
             Frame uneFrame = new Frame();
             MainGrid.Children.Add(uneFrame);
-            uneFrame.Navigate(new AccueilGestionClient());
+            //uneFrame.Navigate(new AccueilGestionClient());
+            uneFrame.Navigate(new CreateCustomer());
         }
     }
 }

@@ -18,32 +18,32 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="179"/>
-            <RowDefinition Height="51"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="16"/>
-            <RowDefinition Height="48"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="16"/>
-            <RowDefinition Height="47"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="18"/>
-            <RowDefinition Height="49*"/>
+            <RowDefinition Height="50*"/>
             <RowDefinition Height="15*"/>
-            <RowDefinition Height="55*"/>
+            <RowDefinition Height="50*"/>
             <RowDefinition Height="35.851"/>
             <RowDefinition Height="270"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Row="1" Content="Nom Entreprise"/>
-        <TextBox Grid.Column="3" Grid.Row="1"/>
-        <TextBox Grid.Row="5" Grid.Column="1"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=name, Mode=TwoWay}"/>
-        <TextBox Grid.Row="3" Grid.Column="1"/>
-        <TextBox Grid.Row="3" Grid.Column="3"/>
-        <TextBox Grid.Row="7" Grid.Column="1" RenderTransformOrigin="0.485,0.516"/>
+        <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding Path=NewContact.lastname}"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding NewContact.address}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NewContact.name}"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NewContact.siret}"/>
+        <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding NewContact.firstname}"/>
+        <TextBox Grid.Row="7" Grid.Column="1" RenderTransformOrigin="0.485,0.516" Text="{Binding NewContact.postalcode}"/>
         <Button Content="Ajouter un client"
-        		Command="{Binding AddCustomer}" Grid.Row="11" Grid.Column="3" Margin="173,137,25,75" Click="Button_Click"/>
-        <TextBox Grid.Column="1" Grid.Row="9" TextWrapping="Wrap" RenderTransformOrigin="-0.108,1.085"/>
-        <TextBox Grid.Row="7" Grid.Column="3"/>
-        <TextBox Grid.Row="9" Grid.Column="3"/>
-        <TextBox Grid.Row="5" Grid.Column="3"/>
+        		Command="{Binding AddCustomer}" CommandParameter="{Binding NewContact}" Grid.Row="11" Grid.Column="3" Margin="173,137,25,75"/>
+        <TextBox Grid.Column="1" Grid.Row="9" TextWrapping="Wrap" RenderTransformOrigin="-0.108,1.085" Text="{Binding NewContact.city}"/>
+        <TextBox Grid.Row="7" Grid.Column="3" Text="{Binding NewContact.email}"/>
+        <TextBox Grid.Row="9" Grid.Column="3" Text="{Binding NewContact.phone}"/>
+        <TextBox Grid.Row="5" Grid.Column="3" Text="{Binding NewContact.gender}"/>
         <Label Grid.Row="3" Content="Siret" Grid.RowSpan="2" Height="64" VerticalAlignment="Bottom"/>
         <Label Grid.Row="5" Content="Adresse" Grid.RowSpan="2"/>
         <Label Grid.Row="7" Content="Code Postal"/>
