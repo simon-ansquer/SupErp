@@ -7,6 +7,7 @@ using SupErp.BLL.ComptabilityBLL.BllObject;
 using SupErp.DAL.GestionComptabilityDAL;
 using SupErp.BLL.ComptabilityBLL.Assembleur;
 using SupErp.Entities;
+using SupErp.BLL.CurrencyConvertor;
 
 
 namespace SupErp.BLL.ComptabilityBLL
@@ -69,13 +70,34 @@ namespace SupErp.BLL.ComptabilityBLL
         {
             var result = comptabilityDal.GetLastExchangeRate();
 
-            if ( result == null )
-                return null;
-            else if ( DateTime.Now - result.updatedDate > new TimeSpan(2, 0, 0, 0, 0) )
+            if ( result == null || DateTime.Now - result.updatedDate > new TimeSpan(2, 0, 0, 0, 0) )
             {
                 // Call Update WebService for ExchangeRate Update =)
                 //comptabilityDal.
                 // ReGet the value updated
+                CurrencyConvertorSoapClient client = new CurrencyConvertorSoapClient();
+
+                try
+                {
+                    COMPTA_ExchangeRate exchangeRate = new COMPTA_ExchangeRate();
+
+                    exchangeRate.EURO_AUD = client.ConversionRate(Currency.EUR, Currency.AUD);
+                    exchangeRate.EURO_GBP = client.ConversionRate(Currency.EUR, Currency.GBP);
+                    exchangeRate.EURO_USD = client.ConversionRate(Currency.EUR, Currency.USD);
+                    exchangeRate.EURO_ZAR = client.ConversionRate(Currency.EUR, Currency.ZAR);
+                    exchangeRate.USD_EURO = client.ConversionRate(Currency.USD, Currency.EUR);
+                    exchangeRate.updatedDate = DateTime.Now;
+                    
+                    comptabilityDal.CreateExchangeRate(exchangeRate);
+
+                    result = comptabilityDal.GetLastExchangeRate();
+                }
+                catch (Exception e)
+                {
+                   
+                }
+
+
             }
 
             return result;
