@@ -82,6 +82,8 @@
       <DependentUpon>ComptabilityService.svc</DependentUpon>
     </Compile>
     <Compile Include="ComptabilityWCF\IComptabilityService.cs" />
+    <Compile Include="ComptabilityWCF\Model\ChartsOfAccount.cs" />
+    <Compile Include="ComptabilityWCF\Model\ClassOfAccount.cs" />
     <Compile Include="GestionClientWCF\IServiceGestionClient.cs" />
     <Compile Include="GestionClientWCF\ServiceGestionClient.svc.cs">
       <DependentUpon>ServiceGestionClient.svc</DependentUpon>

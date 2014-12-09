@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SupErp.WCF.ComptabilityWCF;
 
 namespace SupERP.WPF.Comptabiity
 {
@@ -22,6 +23,14 @@ namespace SupERP.WPF.Comptabiity
         public PlanComptableWPF()
         {
             InitializeComponent();
+        }
+
+        public IEnumerable<Model.ClassOfAccount> getPlanComptable()
+        {
+            using (var ws = new ComptabilityService())
+            {
+                
+            }
         }
     }
 }
