@@ -4,6 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using SupErp.BLL.ComptabilityBLL;
+using SupErp.BLL.ComptabilityBLL.BllObject;
+using SupErp.Entities;
 
 namespace SupErp.WCF.ComptabilityWCF
 {
@@ -12,6 +15,9 @@ namespace SupErp.WCF.ComptabilityWCF
     public interface IComptabilityService
     {
         [OperationContract]
-        void DoWork();
+        public IEnumerable<ClassOfAccount> GetPlanComptable ();
+
+        [OperationContract]
+        public COMPTA_ExchangeRate GetExhangeRate ();
     }
 }

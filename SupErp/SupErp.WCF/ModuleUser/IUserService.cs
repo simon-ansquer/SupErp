@@ -31,6 +31,9 @@ namespace SupErp.WCF
         IEnumerable<Role> GetRoles();
 
         [OperationContract]
+        Role GetRoleById(int roleId);
+
+        [OperationContract]
         IEnumerable<Module> GetModules();
 
         [OperationContract]

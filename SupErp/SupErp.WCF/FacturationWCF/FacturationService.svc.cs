@@ -26,7 +26,7 @@ namespace SupErp.WCF.FacturationWCF
             return billQuotationBLL.GetBillQuotation().OrderBy(b => b.DateBillQuotation).ToList();
         }
 
-        public List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, long? status,int? MontantHTMin, int? MontantHTMax, int? MontantTTCMin, int? MontantTTCMax, bool? isBill)
+        public List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, BILL_Status status,int? MontantHTMin, int? MontantHTMax, bool? isBill)
         {
             var list = new List<BillQuotationLight>();
 
@@ -40,6 +40,13 @@ namespace SupErp.WCF.FacturationWCF
                     list.Add(billQuotationBLL.GetBillByNum(numFact));
                 else
                     list.Where(b => b.NBill == numFact);
+
+            /*** Filtre status ***/
+            if (status != null)
+                if (list.Count == 0)
+                    list.AddRange(billQuotationBLL.GetBillQuotationByStatus(status));
+                else
+                    list.Where(b => b.BillStatus.Status_Id == status.Status_Id);
 
             /*** Filtre date du document ***/
             if (dateDocument != null)
@@ -65,19 +72,19 @@ namespace SupErp.WCF.FacturationWCF
                 else
                     list.Where(b => b.AmountDF < MontantHTMax);
 
-            /*** Filtre MontantTTCMin ***/
-            if (MontantTTCMin != null)
-                if (list.Count == 0)
-                    list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC > MontantTTCMin).ToList());
-                else
-                    list.Where(b => b.AmountTTC > MontantTTCMin);
+            ///*** Filtre MontantTTCMin ***/
+            //if (MontantTTCMin != null)
+            //    if (list.Count == 0)
+            //        list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC > MontantTTCMin).ToList());
+            //    else
+            //        list.Where(b => b.AmountTTC > MontantTTCMin);
 
-            /*** Filtre MontantTTCMax ***/
-            if (MontantTTCMax != null)
-                if (list.Count == 0)
-                    list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC < MontantTTCMax).ToList());
-                else
-                    list.Where(b => b.AmountTTC < MontantTTCMax);
+            ///*** Filtre MontantTTCMax ***/
+            //if (MontantTTCMax != null)
+            //    if (list.Count == 0)
+            //        list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC < MontantTTCMax).ToList());
+            //    else
+            //        list.Where(b => b.AmountTTC < MontantTTCMax);
 
             /*** Filtre isbill ***/
             if (isBill != null)
@@ -95,6 +102,10 @@ namespace SupErp.WCF.FacturationWCF
             return list;
         }
 
+        public BillQuotationComplete GetBillQuotation(long billQuotation_id)
+        {
+            return billQuotationBLL.GetBillQuotationsById(billQuotation_id);
+        }
 
         /**************************/
         /* LIGNE FACTURE / DEVIS  */
@@ -103,6 +114,8 @@ namespace SupErp.WCF.FacturationWCF
         private static readonly Lazy<LineBillQuotationBLL> lazyLineBLL = new Lazy<LineBillQuotationBLL>(() => new LineBillQuotationBLL());
         private static LineBillQuotationBLL lineBLL { get { return lazyLineBLL.Value; } }
 
+        private static readonly Lazy<BillProductBLL> lazyProductBLL = new Lazy<BillProductBLL>(() => new BillProductBLL());
+        private static BillProductBLL productBLL { get { return lazyProductBLL.Value; } }
 
         public List<LineExtended> GetAllLines(long billQuotation_id)
         {
@@ -121,11 +134,79 @@ namespace SupErp.WCF.FacturationWCF
 
 
         /**************************/
-        /*        PRODUIT         */
+        /*    CREATION FACTURE    */
         /**************************/
 
-        private static readonly Lazy<BillProductBLL> lazyProductBLL = new Lazy<BillProductBLL>(() => new BillProductBLL());
-        private static BillProductBLL productBLL { get { return lazyProductBLL.Value; } }
+        public bool CreateBillQuotation(BillQuotationComplete billQuotation)
+        {
+            var res = true;
+           try
+           {
+               var bill = billQuotationBLL.CreateBillQutotation(billQuotation);
+               foreach(var l in billQuotation.lines)
+               {
+                   l.BILL_BillQuotation = bill;
+                   l.BillQuotation_Id = bill.BillQuotation_Id;
+
+                   lineBLL.CreateLineBillQuotation(l);
+               }
+           }
+           catch(Exception)
+           {
+               res = false;
+           }
+           return res;
+
+        }
+
+        /******************************/
+        /*    MODIFICATION FACTURE    */
+        /******************************/
+
+        public bool ModifyBillQuotation(BillQuotationComplete billQuotation)
+        {
+            var res = true;
+            try
+            {
+                /*** Modification de la facture/devis ***/
+                billQuotationBLL.EditBillQuotation(billQuotation);
+
+                /*** Modification des lignes de facture ***/
+                var lineBDD = lineBLL.GetLineBillQuotation(billQuotation.BillQuotation_Id);
+                var lineModif = billQuotation.lines;
+
+                /* TODO: METTRE A JOUR LES LIGNES FACTURES */
+
+            }
+            catch (Exception)
+            {
+                res = false;
+            }
+            return res;
+
+        }
+
+
+        /***********************/
+        /*    TRANSMITTER      */
+        /**********************/
+
+        private static readonly Lazy<BillTransmitterBLL> lazyTransmitterBLL = new Lazy<BillTransmitterBLL>(() => new BillTransmitterBLL());
+        private static BillTransmitterBLL transmitterBLL { get { return lazyTransmitterBLL.Value; } }
+
+        public List<BILL_Transmitter> GetTransmitter()
+        {
+            try
+            {
+                return transmitterBLL.GetBillTrans();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("FacturationService >> GetTransmitter :" + ex.Message);
+            }
+        }
+
+       
 
     }
 }

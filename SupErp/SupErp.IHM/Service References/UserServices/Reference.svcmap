@@ -24,11 +24,11 @@
     <MetadataSource Address="http://localhost:7880/ModuleUser/UserService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="UserService.xsd" MetadataType="Schema" ID="099df5e7-8bef-4bce-8c46-1f08ac422ecc" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?xsd=xsd0" />
-    <MetadataFile FileName="UserService1.xsd" MetadataType="Schema" ID="baded3d9-cefc-48aa-b335-67bbd05fb8bd" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?xsd=xsd2" />
-    <MetadataFile FileName="UserService.disco" MetadataType="Disco" ID="379d5bc0-a7e3-444f-886a-f8d6f47f8f9f" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?disco" />
-    <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="5878f5b0-47ec-4582-8d47-55ac60f3c89c" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?xsd=xsd1" />
-    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="5afa8dbf-9118-431d-8797-36ec564850d0" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?wsdl" />
+    <MetadataFile FileName="UserService.xsd" MetadataType="Schema" ID="d034c3a1-31e5-4102-9f3a-6ebde52cd930" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?xsd=xsd0" />
+    <MetadataFile FileName="UserService1.xsd" MetadataType="Schema" ID="85e84e66-8402-4940-8f62-1e11bd7665e8" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?xsd=xsd2" />
+    <MetadataFile FileName="UserService.disco" MetadataType="Disco" ID="722f13f5-d760-41e1-830f-63f95b597bf6" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?disco" />
+    <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="1bcdf060-9c8f-4ad0-87d6-4d34df1068b3" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?xsd=xsd1" />
+    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="38682df1-9156-49b1-b8ad-00c3a08aac43" SourceId="1" SourceUrl="http://localhost:7880/ModuleUser/UserService.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
