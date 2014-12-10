@@ -12,7 +12,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
     {
         #region Read
 
-        public IEnumerable<COMPTA_ClassOfAccounts> GetClassOfAccounts()
+        public IEnumerable<COMPTA_ClassOfAccounts> GetAccountingClasses()
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
@@ -20,7 +20,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        public IEnumerable<COMPTA_ChartOfAccounts> GetChartOfAccounts()
+        public IEnumerable<COMPTA_ChartOfAccounts> GetAccountingAccounts()
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
@@ -38,7 +38,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        public IEnumerable<COMPTA_Currency> GetCurrency()
+        public IEnumerable<COMPTA_Currency> GetCurrencies()
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
@@ -46,7 +46,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        public IEnumerable<COMPTA_Bank> GetBank()
+        public IEnumerable<COMPTA_Bank> GetBanks()
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
@@ -54,7 +54,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        public IEnumerable<COMPTA_BankAccount> GetBankAccount()
+        public IEnumerable<COMPTA_BankAccount> GetBankAccounts()
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
@@ -73,7 +73,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        public IEnumerable<COMPTA_BankJournalLine> GetBankJournalLine()
+        public IEnumerable<COMPTA_BankJournalLine> GetBankJournalLines()
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
@@ -81,19 +81,35 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        public IEnumerable<COMPTA_CustomerJournalLine> GetCustomerJournalLine()
+        public IEnumerable<COMPTA_CustomerJournalLine> GetCustomerJournalLines()
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.COMPTA_CustomerJournalLine.Include("Company");
+                return context.COMPTA_CustomerJournalLine;
             }
         }
 
-        public IEnumerable<COMPTA_SupplierJournalLine> GetSupplierJournalLine()
+        public IEnumerable<COMPTA_SupplierJournalLine> GetSupplierJournalLines()
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.COMPTA_SupplierJournalLine.Include("Company");
+                return context.COMPTA_SupplierJournalLine;
+            }
+        }
+
+        public COMPTA_AccountingEntries_Periodicity GetAccountingEntriesPeriodicityById ( long id )
+        {
+            using ( SUPERPEntities context = new SUPERPEntities(false) )
+            {
+                return context.COMPTA_AccountingEntries_Periodicity.Include("COMPTA_Periodicity").Include("COMPTA_AccountingEntries").FirstOrDefault(x => x.COMPTA_AccountingEntries.id == id );
+            }
+        }
+
+        public IEnumerable<COMPTA_AccountingEntries_Periodicity> GetAccountingEntriesPeriodicity ( )
+        {
+            using ( SUPERPEntities context = new SUPERPEntities(false) )
+            {
+                return context.COMPTA_AccountingEntries_Periodicity.Include("COMPTA_Periodicity").Include("COMPTA_AccountingEntries").ToList();
             }
         }
 
@@ -101,23 +117,23 @@ namespace SupErp.DAL.GestionComptabilityDAL
 
         #region Create
 
-        public COMPTA_ClassOfAccounts CreateClassOfAccounts(COMPTA_ClassOfAccounts classOfAccountsToAdd)
+        public COMPTA_ClassOfAccounts CreateAccountingClass(COMPTA_ClassOfAccounts accountingClassToAdd)
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                var classOfAccounts = context.COMPTA_ClassOfAccounts.Add(classOfAccountsToAdd);
+                var accountingClass = context.COMPTA_ClassOfAccounts.Add(accountingClassToAdd);
                 context.SaveChanges();
-                return classOfAccounts;
+                return accountingClass;
             }
         }
 
-        public COMPTA_ChartOfAccounts CreateChartOfAccounts(COMPTA_ChartOfAccounts chartOfAcountsToAdd)
+        public COMPTA_ChartOfAccounts CreateAccountingAccount(COMPTA_ChartOfAccounts accountingAccountToAdd)
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                var chartOfAccounts = context.COMPTA_ChartOfAccounts.Add(chartOfAcountsToAdd);
+                var accountingAccount = context.COMPTA_ChartOfAccounts.Add(accountingAccountToAdd);
                 context.SaveChanges();
-                return chartOfAccounts;
+                return accountingAccount;
             }
         }
 
@@ -161,13 +177,13 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        public COMPTA_AccountingEntries CreateAccountingEntries(COMPTA_AccountingEntries accountingEntriesToAdd)
+        public COMPTA_AccountingEntries CreateAccountingEntry(COMPTA_AccountingEntries accountingEntryToAdd)
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                var accountingEntries = context.COMPTA_AccountingEntries.Add(accountingEntriesToAdd);
+                var accountingEntry = context.COMPTA_AccountingEntries.Add(accountingEntryToAdd);
                 context.SaveChanges();
-                return accountingEntries;
+                return accountingEntry;
             }
         }
 
@@ -205,33 +221,33 @@ namespace SupErp.DAL.GestionComptabilityDAL
 
         #region Edit
 
-        public COMPTA_ClassOfAccounts EditClassOfAccounts(COMPTA_ClassOfAccounts classOfAccountsToEdit)
+        public COMPTA_ClassOfAccounts EditAccountingClass(COMPTA_ClassOfAccounts accountingClassToEdit)
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                var classOfAccounts = context.COMPTA_ClassOfAccounts.Find(classOfAccountsToEdit.id);
+                var accountingClass = context.COMPTA_ClassOfAccounts.Find(accountingClassToEdit.id);
 
-                if (classOfAccounts == null)
+                if (accountingClass == null)
                     return null;
 
-                classOfAccounts = classOfAccountsToEdit;
+                accountingClass = accountingClassToEdit;
                 context.SaveChanges();
-                return classOfAccounts;
+                return accountingClass;
             }
         }
 
-        public COMPTA_ChartOfAccounts EditChartOfAccounts(COMPTA_ChartOfAccounts chartOfAccountsToEdit)
+        public COMPTA_ChartOfAccounts EditAccountingAccount(COMPTA_ChartOfAccounts accountingAccountToEdit)
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                var chartOfAccounts = context.COMPTA_ChartOfAccounts.Find(chartOfAccountsToEdit.id);
+                var accountingAccount = context.COMPTA_ChartOfAccounts.Find(accountingAccountToEdit.id);
 
-                if (chartOfAccounts == null)
+                if (accountingAccount == null)
                     return null;
 
-                chartOfAccounts = chartOfAccountsToEdit;
+                accountingAccount = accountingAccountToEdit;
                 context.SaveChanges();
-                return chartOfAccounts;
+                return accountingAccount;
             }
         }
 
@@ -359,7 +375,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
 
         #region Delete
 
-        public bool DeleteClassOfAccounts(int id)
+        public bool DeleteAccountingClass(int id)
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
@@ -377,7 +393,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        public bool DeleteChartOfAccounts(int id)
+        public bool DeleteAccountingAccount(int id)
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {

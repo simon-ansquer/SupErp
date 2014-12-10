@@ -40,6 +40,17 @@ namespace WpfControlLibrarySalaire.ViewModels
             }
         }
 
+        private Status _userStatus;
+        public Status UserStatus
+        {
+            get { return _userStatus; }
+            set
+            {
+                _userStatus = value;
+                RaisePropertyChanged(() => UserStatus);
+            }
+        }
+
         private string _inputPrimeName;
         public string InputPrimeName
         {
@@ -51,7 +62,7 @@ namespace WpfControlLibrarySalaire.ViewModels
             }
         }
 
-        private Regex _regex;
+        private readonly Regex _regex;
         private string _inputPrimePrice;
         public string InputPrimePrice
         {
@@ -63,37 +74,48 @@ namespace WpfControlLibrarySalaire.ViewModels
             }
         }
 
-        private DateTime _inputAbscenceStart;
-        public DateTime InputAbscenceStart
+        private DateTime _inputAbsenceStart;
+        public DateTime InputAbsenceStart
         {
-            get { return _inputAbscenceStart; }
+            get { return _inputAbsenceStart; }
             set
             {
-                _inputAbscenceStart = value;
+                _inputAbsenceStart = value;
                 _addAbscenceClickCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private DateTime _inputAbscenceEnd;
-        public DateTime InputAbscenceEnd
+        private DateTime _inputAbsenceEnd;
+        public DateTime InputAbsenceEnd
         {
-            get { return _inputAbscenceEnd; }
+            get { return _inputAbsenceEnd; }
             set
             {
-                _inputAbscenceEnd = value;
+                _inputAbsenceEnd = value;
                 _addAbscenceClickCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private Status _userStatus;
+        private ObservableCollection<AbsenceType> _absenceTypes;
 
-        public Status UserStatus
+        public ObservableCollection<AbsenceType> AbsenceTypes
         {
-            get { return _userStatus; }
+            get { return _absenceTypes; }
             set
             {
-                _userStatus = value;
-                RaisePropertyChanged(() => UserStatus);
+                _absenceTypes = value;
+                RaisePropertyChanged(() => AbsenceTypes);
+            }
+        }
+
+        private AbsenceType _absenceType;
+        public AbsenceType AbsenceType
+        {
+            get { return _absenceType; }
+            set
+            {
+                _absenceType = value;
+                RaisePropertyChanged(() => AbsenceType);
             }
         }
         #endregion
@@ -103,22 +125,33 @@ namespace WpfControlLibrarySalaire.ViewModels
             Employee = employee;
             UserStatus = employee.Status;
             if(UserStatus == null)
-                UserStatus = new Status(){id = -1};
+                UserStatus = new Status {id = -1};
             else
                 UserStatus.id -= 1;
+            if(Employee.Salaries.Count == 0)
+                Employee.Salaries.Add(new Salary());
             InitializeStatus();
+            InitializeAbsenceTypes();
             _addPrimeClickCommand = new DelegateCommand<string>(
                 OnAddPrimeButtonClick,
                 s => !string.IsNullOrEmpty(InputPrimeName) && !string.IsNullOrEmpty(InputPrimePrice)
             );
             _addAbscenceClickCommand = new DelegateCommand<string>(OnAddAbscenceButtonClick);
             _regex = new Regex(@"[^0-9.,]+");
+            InputAbsenceStart = DateTime.Now;
+            InputAbsenceEnd = DateTime.Now;
         }
 
         private async void InitializeStatus()
         {
             var status = await ServiceSalaire.GetStateAsync();
             if (ServiceSalaire != null) ListStatus = new ObservableCollection<Status>((IEnumerable<Status>)status);
+        }
+
+        private async void InitializeAbsenceTypes()
+        {
+            var listAbsencetypes = await ServiceSalaire.GetAbsenceTypesAsync();
+            AbsenceTypes = new ObservableCollection<AbsenceType>(listAbsencetypes);
         }
 
         #region Commands
@@ -178,15 +211,15 @@ namespace WpfControlLibrarySalaire.ViewModels
                 decimal primePrice = decimal.Parse(InputPrimePrice);
                 if (InputPrimeName == string.Empty)
                     throw new ArgumentNullException();
-                var newPrime = new Prime()
+                var newPrime = new Prime
                 {
                     Label = InputPrimeName,
                     Price = primePrice,
                     StartDate = DateTime.Now
                 };
-                ServiceSalaire.addPrime(Employee.Id, newPrime);
-                // Update the employee
                 var userId = Employee.Id;
+                ServiceSalaire.addPrime(userId, newPrime);
+                // Update the employee
                 Employee = ServiceSalaire.GetUserById(userId);
             }
             catch (ArgumentNullException)
@@ -210,10 +243,15 @@ namespace WpfControlLibrarySalaire.ViewModels
         {
             try
             {
-                var absenceStart = InputAbscenceStart;
-                var absenceEnd = InputAbscenceEnd;
-
-                //ServiceSalaire.addPrime(Employee.Id, new Prime());
+                var newAbsence = new Absence
+                {
+                    StartDate = InputAbsenceStart,
+                    EndDate = InputAbsenceEnd,
+                    AbsenceType_id = AbsenceType.id
+                };
+                var userId = Employee.Id;
+                ServiceSalaire.addAbsence(userId, newAbsence);
+                Employee = ServiceSalaire.GetUserById(userId);
             }
             catch (ArgumentNullException)
             {

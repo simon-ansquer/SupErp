@@ -132,6 +132,14 @@ namespace SupErp.DAL.GestionSalaireDAL
 
             return true;
         }
+
+
+        public List<AbsenceType> GetAbsenceTypes()
+        {
+            return Entities.AbsenceTypes.ToList();
+        }
+
+
         #endregion
 
 

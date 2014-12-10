@@ -10,7 +10,7 @@ namespace WpfControlLibrarySalaire.Views
         public EmployeeHistory(EmployeeHistoryViewModel viewModel)
         {
             InitializeComponent();
-            this.DataContext = viewModel;
+            DataContext = viewModel;
         }
     }
 }

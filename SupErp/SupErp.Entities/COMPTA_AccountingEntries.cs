@@ -15,9 +15,15 @@ namespace SupErp.Entities
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(COMPTA_ChartOfAccounts))]
+    [KnownType(typeof(COMPTA_AccountingEntries_Periodicity))]
     
     public partial class COMPTA_AccountingEntries
     {
+        public COMPTA_AccountingEntries()
+        {
+            this.COMPTA_AccountingEntries_Periodicity = new HashSet<COMPTA_AccountingEntries_Periodicity>();
+        }
+    
     [DataMember]
         public long id { get; set; }
     [DataMember]
@@ -31,5 +37,7 @@ namespace SupErp.Entities
     
     [DataMember]
         public virtual COMPTA_ChartOfAccounts COMPTA_ChartOfAccounts { get; set; }
+    [DataMember]
+        public virtual ICollection<COMPTA_AccountingEntries_Periodicity> COMPTA_AccountingEntries_Periodicity { get; set; }
     }
 }

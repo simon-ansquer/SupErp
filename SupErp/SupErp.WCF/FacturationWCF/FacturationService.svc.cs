@@ -26,7 +26,7 @@ namespace SupErp.WCF.FacturationWCF
             return billQuotationBLL.GetBillQuotation().OrderBy(b => b.DateBillQuotation).ToList();
         }
 
-        public List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, long? status,int? MontantHTMin, int? MontantHTMax, int? MontantTTCMin, int? MontantTTCMax, bool? isBill)
+        public List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, BILL_Status status,int? MontantHTMin, int? MontantHTMax, bool? isBill)
         {
             var list = new List<BillQuotationLight>();
 
@@ -40,6 +40,13 @@ namespace SupErp.WCF.FacturationWCF
                     list.Add(billQuotationBLL.GetBillByNum(numFact));
                 else
                     list.Where(b => b.NBill == numFact);
+
+            /*** Filtre status ***/
+            if (status != null)
+                if (list.Count == 0)
+                    list.AddRange(billQuotationBLL.GetBillQuotationByStatus(status));
+                else
+                    list.Where(b => b.BillStatus.Status_Id == status.Status_Id);
 
             /*** Filtre date du document ***/
             if (dateDocument != null)
@@ -65,19 +72,19 @@ namespace SupErp.WCF.FacturationWCF
                 else
                     list.Where(b => b.AmountDF < MontantHTMax);
 
-            /*** Filtre MontantTTCMin ***/
-            if (MontantTTCMin != null)
-                if (list.Count == 0)
-                    list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC > MontantTTCMin).ToList());
-                else
-                    list.Where(b => b.AmountTTC > MontantTTCMin);
+            ///*** Filtre MontantTTCMin ***/
+            //if (MontantTTCMin != null)
+            //    if (list.Count == 0)
+            //        list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC > MontantTTCMin).ToList());
+            //    else
+            //        list.Where(b => b.AmountTTC > MontantTTCMin);
 
-            /*** Filtre MontantTTCMax ***/
-            if (MontantTTCMax != null)
-                if (list.Count == 0)
-                    list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC < MontantTTCMax).ToList());
-                else
-                    list.Where(b => b.AmountTTC < MontantTTCMax);
+            ///*** Filtre MontantTTCMax ***/
+            //if (MontantTTCMax != null)
+            //    if (list.Count == 0)
+            //        list.AddRange(billQuotationBLL.GetBillQuotation().Where(b => b.AmountTTC < MontantTTCMax).ToList());
+            //    else
+            //        list.Where(b => b.AmountTTC < MontantTTCMax);
 
             /*** Filtre isbill ***/
             if (isBill != null)
@@ -130,19 +137,51 @@ namespace SupErp.WCF.FacturationWCF
         /*    CREATION FACTURE    */
         /**************************/
 
-        public bool CreateBillQuotation(BillQuotationComplete billQuotation)
+        private static readonly Lazy<BillQuotationStatusBLL> lazybqsBLL = new Lazy<BillQuotationStatusBLL>(() => new BillQuotationStatusBLL());
+        private static BillQuotationStatusBLL bqsBLL { get { return lazybqsBLL.Value; } }
+
+        public bool CreateBillQuotation(BillQuotationComplete billQuotationComplete)
         {
             var res = true;
            try
            {
-               var bill = billQuotationBLL.CreateBillQutotation(billQuotation);
-               foreach(var l in billQuotation.lines)
+               BILL_BillQuotation bill = new BILL_BillQuotation
                {
-                   l.BILL_BillQuotation = bill;
-                   l.BillQuotation_Id = bill.BillQuotation_Id;
+                   AmountDF = billQuotationComplete.AmountDF,
+                   BILL_Transmitter = billQuotationComplete.BILL_Transmitter,
+                   Company = billQuotationComplete.Company,
+                   DateBillQuotation = billQuotationComplete.DateBillQuotation,
+                   NBill = billQuotationComplete.NBill,
+                   Vat = billQuotationComplete.Vat,
+                   Company_Id = billQuotationComplete.Company_Id,
+                   Transmitter_Id = billQuotationComplete.Transmitter_Id
+               };
 
-                   lineBLL.CreateLineBillQuotation(l);
+               bill = billQuotationBLL.CreateBillQutotation(bill);
+
+               var status = new BILL_BillQuotationStatus { BILL_BillQuotation = bill, BILL_Status = billQuotationComplete.BillStatus, BillQuotation_Id = bill.BillQuotation_Id, DateAdvancement = DateTime.Now, Status_Id = billQuotationComplete.BillStatus.Status_Id };
+               bqsBLL.CreateBillQuotationStatus(status);
+
+               if (billQuotationComplete.lines == null) return res;
+
+               var listLine = new List<BILL_LineBillQuotation>();
+               foreach (var line in billQuotationComplete.lines)
+               {
+                   var l = new BILL_LineBillQuotation
+                   {
+                       BILL_BillQuotation = bill,
+                       BILL_Product = line.BILL_Product,
+                       BillQuotation_Id = bill.BillQuotation_Id,
+                       DateLine = line.DateLine,
+                       LineBillQuotation_Id = line.LineBillQuotation_Id,
+                       Product_Id = line.Product_Id,
+                       Quantite = line.Quantite
+                   };
+
+                   listLine.Add(l);
                }
+
+               lineBLL.CreateLineBillQuotation(listLine);
            }
            catch(Exception)
            {
@@ -156,20 +195,65 @@ namespace SupErp.WCF.FacturationWCF
         /*    MODIFICATION FACTURE    */
         /******************************/
 
-        public bool ModifyBillQuotation(BillQuotationComplete billQuotation)
+        public bool ModifyBillQuotation(BillQuotationComplete billQuotationComplete)
         {
             var res = true;
             try
             {
                 /*** Modification de la facture/devis ***/
-                billQuotationBLL.EditBillQuotation(billQuotation);
+                BILL_BillQuotation bill = new BILL_BillQuotation
+                {
+                    AmountDF = billQuotationComplete.AmountDF,
+                    BILL_Transmitter = billQuotationComplete.BILL_Transmitter,
+                    Company = billQuotationComplete.Company,
+                    DateBillQuotation = billQuotationComplete.DateBillQuotation,
+                    NBill = billQuotationComplete.NBill,
+                    Vat = billQuotationComplete.Vat,
+                    Company_Id = billQuotationComplete.Company_Id,
+                    Transmitter_Id = billQuotationComplete.Transmitter_Id
+                };
+
+                billQuotationBLL.EditBillQuotation(bill);
+
+                /*** Modification du status ***/
+                var status = new BILL_BillQuotationStatus { BILL_BillQuotation = bill, BILL_Status = billQuotationComplete.BillStatus, BillQuotation_Id = bill.BillQuotation_Id, DateAdvancement = DateTime.Now, Status_Id = billQuotationComplete.BillStatus.Status_Id };
+                bqsBLL.CreateBillQuotationStatus(status);
 
                 /*** Modification des lignes de facture ***/
-                var lineBDD = lineBLL.GetLineBillQuotation(billQuotation.BillQuotation_Id);
-                var lineModif = billQuotation.lines;
+                var lineBDD = lineBLL.GetLineBillQuotation(billQuotationComplete.BillQuotation_Id);
+                var lineModif = billQuotationComplete.lines;
 
+                var listLineAModifie = new List<BILL_LineBillQuotation>();
+                var listLineAAjoute = new List<BILL_LineBillQuotation>();
                 /* TODO: METTRE A JOUR LES LIGNES FACTURES */
+                foreach(var line in lineModif)
+                {
+                    var l = new BILL_LineBillQuotation
+                   {
+                       BILL_BillQuotation = bill,
+                       BILL_Product = line.BILL_Product,
+                       BillQuotation_Id = bill.BillQuotation_Id,
+                       DateLine = line.DateLine,
+                       LineBillQuotation_Id = line.LineBillQuotation_Id,
+                       Product_Id = line.Product_Id,
+                       Quantite = line.Quantite
+                   };
 
+                    if (lineBDD.Contains(l))
+                    {
+                        listLineAModifie.Add(l);
+                        lineBDD.Remove(l);
+                    }
+                    else
+                    {
+                        listLineAAjoute.Add(l);
+                        lineBDD.Remove(l);
+                    }
+                }
+
+                lineBLL.CreateLineBillQuotation(listLineAAjoute);
+                lineBLL.EditLineBillQuotation(listLineAModifie);
+                lineBLL.DeleteLineBillQuotation(lineBDD);
             }
             catch (Exception)
             {
@@ -177,6 +261,46 @@ namespace SupErp.WCF.FacturationWCF
             }
             return res;
 
+        }
+
+
+        /***********************/
+        /*    TRANSMITTER      */
+        /**********************/
+
+        private static readonly Lazy<BillTransmitterBLL> lazyTransmitterBLL = new Lazy<BillTransmitterBLL>(() => new BillTransmitterBLL());
+        private static BillTransmitterBLL transmitterBLL { get { return lazyTransmitterBLL.Value; } }
+
+        public List<BILL_Transmitter> GetTransmitter()
+        {
+            try
+            {
+                return transmitterBLL.GetBillTrans();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("FacturationService >> GetTransmitter :" + ex.Message);
+            }
+        }
+
+
+        /***********************/
+        /*       STATUS       */
+        /**********************/
+
+        private static readonly Lazy<StatusBLL> lazyStatusBLL = new Lazy<StatusBLL>(() => new StatusBLL());
+        private static StatusBLL statusBLL { get { return lazyStatusBLL.Value; } }
+
+        public List<BILL_Status> GetStatus()
+        {
+            try
+            {
+                return statusBLL.GetStatus();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("FacturationService >> GetStatus :" + ex.Message);
+            }
         }
 
     }

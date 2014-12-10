@@ -38,9 +38,6 @@ namespace SupErp.BLL.GestionClientBLL
             return contactDAL.EditCompany_Contact(contact);
         }
 
-
-
-
         public bool DeleteCompany_Contact(int id)
         {
             return contactDAL.DeleteCompany_Contact(id);

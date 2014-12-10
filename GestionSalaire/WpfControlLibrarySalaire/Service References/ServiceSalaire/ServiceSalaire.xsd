@@ -173,4 +173,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfStatus" nillable="true" type="tns:ArrayOfStatus" />
+  <xs:complexType name="ArrayOfAbsenceType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AbsenceType" nillable="true" type="tns:AbsenceType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAbsenceType" nillable="true" type="tns:ArrayOfAbsenceType" />
 </xs:schema>

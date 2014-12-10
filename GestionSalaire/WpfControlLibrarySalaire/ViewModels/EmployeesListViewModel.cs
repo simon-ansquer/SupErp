@@ -44,6 +44,7 @@ namespace WpfControlLibrarySalaire.ViewModels
                     employee.Lastname = employee.Lastname.Trim();
                     employee.Firstname = employee.Firstname.Trim();
                     employee.Salaries.Reverse();
+                    employee.Absences.Reverse();
                     Employees.Add(employee);
                 }
             }
@@ -68,7 +69,7 @@ namespace WpfControlLibrarySalaire.ViewModels
             get
             {
                 return new DelegateCommand<string>(
-                    s => OnGeneratePDFClick()
+                    s => OnGeneratePdfClick()
                     );
             }
         }
@@ -88,9 +89,9 @@ namespace WpfControlLibrarySalaire.ViewModels
         #endregion
 
         #region Command Handlers
-        private void OnGeneratePDFClick()
+        private void OnGeneratePdfClick()
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            var fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
             foreach (User employee in Employees)
                 PDFGenerator.generate(employee, fbd.SelectedPath);
@@ -116,7 +117,7 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         private void OnPdfClick(User userSelected)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            var fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
             PDFGenerator.generate(userSelected, fbd.SelectedPath);
         }

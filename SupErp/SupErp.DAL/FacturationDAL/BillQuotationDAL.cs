@@ -13,50 +13,136 @@ namespace SupErp.DAL.FacturationDAL
 
         public List<BILL_BillQuotation> GetBillQuotation()
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            var result = new List<BILL_BillQuotation>();
+            try
             {
-                return context.BILL_BillQuotation.ToList();
+                using (SUPERPEntities context = new SUPERPEntities(false))
+                {
+                    result = context.BILL_BillQuotation.ToList();
+                }
             }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return result;
         }
 
         public List<BILL_BillQuotation> GetBills()
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            var result = new List<BILL_BillQuotation>();
+            try
             {
-                return context.BILL_BillQuotation.Where(b => b.NBill != null).ToList();
+                using (SUPERPEntities context = new SUPERPEntities(false))
+                {
+                    result= context.BILL_BillQuotation.Where(b => b.NBill != null).ToList();
+                }
             }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return result;
         }
 
         public List<BILL_BillQuotation> GetQuotations()
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            var result = new List<BILL_BillQuotation>();
+            try
             {
-                return context.BILL_BillQuotation.Where(b => b.NBill == null).ToList();
+                using (SUPERPEntities context = new SUPERPEntities(false))
+                {
+                    result = context.BILL_BillQuotation.Where(b => b.NBill == null).ToList();
+                }
             }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return result;
         }
 
         public BILL_BillQuotation GetBillQuotationsById(long id)
         {
-            using (SUPERPEntities context = new SUPERPEntities(false))
+            var result = new BILL_BillQuotation();
+            try
             {
-                return context.BILL_BillQuotation.SingleOrDefault(b => b.BillQuotation_Id == id);
+                using (SUPERPEntities context = new SUPERPEntities(false))
+                {
+                    result=  context.BILL_BillQuotation.SingleOrDefault(b => b.BillQuotation_Id == id);
+                }
             }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return result;
+            
         }
 
         public BILL_BillQuotation GetBillByNum(string numBill)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            var result = new BILL_BillQuotation();
+            try
             {
-                return context.BILL_BillQuotation.SingleOrDefault(b => b.NBill == numBill);
+                using (SUPERPEntities context = new SUPERPEntities(false))
+                {
+                    result = context.BILL_BillQuotation.SingleOrDefault(b => b.NBill == numBill);
+                }
             }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return result;
+            
         }
 
         public BILL_BillQuotation GetBillQuotation(DateTime dateBillQuotation)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            var result = new BILL_BillQuotation();
+            try
             {
-                return context.BILL_BillQuotation.SingleOrDefault(b => b.DateBillQuotation == dateBillQuotation);
+                using (SUPERPEntities context = new SUPERPEntities(false))
+                {
+                    result = context.BILL_BillQuotation.SingleOrDefault(b => b.DateBillQuotation == dateBillQuotation);
+                }
             }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return result;
+        }
+
+        public string getMaxNum()
+        {
+            var num = "000000001";
+
+            try
+            {
+                using (SUPERPEntities context = new SUPERPEntities(false))
+                {
+                    var intNum = Convert.ToInt32(context.BILL_BillQuotation.OrderByDescending(b => Convert.ToInt32(b.NBill)).First().NBill) + 1;
+                    num = intNum.ToString();
+
+                    while(num.Length < 9)
+                    {
+                        num = "0" + num;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            return num;
         }
 
         #endregion
@@ -65,7 +151,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_BillQuotation CreateBillQutotation(BILL_BillQuotation billQuotationToAdd)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var b = context.BILL_BillQuotation.Add(billQuotationToAdd);
                 context.SaveChanges();
@@ -79,7 +165,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public BILL_BillQuotation EditBillQuotation(BILL_BillQuotation billQuotationToEdit)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var b = context.BILL_BillQuotation.Find(billQuotationToEdit.BillQuotation_Id);
                 b = billQuotationToEdit;
@@ -94,7 +180,7 @@ namespace SupErp.DAL.FacturationDAL
 
         public bool DeleteBillQuotation(long id)
         {
-            using (SUPERPEntities context = new SUPERPEntities())
+            using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 try
                 {
