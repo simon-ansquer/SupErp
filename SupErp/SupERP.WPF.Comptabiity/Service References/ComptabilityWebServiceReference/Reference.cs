@@ -372,6 +372,9 @@ namespace SupERP.WPF.Comptabiity.ComptabilityWebServiceReference {
         private System.Nullable<long> Foreign_idField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Foreign_libelleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private SupERP.WPF.Comptabiity.ComptabilityWebServiceReference.SourceEntriesEnum SourceTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -418,6 +421,19 @@ namespace SupERP.WPF.Comptabiity.ComptabilityWebServiceReference {
                 if ((this.Foreign_idField.Equals(value) != true)) {
                     this.Foreign_idField = value;
                     this.RaisePropertyChanged("Foreign_id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Foreign_libelle {
+            get {
+                return this.Foreign_libelleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Foreign_libelleField, value) != true)) {
+                    this.Foreign_libelleField = value;
+                    this.RaisePropertyChanged("Foreign_libelle");
                 }
             }
         }

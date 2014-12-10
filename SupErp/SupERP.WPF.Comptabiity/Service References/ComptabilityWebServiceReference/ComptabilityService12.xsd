@@ -42,6 +42,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="EntryType" type="tns:EntriesTypeEnum" />
       <xs:element minOccurs="0" name="Foreign_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Foreign_libelle" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SourceType" type="tns:SourceEntriesEnum" />
       <xs:element minOccurs="0" name="amount" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="id" type="xs:long" />

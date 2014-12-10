@@ -32,6 +32,8 @@ namespace SupERP.WPF.Comptabiity
             listeTransactions = new List<TransactionWPF>();
             lvListeTransactions.ItemsSource = listeTransactions;
 
+
+
             // donnees en dur en attendant de recuperer les vraies donnees
             TransactionWPF transction1 = new TransactionWPF("premier", 140, DateTime.Now, true, "Client1");
             TransactionWPF transction2 = new TransactionWPF("deuxieme", 14, DateTime.Now, false, "Client2");
@@ -50,6 +52,32 @@ namespace SupERP.WPF.Comptabiity
             addTransactionToListView(transction7);
 
 
+        }
+
+        public IEnumerable<Model.TransactionWPF> getEntries ()
+        {
+            IEnumerable<ComptabilityWebServiceReference.Entries> entriesList;
+            using ( var ws = new ComptabilityWebServiceReference.ComptabilityServiceClient() )
+            {
+                entriesList = ws.GetEntries(string.Empty,null,null,DateTime.Now,null).ToList();
+            }
+
+            List<Model.TransactionWPF> viewModel = new List<TransactionWPF>();
+            List<ComptabilityWebServiceReference.Entries> entries = new List<ComptabilityWebServiceReference.Entries>(entriesList);
+
+            entries.ForEach(delegate( ComptabilityWebServiceReference.Entries entry )
+            {
+                TransactionWPF finalEntry = new TransactionWPF(
+                    string.Format("{0} {1}", entry.EntryType.ToString(), 
+                    entry.postingDate.ToString()), 
+                    entry.amount.Value,
+                    entry.postingDate.Value, 
+                    entry.postingDate > DateTime.Now ? false : true, 
+                    entry.Foreign_libelle);
+                viewModel.Add(finalEntry);
+            });
+
+            return viewModel;
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
