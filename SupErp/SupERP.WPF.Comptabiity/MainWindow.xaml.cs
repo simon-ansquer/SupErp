@@ -32,24 +32,26 @@ namespace SupERP.WPF.Comptabiity
             listeTransactions = new List<TransactionWPF>();
             lvListeTransactions.ItemsSource = listeTransactions;
 
+            listeTransactions = new List<TransactionWPF>(getEntries());
 
+            listeTransactions.ForEach(addTransactionToListView);
 
-            // donnees en dur en attendant de recuperer les vraies donnees
-            TransactionWPF transction1 = new TransactionWPF("premier", 140, DateTime.Now, true, "Client1");
-            TransactionWPF transction2 = new TransactionWPF("deuxieme", 14, DateTime.Now, false, "Client2");
-            TransactionWPF transction3 = new TransactionWPF("trois", 1, DateTime.Now, true, "Client3");
-            TransactionWPF transction4 = new TransactionWPF("quatre", 4, DateTime.Now, false, "Client1");
-            TransactionWPF transction5 = new TransactionWPF("cinq", 41, DateTime.Now, false, "Client4");
-            TransactionWPF transction6 = new TransactionWPF("six", 141, DateTime.Now, false, "Client2");
-            TransactionWPF transction7 = new TransactionWPF("sept", 1400, DateTime.Now, true, "Client6");
+            //// donnees en dur en attendant de recuperer les vraies donnees
+            //TransactionWPF transction1 = new TransactionWPF("premier", 140, DateTime.Now, true, "Client1");
+            //TransactionWPF transction2 = new TransactionWPF("deuxieme", 14, DateTime.Now, false, "Client2");
+            //TransactionWPF transction3 = new TransactionWPF("trois", 1, DateTime.Now, true, "Client3");
+            //TransactionWPF transction4 = new TransactionWPF("quatre", 4, DateTime.Now, false, "Client1");
+            //TransactionWPF transction5 = new TransactionWPF("cinq", 41, DateTime.Now, false, "Client4");
+            //TransactionWPF transction6 = new TransactionWPF("six", 141, DateTime.Now, false, "Client2");
+            //TransactionWPF transction7 = new TransactionWPF("sept", 1400, DateTime.Now, true, "Client6");
 
-            addTransactionToListView(transction1);
-            addTransactionToListView(transction2);
-            addTransactionToListView(transction3);
-            addTransactionToListView(transction4);
-            addTransactionToListView(transction5);
-            addTransactionToListView(transction6);
-            addTransactionToListView(transction7);
+            //addTransactionToListView(transction1);
+            //addTransactionToListView(transction2);
+            //addTransactionToListView(transction3);
+            //addTransactionToListView(transction4);
+            //addTransactionToListView(transction5);
+            //addTransactionToListView(transction6);
+            //addTransactionToListView(transction7);
 
 
         }
