@@ -30,26 +30,60 @@ namespace SupERP.WPF.Comptabiity
         {
             InitializeComponent();
             listeTransactions = new List<TransactionWPF>();
+            
+
+            listeTransactions = new List<TransactionWPF>(getEntries());
+
             lvListeTransactions.ItemsSource = listeTransactions;
+            //foreach ( var item in listeTransactions )
+            //{
+            //    addTransactionToListView(item);
+            //}
 
-            // donnees en dur en attendant de recuperer les vraies donnees
-            TransactionWPF transction1 = new TransactionWPF("premier", 140, DateTime.Now, true, "Client1");
-            TransactionWPF transction2 = new TransactionWPF("deuxieme", 14, DateTime.Now, false, "Client2");
-            TransactionWPF transction3 = new TransactionWPF("trois", 1, DateTime.Now, true, "Client3");
-            TransactionWPF transction4 = new TransactionWPF("quatre", 4, DateTime.Now, false, "Client1");
-            TransactionWPF transction5 = new TransactionWPF("cinq", 41, DateTime.Now, false, "Client4");
-            TransactionWPF transction6 = new TransactionWPF("six", 141, DateTime.Now, false, "Client2");
-            TransactionWPF transction7 = new TransactionWPF("sept", 1400, DateTime.Now, true, "Client6");
+            //// donnees en dur en attendant de recuperer les vraies donnees
+            //TransactionWPF transction1 = new TransactionWPF("premier", 140, DateTime.Now, true, "Client1");
+            //TransactionWPF transction2 = new TransactionWPF("deuxieme", 14, DateTime.Now, false, "Client2");
+            //TransactionWPF transction3 = new TransactionWPF("trois", 1, DateTime.Now, true, "Client3");
+            //TransactionWPF transction4 = new TransactionWPF("quatre", 4, DateTime.Now, false, "Client1");
+            //TransactionWPF transction5 = new TransactionWPF("cinq", 41, DateTime.Now, false, "Client4");
+            //TransactionWPF transction6 = new TransactionWPF("six", 141, DateTime.Now, false, "Client2");
+            //TransactionWPF transction7 = new TransactionWPF("sept", 1400, DateTime.Now, true, "Client6");
 
-            addTransactionToListView(transction1);
-            addTransactionToListView(transction2);
-            addTransactionToListView(transction3);
-            addTransactionToListView(transction4);
-            addTransactionToListView(transction5);
-            addTransactionToListView(transction6);
-            addTransactionToListView(transction7);
+            //addTransactionToListView(transction1);
+            //addTransactionToListView(transction2);
+            //addTransactionToListView(transction3);
+            //addTransactionToListView(transction4);
+            //addTransactionToListView(transction5);
+            //addTransactionToListView(transction6);
+            //addTransactionToListView(transction7);
 
 
+        }
+
+        public IEnumerable<Model.TransactionWPF> getEntries ()
+        {
+            IEnumerable<ComptabilityWebServiceReference.Entries> entriesList;
+            using ( var ws = new ComptabilityWebServiceReference.ComptabilityServiceClient() )
+            {
+                entriesList = ws.GetEntries(string.Empty,null,null,DateTime.Now,null).ToList();
+            }
+
+            List<Model.TransactionWPF> viewModel = new List<TransactionWPF>();
+            List<ComptabilityWebServiceReference.Entries> entries = new List<ComptabilityWebServiceReference.Entries>(entriesList);
+
+            entries.ForEach(delegate( ComptabilityWebServiceReference.Entries entry )
+            {
+                TransactionWPF finalEntry = new TransactionWPF(
+                    string.Format("{0} {1}", entry.EntryType.ToString(), 
+                    entry.postingDate.ToString()), 
+                    entry.amount.Value,
+                    entry.postingDate.Value, 
+                    entry.postingDate > DateTime.Now ? false : true, 
+                    entry.Foreign_libelle);
+                viewModel.Add(finalEntry);
+            });
+
+            return viewModel;
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

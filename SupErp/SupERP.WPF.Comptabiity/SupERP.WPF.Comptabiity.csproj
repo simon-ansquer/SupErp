@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Assembleur\ViewModelAssembleur.cs" />
     <Compile Include="Model\ChartsOfAccount.cs" />
     <Compile Include="Model\ClassOfAccount.cs" />
     <Compile Include="Model\TransactionWPF.cs" />

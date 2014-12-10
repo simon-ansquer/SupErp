@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SupErp.WCF;
+using SupERP.WPF.Comptabiity.Model;
+using SupERP.WPF.Comptabiity.Assembleur;
 
 namespace SupERP.WPF.Comptabiity
 {
@@ -25,9 +27,9 @@ namespace SupERP.WPF.Comptabiity
         {
             plan = new List<Model.ClassOfAccount>();
             InitializeComponent();
-            getPlanComptable(); // on recupere toutes les classes
+            var result = getPlanComptable(); // on recupere toutes les classes
 
-            foreach (Model.ClassOfAccount classe in plan)
+            foreach (Model.ClassOfAccount classe in result)
             {
                 StringBuilder sb = new StringBuilder();
                 string a = ": ";
@@ -47,11 +49,16 @@ namespace SupERP.WPF.Comptabiity
 
         public IEnumerable<Model.ClassOfAccount> getPlanComptable()
         {
+            IEnumerable<ComptabilityWebServiceReference.ClassOfAccount> classAccount;
             using (var ws = new ComptabilityWebServiceReference.ComptabilityServiceClient())
             {
-                var plan = ws.GetPlanComptable();
+                classAccount = ws.GetPlanComptable().ToList();
             }
-            return null;
+
+            IEnumerable<Model.ClassOfAccount> viewModel = classAccount.ToClassOfAccount();
+
+            
+            return viewModel;
         }
 
         public void AfficherCharts(Model.ChartsOfAccount chart, TreeViewItem treeItemSource)
