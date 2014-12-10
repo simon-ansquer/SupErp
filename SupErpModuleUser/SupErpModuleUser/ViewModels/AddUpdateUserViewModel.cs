@@ -21,10 +21,17 @@ namespace SupErpModuleUser.ViewModels
         {
             User = new IHMUser();
             User.IsNew = true;
-            //using (UserServiceClient wcf = new UserServiceClient())
-            //{
-            //    Roles = wcf.GetRoles().ToRoles();
-            //}
+            using (UserServiceClient wcf = new UserServiceClient())
+            {
+                var roles = wcf.GetRoles();
+                if (roles != null)
+                {
+                    Roles = roles.ToRoles().ToList();
+                    SelectedRole = Roles[0];
+                }
+                else
+                    Roles = new List<IHMRole>();
+            }
         }
 
         public AddUpdateUserViewModel(int userId)
@@ -40,8 +47,21 @@ namespace SupErpModuleUser.ViewModels
                         Roles = roles.ToRoles().ToList();
                     else
                         Roles = new List<IHMRole>();
-                    SelectedRole = User.Role;
+
+                    SelectUserRole();
                 }
+            }
+        }
+
+        private void SelectUserRole()
+        {
+            if (User.Role == null)
+                return;
+
+            foreach(IHMRole role in Roles)
+            {
+                if (role.Id == User.Role.Id)
+                    SelectedRole = role;
             }
         }
 
