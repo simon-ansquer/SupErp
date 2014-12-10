@@ -22,6 +22,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SupERP.WPF.Comptabiity.ComptabilityWebServiceReference;
 
 namespace SupERP.WPF.Comptabiity
 {
@@ -35,27 +36,40 @@ namespace SupERP.WPF.Comptabiity
             InitializeComponent();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime dateDebut = dpDateDebut.SelectedDate.Value;
+            DateTime dateFin = dpDateFin.SelectedDate.Value;
+
+            LineChartViewModel line = new LineChartViewModel();
+            line.populateGraph(dateDebut, dateFin);
+           
+        }
+
     }
+
+
     public class LineChartViewModel
     {
+        private IEnumerable<Entries> entrees;
         public LineChartViewModel()
+        {
+
+        }
+        public void populateGraph(DateTime debut,DateTime fin)
         {
             this.power = new ObservableCollection<TransactionSimulation>();
 
             using (var ws = new ComptabilityWebServiceReference.ComptabilityServiceClient())
             {
+                entrees = ws.GetEntries("", null, null, debut, fin);
             }
-
-            DateTime yr = new DateTime(2002, 5, 1);
-            power.Add(new TransactionSimulation() { Date = yr.AddYears(1), Montant = 3900 });
-            power.Add(new TransactionSimulation() { Date = yr.AddYears(2), Montant = 3600});
-            power.Add(new TransactionSimulation() { Date = yr.AddYears(3), Montant = 9400 });
-            power.Add(new TransactionSimulation() { Date = yr.AddYears(4), Montant = 44 });
-            power.Add(new TransactionSimulation() { Date = yr.AddYears(5), Montant = 45 });
-            power.Add(new TransactionSimulation() { Date = yr.AddYears(6), Montant = 48 });
-            power.Add(new TransactionSimulation() { Date = yr.AddYears(7), Montant = 46 });
-
+            foreach (Entries entree in entrees)
+            {
+                power.Add(new TransactionSimulation() { Date = entree.postingDate.Value, Montant =(double) entree.amount.Value });
+            }
         }
+
 
 
         public ObservableCollection<TransactionSimulation> power
