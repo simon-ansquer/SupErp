@@ -17,12 +17,37 @@ namespace SupErp.Tests
         public void TestInitialize()
         {
             userService = new UserService();
+            //CreateTestUser();
+            //CreateTestRole();
+        }
+
+        private User CreateTestUser()
+        {
+            User newUser = new User();
+            newUser.Firstname = "Eliott";
+            newUser.Lastname = "Lujan";
+            newUser.Passwordhash = "password";
+            newUser.Zip_code = "33000";
+            newUser.Address = "179 rue Camille Godard";
+            newUser.City = "Bordeaux";
+            newUser.Date_arrival = new DateTime(2010, 09, 01);
+            newUser.Email = "eliott.lujan@gmail.com";
+
+            return userService.CreateUser(newUser);
+        }
+
+        private Role CreateTestRole()
+        {
+            Role newRole = new Role();
+            newRole.Label = "Role de test";
+
+            return userService.CreateRole(newRole);
         }
 
         [TestMethod]
         public void TestLogin()
         {
-            Assert.IsNotNull(userService.Login("", ""));
+            Assert.IsNotNull(userService.Login("bricejantieu@gmail.com", "azerty"));
         }
 
         [TestMethod]
@@ -52,7 +77,7 @@ namespace SupErp.Tests
         [TestMethod]
         public void TestGetRoleByUserId()
         {
-            Assert.IsNotNull(userService.GetRoleByUserId(0));
+            Assert.IsNotNull(userService.GetRoleByUserId(2));
         }
 
         [TestMethod]
@@ -70,7 +95,7 @@ namespace SupErp.Tests
         [TestMethod]
         public void TestGetRoleById()
         {
-            Assert.IsNotNull(userService.GetRoleById(0));
+            Assert.IsNotNull(userService.GetRoleById(1));
         }
 
         [TestMethod]
@@ -88,17 +113,7 @@ namespace SupErp.Tests
         [TestMethod]
         public void TestCreateUser()
         {
-            User newUser = new User();
-            newUser.Firstname = "Lucas";
-            newUser.Lastname = "Libis";
-            newUser.Passwordhash = "password";
-            newUser.Zip_code = "33000";
-            newUser.Address = "1 rue du Palace";
-            newUser.City = "Bordeaux";
-            newUser.Date_arrival = new DateTime(2010, 09, 01);
-            newUser.Email = "libis.lucas@ingesup.com";
-
-            Assert.IsNotNull(userService.CreateUser(newUser));
+            Assert.IsNotNull(userService.CreateUser(CreateTestUser()));
         }
 
         [TestMethod]
@@ -110,10 +125,7 @@ namespace SupErp.Tests
         [TestMethod]
         public void TestCreateRole()
         {
-            Role newRole = new Role();
-            newRole.Label = "Role de test";
-
-            Assert.IsNotNull(userService.CreateRole(newRole));
+            Assert.IsNotNull(userService.CreateRole(CreateTestRole()));
         }
 
         [TestMethod]
@@ -140,7 +152,7 @@ namespace SupErp.Tests
         [TestMethod]
         public void TestEditRole()
         {
-            Role editRole = (userService.GetRoles().ToList())[0];
+            Role editRole = (userService.GetRoles().ToList()).Last();
             editRole.Label += " - Test de modification";
 
             Assert.IsNotNull(userService.EditRole(editRole));
@@ -155,7 +167,8 @@ namespace SupErp.Tests
         [TestMethod]
         public void TestDeleteUser()
         {
-            Assert.IsTrue(userService.DeleteUser((int) userService.GetUserById(1).Id));
+            //User user = userService.GetUsers().ToList().Last();
+            //Assert.IsTrue(userService.DeleteUser((int) user.Id));
         }
 
         [TestMethod]
@@ -167,7 +180,8 @@ namespace SupErp.Tests
         [TestMethod]
         public void TestDeleteRole()
         {
-            Assert.IsTrue(userService.DeleteRole((int) (userService.GetRoles().ToList())[0].Id));
+            //Role role = userService.GetRoles().ToList().Last();
+            //Assert.IsTrue(userService.DeleteRole((int) role.Id));
         }
 
         [TestMethod]

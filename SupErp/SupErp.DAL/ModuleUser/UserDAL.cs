@@ -83,7 +83,7 @@ namespace SupErp.DAL.ModuleUser
 
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var r = context.Users.Find(userId);
+                var r = context.Users.Include("Role").FirstOrDefault(x => x.Id == userId);
                 if(r == null)
                     return null;
 
