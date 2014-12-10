@@ -38,16 +38,17 @@
 
             <StackPanel x:Name="Form" Grid.Column="1" Grid.Row="3">
                 <TextBlock x:Name="Connexion" Foreground="#FFFFFF" FontFamily="Segoe UI" FontWeight="Bold">Connexion</TextBlock>
-                <TextBlock x:Name="LoginTbl" Foreground="#FFFFFF" FontFamily="Segoe UI" Margin="10,5,0,0" FontWeight="Light">Login</TextBlock>
+                <TextBlock x:Name="LoginTbl" Foreground="#FFFFFF" FontFamily="Segoe UI" Margin="10,5,0,0" FontWeight="Light">Email</TextBlock>
                 <TextBox x:Name="LoginTbx" Margin="10,5,10,5" VerticalContentAlignment="Center" Foreground="#666666" FontFamily="Segoe UI" Text="{Binding Login}"></TextBox>
-                <TextBlock x:Name="PassTbl" Foreground="#FFFFFF" FontFamily="Segoe UI" Margin="10,5,0,0" FontWeight="Light">Password</TextBlock>
+                <TextBlock x:Name="PassTbl" Foreground="#FFFFFF" FontFamily="Segoe UI" Margin="10,5,0,0" FontWeight="Light">Mot de passe</TextBlock>
                 <PasswordBox x:Name="PassTbx" Margin="10,5,10,5" VerticalContentAlignment="Center" Foreground="#666666"></PasswordBox>
+                <TextBlock x:Name="ErrorMsg" Foreground="#FFFFFF" FontFamily="Segoe UI" Margin="10,5,0,0" Visibility="{Binding Path=ErrorMsgVisibility, Mode=TwoWay}" Text="Email ou mot de passe incorrect"/>
                 <Button x:Name="Connect" Background="#4388CC" BorderBrush="#FFFFFF" BorderThickness="2" Foreground="#FFFFFF" Margin="10,10,10,5" FontFamily="Segoe UI" Command="{Binding ConnectCommandHandler}" CommandParameter="{Binding ElementName=PassTbx}" Click="Connect_Clicked">Connect</Button>
             </StackPanel>
         </Grid>
 
         <Grid x:Name="RightTape" Background="#FFFFFF" Grid.Column="1">
-            <controls:ProgressRing x:Name="ProgressRing" IsActive="False" Foreground="#4388CC" KeyboardNavigation.TabNavigation="None"></controls:ProgressRing>
+            <controls:ProgressRing x:Name="ProgressRing" IsActive="{Binding Path=LoadRingState, Mode=TwoWay}" Foreground="#4388CC" KeyboardNavigation.TabNavigation="None"></controls:ProgressRing>
         </Grid>
     </Grid>
 </Page>

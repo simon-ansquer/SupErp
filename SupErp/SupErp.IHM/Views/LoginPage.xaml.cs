@@ -61,6 +61,8 @@ namespace SupErp.IHM.ViewModels
             Connect.Height = ScreenHeight / 25;
             Connect.Width = (ScreenWidth * 0.4) * 0.3;
             Connect.FontSize = ScreenHeight / 50;
+
+            ErrorMsg.FontSize = ScreenHeight / 55;
         }
 
         private void LeftTape_KeyDown(object sender, KeyEventArgs e)

@@ -9,10 +9,11 @@ using SupErp.IHM.Helpers;
 using SupErp.IHM.Views;
 using SupErp.Kernel;
 using SupErp.Shared;
+using System.ComponentModel;
 
 namespace SupErp.IHM.ViewModels
 {
-    class LoginPageViewModel
+    class LoginPageViewModel : INotifyPropertyChanged
     {
         
         #region inputs
@@ -61,6 +62,24 @@ namespace SupErp.IHM.ViewModels
                 }
             }
         }
+
+        private bool loadRingState;
+
+        public bool LoadRingState
+        {
+            get { return loadRingState; }
+            set { loadRingState = value; OnPropertyChanged("LoadRingState"); }
+        }
+
+        private System.Windows.Visibility errorMsgVisibility;
+
+        public System.Windows.Visibility ErrorMsgVisibility
+        {
+            get { return errorMsgVisibility; }
+            set { errorMsgVisibility = value; OnPropertyChanged("ErrorMsgVisibility"); }
+        }
+        
+        
         #endregion
 
         #region Commands
@@ -92,6 +111,7 @@ namespace SupErp.IHM.ViewModels
         public LoginPageViewModel()
         {
             ConnectCommandHandler = new RelayCommand(new Action<object>(ConnectCommand));
+            ErrorMsgVisibility = System.Windows.Visibility.Collapsed;
         }
         #endregion
 
@@ -110,15 +130,33 @@ namespace SupErp.IHM.ViewModels
 
         #region Methodes
 
-        public void Connect()
+        public async void Connect()
         {
-            
-            var user = WCFManager.UserServiceClient.Login(login, password);
+            ErrorMsgVisibility = System.Windows.Visibility.Collapsed;
+            var user = await WCFManager.UserServiceClient.LoginAsync(login, password);
 
-            DllManager dllManager = new DllManager();
-            IEnumerable<IMainMenu> mainMenus = dllManager.GetMainMenus(user.Role);
-            MainWindow.MainFrame.Navigate(new MenuPage(mainMenus));
+            if (user != null)
+            {
+                DllManager dllManager = new DllManager();
+                IEnumerable<IMainMenu> mainMenus = dllManager.GetMainMenus(user.Role);
+                MainWindow.MainFrame.Navigate(new MenuPage(mainMenus));
+            }
+            else
+            {
+                ErrorMsgVisibility = System.Windows.Visibility.Visible;
+                LoadRingState = false;
+            }
         }
         #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string name)
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
     }
 }
