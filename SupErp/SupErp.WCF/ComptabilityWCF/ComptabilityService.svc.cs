@@ -26,5 +26,22 @@ namespace SupErp.WCF.ComptabilityWCF
         {
             return comptabiliteBLL.GetLastExchangeRate();
         }
+
+        IEnumerable<Entries> IComptabilityService.GetEntries ( string type, bool? paye, bool? impaye, DateTime? Debut, DateTime? Fin )
+        {
+            EntriesTypeEnum result;
+            if(Enum.TryParse(type, out result))
+                return comptabiliteBLL.GetEntries(result, paye, impaye, Debut, Fin);
+            return comptabiliteBLL.GetEntries(null, paye, impaye, Debut, Fin);
+        }
+
+        IEnumerable<BilanComptable> IComptabilityService.GetBilanComptable ( string Mode, DateTime? Debut, DateTime? Fin )
+        {
+            BilanComptableModeEnum result;
+            if ( Enum.TryParse(Mode, out result) )
+                return comptabiliteBLL.GetBilanComptable(result, Debut.Value, Fin.Value);
+
+            return comptabiliteBLL.GetBilanComptable(BilanComptableModeEnum.Month, Debut.Value, Fin.Value);
+        }
     }
 }

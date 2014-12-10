@@ -28,6 +28,7 @@
     <MetadataFile FileName="ComptabilityService.xsd" MetadataType="Schema" ID="9b28e023-4d3c-4a4f-9080-5f7912f8fe52" SourceId="1" SourceUrl="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd0" />
     <MetadataFile FileName="ComptabilityService11.xsd" MetadataType="Schema" ID="abffdc07-0c0f-427c-a219-1eab2e6d349e" SourceId="1" SourceUrl="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd3" />
     <MetadataFile FileName="ComptabilityService12.xsd" MetadataType="Schema" ID="0c525457-02a2-48cc-9049-71e40b13623e" SourceId="1" SourceUrl="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ComptabilityService2.xsd" MetadataType="Schema" ID="e811cc69-a5b7-457e-9d0b-79dbc348c148" SourceId="1" SourceUrl="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd4" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

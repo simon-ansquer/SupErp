@@ -121,10 +121,19 @@
     <None Include="Service References\ComptabilityWebServiceReference\ComptabilityService.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ComptabilityWebServiceReference\ComptabilityService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ComptabilityWebServiceReference\SupERP.WPF.Comptabiity.ComptabilityWebServiceReference.BilanComptable.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ComptabilityWebServiceReference\SupERP.WPF.Comptabiity.ComptabilityWebServiceReference.ClassOfAccount.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ComptabilityWebServiceReference\SupERP.WPF.Comptabiity.ComptabilityWebServiceReference.COMPTA_ExchangeRate.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ComptabilityWebServiceReference\SupERP.WPF.Comptabiity.ComptabilityWebServiceReference.Entries.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>

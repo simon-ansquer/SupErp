@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SupErp.BLL.ComptabilityBLL.BllObject" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SupErp.BLL.ComptabilityBLL.BllObject" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/SupErp.BLL.ComptabilityBLL" />
   <xs:complexType name="ArrayOfClassOfAccount">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ClassOfAccount" nillable="true" type="tns:ClassOfAccount" />
@@ -31,4 +32,38 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ChartsOfAccount" nillable="true" type="tns:ChartsOfAccount" />
+  <xs:complexType name="ArrayOfEntries">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Entries" nillable="true" type="tns:Entries" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEntries" nillable="true" type="tns:ArrayOfEntries" />
+  <xs:complexType name="Entries">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EntryType" type="tns:EntriesTypeEnum" />
+      <xs:element minOccurs="0" name="Foreign_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="SourceType" type="tns:SourceEntriesEnum" />
+      <xs:element minOccurs="0" name="amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SupErp.BLL.ComptabilityBLL" minOccurs="0" name="periode" nillable="true" type="q1:Periodicity" />
+      <xs:element minOccurs="0" name="postingDate" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Entries" nillable="true" type="tns:Entries" />
+  <xs:simpleType name="EntriesTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Credit" />
+      <xs:enumeration value="Debit" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EntriesTypeEnum" nillable="true" type="tns:EntriesTypeEnum" />
+  <xs:simpleType name="SourceEntriesEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Bank" />
+      <xs:enumeration value="Accounting" />
+      <xs:enumeration value="Supplier" />
+      <xs:enumeration value="Customer" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SourceEntriesEnum" nillable="true" type="tns:SourceEntriesEnum" />
 </xs:schema>

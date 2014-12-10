@@ -14,30 +14,25 @@ namespace SupErp.Entities
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(COMPTA_ChartOfAccounts))]
-    [KnownType(typeof(COMPTA_AccountingEntries_Periodicity))]
+    [KnownType(typeof(COMPTA_AccountingEntries))]
+    [KnownType(typeof(COMPTA_Periodicity))]
     
-    public partial class COMPTA_AccountingEntries
+    public partial class COMPTA_AccountingEntries_Periodicity
     {
-        public COMPTA_AccountingEntries()
-        {
-            this.COMPTA_AccountingEntries_Periodicity = new HashSet<COMPTA_AccountingEntries_Periodicity>();
-        }
-    
     [DataMember]
         public long id { get; set; }
     [DataMember]
-        public Nullable<bool> direction { get; set; }
+        public Nullable<System.DateTime> startDate { get; set; }
     [DataMember]
-        public Nullable<decimal> amount { get; set; }
+        public Nullable<System.DateTime> endDate { get; set; }
     [DataMember]
-        public Nullable<System.DateTime> postingDate { get; set; }
+        public Nullable<long> accountingEntries_id { get; set; }
     [DataMember]
-        public Nullable<long> chartOfAccount_id { get; set; }
+        public Nullable<long> periodicity_id { get; set; }
     
     [DataMember]
-        public virtual COMPTA_ChartOfAccounts COMPTA_ChartOfAccounts { get; set; }
+        public virtual COMPTA_AccountingEntries COMPTA_AccountingEntries { get; set; }
     [DataMember]
-        public virtual ICollection<COMPTA_AccountingEntries_Periodicity> COMPTA_AccountingEntries_Periodicity { get; set; }
+        public virtual COMPTA_Periodicity COMPTA_Periodicity { get; set; }
     }
 }

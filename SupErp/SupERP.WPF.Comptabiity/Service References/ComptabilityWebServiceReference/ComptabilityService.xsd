@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SupErp.BLL.ComptabilityBLL.BllObject" />
   <xs:import schemaLocation="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities" />
+  <xs:import schemaLocation="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/SupErp.BLL.ComptabilityBLL" />
   <xs:element name="GetPlanComptable">
     <xs:complexType>
       <xs:sequence />
@@ -23,6 +24,40 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SupErp.Entities" minOccurs="0" name="GetExhangeRateResult" nillable="true" type="q2:COMPTA_ExchangeRate" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEntries">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="paye" nillable="true" type="xs:boolean" />
+        <xs:element minOccurs="0" name="impaye" nillable="true" type="xs:boolean" />
+        <xs:element minOccurs="0" name="Debut" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Fin" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEntriesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SupErp.BLL.ComptabilityBLL.BllObject" minOccurs="0" name="GetEntriesResult" nillable="true" type="q3:ArrayOfEntries" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBilanComptable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Mode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Debut" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Fin" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBilanComptableResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SupErp.BLL.ComptabilityBLL" minOccurs="0" name="GetBilanComptableResult" nillable="true" type="q4:ArrayOfBilanComptable" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
