@@ -83,6 +83,7 @@ namespace SupErp.IHM.Views
         private void MainMenuClicked(object sender, SelectionChangedEventArgs e)
         {
             IMainMenu item = (Menus.SelectedItem as IMainMenu);
+            ClearSubMenus(false);
 
             ClearSubMenus(false);
 

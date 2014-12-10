@@ -26,7 +26,7 @@ namespace SupErp.BLL.FacturationBLL
 
         #region Create
 
-        public BILL_LineBillQuotation CreateLineBillQuotation(BILL_LineBillQuotation billLineToAdd)
+        public List<BILL_LineBillQuotation> CreateLineBillQuotation(List<BILL_LineBillQuotation> billLineToAdd)
         {
             return DAL.CreateLineBillQuotation(billLineToAdd);
         }
@@ -35,7 +35,7 @@ namespace SupErp.BLL.FacturationBLL
 
         #region Edit
 
-        public BILL_LineBillQuotation EditLineBillQuotation(BILL_LineBillQuotation LineBillQuotationToEdit)
+        public List<BILL_LineBillQuotation> EditLineBillQuotation(List<BILL_LineBillQuotation> LineBillQuotationToEdit)
         {
            return DAL.EditLineBillQuotation(LineBillQuotationToEdit);
         }
@@ -44,9 +44,14 @@ namespace SupErp.BLL.FacturationBLL
 
         #region Delete
 
-        public bool DeleteLineBillQuotation(long id)
+        public bool DeleteLineBillQuotation(List<BILL_LineBillQuotation> listQuotation)
         {
-            return DAL.DeleteLineBillQuotation(id);
+            var listID = new List<long>();
+
+            foreach (var b in listQuotation)
+                listID.Add(b.LineBillQuotation_Id);
+
+            return DAL.DeleteLineBillQuotation(listID);
         }
 
         #endregion

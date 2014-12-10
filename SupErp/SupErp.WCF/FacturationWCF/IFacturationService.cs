@@ -14,10 +14,13 @@ namespace SupErp.WCF.FacturationWCF
     public interface IFacturationService
     {
         [OperationContract]
+        List<BILL_Transmitter> GetTransmitter();
+
+        [OperationContract]
         List<BillQuotationLight> GetListQuotation();
 
         [OperationContract]
-        List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, long? status, int? MontantHTMin, int? MontantHTMax, bool? isBill);
+        List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, BILL_Status status, int? MontantHTMin, int? MontantHTMax, bool? isBill);
 
         [OperationContract]
         BillQuotationComplete GetBillQuotation(long billQuotation_id);
@@ -30,5 +33,8 @@ namespace SupErp.WCF.FacturationWCF
 
         [OperationContract]
         bool ModifyBillQuotation(BillQuotationComplete billQuotation);
+
+        [OperationContract]
+        List<BILL_Status> GetStatus();
     }
 }

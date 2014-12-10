@@ -85,9 +85,18 @@ namespace SupErp.Tests
         public void TestGetCompany()
         {
             Company comp = new Company();
-            comp = clientService.GetCompany(2);
+            comp.name = "testGet";
+            comp.siret = "3333";
+            comp.city = "Bordeaux";
+            comp.address = "lol";
+            comp.postalcode = 33300;
 
-            Assert.AreEqual("testCreate", comp.name);
+            int newCompanyId = clientService.CreateCompany(comp);
+            Assert.IsTrue(newCompanyId > 0);
+            Company compget = new Company();
+            compget = clientService.GetCompany(newCompanyId);
+
+            Assert.AreEqual("testGet", comp.name);
         }
 
         [TestMethod]
@@ -152,15 +161,25 @@ namespace SupErp.Tests
         [TestMethod]
         public void TestGetCompany_Contact()
         {
-            Company_Contact cont;
-            cont = clientService.GetCompany_Contact(4);
+            Company_Contact cont = new Company_Contact();
+            cont.firstname = "jacques";
+            cont.lastname = "Geogre";
+            cont.gender = 1;
+            cont.email = "jacques@geogre.fr";
+            cont.phone = "0506";
+            cont.company_id = 2;
 
-            Assert.AreEqual("pierre", cont.firstname);
-            Assert.AreEqual("Geogre", cont.lastname);
-            Assert.AreEqual(1, cont.gender);
-            Assert.AreEqual("pierre@geogre.fr", cont.email);
-            Assert.AreEqual("0506", cont.phone);
-            Assert.AreEqual(1, cont.company_id);
+            int id = clientService.CreateCompany_Contact(cont);
+
+            Company_Contact contGet;
+            contGet = clientService.GetCompany_Contact(id);
+
+            Assert.AreEqual("jacques", contGet.firstname);
+            Assert.AreEqual("Geogre", contGet.lastname);
+            Assert.AreEqual(1, contGet.gender);
+            Assert.AreEqual("jacques@geogre.fr", contGet.email);
+            Assert.AreEqual("0506", contGet.phone);
+            Assert.AreEqual(2, contGet.company_id);
         }
 
         [TestMethod]
@@ -176,7 +195,7 @@ namespace SupErp.Tests
         public void TestGetListCompany_ContactByCompany()
         {
             List<Company_Contact> lcont;
-            lcont = clientService.GetListCompany_ContactById(2);
+            lcont = clientService.GetListCompany_ContactById(1);
 
             Assert.IsTrue(lcont.Count > 0);
         }
