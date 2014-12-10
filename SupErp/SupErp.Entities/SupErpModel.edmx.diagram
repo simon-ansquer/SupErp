@@ -33,7 +33,7 @@
         <AssociationConnector Association="SUPERPModel.FK__Salary__User_id__5AEE82B9" />
         <AssociationConnector Association="SUPERPModel.FK__User__Status_id__5BE2A6F2" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_LineBillQuotation" Width="1.5" PointX="15.25" PointY="5.75" />
-        <EntityTypeShape EntityType="SUPERPModel.COMPTA_AccountingEntries" Width="1.5" PointX="5.375" PointY="10.75" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_AccountingEntries" Width="1.5" PointX="6.125" PointY="10.75" />
         <EntityTypeShape EntityType="SUPERPModel.COMPTA_ExchangeRate" Width="1.5" PointX="7.375" PointY="13.75" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotation" Width="1.875" PointX="13" PointY="1.25" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotationStatus" Width="1.5" PointX="16.875" PointY="2.375" />
