@@ -40,8 +40,8 @@ namespace SupErpModuleUser.ViewModels
                         Modules = Role.Modules.ToList();
                     else
                         Modules = new List<IHMModule>();
-                }
-                Role = new IHMRole();
+                }else
+                    Role = new IHMRole();
             }
         }
 
