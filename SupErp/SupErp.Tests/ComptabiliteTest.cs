@@ -32,7 +32,7 @@ namespace SupErp.Tests
 
             CallWriteLineRecursive(test);
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
         private void CallWriteLineRecursive ( object item )

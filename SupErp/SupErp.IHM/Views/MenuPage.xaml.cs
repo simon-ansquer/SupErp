@@ -45,6 +45,7 @@ namespace SupErp.IHM.Views
         {
             RedefineScreenSize();
             SetTextSize();
+            ClearSubMenus(true);
         }
 
         private void SetTextSize()
@@ -150,6 +151,17 @@ namespace SupErp.IHM.Views
             {
                 ListBoxItem listBoxItem = (((ListBox)sender).ItemContainerGenerator.ContainerFromIndex(((ListBox)sender).SelectedIndex) as ListBoxItem);
                 Point position = listBoxItem.TransformToVisual((Visual)(Menus.Parent)).Transform(new Point(listBoxItem.ActualWidth, 0));
+
+                for (int i = 0; i < SubMenus.Count; i++)
+                {
+                    if(SubMenus[i].TransformToVisual((Visual)(Menus.Parent)).Transform(new Point(0, 0)).X >= position.X)
+                    {
+                        MainGrid.Children.Remove(SubMenus[i]);
+                        SubMenus.RemoveAt(i);
+                        i--;
+                    }
+                }
+
                 GenerateSubMenus(item.SubMenus, position, ((SolidColorBrush)(((Grid)(((ListBox)sender).Parent)).Background)).Color.Equals(Color.FromArgb(255, 51, 122, 204)));
             }
             else
