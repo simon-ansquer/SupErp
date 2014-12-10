@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/SupErp.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SupErp.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="COMPTA_ExchangeRate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EURO_AUD" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="EURO_GBP" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="EURO_USD" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="EURO_ZAR" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="USD_EURO" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+      <xs:element minOccurs="0" name="updatedDate" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="COMPTA_ExchangeRate" nillable="true" type="tns:COMPTA_ExchangeRate" />
+</xs:schema>

@@ -110,6 +110,12 @@
     <None Include="Service References\ComptabilityWebServiceReference\ComptabilityService.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ComptabilityWebServiceReference\SupERP.WPF.Comptabiity.ComptabilityWebServiceReference.ClassOfAccount.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ComptabilityWebServiceReference\SupERP.WPF.Comptabiity.ComptabilityWebServiceReference.COMPTA_ExchangeRate.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -134,6 +140,15 @@
     <None Include="Service References\ComptabilityWebServiceReference\ComptabilityService.disco" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\ComptabilityWebServiceReference\ComptabilityService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ComptabilityWebServiceReference\ComptabilityService11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ComptabilityWebServiceReference\ComptabilityService12.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ComptabilityWebServiceReference\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SupErp.BLL.ComptabilityBLL.BllObject" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SupErp.BLL.ComptabilityBLL.BllObject" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfClassOfAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ClassOfAccount" nillable="true" type="tns:ClassOfAccount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfClassOfAccount" nillable="true" type="tns:ArrayOfClassOfAccount" />
+  <xs:complexType name="ClassOfAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChartsOfAccount" nillable="true" type="tns:ArrayOfChartsOfAccount" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="number" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ClassOfAccount" nillable="true" type="tns:ClassOfAccount" />
+  <xs:complexType name="ArrayOfChartsOfAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ChartsOfAccount" nillable="true" type="tns:ChartsOfAccount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfChartsOfAccount" nillable="true" type="tns:ArrayOfChartsOfAccount" />
+  <xs:complexType name="ChartsOfAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="account_number" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="chartsOfAccount" nillable="true" type="tns:ArrayOfChartsOfAccount" />
+      <xs:element minOccurs="0" name="class_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ChartsOfAccount" nillable="true" type="tns:ChartsOfAccount" />
+</xs:schema>

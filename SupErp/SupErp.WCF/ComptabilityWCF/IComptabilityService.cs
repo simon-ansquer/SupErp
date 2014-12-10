@@ -15,9 +15,9 @@ namespace SupErp.WCF.ComptabilityWCF
     public interface IComptabilityService
     {
         [OperationContract]
-        public IEnumerable<ClassOfAccount> GetPlanComptable ();
+        IEnumerable<ClassOfAccount> GetPlanComptable ();
 
         [OperationContract]
-        public COMPTA_ExchangeRate GetExhangeRate ();
+        COMPTA_ExchangeRate GetExhangeRate ();
     }
 }

@@ -145,8 +145,6 @@ namespace SupErp.BLL.ComptabilityBLL
             return result;
         }
         
-        public IEnumerable<>
-
         /*
         public IEnumerable<COMPTA_AccountingEntries> GetAccountingEntries()
         {

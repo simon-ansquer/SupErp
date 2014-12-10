@@ -47,10 +47,11 @@ namespace SupERP.WPF.Comptabiity
 
         public IEnumerable<Model.ClassOfAccount> getPlanComptable()
         {
-            using (var ws = new ComptabilityService())
+            using (var ws = new ComptabilityWebServiceReference.ComptabilityServiceClient())
             {
-                plan = ws.getPlanComptable();
+                var test = ws.GetPlanComptable();
             }
+            return null;
         }
 
         public void AfficherCharts(Model.ChartsOfAccount chart, TreeViewItem treeItemSource)
