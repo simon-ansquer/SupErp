@@ -197,6 +197,9 @@ namespace SupErp.BLL.ComptabilityBLL
                 else if ( Fin.HasValue )
                     resultBank = new List<COMPTA_BankJournalLine>(resultBank.Where(x => x.postingDate.Value < Fin.Value));
 
+                if ( noFilter )
+                    resultBank = new List<COMPTA_BankJournalLine>(bankResult);
+
                 resultBank.ForEach(delegate( COMPTA_BankJournalLine entry )
                 {
                     Entries finalEntry = new Entries()
@@ -238,6 +241,9 @@ namespace SupErp.BLL.ComptabilityBLL
                     resultCustomer = new List<COMPTA_CustomerJournalLine>(resultCustomer.Where(x => Debut.Value < x.postingDate.Value));
                 else if ( Fin.HasValue )
                     resultCustomer = new List<COMPTA_CustomerJournalLine>(resultCustomer.Where(x => x.postingDate.Value < Fin.Value));
+
+                if ( noFilter )
+                    resultCustomer = new List<COMPTA_CustomerJournalLine>(customerResult);
 
                 resultCustomer.ForEach(delegate( COMPTA_CustomerJournalLine entry )
                 {
@@ -281,6 +287,9 @@ namespace SupErp.BLL.ComptabilityBLL
                 else if ( Fin.HasValue )
                     resultSupplier = new List<COMPTA_SupplierJournalLine>(resultSupplier.Where(x => x.postingDate.Value < Fin.Value));
 
+                if ( noFilter )
+                    resultSupplier = new List<COMPTA_SupplierJournalLine>(supplierResult);
+
                 resultSupplier.ForEach(delegate( COMPTA_SupplierJournalLine entry )
                 {
                     Entries finalEntry = new Entries()
@@ -322,6 +331,9 @@ namespace SupErp.BLL.ComptabilityBLL
                     resultAccounting = new List<COMPTA_AccountingEntries>(resultAccounting.Where(x => Debut.Value < x.postingDate.Value));
                 else if ( Fin.HasValue )
                     resultAccounting = new List<COMPTA_AccountingEntries>(resultAccounting.Where(x => x.postingDate.Value < Fin.Value));
+
+                if ( noFilter )
+                    resultAccounting = new List<COMPTA_AccountingEntries>(accountingResult);
 
                 resultAccounting.ForEach(delegate( COMPTA_AccountingEntries entry )
                 {
