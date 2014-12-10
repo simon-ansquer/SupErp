@@ -32,6 +32,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,8 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComptabilityBLL\Assembleur\ComptabilityAssembleur.cs" />
+    <Compile Include="ComptabilityBLL\BllObject\BilanComptable.cs" />
+    <Compile Include="ComptabilityBLL\BllObject\BilanComptableModeEnum.cs" />
     <Compile Include="ComptabilityBLL\BllObject\ChartsOfAccount.cs" />
     <Compile Include="ComptabilityBLL\BllObject\ClassOfAccount.cs" />
+    <Compile Include="ComptabilityBLL\BllObject\Entries.cs" />
+    <Compile Include="ComptabilityBLL\BllObject\EntriesTypeEnum.cs" />
+    <Compile Include="ComptabilityBLL\BllObject\SourceEntriesEnum.cs" />
+    <Compile Include="ComptabilityBLL\BllObject\Periodicity.cs" />
     <Compile Include="ComptabilityBLL\PlanComptableBLL.cs" />
     <Compile Include="FacturationBLL\BillCategoryBLL.cs" />
     <Compile Include="FacturationBLL\BillProductBLL.cs" />
@@ -56,6 +64,11 @@
     <Compile Include="GestionSalaireBLL\SalaireBLL.cs" />
     <Compile Include="ModuleUser\UserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\CurrencyConvertor\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SupErp.DAL\SupErp.DAL.csproj">
@@ -67,7 +80,28 @@
       <Name>SupErp.Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\CurrencyConvertor\CurrencyConvertor.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CurrencyConvertor\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CurrencyConvertor\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CurrencyConvertor\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CurrencyConvertor\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

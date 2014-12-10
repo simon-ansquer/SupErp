@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SUPERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SUPERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Absence">
           <Key>
             <PropertyRef Name="id" />
@@ -141,6 +141,16 @@
           <Property Name="postingDate" Type="datetime2" Precision="7" />
           <Property Name="chartOfAccount_id" Type="bigint" />
         </EntityType>
+        <EntityType Name="COMPTA_AccountingEntries_Periodicity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="startDate" Type="datetime2" Precision="7" />
+          <Property Name="endDate" Type="datetime2" Precision="7" />
+          <Property Name="accountingEntries_id" Type="bigint" />
+          <Property Name="periodicity_id" Type="bigint" />
+        </EntityType>
         <EntityType Name="COMPTA_Bank">
           <Key>
             <PropertyRef Name="id" />
@@ -205,7 +215,7 @@
           </Key>
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="50" />
-          <Property Name="symbol" Type="char" MaxLength="1" />
+          <Property Name="symbol" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="COMPTA_CustomerJournalLine">
           <Key>
@@ -228,6 +238,13 @@
           <Property Name="EURO_AUD" Type="float" />
           <Property Name="EURO_ZAR" Type="float" />
           <Property Name="USD_EURO" Type="float" />
+        </EntityType>
+        <EntityType Name="COMPTA_Periodicity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="COMPTA_SupplierJournalLine">
           <Key>
@@ -270,7 +287,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" Nullable="false" />
-          <Property Name="Label" Type="nchar" MaxLength="100" />
+          <Property Name="Label" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="RoleModule">
           <Key>
@@ -312,13 +329,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" Nullable="false" />
-          <Property Name="Email" Type="nchar" MaxLength="100" />
-          <Property Name="Passwordhash" Type="nchar" MaxLength="200" />
-          <Property Name="Firstname" Type="nchar" MaxLength="50" />
-          <Property Name="Lastname" Type="nchar" MaxLength="50" />
-          <Property Name="City" Type="nchar" MaxLength="30" />
-          <Property Name="Address" Type="nchar" MaxLength="200" />
-          <Property Name="Zip_code" Type="nchar" MaxLength="10" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Passwordhash" Type="nvarchar" MaxLength="200" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="200" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="200" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="Zip_code" Type="nvarchar" MaxLength="200" />
           <Property Name="Date_arrival" Type="datetime" />
           <Property Name="Date_departure" Type="datetime" />
           <Property Name="Role_id" Type="bigint" />
@@ -468,6 +485,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__COMPTA_Ac__accou__40F9A68C">
+          <End Role="COMPTA_AccountingEntries" Type="Self.COMPTA_AccountingEntries" Multiplicity="0..1" />
+          <End Role="COMPTA_AccountingEntries_Periodicity" Type="Self.COMPTA_AccountingEntries_Periodicity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_AccountingEntries">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_AccountingEntries_Periodicity">
+              <PropertyRef Name="accountingEntries_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__COMPTA_Ac__chart__1CBC4616">
           <End Role="COMPTA_ChartOfAccounts" Type="Self.COMPTA_ChartOfAccounts" Multiplicity="0..1" />
           <End Role="COMPTA_AccountingEntries" Type="Self.COMPTA_AccountingEntries" Multiplicity="*" />
@@ -477,6 +506,18 @@
             </Principal>
             <Dependent Role="COMPTA_AccountingEntries">
               <PropertyRef Name="chartOfAccount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Ac__perio__41EDCAC5">
+          <End Role="COMPTA_Periodicity" Type="Self.COMPTA_Periodicity" Multiplicity="0..1" />
+          <End Role="COMPTA_AccountingEntries_Periodicity" Type="Self.COMPTA_AccountingEntries_Periodicity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_Periodicity">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_AccountingEntries_Periodicity">
+              <PropertyRef Name="periodicity_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -663,6 +704,7 @@
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company_Contact" EntityType="Self.Company_Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMPTA_AccountingEntries" EntityType="Self.COMPTA_AccountingEntries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPTA_AccountingEntries_Periodicity" EntityType="Self.COMPTA_AccountingEntries_Periodicity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMPTA_Bank" EntityType="Self.COMPTA_Bank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMPTA_BankAccount" EntityType="Self.COMPTA_BankAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMPTA_BankJournalLine" EntityType="Self.COMPTA_BankJournalLine" Schema="dbo" store:Type="Tables" />
@@ -671,6 +713,7 @@
           <EntitySet Name="COMPTA_Currency" EntityType="Self.COMPTA_Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMPTA_CustomerJournalLine" EntityType="Self.COMPTA_CustomerJournalLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMPTA_ExchangeRate" EntityType="Self.COMPTA_ExchangeRate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPTA_Periodicity" EntityType="Self.COMPTA_Periodicity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMPTA_SupplierJournalLine" EntityType="Self.COMPTA_SupplierJournalLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConfigAbsence" EntityType="Self.ConfigAbsence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
@@ -729,9 +772,17 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="Company_Contact" EntitySet="Company_Contact" />
           </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ac__accou__40F9A68C" Association="Self.FK__COMPTA_Ac__accou__40F9A68C">
+            <End Role="COMPTA_AccountingEntries" EntitySet="COMPTA_AccountingEntries" />
+            <End Role="COMPTA_AccountingEntries_Periodicity" EntitySet="COMPTA_AccountingEntries_Periodicity" />
+          </AssociationSet>
           <AssociationSet Name="FK__COMPTA_Ac__chart__1CBC4616" Association="Self.FK__COMPTA_Ac__chart__1CBC4616">
             <End Role="COMPTA_ChartOfAccounts" EntitySet="COMPTA_ChartOfAccounts" />
             <End Role="COMPTA_AccountingEntries" EntitySet="COMPTA_AccountingEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ac__perio__41EDCAC5" Association="Self.FK__COMPTA_Ac__perio__41EDCAC5">
+            <End Role="COMPTA_Periodicity" EntitySet="COMPTA_Periodicity" />
+            <End Role="COMPTA_AccountingEntries_Periodicity" EntitySet="COMPTA_AccountingEntries_Periodicity" />
           </AssociationSet>
           <AssociationSet Name="FK__COMPTA_Ba__bank___0F624AF8" Association="Self.FK__COMPTA_Ba__bank___0F624AF8">
             <End Role="COMPTA_Bank" EntitySet="COMPTA_Bank" />
@@ -935,6 +986,16 @@
             <End Role="BILL_Status" EntitySet="BILL_Status" />
             <End Role="BILL_StatusChain" EntitySet="BILL_StatusChain" />
           </AssociationSet>
+          <EntitySet Name="COMPTA_AccountingEntries_Periodicity" EntityType="SUPERPModel.COMPTA_AccountingEntries_Periodicity" />
+          <EntitySet Name="COMPTA_Periodicity" EntityType="SUPERPModel.COMPTA_Periodicity" />
+          <AssociationSet Name="FK__COMPTA_Ac__accou__40F9A68C" Association="SUPERPModel.FK__COMPTA_Ac__accou__40F9A68C">
+            <End Role="COMPTA_AccountingEntries" EntitySet="COMPTA_AccountingEntries" />
+            <End Role="COMPTA_AccountingEntries_Periodicity" EntitySet="COMPTA_AccountingEntries_Periodicity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPTA_Ac__perio__41EDCAC5" Association="SUPERPModel.FK__COMPTA_Ac__perio__41EDCAC5">
+            <End Role="COMPTA_Periodicity" EntitySet="COMPTA_Periodicity" />
+            <End Role="COMPTA_AccountingEntries_Periodicity" EntitySet="COMPTA_AccountingEntries_Periodicity" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Absence">
           <Key>
@@ -1073,7 +1134,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="Label" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Label" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RoleModules" Relationship="SUPERPModel.FK_RoleModule_Role" FromRole="Role" ToRole="RoleModule" />
           <NavigationProperty Name="Users" Relationship="SUPERPModel.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
@@ -1121,13 +1182,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="Passwordhash" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
-          <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
-          <Property Name="Zip_code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Passwordhash" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Firstname" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Zip_code" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Date_arrival" Type="DateTime" Precision="3" />
           <Property Name="Date_departure" Type="DateTime" Precision="3" />
           <Property Name="Role_id" Type="Int64" />
@@ -1268,6 +1329,7 @@
           <Property Name="postingDate" Type="DateTime" Precision="7" />
           <Property Name="chartOfAccount_id" Type="Int64" />
           <NavigationProperty Name="COMPTA_ChartOfAccounts" Relationship="SUPERPModel.FK__COMPTA_Ac__chart__1CBC4616" FromRole="COMPTA_AccountingEntries" ToRole="COMPTA_ChartOfAccounts" />
+          <NavigationProperty Name="COMPTA_AccountingEntries_Periodicity" Relationship="SUPERPModel.FK__COMPTA_Ac__accou__40F9A68C" FromRole="COMPTA_AccountingEntries" ToRole="COMPTA_AccountingEntries_Periodicity" />
         </EntityType>
         <EntityType Name="COMPTA_ExchangeRate">
           <Key>
@@ -1490,7 +1552,7 @@
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="symbol" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="symbol" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="COMPTA_BankAccount" Relationship="SUPERPModel.FK__COMPTA_Ba__curre__0E6E26BF" FromRole="COMPTA_Currency" ToRole="COMPTA_BankAccount" />
         </EntityType>
         <EntityType Name="COMPTA_CustomerJournalLine">
@@ -1630,6 +1692,50 @@
             </Principal>
             <Dependent Role="BILL_StatusChain">
               <PropertyRef Name="Status_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="COMPTA_AccountingEntries_Periodicity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="startDate" Type="DateTime" Precision="7" />
+          <Property Name="endDate" Type="DateTime" Precision="7" />
+          <Property Name="accountingEntries_id" Type="Int64" />
+          <Property Name="periodicity_id" Type="Int64" />
+          <NavigationProperty Name="COMPTA_AccountingEntries" Relationship="SUPERPModel.FK__COMPTA_Ac__accou__40F9A68C" FromRole="COMPTA_AccountingEntries_Periodicity" ToRole="COMPTA_AccountingEntries" />
+          <NavigationProperty Name="COMPTA_Periodicity" Relationship="SUPERPModel.FK__COMPTA_Ac__perio__41EDCAC5" FromRole="COMPTA_AccountingEntries_Periodicity" ToRole="COMPTA_Periodicity" />
+        </EntityType>
+        <EntityType Name="COMPTA_Periodicity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COMPTA_AccountingEntries_Periodicity" Relationship="SUPERPModel.FK__COMPTA_Ac__perio__41EDCAC5" FromRole="COMPTA_Periodicity" ToRole="COMPTA_AccountingEntries_Periodicity" />
+        </EntityType>
+        <Association Name="FK__COMPTA_Ac__accou__40F9A68C">
+          <End Type="SUPERPModel.COMPTA_AccountingEntries" Role="COMPTA_AccountingEntries" Multiplicity="0..1" />
+          <End Type="SUPERPModel.COMPTA_AccountingEntries_Periodicity" Role="COMPTA_AccountingEntries_Periodicity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_AccountingEntries">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_AccountingEntries_Periodicity">
+              <PropertyRef Name="accountingEntries_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPTA_Ac__perio__41EDCAC5">
+          <End Type="SUPERPModel.COMPTA_Periodicity" Role="COMPTA_Periodicity" Multiplicity="0..1" />
+          <End Type="SUPERPModel.COMPTA_AccountingEntries_Periodicity" Role="COMPTA_AccountingEntries_Periodicity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPTA_Periodicity">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="COMPTA_AccountingEntries_Periodicity">
+              <PropertyRef Name="periodicity_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1987,6 +2093,25 @@
                 <ScalarProperty Name="NextStatus_Id" ColumnName="NextStatus_Id" />
                 <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
                 <ScalarProperty Name="StatusChain_Id" ColumnName="StatusChain_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPTA_AccountingEntries_Periodicity">
+            <EntityTypeMapping TypeName="SUPERPModel.COMPTA_AccountingEntries_Periodicity">
+              <MappingFragment StoreEntitySet="COMPTA_AccountingEntries_Periodicity">
+                <ScalarProperty Name="periodicity_id" ColumnName="periodicity_id" />
+                <ScalarProperty Name="accountingEntries_id" ColumnName="accountingEntries_id" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPTA_Periodicity">
+            <EntityTypeMapping TypeName="SUPERPModel.COMPTA_Periodicity">
+              <MappingFragment StoreEntitySet="COMPTA_Periodicity">
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
