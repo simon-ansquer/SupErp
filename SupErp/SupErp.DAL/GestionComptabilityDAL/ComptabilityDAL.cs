@@ -85,7 +85,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.COMPTA_CustomerJournalLine.Include("Company");
+                return context.COMPTA_CustomerJournalLine;
             }
         }
 
@@ -93,7 +93,23 @@ namespace SupErp.DAL.GestionComptabilityDAL
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.COMPTA_SupplierJournalLine.Include("Company");
+                return context.COMPTA_SupplierJournalLine;
+            }
+        }
+
+        public COMPTA_AccountingEntries_Periodicity GetAccountingEntriesPeriodicityById ( long id )
+        {
+            using ( SUPERPEntities context = new SUPERPEntities(false) )
+            {
+                return context.COMPTA_AccountingEntries_Periodicity.Include("COMPTA_Periodicity").Include("COMPTA_AccountingEntries").FirstOrDefault(x => x.COMPTA_AccountingEntries.id == id );
+            }
+        }
+
+        public IEnumerable<COMPTA_AccountingEntries_Periodicity> GetAccountingEntriesPeriodicity ( )
+        {
+            using ( SUPERPEntities context = new SUPERPEntities(false) )
+            {
+                return context.COMPTA_AccountingEntries_Periodicity.Include("COMPTA_Periodicity").Include("COMPTA_AccountingEntries").ToList();
             }
         }
 
