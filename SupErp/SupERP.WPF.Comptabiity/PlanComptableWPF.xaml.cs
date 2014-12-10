@@ -49,7 +49,7 @@ namespace SupERP.WPF.Comptabiity
         {
             using (var ws = new ComptabilityWebServiceReference.ComptabilityServiceClient())
             {
-                var test = ws.GetPlanComptable();
+                var plan = ws.GetPlanComptable();
             }
             return null;
         }
