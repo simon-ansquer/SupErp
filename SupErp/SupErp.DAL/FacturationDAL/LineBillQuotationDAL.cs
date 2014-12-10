@@ -31,13 +31,18 @@ namespace SupErp.DAL.FacturationDAL
 
         #region Create
 
-        public BILL_LineBillQuotation CreateLineBillQuotation(BILL_LineBillQuotation billLineToAdd)
+        public List<BILL_LineBillQuotation> CreateLineBillQuotation(List<BILL_LineBillQuotation> billLineToAdd)
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var s = context.BILL_LineBillQuotation.Add(billLineToAdd);
+                var listLine = new List<BILL_LineBillQuotation>();
+                foreach(var line in billLineToAdd)
+                {
+                    var s = context.BILL_LineBillQuotation.Add(line);
+                    listLine.Add(line);
+                }
                 context.SaveChanges();
-                return s;
+                return listLine;
             }
         }
 
@@ -45,14 +50,19 @@ namespace SupErp.DAL.FacturationDAL
 
         #region Edit
 
-        public BILL_LineBillQuotation EditLineBillQuotation(BILL_LineBillQuotation LineBillQuotationToEdit)
+        public List<BILL_LineBillQuotation> EditLineBillQuotation(List<BILL_LineBillQuotation> LineBillQuotationToEdit)
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var l = context.BILL_LineBillQuotation.Find(LineBillQuotationToEdit.LineBillQuotation_Id);
-                l = LineBillQuotationToEdit;
+                var listLine = new List<BILL_LineBillQuotation>();
+                foreach (var line in LineBillQuotationToEdit)
+                {
+                    var l = context.BILL_LineBillQuotation.Find(line.LineBillQuotation_Id);
+                    l = line;
+                    listLine.Add(l);
+                }
                 context.SaveChanges();
-                return l;
+                return listLine;
             }
         }
 
@@ -60,14 +70,17 @@ namespace SupErp.DAL.FacturationDAL
 
         #region Delete
 
-        public bool DeleteLineBillQuotation(long id)
+        public bool DeleteLineBillQuotation(List<long> listID)
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 try
                 {
-                    var l = context.BILL_LineBillQuotation.Find(id);
-                    context.BILL_LineBillQuotation.Remove(l);
+                    foreach(var id in listID)
+                    {
+                        var l = context.BILL_LineBillQuotation.Find(id);
+                        context.BILL_LineBillQuotation.Remove(l);
+                    }
                     context.SaveChanges();
                     return true;
                 }

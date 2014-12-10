@@ -164,6 +164,7 @@ namespace SupErp.WCF.FacturationWCF
 
                if (billQuotationComplete.lines == null) return res;
 
+               var listLine = new List<BILL_LineBillQuotation>();
                foreach (var line in billQuotationComplete.lines)
                {
                    var l = new BILL_LineBillQuotation
@@ -177,8 +178,10 @@ namespace SupErp.WCF.FacturationWCF
                        Quantite = line.Quantite
                    };
 
-                   lineBLL.CreateLineBillQuotation(l);
+                   listLine.Add(l);
                }
+
+               lineBLL.CreateLineBillQuotation(listLine);
            }
            catch(Exception)
            {
@@ -221,7 +224,7 @@ namespace SupErp.WCF.FacturationWCF
                 var lineModif = billQuotationComplete.lines;
 
                 var listLineAModifie = new List<BILL_LineBillQuotation>();
-                var listLineaAjoute = new List<BILL_LineBillQuotation>();
+                var listLineAAjoute = new List<BILL_LineBillQuotation>();
                 /* TODO: METTRE A JOUR LES LIGNES FACTURES */
                 foreach(var line in lineModif)
                 {
@@ -243,9 +246,14 @@ namespace SupErp.WCF.FacturationWCF
                     }
                     else
                     {
-
+                        listLineAAjoute.Add(l);
+                        lineBDD.Remove(l);
                     }
                 }
+
+                lineBLL.CreateLineBillQuotation(listLineAAjoute);
+                lineBLL.EditLineBillQuotation(listLineAModifie);
+                lineBLL.DeleteLineBillQuotation(lineBDD);
             }
             catch (Exception)
             {
@@ -275,7 +283,25 @@ namespace SupErp.WCF.FacturationWCF
             }
         }
 
-       
+
+        /***********************/
+        /*       STATUS       */
+        /**********************/
+
+        private static readonly Lazy<StatusBLL> lazyStatusBLL = new Lazy<StatusBLL>(() => new StatusBLL());
+        private static StatusBLL statusBLL { get { return lazyStatusBLL.Value; } }
+
+        public List<BILL_Status> GetStatus()
+        {
+            try
+            {
+                return statusBLL.GetStatus();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("FacturationService >> GetStatus :" + ex.Message);
+            }
+        }
 
     }
 }
