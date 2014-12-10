@@ -70,7 +70,7 @@ namespace SupErp.BLL.ComptabilityBLL
         {
             var result = comptabilityDal.GetLastExchangeRate();
 
-            if ( result == null || DateTime.Now - result.updatedDate > new TimeSpan(2, 0, 0, 0, 0) )
+            if ( result == null || DateTime.Now - result.updatedDate > new TimeSpan(1, 0, 0, 0, 0) )
             {
                 // Call Update WebService for ExchangeRate Update =)
                 //comptabilityDal.
