@@ -141,8 +141,13 @@ namespace SupErp.DAL.ModuleUser
                 u.Email = userToEdit.Email;
                 u.Firstname = userToEdit.Firstname;
                 u.Lastname = userToEdit.Lastname;
-                u.Role = context.Roles.Find(userToEdit.Role.Id);
-                u.Role_id = u.Role.Id;
+
+                if (userToEdit.Role != null)
+                {
+                    u.Role = context.Roles.Find(userToEdit.Role.Id);
+                    u.Role_id = u.Role.Id;
+                }
+
                 u.Zip_code = userToEdit.Zip_code;
                 u.City = userToEdit.City;
                 context.SaveChanges();
