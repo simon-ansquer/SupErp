@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SUPERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SUPERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Absence">
           <Key>
             <PropertyRef Name="id" />
@@ -78,6 +78,14 @@
           </Key>
           <Property Name="Status_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Libel" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BILL_StatusChain">
+          <Key>
+            <PropertyRef Name="StatusChain_Id" />
+          </Key>
+          <Property Name="StatusChain_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status_Id" Type="bigint" Nullable="false" />
+          <Property Name="NextStatus_Id" Type="bigint" />
         </EntityType>
         <EntityType Name="BILL_Transmitter">
           <Key>
@@ -244,7 +252,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Prime">
           <Key>
@@ -421,6 +429,30 @@
             </Principal>
             <Dependent Role="BILL_Product">
               <PropertyRef Name="Vat_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BILL_Stat__NextS__2A164134">
+          <End Role="BILL_Status" Type="Self.BILL_Status" Multiplicity="0..1" />
+          <End Role="BILL_StatusChain" Type="Self.BILL_StatusChain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILL_Status">
+              <PropertyRef Name="Status_Id" />
+            </Principal>
+            <Dependent Role="BILL_StatusChain">
+              <PropertyRef Name="NextStatus_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BILL_Stat__Statu__29221CFB">
+          <End Role="BILL_Status" Type="Self.BILL_Status" Multiplicity="1" />
+          <End Role="BILL_StatusChain" Type="Self.BILL_StatusChain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILL_Status">
+              <PropertyRef Name="Status_Id" />
+            </Principal>
+            <Dependent Role="BILL_StatusChain">
+              <PropertyRef Name="Status_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -625,6 +657,7 @@
           <EntitySet Name="BILL_LineBillQuotation" EntityType="Self.BILL_LineBillQuotation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BILL_Product" EntityType="Self.BILL_Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BILL_Status" EntityType="Self.BILL_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BILL_StatusChain" EntityType="Self.BILL_StatusChain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BILL_Transmitter" EntityType="Self.BILL_Transmitter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BILL_Vat" EntityType="Self.BILL_Vat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
@@ -683,6 +716,14 @@
           <AssociationSet Name="FK__BILL_Prod__Vat_I__5629CD9C" Association="Self.FK__BILL_Prod__Vat_I__5629CD9C">
             <End Role="BILL_Vat" EntitySet="BILL_Vat" />
             <End Role="BILL_Product" EntitySet="BILL_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL_Stat__NextS__2A164134" Association="Self.FK__BILL_Stat__NextS__2A164134">
+            <End Role="BILL_Status" EntitySet="BILL_Status" />
+            <End Role="BILL_StatusChain" EntitySet="BILL_StatusChain" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL_Stat__Statu__29221CFB" Association="Self.FK__BILL_Stat__Statu__29221CFB">
+            <End Role="BILL_Status" EntitySet="BILL_Status" />
+            <End Role="BILL_StatusChain" EntitySet="BILL_StatusChain" />
           </AssociationSet>
           <AssociationSet Name="FK__Company_C__compa__6383C8BA" Association="Self.FK__Company_C__compa__6383C8BA">
             <End Role="Company" EntitySet="Company" />
@@ -885,6 +926,15 @@
             <End Role="COMPTA_ClassOfAccounts" EntitySet="COMPTA_ClassOfAccounts" />
             <End Role="COMPTA_ChartOfAccounts" EntitySet="COMPTA_ChartOfAccounts" />
           </AssociationSet>
+          <EntitySet Name="BILL_StatusChain" EntityType="SUPERPModel.BILL_StatusChain" />
+          <AssociationSet Name="FK__BILL_Stat__NextS__2A164134" Association="SUPERPModel.FK__BILL_Stat__NextS__2A164134">
+            <End Role="BILL_Status" EntitySet="BILL_Status" />
+            <End Role="BILL_StatusChain" EntitySet="BILL_StatusChain" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BILL_Stat__Statu__29221CFB" Association="SUPERPModel.FK__BILL_Stat__Statu__29221CFB">
+            <End Role="BILL_Status" EntitySet="BILL_Status" />
+            <End Role="BILL_StatusChain" EntitySet="BILL_StatusChain" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Absence">
           <Key>
@@ -935,6 +985,8 @@
           <Property Name="Status_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Libel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BILL_BillQuotationStatus" Relationship="SUPERPModel.FK__BILL_Bill__Statu__534D60F1" FromRole="BILL_Status" ToRole="BILL_BillQuotationStatus" />
+          <NavigationProperty Name="BILL_StatusChain" Relationship="SUPERPModel.FK__BILL_Stat__NextS__2A164134" FromRole="BILL_Status" ToRole="BILL_StatusChain" />
+          <NavigationProperty Name="BILL_StatusChain1" Relationship="SUPERPModel.FK__BILL_Stat__Statu__29221CFB" FromRole="BILL_Status" ToRole="BILL_StatusChain" />
         </EntityType>
         <EntityType Name="BILL_Transmitter">
           <Key>
@@ -1001,7 +1053,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RoleModules" Relationship="SUPERPModel.FK_RoleModule_Module" FromRole="Module" ToRole="RoleModule" />
         </EntityType>
         <EntityType Name="Prime">
@@ -1547,6 +1599,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="BILL_StatusChain">
+          <Key>
+            <PropertyRef Name="StatusChain_Id" />
+          </Key>
+          <Property Name="StatusChain_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status_Id" Type="Int64" Nullable="false" />
+          <Property Name="NextStatus_Id" Type="Int64" />
+          <NavigationProperty Name="BILL_Status" Relationship="SUPERPModel.FK__BILL_Stat__NextS__2A164134" FromRole="BILL_StatusChain" ToRole="BILL_Status" />
+          <NavigationProperty Name="BILL_Status1" Relationship="SUPERPModel.FK__BILL_Stat__Statu__29221CFB" FromRole="BILL_StatusChain" ToRole="BILL_Status" />
+        </EntityType>
+        <Association Name="FK__BILL_Stat__NextS__2A164134">
+          <End Type="SUPERPModel.BILL_Status" Role="BILL_Status" Multiplicity="0..1" />
+          <End Type="SUPERPModel.BILL_StatusChain" Role="BILL_StatusChain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILL_Status">
+              <PropertyRef Name="Status_Id" />
+            </Principal>
+            <Dependent Role="BILL_StatusChain">
+              <PropertyRef Name="NextStatus_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BILL_Stat__Statu__29221CFB">
+          <End Type="SUPERPModel.BILL_Status" Role="BILL_Status" Multiplicity="1" />
+          <End Type="SUPERPModel.BILL_StatusChain" Role="BILL_StatusChain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BILL_Status">
+              <PropertyRef Name="Status_Id" />
+            </Principal>
+            <Dependent Role="BILL_StatusChain">
+              <PropertyRef Name="Status_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1892,6 +1978,15 @@
                 <ScalarProperty Name="amount" ColumnName="amount" />
                 <ScalarProperty Name="direction" ColumnName="direction" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BILL_StatusChain">
+            <EntityTypeMapping TypeName="SUPERPModel.BILL_StatusChain">
+              <MappingFragment StoreEntitySet="BILL_StatusChain">
+                <ScalarProperty Name="NextStatus_Id" ColumnName="NextStatus_Id" />
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+                <ScalarProperty Name="StatusChain_Id" ColumnName="StatusChain_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

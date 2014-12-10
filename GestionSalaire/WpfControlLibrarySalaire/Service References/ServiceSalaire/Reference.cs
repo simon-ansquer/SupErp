@@ -11,7 +11,7 @@
 namespace WpfControlLibrarySalaire.ServiceSalaire {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -312,7 +312,7 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Role", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Role", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class Role : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -405,7 +405,7 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Status", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Status", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class Status : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -498,7 +498,7 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Absence", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Absence", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class Absence : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -639,7 +639,7 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Prime", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Prime", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class Prime : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -780,7 +780,7 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Salary", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Salary", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class Salary : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -889,7 +889,7 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AbsenceType", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AbsenceType", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class AbsenceType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -982,7 +982,7 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ConfigAbsence", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ConfigAbsence", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ConfigAbsence : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1075,7 +1075,7 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RoleModule", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RoleModule", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class RoleModule : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1184,7 +1184,7 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Module", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Module", Namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class Module : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1280,6 +1280,48 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/GetUserById", ReplyAction="http://tempuri.org/IServiceSalaire/GetUserByIdResponse")]
         System.Threading.Tasks.Task<WpfControlLibrarySalaire.ServiceSalaire.User> GetUserByIdAsync(long userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/UpdateUserSalaryById", ReplyAction="http://tempuri.org/IServiceSalaire/UpdateUserSalaryByIdResponse")]
+        bool UpdateUserSalaryById(long idUser, decimal newSalaryNet);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/UpdateUserSalaryById", ReplyAction="http://tempuri.org/IServiceSalaire/UpdateUserSalaryByIdResponse")]
+        System.Threading.Tasks.Task<bool> UpdateUserSalaryByIdAsync(long idUser, decimal newSalaryNet);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/GetState", ReplyAction="http://tempuri.org/IServiceSalaire/GetStateResponse")]
+        System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.Status> GetState();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/GetState", ReplyAction="http://tempuri.org/IServiceSalaire/GetStateResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.Status>> GetStateAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/UpdateUserState", ReplyAction="http://tempuri.org/IServiceSalaire/UpdateUserStateResponse")]
+        bool UpdateUserState(long idUser, long idState);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/UpdateUserState", ReplyAction="http://tempuri.org/IServiceSalaire/UpdateUserStateResponse")]
+        System.Threading.Tasks.Task<bool> UpdateUserStateAsync(long idUser, long idState);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/addPrime", ReplyAction="http://tempuri.org/IServiceSalaire/addPrimeResponse")]
+        bool addPrime(long idUser, WpfControlLibrarySalaire.ServiceSalaire.Prime prime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/addPrime", ReplyAction="http://tempuri.org/IServiceSalaire/addPrimeResponse")]
+        System.Threading.Tasks.Task<bool> addPrimeAsync(long idUser, WpfControlLibrarySalaire.ServiceSalaire.Prime prime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/GetPrimesByUserId", ReplyAction="http://tempuri.org/IServiceSalaire/GetPrimesByUserIdResponse")]
+        System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.Prime> GetPrimesByUserId(long id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/GetPrimesByUserId", ReplyAction="http://tempuri.org/IServiceSalaire/GetPrimesByUserIdResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.Prime>> GetPrimesByUserIdAsync(long id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/addAbsence", ReplyAction="http://tempuri.org/IServiceSalaire/addAbsenceResponse")]
+        bool addAbsence(long idUser, WpfControlLibrarySalaire.ServiceSalaire.Absence absence);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/addAbsence", ReplyAction="http://tempuri.org/IServiceSalaire/addAbsenceResponse")]
+        System.Threading.Tasks.Task<bool> addAbsenceAsync(long idUser, WpfControlLibrarySalaire.ServiceSalaire.Absence absence);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/GetAbsenceTypes", ReplyAction="http://tempuri.org/IServiceSalaire/GetAbsenceTypesResponse")]
+        System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.AbsenceType> GetAbsenceTypes();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSalaire/GetAbsenceTypes", ReplyAction="http://tempuri.org/IServiceSalaire/GetAbsenceTypesResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.AbsenceType>> GetAbsenceTypesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1331,6 +1373,62 @@ namespace WpfControlLibrarySalaire.ServiceSalaire {
         
         public System.Threading.Tasks.Task<WpfControlLibrarySalaire.ServiceSalaire.User> GetUserByIdAsync(long userID) {
             return base.Channel.GetUserByIdAsync(userID);
+        }
+        
+        public bool UpdateUserSalaryById(long idUser, decimal newSalaryNet) {
+            return base.Channel.UpdateUserSalaryById(idUser, newSalaryNet);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateUserSalaryByIdAsync(long idUser, decimal newSalaryNet) {
+            return base.Channel.UpdateUserSalaryByIdAsync(idUser, newSalaryNet);
+        }
+        
+        public System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.Status> GetState() {
+            return base.Channel.GetState();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.Status>> GetStateAsync() {
+            return base.Channel.GetStateAsync();
+        }
+        
+        public bool UpdateUserState(long idUser, long idState) {
+            return base.Channel.UpdateUserState(idUser, idState);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateUserStateAsync(long idUser, long idState) {
+            return base.Channel.UpdateUserStateAsync(idUser, idState);
+        }
+        
+        public bool addPrime(long idUser, WpfControlLibrarySalaire.ServiceSalaire.Prime prime) {
+            return base.Channel.addPrime(idUser, prime);
+        }
+        
+        public System.Threading.Tasks.Task<bool> addPrimeAsync(long idUser, WpfControlLibrarySalaire.ServiceSalaire.Prime prime) {
+            return base.Channel.addPrimeAsync(idUser, prime);
+        }
+        
+        public System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.Prime> GetPrimesByUserId(long id) {
+            return base.Channel.GetPrimesByUserId(id);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.Prime>> GetPrimesByUserIdAsync(long id) {
+            return base.Channel.GetPrimesByUserIdAsync(id);
+        }
+        
+        public bool addAbsence(long idUser, WpfControlLibrarySalaire.ServiceSalaire.Absence absence) {
+            return base.Channel.addAbsence(idUser, absence);
+        }
+        
+        public System.Threading.Tasks.Task<bool> addAbsenceAsync(long idUser, WpfControlLibrarySalaire.ServiceSalaire.Absence absence) {
+            return base.Channel.addAbsenceAsync(idUser, absence);
+        }
+        
+        public System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.AbsenceType> GetAbsenceTypes() {
+            return base.Channel.GetAbsenceTypes();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WpfControlLibrarySalaire.ServiceSalaire.AbsenceType>> GetAbsenceTypesAsync() {
+            return base.Channel.GetAbsenceTypesAsync();
         }
     }
 }

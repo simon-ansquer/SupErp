@@ -9,14 +9,16 @@ namespace SupErp.DAL.GestionClientDAL
 {
     public class Company_ContactDAL
     {
-        public bool CreateCompany_Contact(Company_Contact contact)
+        public int CreateCompany_Contact(Company_Contact contact)
         {
             using (SUPERPEntities sup = new SUPERPEntities(false))
             {
                 sup.Company_Contact.Add(contact);
                 sup.SaveChanges();
+                
+                    Company_Contact cont= sup.Company_Contact.OrderByDescending(p => p.id).First();
+                    return (int)cont.id;
             }
-            return true;
         }
 
         public Company_Contact GetCompany_Contact(int idContact)
@@ -65,5 +67,15 @@ namespace SupErp.DAL.GestionClientDAL
 
         }
 
+        public bool DeleteCompany_Contact(int id)
+        {
+            using (SUPERPEntities sup = new SUPERPEntities(false))
+            {
+                Company_Contact contact = sup.Company_Contact.Where(p => p.id == id).FirstOrDefault();
+                sup.Entry(contact).State = System.Data.Entity.EntityState.Deleted;
+                sup.SaveChanges();
+            }
+            return true;
+        }
     }
 }

@@ -38,5 +38,8 @@ namespace SupErp.WCF.GestionSalaireWCF
 
         [OperationContract]
         bool addAbsence(long idUser, Absence absence);
+
+        [OperationContract]
+        List<AbsenceType> GetAbsenceTypes();
     }
 }

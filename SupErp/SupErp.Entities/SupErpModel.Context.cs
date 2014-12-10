@@ -56,5 +56,6 @@ namespace SupErp.Entities
         public virtual DbSet<COMPTA_Currency> COMPTA_Currency { get; set; }
         public virtual DbSet<COMPTA_CustomerJournalLine> COMPTA_CustomerJournalLine { get; set; }
         public virtual DbSet<COMPTA_SupplierJournalLine> COMPTA_SupplierJournalLine { get; set; }
+        public virtual DbSet<BILL_StatusChain> BILL_StatusChain { get; set; }
     }
 }

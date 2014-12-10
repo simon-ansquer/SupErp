@@ -27,7 +27,7 @@ namespace SupErp.BLL.GestionSalaireBLL
             return salaireDAL.GetUsers(query);
         }
 
-        public User getUser(long userID)
+        public User getUser(long userID) 
         {
             return salaireDAL.GetUserById(userID);
         }
@@ -61,6 +61,11 @@ namespace SupErp.BLL.GestionSalaireBLL
         public bool addAbsence(long idUser, Absence absence)
         {
             return salaireDAL.addAbsence(idUser, absence);
+        }
+
+        public List<AbsenceType> GetAbsenceTypes()
+        {
+            return salaireDAL.GetAbsenceTypes();
         }
 
 

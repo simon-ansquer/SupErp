@@ -38,6 +38,21 @@ namespace SupErp.BLL.FacturationBLL
             return billQuotationDAL.GetQuotations().Select(b => new BillQuotationLight(b));
         }
 
+        public IEnumerable<BillQuotationLight> GetBillQuotationByStatus(BILL_Status status)
+        {
+            var res = new List<BillQuotationLight>();
+            try
+            {
+                var list = billQuotationDAL.GetBillQuotation().Select(b => new BillQuotationLight(b)).Where(bq => bq.BillStatus.Status_Id == status.Status_Id);
+                
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(" BillQuotationBLL >> GetBillQuotationByStatus :" + ex.Message);
+            }
+            return res;
+        }
+
         public BillQuotationLight GetBillQuotation(DateTime dateBillQuotation)
         {
             return new BillQuotationLight(billQuotationDAL.GetBillQuotation(dateBillQuotation));

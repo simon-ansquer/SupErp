@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using SupErp.BLL.ComptabilityBLL;
+using SupErp.BLL.ComptabilityBLL.BllObject;
 
 namespace SupErp.WCF.ComptabilityWCF
 {
@@ -11,14 +13,18 @@ namespace SupErp.WCF.ComptabilityWCF
     // REMARQUE : pour lancer le client test WCF afin de tester ce service, sélectionnez Comptability.svc ou Comptability.svc.cs dans l'Explorateur de solutions et démarrez le débogage.
     public class ComptabilityService : IComptabilityService
     {
-        public void DoWork()
+
+        private static readonly Lazy<PlanComptableBLL> LazyComptabiliteBLL = new Lazy<PlanComptableBLL>(() => new PlanComptableBLL());
+        private static PlanComptableBLL comptabiliteBLL { get { return LazyComptabiliteBLL.Value; } }
+
+        public IEnumerable<ClassOfAccount> IComptabilityService.GetPlanComptable ()
         {
+            return comptabiliteBLL.GetPlanComptable();
         }
-        public List<List<string>> getPlanComptable()
+
+        Entities.COMPTA_ExchangeRate IComptabilityService.GetExhangeRate ()
         {
-
-
-            return null;
+            return comptabiliteBLL.GetLastExchangeRate();
         }
     }
 }
