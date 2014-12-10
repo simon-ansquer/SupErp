@@ -22,7 +22,7 @@
                 Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid
+            <Grid x:Name="maingrid"
             Grid.Column="1">
 
                 <Grid.ColumnDefinitions>
@@ -53,8 +53,6 @@
                     Height="0.1*"/>
                     <RowDefinition
                     Height="0.1*"/>
-                    <RowDefinition
-                    Height="0.1*"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock
@@ -62,7 +60,7 @@
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
                     Text="{Binding Path=User.IsNew, Converter={StaticResource ResourceKey=UserTitleConverer}}"
-                Foreground="Blue"
+                Foreground="#4388CC"
                 FontSize="20"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
@@ -72,7 +70,7 @@
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
                 VerticalAlignment="Bottom"
-                Background="Blue"
+                Background="#4388CC"
                 Margin="15, 0, 15, 0"/>
 
 
@@ -81,7 +79,7 @@
                 Grid.Row="1"
                 Text="Nom"
                 FontSize="18"
-                Foreground="Blue"
+                Foreground="#4388CC"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
 
@@ -90,71 +88,52 @@
                 Grid.Row="2"
                 Text="Prénom"
                 FontSize="18"
-                Foreground="Blue"
+                Foreground="#4388CC"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Center" />
 
                 <TextBlock
                 Grid.Column="0"
                 Grid.Row="3"
                 Text="E-Mail"
                 FontSize="18"
-                Foreground="Blue"
+                Foreground="#4388CC"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
 
                 <TextBlock
                 Grid.Column="0"
-                Grid.Row="4"
-                Text="Mot de passe"
-                FontSize="18"
-                Foreground="Blue"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                    Visibility="{Binding Path=User.IsNew, Converter={StaticResource PasswordVisibilityConverter}}"/>
-
-                <TextBlock
-                Grid.Column="0"
                 Grid.Row="5"
-                Text="Date de naissance"
+                Text="Adresse"
                 FontSize="18"
-                Foreground="Blue"
+                Foreground="#4388CC"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
 
                 <TextBlock
                 Grid.Column="0"
                 Grid.Row="6"
-                Text="Adresse"
+                Text="Code Postal"
                 FontSize="18"
-                Foreground="Blue"
+                Foreground="#4388CC"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
 
                 <TextBlock
                 Grid.Column="0"
                 Grid.Row="7"
-                Text="Code Postal"
+                Text="Ville"
                 FontSize="18"
-                Foreground="Blue"
+                Foreground="#4388CC"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
 
                 <TextBlock
                 Grid.Column="0"
                 Grid.Row="8"
-                Text="Ville"
-                FontSize="18"
-                Foreground="Blue"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"/>
-
-                <TextBlock
-                Grid.Column="0"
-                Grid.Row="9"
                 Text="Rôle"
                 FontSize="18"
-                Foreground="Blue"
+                Foreground="#4388CC"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
 
@@ -162,8 +141,8 @@
                     x:Name="tbNom"
                 Grid.Column="1"
                 Grid.Row="1"
-                Foreground="Blue"
-                BorderBrush="Blue"
+                Foreground="#4388CC"
+                BorderBrush="#4388CC"
                     Text="{Binding Path=User.Firstname, Mode=TwoWay}"
                 Margin="0, 10, 10, 10"/>
 
@@ -171,8 +150,8 @@
                     x:Name="tbPrenom"
                 Grid.Column="1"
                 Grid.Row="2"
-                Foreground="Blue"
-                BorderBrush="Blue"
+                Foreground="#4388CC"
+                BorderBrush="#4388CC"
                     Text="{Binding Path=User.Lastname, Mode=TwoWay}"
                 Margin="0, 10, 10, 10"/>
 
@@ -180,62 +159,44 @@
                     x:Name="tbEmail"
                 Grid.Column="1"
                 Grid.Row="3"
-                Foreground="Blue"
-                BorderBrush="Blue"
+                Foreground="#4388CC"
+                BorderBrush="#4388CC"
                     Text="{Binding Path=User.Email, Mode=TwoWay}"
-                Margin="0, 10, 10, 10"/>
-
-                <TextBox
-                    x:Name="tbMotDePasse"
-                Grid.Column="1"
-                Grid.Row="4"
-                Foreground="Blue"
-                BorderBrush="Blue"
-                Margin="0, 10, 10, 10"
-                    Visibility="{Binding Path=User.IsNew, Converter={StaticResource PasswordVisibilityConverter}}"/>
-
-                <TextBox
-                    x:Name="tbDateDeNaissance"
-                Grid.Column="1"
-                Grid.Row="5"
-                Foreground="Blue"
-                BorderBrush="Blue"
-                    Text="{Binding Path=User.Birthday, Mode=TwoWay}"
                 Margin="0, 10, 10, 10"/>
 
                 <TextBox
                     x:Name="tbAdresse"
                 Grid.Column="1"
-                Grid.Row="6"
-                Foreground="Blue"
-                BorderBrush="Blue"
+                Grid.Row="5"
+                Foreground="#4388CC"
+                BorderBrush="#4388CC"
                     Text="{Binding Path=User.Address, Mode=TwoWay}"
                 Margin="0, 10, 10, 10"/>
 
                 <TextBox
                     x:Name="tbCodePostal"
                 Grid.Column="1"
-                Grid.Row="7"
-                Foreground="Blue"
-                BorderBrush="Blue"
+                Grid.Row="6"
+                Foreground="#4388CC"
+                BorderBrush="#4388CC"
                     Text="{Binding Path=User.Zipcode, Mode=TwoWay}"
                 Margin="0, 10, 10, 10"/>
 
                 <TextBox
                     x:Name="tbVille"
                 Grid.Column="1"
-                Grid.Row="8"
-                Foreground="Blue"
-                BorderBrush="Blue"
+                Grid.Row="7"
+                Foreground="#4388CC"
+                BorderBrush="#4388CC"
                     Text="{Binding Path=User.City, Mode=TwoWay}"
                 Margin="0,13,10,7"/>
 
                 <ComboBox
                     x:Name="lbRoles"
                     Grid.Column="1"
-                    Grid.Row="9"
-                    Foreground="Blue"
-                    BorderBrush="Blue"
+                    Grid.Row="8"
+                    Foreground="#4388CC"
+                    BorderBrush="#4388CC"
                     Margin="0, 10, 10, 10"
                     ItemsSource="{Binding Roles}"
                     SelectedItem="{Binding SelectedRole}">
@@ -267,7 +228,7 @@
                     Content="ANNULER"
                     FontSize="18"
                     Foreground="White"
-                    Background="Blue"
+                    Background="#4388CC"
                     BorderBrush="White"
                     Margin="15, 15, 15, 15" 
                     Command="{Binding CancelCommand}"/>
@@ -277,9 +238,9 @@
                     Grid.Row="0"
                             Content="{Binding Path=User.IsNew, Converter={StaticResource ResourceKey=UserButtonTextConverter}}"
                     FontSize="18"
-                    Foreground="Blue"
+                    Foreground="#4388CC"
                     Background="White"
-                    BorderBrush="Blue"
+                    BorderBrush="#4388CC"
                     Margin="15, 15, 15, 15" 
                     Command="{Binding AddOrUpdateCommand}"/>
 

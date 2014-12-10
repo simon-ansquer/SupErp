@@ -16,31 +16,6 @@ namespace SupErpModuleUser.ViewModels
 
         public ListUserViewModel()
         {
-            //Users = new UserService.UserServiceClient().GetUsers().ToIHMUser().ToList();
-
-            //IHMRole role1 = new IHMRole();
-            //role1.Label = "Role1";
-
-            //IHMUser user1 = new IHMUser();
-            //user1.Id = 1;
-            //user1.Role = role1;
-            //user1.Firstname = "Eliott";
-            //user1.Lastname = "Lujan";
-            //user1.Email = "eliott.lujan@gmail.com";
-            //user1.Address = "179 rue Camille Godard";
-
-            //IHMUser user2 = new IHMUser();
-            //user2.Id = 2;
-            //user1.Role = role1;
-            //user2.Firstname = "Brice";
-            //user2.Lastname = "Jantieu";
-            //user2.Email = "brice.jantieu@gmail.com";
-            //user2.Address = "rue du Jardin Public";
-
-            //Users = new List<IHMUser>();
-            //Users.Add(user1);
-            //Users.Add(user2);
-
             using (UserServiceClient ws = new UserServiceClient())
             {
                 var users = ws.GetUsers();

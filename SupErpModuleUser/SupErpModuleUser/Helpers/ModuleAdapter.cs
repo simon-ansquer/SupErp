@@ -22,9 +22,8 @@ namespace SupErpModuleUser.Helpers
                 yield return new RoleModule()
                 {
                     Id = module.IdRoleModule,
-                    Role = role.ToRole(),
                     Role_id = role.Id,
-                    Module_id = module.IdRoleModule,
+                    Module_id = module.Id,
                     Module = new Module()
                     {
                         Id = module.Id,
