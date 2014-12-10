@@ -137,6 +137,9 @@ namespace SupErp.WCF.FacturationWCF
         /*    CREATION FACTURE    */
         /**************************/
 
+        private static readonly Lazy<BillQuotationStatusBLL> lazybqsBLL = new Lazy<BillQuotationStatusBLL>(() => new BillQuotationStatusBLL());
+        private static BillQuotationStatusBLL bqsBLL { get { return lazybqsBLL.Value; } }
+
         public bool CreateBillQuotation(BillQuotationComplete billQuotationComplete)
         {
             var res = true;
@@ -145,16 +148,22 @@ namespace SupErp.WCF.FacturationWCF
                BILL_BillQuotation bill = new BILL_BillQuotation
                {
                    AmountDF = billQuotationComplete.AmountDF,
-                   BILL_BillQuotationStatus = billQuotationComplete.BILL_BillQuotationStatus,
                    BILL_Transmitter = billQuotationComplete.BILL_Transmitter,
                    Company = billQuotationComplete.Company,
                    DateBillQuotation = billQuotationComplete.DateBillQuotation,
                    NBill = billQuotationComplete.NBill,
-                   Vat = billQuotationComplete.Vat
+                   Vat = billQuotationComplete.Vat,
                    Company_Id = billQuotationComplete.Company_Id,
                    Transmitter_Id = billQuotationComplete.Transmitter_Id
                };
+
                bill = billQuotationBLL.CreateBillQutotation(bill);
+
+               var status = new BILL_BillQuotationStatus { BILL_BillQuotation = bill, BILL_Status = billQuotationComplete.BillStatus, BillQuotation_Id = bill.BillQuotation_Id, DateAdvancement = DateTime.Now, Status_Id = billQuotationComplete.BillStatus.Status_Id };
+               bqsBLL.CreateBillQuotationStatus(status);
+
+               if (billQuotationComplete.lines == null) return res;
+
                foreach (var line in billQuotationComplete.lines)
                {
                    var l = new BILL_LineBillQuotation
@@ -183,20 +192,60 @@ namespace SupErp.WCF.FacturationWCF
         /*    MODIFICATION FACTURE    */
         /******************************/
 
-        public bool ModifyBillQuotation(BillQuotationComplete billQuotation)
+        public bool ModifyBillQuotation(BillQuotationComplete billQuotationComplete)
         {
             var res = true;
             try
             {
                 /*** Modification de la facture/devis ***/
-                billQuotationBLL.EditBillQuotation(billQuotation);
+                BILL_BillQuotation bill = new BILL_BillQuotation
+                {
+                    AmountDF = billQuotationComplete.AmountDF,
+                    BILL_Transmitter = billQuotationComplete.BILL_Transmitter,
+                    Company = billQuotationComplete.Company,
+                    DateBillQuotation = billQuotationComplete.DateBillQuotation,
+                    NBill = billQuotationComplete.NBill,
+                    Vat = billQuotationComplete.Vat,
+                    Company_Id = billQuotationComplete.Company_Id,
+                    Transmitter_Id = billQuotationComplete.Transmitter_Id
+                };
+
+                billQuotationBLL.EditBillQuotation(bill);
+
+                /*** Modification du status ***/
+                var status = new BILL_BillQuotationStatus { BILL_BillQuotation = bill, BILL_Status = billQuotationComplete.BillStatus, BillQuotation_Id = bill.BillQuotation_Id, DateAdvancement = DateTime.Now, Status_Id = billQuotationComplete.BillStatus.Status_Id };
+                bqsBLL.CreateBillQuotationStatus(status);
 
                 /*** Modification des lignes de facture ***/
-                var lineBDD = lineBLL.GetLineBillQuotation(billQuotation.BillQuotation_Id);
-                var lineModif = billQuotation.lines;
+                var lineBDD = lineBLL.GetLineBillQuotation(billQuotationComplete.BillQuotation_Id);
+                var lineModif = billQuotationComplete.lines;
 
+                var listLineAModifie = new List<BILL_LineBillQuotation>();
+                var listLineaAjoute = new List<BILL_LineBillQuotation>();
                 /* TODO: METTRE A JOUR LES LIGNES FACTURES */
+                foreach(var line in lineModif)
+                {
+                    var l = new BILL_LineBillQuotation
+                   {
+                       BILL_BillQuotation = bill,
+                       BILL_Product = line.BILL_Product,
+                       BillQuotation_Id = bill.BillQuotation_Id,
+                       DateLine = line.DateLine,
+                       LineBillQuotation_Id = line.LineBillQuotation_Id,
+                       Product_Id = line.Product_Id,
+                       Quantite = line.Quantite
+                   };
 
+                    if (lineBDD.Contains(l))
+                    {
+                        listLineAModifie.Add(l);
+                        lineBDD.Remove(l);
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
             catch (Exception)
             {
