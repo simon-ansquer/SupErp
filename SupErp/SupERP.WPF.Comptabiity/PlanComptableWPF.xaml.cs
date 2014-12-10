@@ -63,21 +63,20 @@ namespace SupERP.WPF.Comptabiity
 
         public void AfficherCharts(Model.ChartsOfAccount chart, TreeViewItem treeItemSource)
         {
-            foreach (Model.ChartsOfAccount item in chart.chartsOfAccount)
+            StringBuilder sb = new StringBuilder();
+            string a = ": ";
+            sb.Append(chart.account_number); sb.Append(a); sb.Append(chart.name);
+            TreeViewItem treeItem = new TreeViewItem();
+            treeItem.Items.Add(new TreeViewItem() { Header = sb.ToString() });
+            treeItemSource.Items.Add(treeItem);//on rajoute au noeud source
+            sb.Clear();
+            if (chart.chartsOfAccount!=null)
             {
-                StringBuilder sb = new StringBuilder();
-                string a = ": ";
-                sb.Append(chart.id); sb.Append(a); sb.Append(chart.name);
-                TreeViewItem treeItem = new TreeViewItem();
-                treeItem.Items.Add(new TreeViewItem() { Header = sb.ToString() });
-                treeItemSource.Items.Add(treeItem);//on rajoute au noeud source
-                sb.Clear();
-                if (item.chartsOfAccount!=null)
+                foreach ( var subItem in chart.chartsOfAccount )
                 {
-                    AfficherCharts(item,treeItem);
+                    AfficherCharts(subItem, treeItem);
                 }
             }
-
         }
     }
 }
