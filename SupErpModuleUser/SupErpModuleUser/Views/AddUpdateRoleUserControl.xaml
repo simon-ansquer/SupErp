@@ -96,8 +96,8 @@
                 Margin="0, 10, 10, 10"
                 ItemsSource="{Binding Path=Modules,Mode=TwoWay}"
                 HeadersVisibility="None"
-                AutoGenerateColumns="False">
-                <DataGrid.Columns>
+                AutoGenerateColumns="True" AutoGeneratingColumn="DataGrid_OnAutoGeneratingColumn">
+                <!--<DataGrid.Columns>
                     <DataGridCheckBoxColumn
                         Width="0.5*"
                         Binding="{Binding Path=IsSelected, Mode=TwoWay}">
@@ -116,7 +116,7 @@
                             </Style>
                         </DataGridCheckBoxColumn.ElementStyle>
                     </DataGridCheckBoxColumn>
-                </DataGrid.Columns>
+                </DataGrid.Columns>-->
             </DataGrid>
             
             <Grid

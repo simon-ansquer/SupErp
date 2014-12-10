@@ -53,5 +53,15 @@ namespace SupErpModuleUser
                 throw new NotImplementedException();
             }
         }
+
+        private void DataGrid_OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.Column.Header.ToString() == "Id")
+                e.Column.Visibility = Visibility.Collapsed;
+            if (e.Column.Header.ToString() == "IdRoleModule")
+                e.Column.Visibility = Visibility.Collapsed;
+            if (e.Column.Header.ToString() == "IsWritingSelected")
+                e.Column.Visibility = Visibility.Collapsed;
+        }
     }
 }
