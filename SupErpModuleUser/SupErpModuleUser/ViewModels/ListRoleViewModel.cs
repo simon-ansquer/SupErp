@@ -16,20 +16,14 @@ namespace SupErpModuleUser.ViewModels
 
         public ListRoleViewModel()
         {
-            //Roles = new UserService.UserServiceClient().GetRoles().ToRoles().ToList();
-
-            IHMRole role1 = new IHMRole();
-            role1.Id = 1;
-            role1.Label = "Role 1";
-            role1.ListModules = "zaeui nazieu nazuieb iuazbeiu baziue baizbe iabzuei baziue aiu";
-            IHMRole role2 = new IHMRole();
-            role2.Id = 2;
-            role2.Label = "Role 2";
-            role2.ListModules = "zaeui nazieu nazuieb iuazbeiu baziue baizbe iabzuei baziue aiu";
-
-            Roles = new List<IHMRole>();
-            Roles.Add(role1);
-            Roles.Add(role2);
+            using (var ws = new UserServiceClient())
+            {
+                var roles = ws.GetRoles();
+                if (roles != null)
+                    Roles = roles.ToRoles().ToList();
+                else
+                    Roles = new List<IHMRole>();
+            }
         }
 
         #region Commands

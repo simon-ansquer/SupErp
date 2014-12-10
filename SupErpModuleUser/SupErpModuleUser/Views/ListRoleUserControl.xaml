@@ -29,12 +29,12 @@
             
             <TextBlock
                 Text="Administration >"
-                Foreground="Blue"
+                Foreground="#4388CC"
                 FontSize="20"/>
             
             <TextBlock
                 Text=" Rôles"
-                Foreground="Blue"
+                Foreground="#4388CC"
                 VerticalAlignment="Center"/>
             
         </StackPanel>

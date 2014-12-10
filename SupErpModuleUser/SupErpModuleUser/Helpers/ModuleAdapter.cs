@@ -22,15 +22,22 @@ namespace SupErpModuleUser.Helpers
                 yield return new RoleModule()
                 {
                     Id = module.IdRoleModule,
-                    Role = role.ToRole(),
                     Role_id = role.Id,
-                    Module_id = module.IdRoleModule,
+                    Module_id = module.Id,
                     Module = new Module()
                     {
                         Id = module.Id,
                         Name = module.Name
                     }
                 };
+            }
+        }
+
+        public static IEnumerable<IHMModule> ToIHMModules(this IEnumerable<Module> modules)
+        {
+            foreach (var m in modules)
+            {
+                yield return new IHMModule(m);
             }
         }
     }

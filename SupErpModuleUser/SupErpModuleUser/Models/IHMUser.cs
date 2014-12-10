@@ -30,7 +30,7 @@ namespace SupErpModuleUser.Models
             Firstname = user.Firstname;
             Lastname = user.Lastname;
             Address = user.Address;
-            Role = user.Role.ToIHMRole();
+            Role = user.Role != null ? user.Role.ToIHMRole() : null;
             isNew = false;
         }
 

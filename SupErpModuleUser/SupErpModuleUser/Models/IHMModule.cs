@@ -25,6 +25,12 @@ namespace SupErpModuleUser.Models
             IdRoleModule = roleModule.Id;
         }
 
+        public IHMModule(Module module)
+        {
+            Id = module.Id;
+            Name = module.Name;
+        }
+
         public long Id { 
             get{ return id; } 
             set { id = value; OnPropertyChanged("Id"); } 

@@ -39,6 +39,20 @@ namespace SupErpModuleUser
             get { return "Ajouter utilisateur"; }
         }
 
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            var g = maingrid.Children;
+            var newSize = (sizeInfo.NewSize.Height * sizeInfo.NewSize.Width);
+            foreach (UIElement el in g)
+            {
+                if (el.GetType() == typeof(TextBlock))
+                    ((TextBlock)el).FontSize =  newSize/ 50000;
+                if (el.GetType() == typeof(TextBox))
+                    ((TextBox)el).FontSize = newSize / 40000;
+            }
+            base.OnRenderSizeChanged(sizeInfo);
+        }
+
         public List<ISubMenu> SubMenus
         {
             get

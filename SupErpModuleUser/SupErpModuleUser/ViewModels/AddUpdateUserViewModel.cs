@@ -29,39 +29,19 @@ namespace SupErpModuleUser.ViewModels
 
         public AddUpdateUserViewModel(int userId)
         {
-            //User = new UserServiceClient().GetUserById(userId).ToIHMUser();
-            //Roles = new UserServiceClient().GetRoles();
-
-            IHMRole role1 = new IHMRole();
-            role1.Label = "Role1";
-            role1.Id = 1;
-            IHMRole role2 = new IHMRole();
-            role2.Label = "Role2";
-            role2.Id = 2;
-            IHMRole role3 = new IHMRole();
-            role3.Label = "Role3";
-            role3.Id = 3;
-
-            User = new IHMUser();
-            User.Id = 1;
-            User.Role = role2;
-            User.Firstname = "Eliott";
-            User.Lastname = "Lujan";
-            User.Email = "eliott.lujan@gmail.com";
-            User.Address = "179 rue Camille Godard";
-            User.IsNew = false;
-
-            Roles = new List<IHMRole>();
-            Roles.Add(role1);
-            Roles.Add(role2);
-            Roles.Add(role3);
-
-
-            //A conserver après les appels en place du WS
-            foreach (IHMRole role in Roles)
+            using (UserServiceClient ws = new UserServiceClient())
             {
-                if (role.Id == User.Role.Id)
-                    SelectedRole = role;
+                var rep = ws.GetUserById(userId);
+                if(rep != null)
+                {
+                    User = rep.ToIHMUser();
+                    var roles = ws.GetRoles();
+                    if (roles != null)
+                        Roles = roles.ToRoles().ToList();
+                    else
+                        Roles = new List<IHMRole>();
+                    SelectedRole = User.Role;
+                }
             }
         }
 
@@ -76,6 +56,7 @@ namespace SupErpModuleUser.ViewModels
         private void OnAddOrUpdate()
         {
             //TODO Terminer l'ajout du user
+            User.Role = SelectedRole;
             if (User.IsNew)
                 new UserService.UserServiceClient().CreateUser(User.ToUser());
             else
