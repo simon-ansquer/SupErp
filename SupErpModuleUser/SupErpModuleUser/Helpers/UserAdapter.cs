@@ -25,7 +25,9 @@ namespace SupErpModuleUser.Helpers
                 Lastname = user.Lastname,
                 Address = user.Address,
                 Role = user.Role.ToRole(),
-                Role_id = user.Role.Id
+                Role_id = user.Role.Id,
+                City = user.City,
+                Zip_code = user.Zipcode
             };
         }
 

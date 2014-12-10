@@ -9,6 +9,10 @@
              Background="White"
              d:DesignHeight="700" d:DesignWidth="500">
     
+    <UserControl.DataContext>
+        <viewModels:AddUpdateUserViewModel/>
+    </UserControl.DataContext>
+    
     <UserControl.Resources>
         <c:UserButtonTextConverter x:Key="UserButtonTextConverter"/>
         <c:UserTitleConverter x:Key="UserTitleConverer"/>

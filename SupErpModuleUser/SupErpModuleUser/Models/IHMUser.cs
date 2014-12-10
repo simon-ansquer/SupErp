@@ -17,6 +17,23 @@ namespace SupErpModuleUser.Models
         private string address;
         private IHMRole role;
         private bool isNew;
+        private string city;
+
+        public string City
+        {
+            get { return city; }
+            set { city = value; OnPropertyChanged("City"); }
+        }
+
+        private string zipcode;
+
+        public string Zipcode
+        {
+            get { return zipcode; }
+            set { zipcode = value; OnPropertyChanged("Zipcode"); }
+        }
+        
+        
 
         public IHMUser()
         {
@@ -32,6 +49,8 @@ namespace SupErpModuleUser.Models
             Address = user.Address;
             Role = user.Role != null ? user.Role.ToIHMRole() : null;
             isNew = false;
+            Zipcode = user.Zip_code;
+            City = user.City;
         }
 
         public long Id
@@ -57,7 +76,7 @@ namespace SupErpModuleUser.Models
             get { return firstname; }
             set { 
                 firstname = value;
-                OnPropertyChanged("FirstName");
+                OnPropertyChanged("Firstname");
             }
         }
 

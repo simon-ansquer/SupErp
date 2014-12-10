@@ -9,6 +9,10 @@
              Background="White"
              d:DesignHeight="500" d:DesignWidth="800">
 
+    <UserControl.DataContext>
+        <viewModels:AddUpdateRoleViewModel/>
+    </UserControl.DataContext>
+    
     <UserControl.Resources>
         <e:RoleButtonTextConverter x:Key="RoleButtonTextConverter"/>
         <e:RoleTitleConverter x:Key="RoleTitleConverter"/>
