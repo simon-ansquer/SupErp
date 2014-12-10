@@ -7,7 +7,7 @@
       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300" 
-      Title="LoginPage">
+      Title="LoginPage" Loaded="PageLoaded">
 
     <Page.DataContext>
         <local:LoginPageViewModel/>

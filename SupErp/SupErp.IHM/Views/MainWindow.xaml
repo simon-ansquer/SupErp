@@ -4,7 +4,7 @@
         Title="SupERP" Height="350" Width="525"
         xmlns:local="clr-namespace:SupErp.IHM.ViewModels"
         MinWidth="1290" MinHeight="810"
-        WindowState="Maximized" x:Name="Main">
+        WindowState="Maximized" x:Name="Main" StateChanged="WindowStateChanged" SizeChanged="MainWindowSizeChanged">
 
     <Window.DataContext>
         <local:MainWindowViewModel/>

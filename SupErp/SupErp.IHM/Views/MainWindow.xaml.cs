@@ -42,6 +42,22 @@ namespace SupErp.IHM
             Main.AddChild(MainFrame);
 
             MainFrame.Navigate(new LoginPage());
+
+
+
+        }
+
+        private void WindowStateChanged(object sender, EventArgs e)
+        {
+            //Main.Width = ScreenWidth;
+            //Main.Height = ScreenHeight;
+        }
+
+        private void MainWindowSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            StaticParams.ScreenWidth = Main.ActualWidth;
+            StaticParams.ScreenHeight = Main.ActualHeight;
+            MainFrame.NavigationService.Refresh();
         }
     }
 }
