@@ -63,5 +63,22 @@ namespace SupErpModuleUser
             if (e.Column.Header.ToString() == "IsWritingSelected")
                 e.Column.Visibility = Visibility.Collapsed;
         }
+
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            var g = maingrid.Children;
+            var newSize = (sizeInfo.NewSize.Height * sizeInfo.NewSize.Width);
+            foreach (UIElement el in g)
+            {
+                if (el.GetType() == typeof(TextBlock))
+                    ((TextBlock)el).FontSize = newSize / 50000;
+                if (el.GetType() == typeof (TextBox))
+                {
+                    ((TextBox)el).FontSize = newSize/50000;
+                    ((TextBox)el).Height = newSize / 35000;
+                }
+            }
+            base.OnRenderSizeChanged(sizeInfo);
+        }
     }
 }

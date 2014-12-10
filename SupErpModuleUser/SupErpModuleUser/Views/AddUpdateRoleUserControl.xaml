@@ -24,8 +24,8 @@
             <ColumnDefinition
                 Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <Grid
+
+        <Grid x:Name="maingrid"
             Grid.Column="1">
 
             <Grid.ColumnDefinitions>
@@ -43,7 +43,9 @@
                 <RowDefinition
                     Height="0.5*"/>
                 <RowDefinition
-                    Height="0.2*"/>
+                    Height="0.3*"/>
+                <RowDefinition
+                    Height="0.1*"/>
             </Grid.RowDefinitions>
 
             <TextBlock
@@ -80,7 +82,7 @@
                 FontSize="18"
                 Foreground="#4388CC"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Top"/>
             
             <TextBox
                 Grid.Column="1"
@@ -119,9 +121,9 @@
                 </DataGrid.Columns>-->
             </DataGrid>
             
-            <Grid
+            <Grid x:Name="ButtonContainer"
                 Grid.Column="0"
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.ColumnSpan="2">
                 
                 <Grid.ColumnDefinitions>
