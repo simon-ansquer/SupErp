@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using SupErp.WCF.ComptabilityWCF;
+using SupErp.WCF;
 
 namespace SupERP.WPF.Comptabiity
 {
@@ -20,17 +20,56 @@ namespace SupERP.WPF.Comptabiity
     /// </summary>
     public partial class PlanComptableWPF : Window
     {
+        private IEnumerable<Model.ClassOfAccount> plan;
         public PlanComptableWPF()
         {
+            plan = new List<Model.ClassOfAccount>();
             InitializeComponent();
+            getPlanComptable(); // on recupere toutes les classes
+
+            foreach (Model.ClassOfAccount classe in plan)
+            {
+                StringBuilder sb = new StringBuilder();
+                string a = ": ";
+                sb.Append(classe.id); sb.Append(a); sb.Append(classe.name);
+                TreeViewItem treeItem = new TreeViewItem();
+                treeItem.Items.Add(new TreeViewItem() { Header = sb.ToString() });
+                sb.Clear();
+                PlanComptableTreeView.Items.Add(treeItem);// ici on affiche le treeitem de la  
+                                                          // classe qui vient d'etre traitee
+                foreach (Model.ChartsOfAccount chart in classe.ChartsOfAccount)
+	            {
+                    AfficherCharts(chart,treeItem);
+	            }
+
+            }
         }
 
         public IEnumerable<Model.ClassOfAccount> getPlanComptable()
         {
             using (var ws = new ComptabilityService())
             {
-                
+                plan = ws.getPlanComptable();
             }
+        }
+
+        public void AfficherCharts(Model.ChartsOfAccount chart, TreeViewItem treeItemSource)
+        {
+            foreach (Model.ChartsOfAccount item in chart.chartsOfAccount)
+            {
+                StringBuilder sb = new StringBuilder();
+                string a = ": ";
+                sb.Append(chart.id); sb.Append(a); sb.Append(chart.name);
+                TreeViewItem treeItem = new TreeViewItem();
+                treeItem.Items.Add(new TreeViewItem() { Header = sb.ToString() });
+                treeItemSource.Items.Add(treeItem);//on rajoute au noeud source
+                sb.Clear();
+                if (item.chartsOfAccount!=null)
+                {
+                    AfficherCharts(item,treeItem);
+                }
+            }
+
         }
     }
 }
