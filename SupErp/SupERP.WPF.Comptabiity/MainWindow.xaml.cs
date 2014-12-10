@@ -30,11 +30,15 @@ namespace SupERP.WPF.Comptabiity
         {
             InitializeComponent();
             listeTransactions = new List<TransactionWPF>();
-            lvListeTransactions.ItemsSource = listeTransactions;
+            
 
             listeTransactions = new List<TransactionWPF>(getEntries());
 
-            listeTransactions.ForEach(addTransactionToListView);
+            lvListeTransactions.ItemsSource = listeTransactions;
+            //foreach ( var item in listeTransactions )
+            //{
+            //    addTransactionToListView(item);
+            //}
 
             //// donnees en dur en attendant de recuperer les vraies donnees
             //TransactionWPF transction1 = new TransactionWPF("premier", 140, DateTime.Now, true, "Client1");
