@@ -117,9 +117,15 @@ namespace SupErp.DAL.ModuleUser
                 var u = context.Users.Find(userToEdit.Id);
                 if (u == null)
                     return null;
-                if (u.Passwordhash != userToEdit.Passwordhash)
-                    userToEdit.Passwordhash = Encrypt.hashSHA256(userToEdit.Passwordhash);
-                u = userToEdit;
+
+                u.Address = userToEdit.Address;
+                u.Email = userToEdit.Email;
+                u.Firstname = userToEdit.Firstname;
+                u.Lastname = userToEdit.Lastname;
+                u.Role = context.Roles.Find(userToEdit.Role.Id);
+                u.Role_id = u.Role.Id;
+                u.Zip_code = userToEdit.Zip_code;
+                u.City = userToEdit.City;
                 context.SaveChanges();
                 return u;
             }
