@@ -7,9 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000">
     <UserControl.Resources>
-        <viewModels:AccueilGestionClientViewModel x:Key="AccueilViewModel" />
-    </UserControl.Resources>   
-    <Grid DataContext="{StaticResource AccueilViewModel}">
+        <viewModels:AccueilGestionClientViewModel x:Key="Windows1ViewModel" />
+    </UserControl.Resources>
+
+    <Grid DataContext="{StaticResource Windows1ViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.01*"/>
             <RowDefinition Height="0.3*"/>

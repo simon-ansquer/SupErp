@@ -51,6 +51,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\CompanyAdapter.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Helpers\NotificationObject.cs" />
     <Compile Include="Models\Company.cs" />
