@@ -71,7 +71,7 @@
                                     Width="20"
                                     Background="Transparent"
                                     BorderThickness="0"
-                                    Command="{Binding DataContext.ImageCommand, ElementName=UserListView}"
+                                    Command="{Binding DataContext.ImageCommand, ElementName=RoleListView}"
                                     CommandParameter="{Binding Path=Id}">
                                 <Image
                                         Height="20"
