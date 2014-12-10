@@ -27,7 +27,7 @@ namespace SupErpModuleUser.Views
             Switcher.PageSwitcher = this;
             //Switcher.Switch(new AddUpdateUserUserControl());
             //Switcher.Switch(new ListUserUserControl());
-            Switcher.Switch(new ListRoleUserControl());
+            Switcher.Switch(new AddUpdateRoleUserControl());
         }
 
         internal void Navigate(UserControl goToUserControl)
