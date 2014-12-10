@@ -286,7 +286,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Label" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="RoleModule">
@@ -328,7 +328,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="nvarchar" MaxLength="200" />
           <Property Name="Passwordhash" Type="nvarchar" MaxLength="200" />
           <Property Name="Firstname" Type="nvarchar" MaxLength="200" />
@@ -1133,7 +1133,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Label" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RoleModules" Relationship="SUPERPModel.FK_RoleModule_Role" FromRole="Role" ToRole="RoleModule" />
           <NavigationProperty Name="Users" Relationship="SUPERPModel.FK_User_Role" FromRole="Role" ToRole="User" />
@@ -1181,7 +1181,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Passwordhash" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Firstname" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />

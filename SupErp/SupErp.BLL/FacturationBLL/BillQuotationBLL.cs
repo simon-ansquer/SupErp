@@ -69,6 +69,7 @@ namespace SupErp.BLL.FacturationBLL
 
         public BILL_BillQuotation CreateBillQutotation(BILL_BillQuotation billQuotationToAdd)
         {
+            billQuotationToAdd.NBill = billQuotationDAL.getMaxNum();
             return billQuotationDAL.CreateBillQutotation(billQuotationToAdd);
         }
 

@@ -121,6 +121,30 @@ namespace SupErp.DAL.FacturationDAL
             return result;
         }
 
+        public string getMaxNum()
+        {
+            var num = "000000001";
+
+            try
+            {
+                using (SUPERPEntities context = new SUPERPEntities(false))
+                {
+                    var intNum = Convert.ToInt32(context.BILL_BillQuotation.OrderByDescending(b => Convert.ToInt32(b.NBill)).First().NBill) + 1;
+                    num = intNum.ToString();
+
+                    while(num.Length < 9)
+                    {
+                        num = "0" + num;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            return num;
+        }
+
         #endregion
 
         #region Create

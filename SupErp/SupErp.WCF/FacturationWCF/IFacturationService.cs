@@ -33,5 +33,8 @@ namespace SupErp.WCF.FacturationWCF
 
         [OperationContract]
         bool ModifyBillQuotation(BillQuotationComplete billQuotation);
+
+        [OperationContract]
+        List<BILL_Status> GetStatus();
     }
 }
