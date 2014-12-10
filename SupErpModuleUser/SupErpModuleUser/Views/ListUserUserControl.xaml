@@ -38,7 +38,71 @@
 
         </StackPanel>
 
-        <ListView
+        <DataGrid x:Name="UserListView" ItemsSource="{Binding Users}" Grid.Row="1" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="White"  HorizontalAlignment="Stretch"
+                      AlternatingRowBackground="#FFCCCCCC" AlternationCount="1" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled"  VerticalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Rôle" Width ="1*" Binding="{Binding Role.Label}" IsReadOnly="True" CanUserResize="False" >
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width ="1*" Header="Nom" Binding="{Binding Lastname}" IsReadOnly="True" CanUserResize="False">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width ="1*" Header="Prénom" Binding="{Binding Firstname}" IsReadOnly="True" CanUserResize="False">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width ="1*" Header="E-Mail" IsReadOnly="True" Binding="{Binding Email}" CanUserResize="False">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width ="1*" Header="Adresse" Binding="{Binding Address}" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Width ="0.5*" Header="Editer" CanUserSort="False" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                    Height="20"
+                                    Width="20"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Command="{Binding DataContext.ImageCommand, ElementName=UserListView}"
+                                    CommandParameter="{Binding Path=Id}">
+                                <Image
+                                        Height="20"
+                                        Width="20"
+                                        Source="../Content/Images/edit.png"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--<ListView
             x:Name="UserListView"
             Grid.Column="0"
             Grid.Row="1"
@@ -47,7 +111,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        Width="100">
+                        >
                         <TextBlock
                             Text="Rôle"
                             Background="White"/>
@@ -58,9 +122,8 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
                     <GridViewColumn
-                        Width="100">
+                       >
                         <TextBlock
                             Text="Nom"
                             Background="White"
@@ -75,7 +138,7 @@
 
 
                     <GridViewColumn
-                        Width="100">
+                        >
                         <TextBlock
                             Text="Prénom"
                             Background="White"
@@ -90,7 +153,7 @@
 
 
                     <GridViewColumn
-                        Width="100">
+                       >
                         <TextBlock
                             Text="Email"
                             Background="White"
@@ -105,7 +168,7 @@
 
 
                     <GridViewColumn
-                        Width="200">
+                        >
                         <TextBlock
                             Text="Adresse"
                             Background="White"
@@ -142,7 +205,7 @@
 
             </ListView.View>
 
-        </ListView>
+        </ListView>-->
 
     </Grid>
 </UserControl>
