@@ -37,7 +37,17 @@ namespace SupErpModuleUser.ViewModels
                 {
                     Role = rep.ToIHMRole();
                     if (Role.Modules != null)
-                        Modules = Role.Modules.ToList();
+                    {
+                        var modules = ws.GetModules();
+                        if(modules != null)
+                            Modules = modules.ToIHMModules().ToList();
+                        foreach (var m in Role.Modules)
+	                    {
+                            IHMModule module = null;
+		                    if((module = Modules.FirstOrDefault(x=>x.Id == m.Id)) !=null)
+                                module.IsSelected = true;
+	                    }
+                    }
                     else
                         Modules = new List<IHMModule>();
                 }else
