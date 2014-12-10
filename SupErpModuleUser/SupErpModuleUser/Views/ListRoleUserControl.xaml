@@ -38,67 +38,51 @@
                 VerticalAlignment="Center"/>
             
         </StackPanel>
-        
-        <ListView
-            x:Name="RoleListView"
-            Grid.Column="0"
-            Grid.Row="1"
-            ItemsSource="{Binding Roles}">
-            
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn
-                        Width="100">
-                        <TextBlock
-                            Text="Rôle"
-                            Background="White"/>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock
-                                    Text="{Binding Label}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
 
-                    <GridViewColumn
-                        Width="350">
-                        <TextBlock
-                            Text="Modules"
-                            Background="White"
-                            HorizontalAlignment="Center"/>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock
-                                Text="{Binding ListModules}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
 
-                    <GridViewColumn
-                        Width="50">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button
+
+        <DataGrid x:Name="RoleListView" ItemsSource="{Binding Roles}" Grid.Row="1" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="White"  HorizontalAlignment="Stretch"
+                      AlternatingRowBackground="#FFCCCCCC" AlternationCount="1" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled"  VerticalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width ="1*" Header="Rôle" IsReadOnly="True" Binding="{Binding Label}" CanUserResize="False">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width ="1*" Header="Modules" Binding="{Binding ListModules}" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Width ="0.5*" Header="Editer" CanUserSort="False" CanUserResize="False" IsReadOnly="True">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
                                     Height="20"
                                     Width="20"
                                     Background="Transparent"
-                                    Command="{Binding DataContext.ImageCommand, ElementName=RoleListView}"
+                                    BorderThickness="0"
+                                    Command="{Binding DataContext.ImageCommand, ElementName=UserListView}"
                                     CommandParameter="{Binding Path=Id}">
-                                    <Image
+                                <Image
                                         Height="20"
                                         Width="20"
                                         Source="../Content/Images/edit.png"/>
-                                </Button>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                </GridView>
-                
-
-            </ListView.View>
-            
-        </ListView>        
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </UserControl>

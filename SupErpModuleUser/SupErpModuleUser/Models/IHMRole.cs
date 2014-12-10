@@ -29,6 +29,14 @@ namespace SupErpModuleUser.Models
             Label = role.Label;
             Modules = GetModules(role.RoleModules);
             isNew = false;
+
+            ModulesDictionnary dictionnary = new ModulesDictionnary();
+            StringBuilder sb = new StringBuilder();
+            foreach (var m in Modules)
+            {
+                sb.Append(dictionnary.Modules[m.Name] + " / ");
+            }
+            ListModules = sb.ToString();
         }
 
         private IEnumerable<IHMModule> GetModules(IEnumerable<RoleModule> roleModules)

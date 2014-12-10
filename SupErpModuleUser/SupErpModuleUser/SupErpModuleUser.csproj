@@ -59,6 +59,7 @@
     <Compile Include="Helpers\Converters\UserTitleConverter.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Helpers\ModuleAdapter.cs" />
+    <Compile Include="Helpers\ModulesDictionnary.cs" />
     <Compile Include="Helpers\PageSwitcher.cs" />
     <Compile Include="Helpers\RoleAdapter.cs" />
     <Compile Include="Helpers\Switcher.cs" />
