@@ -162,7 +162,7 @@ namespace SupErp.DAL.ModuleUser
 
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var r = context.Roles.Find(roleToEdit.Id);
+                var r = context.Roles.Include("RoleModules").Include("RoleModules.Module").Include("RoleModules.Role").FirstOrDefault(x => x.Id == roleToEdit.Id);
                 if (r == null)
                     return null;
                 r.Label = roleToEdit.Label;
