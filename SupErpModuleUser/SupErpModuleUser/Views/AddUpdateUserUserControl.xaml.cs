@@ -48,7 +48,7 @@ namespace SupErpModuleUser
                 if (el.GetType() == typeof(TextBlock))
                     ((TextBlock)el).FontSize =  newSize/ 50000;
                 if (el.GetType() == typeof(TextBox))
-                    ((TextBox)el).FontSize = newSize / 40000;
+                    ((TextBox)el).FontSize = newSize / 50000;
             }
             base.OnRenderSizeChanged(sizeInfo);
         }
