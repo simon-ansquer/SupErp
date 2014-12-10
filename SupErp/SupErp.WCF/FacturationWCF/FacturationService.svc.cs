@@ -137,16 +137,36 @@ namespace SupErp.WCF.FacturationWCF
         /*    CREATION FACTURE    */
         /**************************/
 
-        public bool CreateBillQuotation(BillQuotationComplete billQuotation)
+        public bool CreateBillQuotation(BillQuotationComplete billQuotationComplete)
         {
             var res = true;
            try
            {
-               var bill = billQuotationBLL.CreateBillQutotation(billQuotation);
-               foreach(var l in billQuotation.lines)
+               BILL_BillQuotation bill = new BILL_BillQuotation
                {
-                   l.BILL_BillQuotation = bill;
-                   l.BillQuotation_Id = bill.BillQuotation_Id;
+                   AmountDF = billQuotationComplete.AmountDF,
+                   BILL_BillQuotationStatus = billQuotationComplete.BILL_BillQuotationStatus,
+                   BILL_Transmitter = billQuotationComplete.BILL_Transmitter,
+                   Company = billQuotationComplete.Company,
+                   DateBillQuotation = billQuotationComplete.DateBillQuotation,
+                   NBill = billQuotationComplete.NBill,
+                   Vat = billQuotationComplete.Vat
+                   Company_Id = billQuotationComplete.Company_Id,
+                   Transmitter_Id = billQuotationComplete.Transmitter_Id
+               };
+               bill = billQuotationBLL.CreateBillQutotation(bill);
+               foreach (var line in billQuotationComplete.lines)
+               {
+                   var l = new BILL_LineBillQuotation
+                   {
+                       BILL_BillQuotation = bill,
+                       BILL_Product = line.BILL_Product,
+                       BillQuotation_Id = bill.BillQuotation_Id,
+                       DateLine = line.DateLine,
+                       LineBillQuotation_Id = line.LineBillQuotation_Id,
+                       Product_Id = line.Product_Id,
+                       Quantite = line.Quantite
+                   };
 
                    lineBLL.CreateLineBillQuotation(l);
                }
