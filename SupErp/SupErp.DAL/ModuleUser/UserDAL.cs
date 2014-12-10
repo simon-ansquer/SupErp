@@ -165,7 +165,8 @@ namespace SupErp.DAL.ModuleUser
                 var r = context.Roles.Find(roleToEdit.Id);
                 if (r == null)
                     return null;
-                r = roleToEdit;
+                r.Label = roleToEdit.Label;
+                r.RoleModules = roleToEdit.RoleModules;
                 context.SaveChanges();
                 return r;
             }
