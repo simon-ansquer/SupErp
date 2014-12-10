@@ -57,7 +57,7 @@ namespace SupErpModuleUser.ViewModels
 
         #region Commands
 
-        public ICommand AddCommand { get { return new DelegateCommand(OnAddOrUpdate); } }
+        public ICommand AddOrUpdateCommand { get { return new DelegateCommand(OnAddOrUpdate); } }
         public ICommand CancelCommand { get { return new DelegateCommand(OnCancel); } }
 
         #endregion
