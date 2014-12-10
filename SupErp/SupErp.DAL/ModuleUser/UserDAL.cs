@@ -160,13 +160,32 @@ namespace SupErp.DAL.ModuleUser
             if (roleToEdit == null)
                 return null;
 
+            var listToAdd = new List<RoleModule>();
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var r = context.Roles.Include("RoleModules").Include("RoleModules.Module").Include("RoleModules.Role").FirstOrDefault(x => x.Id == roleToEdit.Id);
                 if (r == null)
                     return null;
+
+                foreach (var rm in roleToEdit.RoleModules)
+                {
+                    RoleModule rrm = null;
+                    if ((rrm = r.RoleModules.FirstOrDefault(x => x.Id == rm.Id)) == null)
+                    {
+                        listToAdd.Add(new RoleModule()
+                        {
+                            Module = rm.Module,
+                            Module_id = rm.Module_id,
+                            Role = rm.Role,
+                            Role_id = rm.Role_id
+                        });
+                    }
+                }
+
+                context.RoleModules.AddRange(listToAdd);
+
                 r.Label = roleToEdit.Label;
-                r.RoleModules = roleToEdit.RoleModules;
                 context.SaveChanges();
                 return r;
             }
