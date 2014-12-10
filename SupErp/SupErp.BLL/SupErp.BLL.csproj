@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComptabilityBLL\Assembleur\ComptabilityAssembleur.cs" />
+    <Compile Include="ComptabilityBLL\BllObject\BilanComptable.cs" />
+    <Compile Include="ComptabilityBLL\BllObject\BilanComptableModeEnum.cs" />
     <Compile Include="ComptabilityBLL\BllObject\ChartsOfAccount.cs" />
     <Compile Include="ComptabilityBLL\BllObject\ClassOfAccount.cs" />
     <Compile Include="ComptabilityBLL\BllObject\Entries.cs" />

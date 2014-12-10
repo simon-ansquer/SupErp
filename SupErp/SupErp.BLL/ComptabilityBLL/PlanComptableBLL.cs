@@ -75,7 +75,7 @@ namespace SupErp.BLL.ComptabilityBLL
                 // Call Update WebService for ExchangeRate Update =)
                 //comptabilityDal.
                 // ReGet the value updated
-                CurrencyConvertorSoapClient client = new CurrencyConvertorSoapClient();
+                CurrencyConvertor.CurrencyConvertorSoapClient client = new CurrencyConvertor.CurrencyConvertorSoapClient("CurrencyConvertorSoap",new System.ServiceModel.EndpointAddress("http://www.webservicex.net/CurrencyConvertor.asmx"));
 
                 try
                 {
@@ -145,6 +145,15 @@ namespace SupErp.BLL.ComptabilityBLL
             return result;
         }
 
+        /// <summary>
+        /// Récupère les entrées et sorties des comptes comptables
+        /// </summary>
+        /// <param name="type">Type d'entrée : Crédit ou Débit</param>
+        /// <param name="paye"></param>
+        /// <param name="impaye"></param>
+        /// <param name="Debut"></param>
+        /// <param name="Fin"></param>
+        /// <returns></returns>
         public IEnumerable<Entries> GetEntries ( EntriesTypeEnum? type, bool? paye, bool? impaye, DateTime? Debut, DateTime? Fin )
         {
             var bankResult = comptabilityDal.GetBankJournalLines();
@@ -157,6 +166,13 @@ namespace SupErp.BLL.ComptabilityBLL
             List<COMPTA_SupplierJournalLine> resultSupplier = new List<COMPTA_SupplierJournalLine>();
             List<COMPTA_AccountingEntries> resultAccounting = new List<COMPTA_AccountingEntries>();
 
+            List<Entries> finalEntries = new List<Entries>();
+
+            bool noFilter = false;
+
+            if ( !type.HasValue && !paye.HasValue && !impaye.HasValue && !Debut.HasValue && !Fin.HasValue )
+                noFilter = true;
+
             #region Bank Journal
 
             if ( resultBank != null )
@@ -166,20 +182,35 @@ namespace SupErp.BLL.ComptabilityBLL
                     switch(type)
                     {
                         case EntriesTypeEnum.Credit:
-                            resultBank.AddRange(bankResult.Where(x => x.direction.Value == true));
+                            resultBank = new List<COMPTA_BankJournalLine>(bankResult.Where(x => x.direction.Value == true));
                             break;
                         case EntriesTypeEnum.Debit:
-                            resultBank.AddRange(bankResult.Where(x => x.direction.Value == false));
+                            resultBank = new List<COMPTA_BankJournalLine>(bankResult.Where(x => x.direction.Value == false));
                             break;
                     }
                 }
 
                 if ( Debut.HasValue && Fin.HasValue )
-                    resultBank.AddRange(bankResult.Where(x => Debut.Value < x.postingDate.Value && x.postingDate.Value < Fin.Value));
+                    resultBank = new List<COMPTA_BankJournalLine>(resultBank.Where(x => Debut.Value < x.postingDate.Value && x.postingDate.Value < Fin.Value));
                 else if ( Debut.HasValue )
-                    resultBank.AddRange(bankResult.Where(x => Debut.Value < x.postingDate.Value));
+                    resultBank = new List<COMPTA_BankJournalLine>(resultBank.Where(x => Debut.Value < x.postingDate.Value));
                 else if ( Fin.HasValue )
-                    resultBank.AddRange(bankResult.Where(x => x.postingDate.Value < Fin.Value));
+                    resultBank = new List<COMPTA_BankJournalLine>(resultBank.Where(x => x.postingDate.Value < Fin.Value));
+
+                resultBank.ForEach(delegate( COMPTA_BankJournalLine entry )
+                {
+                    Entries finalEntry = new Entries()
+                    {
+                        amount = entry.amount,
+                        EntryType = entry.direction == false ? EntriesTypeEnum.Debit : EntriesTypeEnum.Credit,
+                        Foreign_id = entry.bankAccount_id,
+                        id = entry.id,
+                        postingDate = entry.postingDate,
+                        SourceType = SourceEntriesEnum.Bank
+                    };
+
+                    finalEntries.Add(finalEntry);
+                });
             }
 
             #endregion
@@ -193,20 +224,35 @@ namespace SupErp.BLL.ComptabilityBLL
                     switch ( type )
                     {
                         case EntriesTypeEnum.Credit:
-                            resultCustomer.AddRange(customerResult.Where(x => x.direction.Value == true));
+                            resultCustomer = new List<COMPTA_CustomerJournalLine>(customerResult.Where(x => x.direction.Value == true));
                             break;
                         case EntriesTypeEnum.Debit:
-                            resultCustomer.AddRange(customerResult.Where(x => x.direction.Value == false));
+                            resultCustomer = new List<COMPTA_CustomerJournalLine>(customerResult.Where(x => x.direction.Value == false));
                             break;
                     }
                 }
 
                 if ( Debut.HasValue && Fin.HasValue )
-                    resultCustomer.AddRange(customerResult.Where(x => Debut.Value < x.postingDate.Value && x.postingDate.Value < Fin.Value));
+                    resultCustomer = new List<COMPTA_CustomerJournalLine>(resultCustomer.Where(x => Debut.Value < x.postingDate.Value && x.postingDate.Value < Fin.Value));
                 else if ( Debut.HasValue )
-                    resultCustomer.AddRange(customerResult.Where(x => Debut.Value < x.postingDate.Value));
+                    resultCustomer = new List<COMPTA_CustomerJournalLine>(resultCustomer.Where(x => Debut.Value < x.postingDate.Value));
                 else if ( Fin.HasValue )
-                    resultCustomer.AddRange(customerResult.Where(x => x.postingDate.Value < Fin.Value));
+                    resultCustomer = new List<COMPTA_CustomerJournalLine>(resultCustomer.Where(x => x.postingDate.Value < Fin.Value));
+
+                resultCustomer.ForEach(delegate( COMPTA_CustomerJournalLine entry )
+                {
+                    Entries finalEntry = new Entries()
+                    {
+                        amount = entry.amount,
+                        EntryType = entry.direction == false ? EntriesTypeEnum.Debit : EntriesTypeEnum.Credit,
+                        Foreign_id = entry.clientAccount_id,
+                        id = entry.id,
+                        postingDate = entry.postingDate,
+                        SourceType = SourceEntriesEnum.Customer
+                    };
+
+                    finalEntries.Add(finalEntry);
+                });
             }
 
             #endregion
@@ -220,55 +266,208 @@ namespace SupErp.BLL.ComptabilityBLL
                     switch ( type )
                     {
                         case EntriesTypeEnum.Credit:
-                            resultSupplier.AddRange(supplierResult.Where(x => x.direction.Value == true));
+                            resultSupplier = new List<COMPTA_SupplierJournalLine>(supplierResult.Where(x => x.direction.Value == true));
                             break;
                         case EntriesTypeEnum.Debit:
-                            resultSupplier.AddRange(supplierResult.Where(x => x.direction.Value == false));
+                            resultSupplier = new List<COMPTA_SupplierJournalLine>(supplierResult.Where(x => x.direction.Value == false));
                             break;
                     }
                 }
 
                 if ( Debut.HasValue && Fin.HasValue )
-                    resultSupplier.AddRange(supplierResult.Where(x => Debut.Value < x.postingDate.Value && x.postingDate.Value < Fin.Value));
+                    resultSupplier = new List<COMPTA_SupplierJournalLine>(resultSupplier.Where(x => Debut.Value < x.postingDate.Value && x.postingDate.Value < Fin.Value));
                 else if ( Debut.HasValue )
-                    resultSupplier.AddRange(supplierResult.Where(x => Debut.Value < x.postingDate.Value));
+                    resultSupplier = new List<COMPTA_SupplierJournalLine>(resultSupplier.Where(x => Debut.Value < x.postingDate.Value));
                 else if ( Fin.HasValue )
-                    resultSupplier.AddRange(supplierResult.Where(x => x.postingDate.Value < Fin.Value));
+                    resultSupplier = new List<COMPTA_SupplierJournalLine>(resultSupplier.Where(x => x.postingDate.Value < Fin.Value));
+
+                resultSupplier.ForEach(delegate( COMPTA_SupplierJournalLine entry )
+                {
+                    Entries finalEntry = new Entries()
+                    {
+                        amount = entry.amount,
+                        EntryType = entry.direction == false ? EntriesTypeEnum.Debit : EntriesTypeEnum.Credit,
+                        Foreign_id = entry.SupplierAccount_id,
+                        id = entry.id,
+                        postingDate = entry.postingDate,
+                        SourceType = SourceEntriesEnum.Supplier
+                    };
+
+                    finalEntries.Add(finalEntry);
+                });
             }
 
             #endregion
 
             #region Accounting Journal
 
-            if ( resultBank != null )
+            if ( accountingResult != null )
             {
                 if ( type.HasValue )
                 {
                     switch ( type )
                     {
                         case EntriesTypeEnum.Credit:
-                            resultAccounting.AddRange(accountingResult.Where(x => x.direction.Value == true));
+                            resultAccounting = new List<COMPTA_AccountingEntries>(accountingResult.Where(x => x.direction.Value == true));
                             break;
                         case EntriesTypeEnum.Debit:
-                            resultAccounting.AddRange(accountingResult.Where(x => x.direction.Value == false));
+                            resultAccounting = new List<COMPTA_AccountingEntries>(accountingResult.Where(x => x.direction.Value == false));
                             break;
                     }
                 }
 
                 if ( Debut.HasValue && Fin.HasValue )
-                    resultAccounting.AddRange(accountingResult.Where(x => Debut.Value < x.postingDate.Value && x.postingDate.Value < Fin.Value));
+                    resultAccounting = new List<COMPTA_AccountingEntries>(resultAccounting.Where(x => Debut.Value < x.postingDate.Value && x.postingDate.Value < Fin.Value));
                 else if ( Debut.HasValue )
-                    resultAccounting.AddRange(accountingResult.Where(x => Debut.Value < x.postingDate.Value));
+                    resultAccounting = new List<COMPTA_AccountingEntries>(resultAccounting.Where(x => Debut.Value < x.postingDate.Value));
                 else if ( Fin.HasValue )
-                    resultAccounting.AddRange(accountingResult.Where(x => x.postingDate.Value < Fin.Value));
+                    resultAccounting = new List<COMPTA_AccountingEntries>(resultAccounting.Where(x => x.postingDate.Value < Fin.Value));
+
+                resultAccounting.ForEach(delegate( COMPTA_AccountingEntries entry )
+                {
+                    Entries finalEntry = new Entries()
+                    {
+                        amount = entry.amount,
+                        EntryType = entry.direction == false ? EntriesTypeEnum.Debit : EntriesTypeEnum.Credit,
+                        Foreign_id = entry.chartOfAccount_id,
+                        id = entry.id,
+                        postingDate = entry.postingDate,
+                        SourceType = SourceEntriesEnum.Accounting
+                    };
+
+                    finalEntries.Add(finalEntry);
+                });
             }
 
             #endregion
 
-            
+            return finalEntries;
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Debut"></param>
+        /// <param name="Fin"></param>
+        /// <returns></returns>
+        public IEnumerable<BilanComptable> GetBilanComptable ( BilanComptableModeEnum Mode, DateTime? Debut, DateTime? Fin )
+        {
+            if ( !Debut.HasValue )
+                Debut = DateTime.Now;
+            if ( !Fin.HasValue )
+                Fin = DateTime.Now;
+
+            List<BilanComptable> listBilan;
+
+            IEnumerable<COMPTA_AccountingEntries> accountLines = comptabilityDal.GetAccountingEntries();
+
+            if (Mode == BilanComptableModeEnum.Month)
+            {
+                CreateBilanComptableModeMonth(accountLines, Debut.Value, Fin.Value, out listBilan);
+                return listBilan;
+            }
+            else if ( Mode == BilanComptableModeEnum.Year )
+            {
+                CreateBilanComptableModeYear(accountLines, Debut.Value, Fin.Value, out listBilan);
+                return listBilan;
+            }
             return null;
+        }
 
+        private void CreateBilanComptableModeYear(IEnumerable<COMPTA_AccountingEntries> accountLines, DateTime Debut, DateTime Fin, out List<BilanComptable> bilan)
+        {
+            DateTime refTime = Debut;
+            DateTime refEndTime = Fin;
+
+            int yearDifference, month;
+
+            yearDifference = Debut.Year - Fin.Year;
+
+            int Capacity = ( 12 - ( Debut.Month - 1 ) + 12 * yearDifference + Fin.Month );
+
+            bilan = new List<BilanComptable>(Capacity);
+
+            int count = 0;
+
+            while ( refTime.Year != refEndTime.Year + 1 )
+            {
+                // On récupère les lignes correspondante à notre année de réfèrence
+                var result = accountLines.Where(x => x.postingDate.HasValue && x.postingDate.Value.Year == refTime.Year);
+
+                if ( result != null )
+                {
+                    // On instancie un nouveau bilanComptable
+                    BilanComptable tempBilan = new BilanComptable();
+                    tempBilan.TimePoint = new DateTime(refTime.Year, 1, 1);
+
+                    // Pour chaque ligne récupère on affecte ça valeur positive ou négative selon sa direction
+                    foreach ( var lineAccount in result )
+                    {
+                        if ( lineAccount.amount.HasValue && lineAccount.direction.HasValue )
+                            tempBilan.Amount += lineAccount.direction == false ? -lineAccount.amount.Value : lineAccount.amount.Value;
+                    }
+
+                    // On assigne la valeur du Bilan temporaire à la listeFinale au niveau de l'index courant
+                    bilan[count] = tempBilan;
+                    // On incrémente l'index
+                    count++;
+
+                    // On recalcule la date de réfèrence et on ré-assigne la valeur au temps de réfèrence
+                    int refYear = refTime.Year + 1;
+
+                    refTime = new DateTime(refYear, 1, 1);
+                }
+
+            }
+        }
+
+        private void CreateBilanComptableModeMonth ( IEnumerable<COMPTA_AccountingEntries> accountLines, DateTime Debut, DateTime Fin, out List<BilanComptable> bilan )
+        {
+            DateTime refTime = Debut;
+            DateTime refEndTime = Fin;
+
+            int Capacity = (Debut.Year - Fin.Year) + 1;
+            int count = 0;
+
+            bilan = new List<BilanComptable>(Capacity);
+
+            while ( refTime.Month != refEndTime.Month + 1 && refTime.Year != refEndTime.Year )
+            {
+                // On récupère les lignes correspondante à notre mois et notre année de réfèrence
+                var result = accountLines.Where(x => x.postingDate.HasValue && x.postingDate.Value.Month == refTime.Month && x.postingDate.Value.Year == refTime.Year);
+
+                if ( result != null )
+                {
+                    // On instancie un nouveau bilanComptable
+                    BilanComptable tempBilan = new BilanComptable();
+                    tempBilan.TimePoint = new DateTime(refTime.Year, refTime.Month, 1);
+
+                    // Pour chaque ligne récupère on affecte ça valeur positive ou négative selon sa direction
+                    foreach ( var lineAccount in result )
+                    {
+                        if ( lineAccount.amount.HasValue && lineAccount.direction.HasValue )
+                            tempBilan.Amount += lineAccount.direction == false ? -lineAccount.amount.Value : lineAccount.amount.Value;
+                    }
+
+                    // On assigne la valeur du Bilan temporaire à la listeFinale au niveau de l'index courant
+                    bilan[count] = tempBilan;
+                    // On incrémente l'index
+                    count++;
+
+                    // On recalcule la date de réfèrence et on ré-assigne la valeur au temps de réfèrence
+                    int refMonth = refTime.Month + 1;
+                    int refYear = refTime.Year;
+
+                    if ( refMonth == 13 )
+                    {
+                        refMonth = 1;
+                        refYear += 1;
+                    }
+
+                    refTime = new DateTime(refYear, refMonth, 1);
+                }
+
+            }
         }
 
         /*

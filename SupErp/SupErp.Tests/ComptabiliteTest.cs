@@ -23,6 +23,18 @@ namespace SupErp.Tests
             Console.ReadLine();
         }
 
+        [TestMethod]
+        public void TestExhangeRate ()
+        {
+            PlanComptableBLL ComptaBll = new PlanComptableBLL();
+
+            var test = ComptaBll.GetLastExchangeRate();
+
+            CallWriteLineRecursive(test);
+
+            Console.ReadLine();
+        }
+
         private void CallWriteLineRecursive ( object item )
         {
             if ( item == null )

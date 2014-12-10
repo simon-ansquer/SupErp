@@ -21,6 +21,9 @@ namespace SupErp.WCF.ComptabilityWCF
         COMPTA_ExchangeRate GetExhangeRate ();
 
         [OperationContract]
-        IEnumerable<Entries> GetEntries ( EntriesTypeEnum? type, bool? paye, bool? impaye, DateTime? Debut, DateTime? Fin );
+        IEnumerable<Entries> GetEntries ( string type, bool? paye, bool? impaye, DateTime? Debut, DateTime? Fin );
+
+        [OperationContract]
+        IEnumerable<BilanComptable> GetBilanComptable ( string Mode, DateTime? Debut, DateTime? Fin );
     }
 }
