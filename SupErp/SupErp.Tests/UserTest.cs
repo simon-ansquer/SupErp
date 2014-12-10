@@ -153,6 +153,15 @@ namespace SupErp.Tests
             Role editRole = (userService.GetRoles().ToList()).Last();
             editRole.Label += " - Test de modification";
 
+            List<Module> modules = userService.GetModules().ToList();
+            RoleModule roleModule = new RoleModule();
+            roleModule.Role_id = editRole.Id;
+            roleModule.Module = modules[0];
+            roleModule.Role = editRole;
+            roleModule.Module_id = modules[0].Id;
+
+            editRole.RoleModules.Add(roleModule);
+
             Assert.IsNotNull(userService.EditRole(editRole));
         }
 
