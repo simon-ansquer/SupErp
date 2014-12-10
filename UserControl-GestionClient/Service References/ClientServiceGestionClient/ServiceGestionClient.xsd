@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/SupErp.Entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SupErp.Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:7880/GestionClientWCF/ServiceGestionClient.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Company">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BILL_BillQuotation" nillable="true" type="tns:ArrayOfBILL_BillQuotation" />
+      <xs:element minOccurs="0" name="COMPTA_CustomerJournalLine" nillable="true" type="tns:ArrayOfCOMPTA_CustomerJournalLine" />
+      <xs:element minOccurs="0" name="COMPTA_SupplierJournalLine" nillable="true" type="tns:ArrayOfCOMPTA_SupplierJournalLine" />
+      <xs:element minOccurs="0" name="Company_Contact" nillable="true" type="tns:ArrayOfCompany_Contact" />
+      <xs:element minOccurs="0" name="address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="postalcode" type="xs:int" />
+      <xs:element minOccurs="0" name="siret" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Company" nillable="true" type="tns:Company" />
+  <xs:complexType name="ArrayOfBILL_BillQuotation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BILL_BillQuotation" nillable="true" type="tns:BILL_BillQuotation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBILL_BillQuotation" nillable="true" type="tns:ArrayOfBILL_BillQuotation" />
+  <xs:complexType name="BILL_BillQuotation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AmountDF" type="xs:double" />
+      <xs:element minOccurs="0" name="BILL_BillQuotationStatus" nillable="true" type="tns:ArrayOfBILL_BillQuotationStatus" />
+      <xs:element minOccurs="0" name="BILL_LineBillQuotation" nillable="true" type="tns:ArrayOfBILL_LineBillQuotation" />
+      <xs:element minOccurs="0" name="BILL_Transmitter" nillable="true" type="tns:BILL_Transmitter" />
+      <xs:element minOccurs="0" name="BillQuotation_Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Company" nillable="true" type="tns:Company" />
+      <xs:element minOccurs="0" name="Company_Id" type="xs:long" />
+      <xs:element minOccurs="0" name="DateBillQuotation" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NBill" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Transmitter_Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Vat" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BILL_BillQuotation" nillable="true" type="tns:BILL_BillQuotation" />
+  <xs:complexType name="ArrayOfBILL_BillQuotationStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BILL_BillQuotationStatus" nillable="true" type="tns:BILL_BillQuotationStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBILL_BillQuotationStatus" nillable="true" type="tns:ArrayOfBILL_BillQuotationStatus" />
+  <xs:complexType name="BILL_BillQuotationStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BILL_BillQuotation" nillable="true" type="tns:BILL_BillQuotation" />
+      <xs:element minOccurs="0" name="BILL_Status" nillable="true" type="tns:BILL_Status" />
+      <xs:element minOccurs="0" name="BillQuotationStatus_Id" type="xs:long" />
+      <xs:element minOccurs="0" name="BillQuotation_Id" type="xs:long" />
+      <xs:element minOccurs="0" name="DateAdvancement" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Status_Id" type="xs:long" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BILL_BillQuotationStatus" nillable="true" type="tns:BILL_BillQuotationStatus" />
+  <xs:complexType name="BILL_Status">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BILL_BillQuotationStatus" nillable="true" type="tns:ArrayOfBILL_BillQuotationStatus" />
+      <xs:element minOccurs="0" name="BILL_StatusChain" nillable="true" type="tns:ArrayOfBILL_StatusChain" />
+      <xs:element minOccurs="0" name="BILL_StatusChain1" nillable="true" type="tns:ArrayOfBILL_StatusChain" />
+      <xs:element minOccurs="0" name="Libel" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status_Id" type="xs:long" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BILL_Status" nillable="true" type="tns:BILL_Status" />
+  <xs:complexType name="ArrayOfBILL_StatusChain">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BILL_StatusChain" nillable="true" type="tns:BILL_StatusChain" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBILL_StatusChain" nillable="true" type="tns:ArrayOfBILL_StatusChain" />
+  <xs:complexType name="BILL_StatusChain">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BILL_Status" nillable="true" type="tns:BILL_Status" />
+      <xs:element minOccurs="0" name="BILL_Status1" nillable="true" type="tns:BILL_Status" />
+      <xs:element minOccurs="0" name="NextStatus_Id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="StatusChain_Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Status_Id" type="xs:long" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BILL_StatusChain" nillable="true" type="tns:BILL_StatusChain" />
+  <xs:complexType name="BILL_LineBillQuotation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BILL_BillQuotation" nillable="true" type="tns:BILL_BillQuotation" />
+      <xs:element minOccurs="0" name="BILL_Product" nillable="true" type="tns:BILL_Product" />
+      <xs:element minOccurs="0" name="BillQuotation_Id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="DateLine" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LineBillQuotation_Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Product_Id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Quantite" type="xs:double" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BILL_LineBillQuotation" nillable="true" type="tns:BILL_LineBillQuotation" />
+  <xs:complexType name="BILL_Product">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BILL_Category" nillable="true" type="tns:BILL_Category" />
+      <xs:element minOccurs="0" name="BILL_LineBillQuotation" nillable="true" type="tns:ArrayOfBILL_LineBillQuotation" />
+      <xs:element minOccurs="0" name="BILL_Vat" nillable="true" type="tns:BILL_Vat" />
+      <xs:element minOccurs="0" name="Category_Id" type="xs:long" />
+      <xs:element minOccurs="0" name="DescriptionPro" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:double" />
+      <xs:element minOccurs="0" name="Product_Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Vat_Id" type="xs:long" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BILL_Product" nillable="true" type="tns:BILL_Product" />
+  <xs:complexType name="BILL_Category">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BILL_Product" nillable="true" type="tns:ArrayOfBILL_Product" />
+      <xs:element minOccurs="0" name="Category_Id" type="xs:long" />
+      <xs:element minOccurs="0" name="DescriptionCat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BILL_Category" nillable="true" type="tns:BILL_Category" />
+  <xs:complexType name="ArrayOfBILL_Product">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BILL_Product" nillable="true" type="tns:BILL_Product" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBILL_Product" nillable="true" type="tns:ArrayOfBILL_Product" />
+  <xs:complexType name="BILL_Vat">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BILL_Product" nillable="true" type="tns:ArrayOfBILL_Product" />
+      <xs:element minOccurs="0" name="DateVat" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="Vat_Id" type="xs:long" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BILL_Vat" nillable="true" type="tns:BILL_Vat" />
+  <xs:complexType name="BILL_Transmitter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Adress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AdressMail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BILL_BillQuotation" nillable="true" type="tns:ArrayOfBILL_BillQuotation" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NSiret" type="xs:long" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PostCode" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Transmitter_Id" type="xs:long" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BILL_Transmitter" nillable="true" type="tns:BILL_Transmitter" />
+  <xs:complexType name="Company_Contact">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Company" nillable="true" type="tns:Company" />
+      <xs:element minOccurs="0" name="company_id" type="xs:long" />
+      <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="gender" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+      <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="phone" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Company_Contact" nillable="true" type="tns:Company_Contact" />
+  <xs:complexType name="COMPTA_CustomerJournalLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Company" nillable="true" type="tns:Company" />
+      <xs:element minOccurs="0" name="amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="clientAccount_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="direction" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+      <xs:element minOccurs="0" name="postingDate" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="COMPTA_CustomerJournalLine" nillable="true" type="tns:COMPTA_CustomerJournalLine" />
+  <xs:complexType name="COMPTA_SupplierJournalLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Company" nillable="true" type="tns:Company" />
+      <xs:element minOccurs="0" name="SupplierAccount_id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="direction" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+      <xs:element minOccurs="0" name="postingDate" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="COMPTA_SupplierJournalLine" nillable="true" type="tns:COMPTA_SupplierJournalLine" />
+  <xs:complexType name="ArrayOfBILL_LineBillQuotation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BILL_LineBillQuotation" nillable="true" type="tns:BILL_LineBillQuotation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBILL_LineBillQuotation" nillable="true" type="tns:ArrayOfBILL_LineBillQuotation" />
+  <xs:complexType name="ArrayOfCOMPTA_CustomerJournalLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="COMPTA_CustomerJournalLine" nillable="true" type="tns:COMPTA_CustomerJournalLine" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCOMPTA_CustomerJournalLine" nillable="true" type="tns:ArrayOfCOMPTA_CustomerJournalLine" />
+  <xs:complexType name="ArrayOfCOMPTA_SupplierJournalLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="COMPTA_SupplierJournalLine" nillable="true" type="tns:COMPTA_SupplierJournalLine" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCOMPTA_SupplierJournalLine" nillable="true" type="tns:ArrayOfCOMPTA_SupplierJournalLine" />
+  <xs:complexType name="ArrayOfCompany_Contact">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Company_Contact" nillable="true" type="tns:Company_Contact" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompany_Contact" nillable="true" type="tns:ArrayOfCompany_Contact" />
+  <xs:complexType name="ArrayOfCompany">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Company" nillable="true" type="tns:Company" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompany" nillable="true" type="tns:ArrayOfCompany" />
+</xs:schema>

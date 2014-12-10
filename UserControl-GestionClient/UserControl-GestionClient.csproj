@@ -35,6 +35,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,6 +69,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Service References\ClientServiceGestionClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AccueilGestionClientViewModel.cs" />
     <Compile Include="ViewModels\CreateContactViewModel.cs" />
     <Compile Include="ViewModels\CreateViewModel.cs" />
@@ -80,13 +87,32 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\ClientServiceGestionClient\ServiceGestionClient.wsdl" />
+    <None Include="Service References\ClientServiceGestionClient\ServiceGestionClient.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientServiceGestionClient\ServiceGestionClient1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientServiceGestionClient\ServiceGestionClient2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientServiceGestionClient\UserControl_GestionClient.ClientServiceGestionClient.Company.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientServiceGestionClient\UserControl_GestionClient.ClientServiceGestionClient.Company_Contact.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AccueilGestionClient.xaml">
       <SubType>Designer</SubType>
@@ -96,6 +122,24 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ClientServiceGestionClient\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientServiceGestionClient\ServiceGestionClient.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientServiceGestionClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientServiceGestionClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientServiceGestionClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f91d3d0c-a241-4477-bded-db9086478a01" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:7880/GestionClientWCF/ServiceGestionClient.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceGestionClient.xsd" MetadataType="Schema" ID="40bd7fc7-6265-4dbc-ba81-353f02cd04f5" SourceId="1" SourceUrl="http://localhost:7880/GestionClientWCF/ServiceGestionClient.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceGestionClient.disco" MetadataType="Disco" ID="bb4f1185-9c2f-4279-abb0-f443f5e9f1e9" SourceId="1" SourceUrl="http://localhost:7880/GestionClientWCF/ServiceGestionClient.svc?disco" />
+    <MetadataFile FileName="ServiceGestionClient1.xsd" MetadataType="Schema" ID="48cfff6c-80f8-4b91-98c3-d20b31277fe3" SourceId="1" SourceUrl="http://localhost:7880/GestionClientWCF/ServiceGestionClient.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceGestionClient.wsdl" MetadataType="Wsdl" ID="cc461880-0f4a-4fee-bcf6-0fe617adef0e" SourceId="1" SourceUrl="http://localhost:7880/GestionClientWCF/ServiceGestionClient.svc?wsdl" />
+    <MetadataFile FileName="ServiceGestionClient2.xsd" MetadataType="Schema" ID="431e3e10-33e9-41ca-bdaf-b357a08a58e8" SourceId="1" SourceUrl="http://localhost:7880/GestionClientWCF/ServiceGestionClient.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

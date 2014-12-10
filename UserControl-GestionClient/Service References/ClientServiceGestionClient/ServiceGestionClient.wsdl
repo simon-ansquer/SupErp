@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServiceGestionClient" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:7880/GestionClientWCF/ServiceGestionClient.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:7880/GestionClientWCF/ServiceGestionClient.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:7880/GestionClientWCF/ServiceGestionClient.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServiceGestionClient_CreateCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCompany" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_CreateCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_GetCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompany" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_GetCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_GetListCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListCompany" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_GetListCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_EditCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditCompany" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_EditCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_DeleteCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCompany" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_DeleteCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_CreateCompany_Contact_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCompany_Contact" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_CreateCompany_Contact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCompany_ContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_GetCompany_Contact_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompany_Contact" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_GetCompany_Contact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompany_ContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_GetListCompany_Contact_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListCompany_Contact" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_GetListCompany_Contact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListCompany_ContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_GetListCompany_ContactById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListCompany_ContactById" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_GetListCompany_ContactById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListCompany_ContactByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_EditCompany_Contact_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditCompany_Contact" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_EditCompany_Contact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditCompany_ContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_DeleteCompany_Contact_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCompany_Contact" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGestionClient_DeleteCompany_Contact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCompany_ContactResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServiceGestionClient">
+    <wsdl:operation name="CreateCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGestionClient/CreateCompany" message="tns:IServiceGestionClient_CreateCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGestionClient/CreateCompanyResponse" message="tns:IServiceGestionClient_CreateCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGestionClient/GetCompany" message="tns:IServiceGestionClient_GetCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGestionClient/GetCompanyResponse" message="tns:IServiceGestionClient_GetCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGestionClient/GetListCompany" message="tns:IServiceGestionClient_GetListCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGestionClient/GetListCompanyResponse" message="tns:IServiceGestionClient_GetListCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGestionClient/EditCompany" message="tns:IServiceGestionClient_EditCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGestionClient/EditCompanyResponse" message="tns:IServiceGestionClient_EditCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGestionClient/DeleteCompany" message="tns:IServiceGestionClient_DeleteCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGestionClient/DeleteCompanyResponse" message="tns:IServiceGestionClient_DeleteCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCompany_Contact">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGestionClient/CreateCompany_Contact" message="tns:IServiceGestionClient_CreateCompany_Contact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGestionClient/CreateCompany_ContactResponse" message="tns:IServiceGestionClient_CreateCompany_Contact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompany_Contact">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGestionClient/GetCompany_Contact" message="tns:IServiceGestionClient_GetCompany_Contact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGestionClient/GetCompany_ContactResponse" message="tns:IServiceGestionClient_GetCompany_Contact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListCompany_Contact">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGestionClient/GetListCompany_Contact" message="tns:IServiceGestionClient_GetListCompany_Contact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGestionClient/GetListCompany_ContactResponse" message="tns:IServiceGestionClient_GetListCompany_Contact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListCompany_ContactById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGestionClient/GetListCompany_ContactById" message="tns:IServiceGestionClient_GetListCompany_ContactById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGestionClient/GetListCompany_ContactByIdResponse" message="tns:IServiceGestionClient_GetListCompany_ContactById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditCompany_Contact">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGestionClient/EditCompany_Contact" message="tns:IServiceGestionClient_EditCompany_Contact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGestionClient/EditCompany_ContactResponse" message="tns:IServiceGestionClient_EditCompany_Contact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCompany_Contact">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGestionClient/DeleteCompany_Contact" message="tns:IServiceGestionClient_DeleteCompany_Contact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGestionClient/DeleteCompany_ContactResponse" message="tns:IServiceGestionClient_DeleteCompany_Contact_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServiceGestionClient" type="tns:IServiceGestionClient">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateCompany">
+      <soap:operation soapAction="http://tempuri.org/IServiceGestionClient/CreateCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompany">
+      <soap:operation soapAction="http://tempuri.org/IServiceGestionClient/GetCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListCompany">
+      <soap:operation soapAction="http://tempuri.org/IServiceGestionClient/GetListCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditCompany">
+      <soap:operation soapAction="http://tempuri.org/IServiceGestionClient/EditCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCompany">
+      <soap:operation soapAction="http://tempuri.org/IServiceGestionClient/DeleteCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCompany_Contact">
+      <soap:operation soapAction="http://tempuri.org/IServiceGestionClient/CreateCompany_Contact" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompany_Contact">
+      <soap:operation soapAction="http://tempuri.org/IServiceGestionClient/GetCompany_Contact" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListCompany_Contact">
+      <soap:operation soapAction="http://tempuri.org/IServiceGestionClient/GetListCompany_Contact" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListCompany_ContactById">
+      <soap:operation soapAction="http://tempuri.org/IServiceGestionClient/GetListCompany_ContactById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditCompany_Contact">
+      <soap:operation soapAction="http://tempuri.org/IServiceGestionClient/EditCompany_Contact" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCompany_Contact">
+      <soap:operation soapAction="http://tempuri.org/IServiceGestionClient/DeleteCompany_Contact" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceGestionClient">
+    <wsdl:port name="BasicHttpBinding_IServiceGestionClient" binding="tns:BasicHttpBinding_IServiceGestionClient">
+      <soap:address location="http://localhost:7880/GestionClientWCF/ServiceGestionClient.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
