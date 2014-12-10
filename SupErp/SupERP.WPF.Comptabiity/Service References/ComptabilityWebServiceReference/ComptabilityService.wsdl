@@ -6,6 +6,7 @@
       <xsd:import schemaLocation="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SupErp.BLL.ComptabilityBLL.BllObject" />
       <xsd:import schemaLocation="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/SupErp.Entities" />
+      <xsd:import schemaLocation="http://localhost:7880/ComptabilityWCF/ComptabilityService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/SupErp.BLL.ComptabilityBLL" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IComptabilityService_GetPlanComptable_InputMessage">
@@ -20,6 +21,18 @@
   <wsdl:message name="IComptabilityService_GetExhangeRate_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetExhangeRateResponse" />
   </wsdl:message>
+  <wsdl:message name="IComptabilityService_GetEntries_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEntries" />
+  </wsdl:message>
+  <wsdl:message name="IComptabilityService_GetEntries_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEntriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IComptabilityService_GetBilanComptable_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBilanComptable" />
+  </wsdl:message>
+  <wsdl:message name="IComptabilityService_GetBilanComptable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBilanComptableResponse" />
+  </wsdl:message>
   <wsdl:portType name="IComptabilityService">
     <wsdl:operation name="GetPlanComptable">
       <wsdl:input wsaw:Action="http://tempuri.org/IComptabilityService/GetPlanComptable" message="tns:IComptabilityService_GetPlanComptable_InputMessage" />
@@ -28,6 +41,14 @@
     <wsdl:operation name="GetExhangeRate">
       <wsdl:input wsaw:Action="http://tempuri.org/IComptabilityService/GetExhangeRate" message="tns:IComptabilityService_GetExhangeRate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IComptabilityService/GetExhangeRateResponse" message="tns:IComptabilityService_GetExhangeRate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEntries">
+      <wsdl:input wsaw:Action="http://tempuri.org/IComptabilityService/GetEntries" message="tns:IComptabilityService_GetEntries_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IComptabilityService/GetEntriesResponse" message="tns:IComptabilityService_GetEntries_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBilanComptable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IComptabilityService/GetBilanComptable" message="tns:IComptabilityService_GetBilanComptable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IComptabilityService/GetBilanComptableResponse" message="tns:IComptabilityService_GetBilanComptable_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IComptabilityService" type="tns:IComptabilityService">
@@ -43,6 +64,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetExhangeRate">
       <soap:operation soapAction="http://tempuri.org/IComptabilityService/GetExhangeRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntries">
+      <soap:operation soapAction="http://tempuri.org/IComptabilityService/GetEntries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBilanComptable">
+      <soap:operation soapAction="http://tempuri.org/IComptabilityService/GetBilanComptable" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
