@@ -12,30 +12,13 @@ namespace UserControl_GestionClient.ViewModels
     class CreateContactViewModel
     {
 
-        private Company_Contact newContact;
+        public Company_Contact NewContact {get; set;}
         /// <summary>
         /// Gets or sets the login.
         /// </summary>
         /// <value>
         /// The login.
         /// </value>
-        public Company_Contact NewContact
-        {
-            get { return this.newContact; }
-            set
-            {
-                this.newContact = value;
-            }
-        }
-        /*private string thestring;
-        public string Thestring
-        {
-            get { return this.thestring; }
-            set
-            {
-                this.thestring = value;
-            }
-        }*/
         private ICommand addCustomer;
 
         public ICommand AddCustomer
@@ -52,6 +35,7 @@ namespace UserControl_GestionClient.ViewModels
 
         public CreateContactViewModel()
         {
+            NewContact = new Company_Contact();
             AddCustomer = new DelegateCommand(new Action<object>(AddNewCustomer));
         }
         private void AddNewCustomer(object contact)
