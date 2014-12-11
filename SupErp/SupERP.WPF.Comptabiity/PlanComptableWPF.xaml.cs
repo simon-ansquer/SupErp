@@ -34,8 +34,7 @@ namespace SupERP.WPF.Comptabiity
                 StringBuilder sb = new StringBuilder();
                 string a = ": ";
                 sb.Append(classe.id); sb.Append(a); sb.Append(classe.name);
-                TreeViewItem treeItem = new TreeViewItem();
-                treeItem.Items.Add(new TreeViewItem() { Header = sb.ToString() });
+                TreeViewItem treeItem =  new TreeViewItem() { Header = sb.ToString() };
                 sb.Clear();
                 PlanComptableTreeView.Items.Add(treeItem);// ici on affiche le treeitem de la  
                                                           // classe qui vient d'etre traitee
@@ -66,8 +65,7 @@ namespace SupERP.WPF.Comptabiity
             StringBuilder sb = new StringBuilder();
             string a = ": ";
             sb.Append(chart.account_number); sb.Append(a); sb.Append(chart.name);
-            TreeViewItem treeItem = new TreeViewItem();
-            treeItem.Items.Add(new TreeViewItem() { Header = sb.ToString() });
+            TreeViewItem treeItem = new TreeViewItem() { Header = sb.ToString() };
             treeItemSource.Items.Add(treeItem);//on rajoute au noeud source
             sb.Clear();
             if (chart.chartsOfAccount!=null)
