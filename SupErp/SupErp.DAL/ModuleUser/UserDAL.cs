@@ -193,9 +193,7 @@ namespace SupErp.DAL.ModuleUser
                     {
                         listToAdd.Add(new RoleModule()
                         {
-                            Module = rm.Module,
                             Module_id = rm.Module_id,
-                            Role = rm.Role,
                             Role_id = rm.Role_id
                         });
                     }
