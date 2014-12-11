@@ -15,7 +15,8 @@ namespace SupErp.DAL.FacturationDAL
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.BILL_StatusChain.Where(s => s.StatusChain_Id == status_id).Select(s => s.BILL_Status1).ToList();
+                var res = context.BILL_StatusChain.Include("BILL_Status").Include("BILL_Status1").Where(s => s.Status_Id == status_id).Select(s => s.BILL_Status1).ToList();
+                return res;
             }
         }
 
