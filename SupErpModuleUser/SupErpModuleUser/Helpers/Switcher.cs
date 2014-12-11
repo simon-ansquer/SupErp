@@ -16,6 +16,7 @@ namespace SupErpModuleUser.Helpers
         {
             if(PageSwitcher == null)
                 PageSwitcher = new PageSwitcher();
+
             PageSwitcher.Navigate(newPage);
         }
     }

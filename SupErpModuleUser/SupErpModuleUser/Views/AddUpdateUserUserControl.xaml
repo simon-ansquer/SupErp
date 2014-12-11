@@ -95,6 +95,7 @@
                 Foreground="#4388CC"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />
+                
 
                 <TextBlock
                 Grid.Column="0"
@@ -104,6 +105,16 @@
                 Foreground="#4388CC"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
+
+                <TextBlock
+                Grid.Column="0"
+                Grid.Row="4"
+                Text="Mot de passe"
+                FontSize="18"
+                Foreground="#4388CC"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                    Visibility="{Binding Path=User.IsNew, Converter={StaticResource PasswordVisibilityConverter}}"/>
 
                 <TextBlock
                 Grid.Column="0"
@@ -168,6 +179,15 @@
                     Text="{Binding Path=User.Email, Mode=TwoWay}"
                 Margin="0, 10, 10, 10"/>
 
+                <PasswordBox
+                    x:Name="passwordBox"
+                    Grid.Column="1"
+                    Grid.Row="4"
+                Foreground="#4388CC"
+                BorderBrush="#4388CC"
+                    Visibility="{Binding Path=User.IsNew, Converter={StaticResource PasswordVisibilityConverter}}"
+                    Margin="0, 10, 10, 10"/>
+                
                 <TextBox
                     x:Name="tbAdresse"
                 Grid.Column="1"
@@ -246,7 +266,8 @@
                     Background="White"
                     BorderBrush="#4388CC"
                     Margin="15, 15, 15, 15" 
-                    Command="{Binding AddOrUpdateCommand}"/>
+                    Command="{Binding AddOrUpdateCommand}"
+                            CommandParameter="{Binding ElementName=passwordBox}"/>
 
                 </Grid>
                 
