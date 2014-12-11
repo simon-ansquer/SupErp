@@ -8,6 +8,7 @@ using System.Windows.Input;
 using SupErpModuleUser.UserService;
 using SupErpModuleUser.Helpers;
 using SupErpModuleUser.Models;
+using SupErpModuleUser.Views;
 
 namespace SupErpModuleUser.ViewModels
 {
@@ -16,9 +17,11 @@ namespace SupErpModuleUser.ViewModels
         public IHMUser User { get; set; }
         public List<IHMRole> Roles { get; set; }
         public IHMRole SelectedRole { get; set; }
+        private bool Create;
 
         public AddUpdateUserViewModel()
         {
+            Create = true;
             User = new IHMUser();
             User.IsNew = true;
             using (UserServiceClient wcf = new UserServiceClient())
@@ -36,6 +39,7 @@ namespace SupErpModuleUser.ViewModels
 
         public AddUpdateUserViewModel(int userId)
         {
+            Create = false;
             using (UserServiceClient ws = new UserServiceClient())
             {
                 var rep = ws.GetUserById(userId);
@@ -82,12 +86,20 @@ namespace SupErpModuleUser.ViewModels
             else
                 new UserService.UserServiceClient().EditUser(User.ToUser());
 
-            Switcher.Switch(new ListUserUserControl());
+            if (!Create)
+                UserListPageSwitcher.UserListSwitcherFrame.Navigate(new ListUserUserControl());
+            else
+                UserCreatePageSwitcher.UserCreateSwitcherFrame.Navigate(new ListUserUserControl());
+            //Switcher.Switch(new ListUserUserControl());
         }
 
         private void OnCancel()
         {
-            Switcher.Switch(new ListUserUserControl());
+            if (UserListPageSwitcher.UserListSwitcherFrame != null)
+                UserListPageSwitcher.UserListSwitcherFrame.Navigate(new ListUserUserControl());
+            else
+                UserCreatePageSwitcher.UserCreateSwitcherFrame.Navigate(new ListUserUserControl());
+            //Switcher.Switch(new ListUserUserControl());
         }
 
         #endregion

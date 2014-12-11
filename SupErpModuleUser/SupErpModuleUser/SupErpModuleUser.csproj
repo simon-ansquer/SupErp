@@ -92,8 +92,20 @@
     <Compile Include="Views\PageSwitcher.xaml.cs">
       <DependentUpon>PageSwitcher.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RoleCreatePageSwitcher.xaml.cs">
+      <DependentUpon>RoleCreatePageSwitcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RoleListPageSwitcher.xaml.cs">
+      <DependentUpon>RoleListPageSwitcher.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RoleUserControl.xaml.cs">
       <DependentUpon>RoleUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserCreatePageSwitcher.xaml.cs">
+      <DependentUpon>UserCreatePageSwitcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserListPageSwitcher.xaml.cs">
+      <DependentUpon>UserListPageSwitcher.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserUserControl.xaml.cs">
       <DependentUpon>UserUserControl.xaml</DependentUpon>
@@ -126,7 +138,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\RoleCreatePageSwitcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RoleListPageSwitcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RoleUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserCreatePageSwitcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserListPageSwitcher.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,5 +1,4 @@
-﻿using SupErp.Shared;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,36 +12,36 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SupErpModuleUser.Views;
+using SupErp.Shared;
 
-namespace SupErpModuleUser
+namespace SupErpModuleUser.Views
 {
     /// <summary>
-    /// Logique d'interaction pour RoleUserControl.xaml
+    /// Interaction logic for UserListPageSwitcher.xaml
     /// </summary>
-    public partial class RoleUserControl : UserControl, ISubMenu
+    public partial class UserListPageSwitcher : UserControl, ISubMenu
     {
-        private List<ISubMenu> subMenus;
-
-        public RoleUserControl()
+        public static Frame UserListSwitcherFrame ;
+        public UserListPageSwitcher()
         {
             InitializeComponent();
 
-            subMenus = new List<ISubMenu>();
-            subMenus.Add(new RoleCreatePageSwitcher());
-            subMenus.Add(new RoleListPageSwitcher());
+            UserListSwitcherFrame = new Frame();
+            MainGrid.Children.Add(UserListSwitcherFrame);
+            UserListSwitcherFrame.Navigate(new ListUserUserControl());
+            UserListSwitcherFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }
 
         public string SubMenuName
         {
-            get { return "Rôles"; }
+            get { return "Afficher les utilisateurs"; }
         }
 
         public List<ISubMenu> SubMenus
         {
             get
             {
-                return subMenus;
+                return null;
             }
         }
 

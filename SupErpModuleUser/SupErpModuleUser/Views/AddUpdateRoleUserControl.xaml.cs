@@ -20,7 +20,7 @@ namespace SupErpModuleUser
     /// <summary>
     /// Logique d'interaction pour AddRoleUserControl.xaml
     /// </summary>
-    public partial class AddUpdateRoleUserControl : UserControl, ISubMenu
+    public partial class AddUpdateRoleUserControl : UserControl
     {
         public AddUpdateRoleUserControl()
         {
@@ -33,26 +33,7 @@ namespace SupErpModuleUser
             this.DataContext = viewModel;
         }
 
-        public string SubMenuName
-        {
-            get { return "Ajouter un rôle"; }
-        }
-
-        public List<ISubMenu> SubMenus
-        {
-            get
-            {
-                return null;
-            }
-        }
-
-        public bool CanWrite
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+       
 
         private void DataGrid_OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {

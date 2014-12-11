@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using SupErpModuleUser.Views;
 
 namespace SupErpModuleUser.ViewModels
 {
@@ -46,7 +47,11 @@ namespace SupErpModuleUser.ViewModels
 
         private void OnImageClicked(object id)
         {
-            Switcher.Switch(new AddUpdateUserUserControl(new AddUpdateUserViewModel(int.Parse(id.ToString()))));
+            if (UserListPageSwitcher.UserListSwitcherFrame != null)
+                UserListPageSwitcher.UserListSwitcherFrame.Navigate(new AddUpdateUserUserControl(new AddUpdateUserViewModel(int.Parse(id.ToString()))));
+            else
+                UserCreatePageSwitcher.UserCreateSwitcherFrame.Navigate(new AddUpdateUserUserControl(new AddUpdateUserViewModel(int.Parse(id.ToString()))));
+            //Switcher.Switch(new AddUpdateUserUserControl(new AddUpdateUserViewModel(int.Parse(id.ToString()))));
         }
 
         #endregion

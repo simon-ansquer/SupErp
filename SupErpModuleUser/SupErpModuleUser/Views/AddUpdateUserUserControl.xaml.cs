@@ -20,7 +20,7 @@ namespace SupErpModuleUser
     /// <summary>
     /// Logique d'interaction pour AddUserUserControl.xaml
     /// </summary>
-    public partial class AddUpdateUserUserControl : UserControl, ISubMenu
+    public partial class AddUpdateUserUserControl : UserControl
     {
 
         public AddUpdateUserUserControl()
@@ -32,11 +32,6 @@ namespace SupErpModuleUser
         {
             InitializeComponent();
             this.DataContext = viewModel;
-        }
-
-        public string SubMenuName
-        {
-            get { return "Ajouter utilisateur"; }
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
@@ -53,20 +48,6 @@ namespace SupErpModuleUser
             base.OnRenderSizeChanged(sizeInfo);
         }
 
-        public List<ISubMenu> SubMenus
-        {
-            get
-            {
-                return null;
-            }
-        }
-
-        public bool CanWrite
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        
     }
 }

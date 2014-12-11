@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using SupErpModuleUser.Helpers;
 using SupErpModuleUser.UserService;
+using SupErpModuleUser.Views;
 
 namespace SupErpModuleUser.ViewModels
 {
@@ -79,12 +80,20 @@ namespace SupErpModuleUser.ViewModels
             else
                 new UserService.UserServiceClient().EditRole(Role.ToRole());
 
-            Switcher.Switch(new ListRoleUserControl());
+            if (RoleListPageSwitcher.RoleListSwitcherFrame != null)
+                RoleListPageSwitcher.RoleListSwitcherFrame.Navigate(new ListRoleUserControl());
+            else
+                RoleCreatePageSwitcher.RoleCreateSwitcherFrame.Navigate(new ListRoleUserControl());
+            //Switcher.Switch(new ListRoleUserControl());
         }
 
         private void OnCancel() 
         {
-            Switcher.Switch(new ListRoleUserControl());
+            if (RoleListPageSwitcher.RoleListSwitcherFrame != null)
+                RoleListPageSwitcher.RoleListSwitcherFrame.Navigate(new ListRoleUserControl());
+            else
+                RoleCreatePageSwitcher.RoleCreateSwitcherFrame.Navigate(new ListRoleUserControl());
+            //Switcher.Switch(new ListRoleUserControl());
         }
 
         #endregion

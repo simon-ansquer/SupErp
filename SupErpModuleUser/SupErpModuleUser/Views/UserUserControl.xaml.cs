@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SupErpModuleUser.Views;
 
 namespace SupErpModuleUser
 {
@@ -28,8 +29,8 @@ namespace SupErpModuleUser
             InitializeComponent();
 
             subMenus = new List<ISubMenu>();
-            subMenus.Add(new AddUpdateUserUserControl());
-            subMenus.Add(new ListUserUserControl());
+            subMenus.Add(new UserCreatePageSwitcher());
+            subMenus.Add(new UserListPageSwitcher());
         }
 
         public string SubMenuName

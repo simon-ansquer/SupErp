@@ -19,32 +19,11 @@ namespace SupErpModuleUser
     /// <summary>
     /// Logique d'interaction pour ListRoleUserControl.xaml
     /// </summary>
-    public partial class ListRoleUserControl : UserControl, ISubMenu
+    public partial class ListRoleUserControl : UserControl
     {
         public ListRoleUserControl()
         {
             InitializeComponent();
-        }
-
-        public string SubMenuName
-        {
-            get { return "Consulter les rôles"; }
-        }
-
-        public List<ISubMenu> SubMenus
-        {
-            get
-            {
-                return null;
-            }
-        }
-
-        public bool CanWrite
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }

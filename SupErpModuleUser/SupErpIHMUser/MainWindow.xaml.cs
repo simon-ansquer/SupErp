@@ -28,7 +28,7 @@ namespace SupErpIHMUser
 
             Frame uneFrame = new Frame();
             MainGrid.Children.Add(uneFrame);
-            uneFrame.Navigate(new PageSwitcher());
+            uneFrame.Navigate(new UserCreatePageSwitcher());
             
         }
     }
