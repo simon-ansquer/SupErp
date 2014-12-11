@@ -12,22 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using UserControl_GestionClient.Views;
 
-namespace TestApplication
+namespace UserControl_GestionClient.Views
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour CreateContact.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CreateContact : UserControl
     {
-        public MainWindow()
+        public CreateContact()
         {
             InitializeComponent();
-            Frame uneFrame = new Frame();
-            MainGrid.Children.Add(uneFrame);
-            //uneFrame.Navigate(new AccueilGestionClient());
-            uneFrame.Navigate(new CreateCustomer());
         }
     }
 }

@@ -53,16 +53,7 @@ namespace UserControl_GestionClient.ViewModels
             }
         }
 
-        private void RandomizeData()
-        {
-            CompanyCollection = new ObservableCollection<Models.Company>();
-
-            for (var i = 0; i < 10; i++)
-            {
-                //CompanyCollection.Add(new Company { id = i, address = "4" + i + " allée d'orléan", city = "Bordeaux", name = "neo", postalcode = 33000, siret = "00000000" + i });
-            }
-        }
-
+        
         public ICommand AddCustomer { get { return new DelegateCommand(AddNewCustomer); } }
         private void AddNewCustomer(object parameter)
         {

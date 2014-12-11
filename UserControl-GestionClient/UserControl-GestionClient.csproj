@@ -76,10 +76,13 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AccueilGestionClientViewModel.cs" />
+    <Compile Include="ViewModels\CreateCompanieViewModel.cs" />
     <Compile Include="ViewModels\CreateContactViewModel.cs" />
-    <Compile Include="ViewModels\CreateViewModel.cs" />
     <Compile Include="Views\AccueilGestionClient.xaml.cs">
       <DependentUpon>AccueilGestionClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateContact.xaml.cs">
+      <DependentUpon>CreateContact.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreateCustomer.xaml.cs">
       <DependentUpon>CreateCustomer.xaml</DependentUpon>
@@ -116,6 +119,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AccueilGestionClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateContact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

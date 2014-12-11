@@ -9,10 +9,10 @@ using UserControl_GestionClient.Models;
 
 namespace UserControl_GestionClient.ViewModels
 {
-    class CreateContactViewModel
+    public class CreateContactViewModel
     {
-
-        public Company_Contact NewContact {get; set;}
+        public Contact NewContact {get; set;}
+        public Dictionary<long, string> ListEntreprise { get; set; }
         /// <summary>
         /// Gets or sets the login.
         /// </summary>
@@ -35,13 +35,24 @@ namespace UserControl_GestionClient.ViewModels
 
         public CreateContactViewModel()
         {
-            NewContact = new Company_Contact();
+            using (var ws = new ClientServiceGestionClient.ServiceGestionClientClient())
+            {
+                List<ClientServiceGestionClient.Company> companies = ws.GetListCompany().ToList();
+                foreach(ClientServiceGestionClient.Company c in companies)
+                {
+                    ListEntreprise.Add(c.id, c.name);
+                }
+            }
+            NewContact = new Contact();
             AddCustomer = new DelegateCommand(new Action<object>(AddNewCustomer));
         }
         private void AddNewCustomer(object contact)
         {
-            Company_Contact c = this.NewContact;
-            //this.Thestring = (string)contact;
+            using (var ws = new ClientServiceGestionClient.ServiceGestionClientClient())
+            {                
+                ClientServiceGestionClient.Company_Contact cont = new ClientServiceGestionClient.Company_Contact { email = NewContact.email, firstname = NewContact.email, gender = NewContact.gender, lastname = NewContact.lastname, phone = NewContact.phone, company_id = NewContact.company_id };
+                ws.CreateCompany_Contact(cont);
+            }
         }
     }
 }
