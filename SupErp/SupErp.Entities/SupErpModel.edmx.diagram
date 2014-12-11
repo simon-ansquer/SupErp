@@ -33,7 +33,7 @@
         <AssociationConnector Association="SUPERPModel.FK__Salary__User_id__5AEE82B9" />
         <AssociationConnector Association="SUPERPModel.FK__User__Status_id__5BE2A6F2" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_LineBillQuotation" Width="1.5" PointX="15.25" PointY="5.75" />
-        <EntityTypeShape EntityType="SUPERPModel.COMPTA_AccountingEntries" Width="1.5" PointX="5.375" PointY="10.75" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_AccountingEntries" Width="1.5" PointX="6.125" PointY="10.75" />
         <EntityTypeShape EntityType="SUPERPModel.COMPTA_ExchangeRate" Width="1.5" PointX="7.375" PointY="13.75" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotation" Width="1.875" PointX="13" PointY="1.25" />
         <EntityTypeShape EntityType="SUPERPModel.BILL_BillQuotationStatus" Width="1.5" PointX="16.875" PointY="2.375" />
@@ -64,6 +64,10 @@
         <EntityTypeShape EntityType="SUPERPModel.BILL_StatusChain" Width="1.5" PointX="15.25" PointY="9.5" />
         <AssociationConnector Association="SUPERPModel.FK__BILL_Stat__NextS__2A164134" />
         <AssociationConnector Association="SUPERPModel.FK__BILL_Stat__Statu__29221CFB" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_AccountingEntries_Periodicity" Width="1.5" PointX="9.625" PointY="14.75" />
+        <EntityTypeShape EntityType="SUPERPModel.COMPTA_Periodicity" Width="1.5" PointX="7.375" PointY="17.125" />
+        <AssociationConnector Association="SUPERPModel.FK__COMPTA_Ac__accou__40F9A68C" />
+        <AssociationConnector Association="SUPERPModel.FK__COMPTA_Ac__perio__41EDCAC5" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

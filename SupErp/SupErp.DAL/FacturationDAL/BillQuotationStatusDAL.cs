@@ -1,9 +1,7 @@
-﻿using System;
+﻿using SupErp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SupErp.Entities;
 
 namespace SupErp.DAL.FacturationDAL
 {
@@ -19,24 +17,7 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        public BILL_BillQuotationStatus GetCurrentStatusBillQuotation(long billQuotation_id)
-        {
-            using (SUPERPEntities context = new SUPERPEntities(false))
-            {
-                var listStatus = GetBillQuotationStatusByBillQuotation(billQuotation_id).OrderByDescending(x => x.DateAdvancement);
-                return listStatus.First();
-            }
-        }
-
-        public List<BILL_BillQuotation> GetBillQuotationByStatus(long status_id)
-        {
-            using (SUPERPEntities context = new SUPERPEntities(false))
-            {
-                return context.BILL_BillQuotationStatus.Where(bqs => bqs.Status_Id == status_id).Select(s => s.BILL_BillQuotation).ToList();
-            }
-        }
-
-        #endregion
+        #endregion Read
 
         #region Create
 
@@ -44,49 +25,20 @@ namespace SupErp.DAL.FacturationDAL
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var s = context.BILL_BillQuotationStatus.Add(billQuotationStatusToAdd);
-                context.SaveChanges();
-                return s;
-            }
-        }
-
-        #endregion
-
-        #region Edit
-
-        public BILL_BillQuotationStatus EditLineBillQuotation(BILL_BillQuotationStatus BillQuotationStatusToEdit)
-        {
-            using (SUPERPEntities context = new SUPERPEntities(false))
-            {
-                var bqs = context.BILL_BillQuotationStatus.Find(BillQuotationStatusToEdit.BillQuotationStatus_Id);
-                bqs = BillQuotationStatusToEdit;
-                context.SaveChanges();
-                return bqs;
-            }
-        }
-
-        #endregion
-
-        #region Delete
-
-        public bool DeleteBillQuotationStatus(long billQuotationStatus_id)
-        {
-            using (SUPERPEntities context = new SUPERPEntities(false))
-            {
-                try
+                var exist = context.BILL_BillQuotationStatus.SingleOrDefault(x => x.BillQuotation_Id == billQuotationStatusToAdd.BillQuotation_Id
+                                                                    && x.BILL_Status.Status_Id == billQuotationStatusToAdd.BILL_Status.Status_Id);
+                if (exist != null)
+                    return exist;
+                else
                 {
-                    var bqs = context.BILL_BillQuotationStatus.Find(billQuotationStatus_id);
-                    context.BILL_BillQuotationStatus.Remove(bqs);
+                    var s = context.BILL_BillQuotationStatus.Add(billQuotationStatusToAdd);
                     context.SaveChanges();
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return false;
+                    return s;
                 }
             }
         }
 
-        #endregion
+        #endregion Create
+
     }
 }

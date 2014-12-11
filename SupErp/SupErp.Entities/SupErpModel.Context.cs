@@ -57,5 +57,7 @@ namespace SupErp.Entities
         public virtual DbSet<COMPTA_CustomerJournalLine> COMPTA_CustomerJournalLine { get; set; }
         public virtual DbSet<COMPTA_SupplierJournalLine> COMPTA_SupplierJournalLine { get; set; }
         public virtual DbSet<BILL_StatusChain> BILL_StatusChain { get; set; }
+        public virtual DbSet<COMPTA_AccountingEntries_Periodicity> COMPTA_AccountingEntries_Periodicity { get; set; }
+        public virtual DbSet<COMPTA_Periodicity> COMPTA_Periodicity { get; set; }
     }
 }

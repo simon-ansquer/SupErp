@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestSalary", "UnitTestS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplicationSalary", "WpfApplicationSalaire\WpfApplicationSalary.csproj", "{0FED60C9-9A66-4BAC-9E21-CA6B81761AF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupErp.Shared", "..\SupErp\SupErp.Shared\SupErp.Shared.csproj", "{AED44877-9636-4E8C-95A3-722D99F6260B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0FED60C9-9A66-4BAC-9E21-CA6B81761AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FED60C9-9A66-4BAC-9E21-CA6B81761AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FED60C9-9A66-4BAC-9E21-CA6B81761AF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AED44877-9636-4E8C-95A3-722D99F6260B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AED44877-9636-4E8C-95A3-722D99F6260B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AED44877-9636-4E8C-95A3-722D99F6260B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AED44877-9636-4E8C-95A3-722D99F6260B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

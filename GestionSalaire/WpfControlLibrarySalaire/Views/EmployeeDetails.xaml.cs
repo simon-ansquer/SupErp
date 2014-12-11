@@ -12,12 +12,12 @@ namespace WpfControlLibrarySalaire.Views
         public EmployeeDetails(EmployeeDetailsViewModel viewModel)
         {
             InitializeComponent();
-            this.DataContext = viewModel;
+            DataContext = viewModel;
         }
 
         private void UIElement_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex(@"[^0-9.,]+");
+            var regex = new Regex(@"[^0-9.,]+");
             e.Handled = regex.IsMatch(e.Text);
         }
     }

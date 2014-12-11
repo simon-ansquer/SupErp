@@ -94,6 +94,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SupErp\SupErp.Shared\SupErp.Shared.csproj">
+      <Project>{aed44877-9636-4e8c-95a3-722d99f6260b}</Project>
+      <Name>SupErp.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WpfControlLibrarySalaire\WpfControlLibrarySalary.csproj">
       <Project>{96afc8b4-f382-42b1-a83d-6724888f9df9}</Project>
       <Name>WpfControlLibrarySalary</Name>

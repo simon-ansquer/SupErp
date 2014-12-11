@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
 using WpfControlLibrarySalaire.Helpers;
@@ -34,23 +35,31 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         private async void InitializeUsers()
         {
-            try
+            if (Employees == null)
             {
-                var employees = await ServiceSalaire.GetUserAsync();
-                
-                Employees = new ObservableCollection<User>();
-                foreach (var employee in employees)
+                try
                 {
-                    employee.Lastname = employee.Lastname.Trim();
-                    employee.Firstname = employee.Firstname.Trim();
-                    employee.Salaries.Reverse();
-                    employee.Absences.Reverse();
-                    Employees.Add(employee);
+                    var employees = await ServiceSalaire.GetUserAsync();
+                    employees = employees.OrderBy(e => e.Lastname).ToList();
+                    Employees = new ObservableCollection<User>();
+                    foreach (var employee in employees)
+                    {
+                        if (employee.Lastname != null)
+                        {
+                            employee.Lastname = employee.Lastname.Trim();
+                            employee.Firstname = employee.Firstname.Trim();
+                            if (employee.Salaries != null)
+                                employee.Salaries.Reverse();
+                            if (employee.Absences != null)
+                                employee.Absences.Reverse();
+                            Employees.Add(employee);
+                        }
+                    }
                 }
-            }
-            catch (Exception)
-            {
-                ServiceSalaire.Close();
+                catch (Exception)
+                {
+                    ServiceSalaire.Close();
+                }
             }
         }
 
@@ -69,7 +78,7 @@ namespace WpfControlLibrarySalaire.ViewModels
             get
             {
                 return new DelegateCommand<string>(
-                    s => OnGeneratePDFClick()
+                    s => OnGeneratePdfClick()
                     );
             }
         }
@@ -89,9 +98,9 @@ namespace WpfControlLibrarySalaire.ViewModels
         #endregion
 
         #region Command Handlers
-        private void OnGeneratePDFClick()
+        private void OnGeneratePdfClick()
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            var fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
             foreach (User employee in Employees)
                 PDFGenerator.generate(employee, fbd.SelectedPath);
@@ -99,7 +108,7 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         private async void OnSearchButtonClick()
         {
-            if (Employees == null) return;
+            if (Employees == null && _inputSearch == null) return;
             List<User> employees;
             if (_inputSearch == string.Empty)
                 employees = await ServiceSalaire.GetUserAsync();
@@ -111,13 +120,14 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         private void OnDetailsClick(User userSelected)
         {
+            if (userSelected == null) return;
             var employeeDetails = new EmployeeDetails(new EmployeeDetailsViewModel(userSelected));
             Switcher.Switch(employeeDetails);
         }
 
         private void OnPdfClick(User userSelected)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            var fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
             PDFGenerator.generate(userSelected, fbd.SelectedPath);
         }

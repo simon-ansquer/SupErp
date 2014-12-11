@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="clr-namespace:WpfControlLibrarySalaire.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000"
              Background="White"
@@ -28,20 +27,28 @@
             <Run Text="{Binding Employee.Firstname}"/>
             <Run Text="{Binding Employee.Lastname}"/>
         </TextBlock>
-        <Button Content="Retour" Foreground="White" Background="#4388CC" Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="15"
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        <Button Grid.Row="1" Content="Retour" Foreground="White" Background="#4388CC" BorderThickness="0"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="15"
                 Command="{Binding PreviousCommand}"/>
+        </Grid>
 
         <DataGrid Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"  Grid.Row="2" Grid.RowSpan="3" VerticalAlignment="Stretch" ItemsSource="{Binding Employee.Salaries}"  GridLinesVisibility="Horizontal" FontSize="15" HorizontalGridLinesBrush="Silver"
-                  AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanUserAddRows="False" AlternatingRowBackground="#FFCCCCCC" AlternationCount="1">
+                    AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanUserAddRows="False" AlternatingRowBackground="#FFCCCCCC" 
+                    AlternationCount="1" SelectionMode="Single" CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Width ="1*" Binding="{Binding Date, StringFormat={}{0:dd MMMM yyyy}}" CanUserResize="False" >
+                <DataGridTextColumn Header="Date" Width ="1*" Binding="{Binding Date, StringFormat={}{0:dd MMMM yyyy}}" CanUserResize="False" IsReadOnly="True">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Salaire" Width ="1*" Binding="{Binding NetSalary}" CanUserResize="False" >
+                <DataGridTextColumn Header="Salaire" Width ="1*" Binding="{Binding NetSalary}" CanUserResize="False" IsReadOnly="True" >
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />

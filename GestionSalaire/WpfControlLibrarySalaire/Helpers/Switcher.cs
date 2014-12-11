@@ -3,7 +3,7 @@ using WpfControlLibrarySalaire.Views;
 
 namespace WpfControlLibrarySalaire.Helpers
 {
-    public class Switcher
+    public static class Switcher
     {
         public static PageSwitcher PageSwitcher;
 

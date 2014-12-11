@@ -22,55 +22,18 @@ namespace SupErp.BLL.FacturationBLL
 
         public List<ProductExtended> getListProductIncludedOrNot(long billquotation_id)
         {
-            return GetBillProduct().Select(p => new ProductExtended(p, billquotation_id)).ToList();
+            var listProduct = GetBillProduct();
+            var res = listProduct.Select(p => new ProductExtended(p, billquotation_id)).ToList();
+            return res;
         }
 
-        public List<BILL_Product> GetProducts()
-        {
-            return billProdDAL.GetProducts();
-        }
-
-        public BILL_Product GetProductByName(string nameProduct)
-        {
-            return billProdDAL.GetProductByName(nameProduct);
-        }
 
         public BILL_Product GetProductByID(long id)
         {
             return billProdDAL.GetProductByID(id);
         }
 
-        public IEnumerable<BILL_Product> GetProductByCategory(long category_id)
-        {
-            return billProdDAL.GetProductCategory(category_id);
-        }
-
-        public BILL_Product GetProductPrice(Double priceProduct)
-        {
-            return billProdDAL.GetProductPrice(priceProduct);
-        }
-
         #endregion
 
-        #region Create
-        public BILL_Product CreateBillProduct(BILL_Product billProductToAdd)
-        {
-            return billProdDAL.CreateBillProduct(billProductToAdd);
-        }
-        #endregion
-
-        #region Edit
-        public BILL_Product EditBillProduct(BILL_Product billProductToEdit)
-        {
-            return billProdDAL.EditBillProduct(billProductToEdit);
-        }
-        #endregion
-
-        #region Delete
-        public bool DeleteBillProduct(long id)
-        {
-            return billProdDAL.DeleteBillProduct(id);
-        }
-        #endregion
     }
 }

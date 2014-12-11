@@ -5,9 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-	Title="MenuPage">
+	Title="MenuPage" Loaded="PageLoaded">
 
-    <Grid x:Name="MainGrid">
+    <Grid x:Name="MainGrid" MouseLeftButtonDown="MainGridClicked">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.15*"/>
             <ColumnDefinition Width="*"/>
@@ -27,10 +27,13 @@
                 <RowDefinition Height="0.1" />
             </Grid.RowDefinitions>
 
-            <ListBox x:Name="Menus" Grid.Column="1" Grid.Row="2" Background="Transparent" BorderThickness="0">
+            <ListBox x:Name="Menus" Grid.Column="1" Grid.Row="2" Background="Transparent" BorderThickness="0" SelectionChanged="MainMenuClicked">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock x:Name="MenuItem" Text="{Binding MenuName}" Foreground="White" VerticalAlignment="Center" Margin="0 0 0 10" Loaded="MenuItem_Loaded"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="MenuItem" Text="{Binding MenuName}" Foreground="White" VerticalAlignment="Center" Margin="0 0 0 10" Loaded="MenuItem_Loaded"/>
+                            <!--<TextBlock x:Name="ArrowMainMenu" Text=">" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 0 10" Loaded="MenuItem_Loaded"/>-->
+                        </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -38,12 +41,12 @@
             <TextBlock x:Name="Logo" Grid.Column="1" Grid.Row="1" Foreground="#FFFFFF" FontFamily="Segoe UI">SupERP</TextBlock>
             <StackPanel x:Name="LogOutPanel" Grid.Column="1" Grid.Row="3" Orientation="Horizontal" Cursor="Hand" MouseEnter="LogOutPanel_MouseEnter" MouseLeftButtonDown="LogOutClicked" MouseLeave="LogOutPanel_MouseLeave">
                 <Image x:Name="LogOutImage" Source="../Content/Img/LogOut.png" Stretch="Uniform"></Image>
-                <TextBlock x:Name="LogOut" Foreground="#FFFFFF" FontFamily="Segoe UI" VerticalAlignment="Center">LogOut</TextBlock>
+                <TextBlock x:Name="LogOut" Foreground="#FFFFFF" FontFamily="Segoe UI" VerticalAlignment="Center">Déconnexion</TextBlock>
             </StackPanel>
 
 
         </Grid>
-        <Grid x:Name="RightTape" Background="#FFFFFF" Grid.Column="1">
+        <Grid x:Name="RightTape" Background="#FFFFFF" Grid.Column="1" Margin="10">
         </Grid>
     </Grid>
 </Page>

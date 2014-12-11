@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SupErp.Entities;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SupErp.Entities;
 using System.Runtime.Serialization;
 
 namespace SupErp.DAL.FacturationModele
@@ -26,19 +23,26 @@ namespace SupErp.DAL.FacturationModele
             base.Transmitter_Id = bill_billQuotation.Transmitter_Id;
             base.Vat = bill_billQuotation.Vat;
 
+            var billStatus = bill_billQuotation.BILL_BillQuotationStatus.OrderByDescending(s => s.DateAdvancement);
+            if (billStatus != null && billStatus.Count() > 0)
+                BillStatus = billStatus.First().BILL_Status;
+
             CalculateTTC();
         }
 
         [DataMember]
-        public double AmountTTC{ get; private set;}
+        public double AmountTTC { get; private set; }
+
+        [DataMember]
+        public BILL_Status BillStatus { get; private set; }
 
         private void CalculateTTC()
         {
-            var htRef = 0.00;    
+            var htRef = 0.00;
             var context = new SUPERPEntities();
             var lstLine = context.BILL_LineBillQuotation.Where(l => l.BillQuotation_Id == BillQuotation_Id);
 
-            foreach(var line in lstLine)
+            foreach (var line in lstLine)
             {
                 var tvaRate = (line.BILL_Product.BILL_Vat.Rate == null) ? 0.00 : Convert.ToDouble(line.BILL_Product.BILL_Vat.Rate);
 
@@ -47,9 +51,8 @@ namespace SupErp.DAL.FacturationModele
                 AmountTTC += priceProductTTC * line.Quantite;
             }
 
-
             /* Check if amountHT is valid */
-            if(htRef != AmountDF)
+            if (htRef != AmountDF)
             {
                 var b = context.BILL_BillQuotation.Find(BillQuotation_Id);
                 b.AmountDF = htRef;
@@ -58,8 +61,6 @@ namespace SupErp.DAL.FacturationModele
 
             /* Check if VAT is affected */
             if (!Vat) AmountTTC = AmountDF;
-
         }
-
     }
 }

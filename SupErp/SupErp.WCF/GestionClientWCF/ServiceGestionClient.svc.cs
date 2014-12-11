@@ -9,8 +9,7 @@ using System.Collections.Generic;
 
 namespace SupErp.WCF.GestionClientWCF
 {
-    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class ServiceGestionClient //: IServiceGestionClient
+    public class ServiceGestionClient : IServiceGestionClient
     {
 
         //////////////////////////////
@@ -35,6 +34,10 @@ namespace SupErp.WCF.GestionClientWCF
             return clientBLL.GetListCompany();
         }
 
+        public bool EditCompany(Company company)
+        {
+            return clientBLL.EditCompany(company);
+        }
 
         public bool DeleteCompany(int id)
         {
@@ -77,12 +80,6 @@ namespace SupErp.WCF.GestionClientWCF
         public bool DeleteCompany_Contact(int id)
         {
             return ContactBLL.DeleteCompany_Contact(id);
-        }
-
-
-        public bool EditCompany(Company company)
-        {
-            throw new NotImplementedException();
         }
     }
 }

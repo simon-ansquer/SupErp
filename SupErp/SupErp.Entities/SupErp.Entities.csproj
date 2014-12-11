@@ -91,6 +91,9 @@
     <Compile Include="COMPTA_AccountingEntries.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="COMPTA_AccountingEntries_Periodicity.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="COMPTA_Bank.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
@@ -113,6 +116,9 @@
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="COMPTA_ExchangeRate.cs">
+      <DependentUpon>SupErpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPTA_Periodicity.cs">
       <DependentUpon>SupErpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="COMPTA_SupplierJournalLine.cs">
@@ -170,7 +176,9 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="SupErpModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

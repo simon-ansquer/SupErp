@@ -15,11 +15,15 @@ namespace SupErp.DAL.ModuleUser
 
         public User Login(string email, string password)
         {
-
+            if(email != null && password != null)
+            {
             using (var context = new SUPERPEntities(false))
             {
+                    password = Encrypt.hashSHA256(password);
                 return context.Users.Include("Role").Include("Role.RoleModules").Include("Role.RoleModules.Module").FirstOrDefault(x => x.Email == email && x.Passwordhash == password);
             }
+        }
+            return null;
         }
 
         #endregion
@@ -28,9 +32,12 @@ namespace SupErp.DAL.ModuleUser
 
         public User GetUserById(int id)
         {
+            if (id < 0)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.Users.Include("Role").FirstOrDefault(x => x.Id == id);
+                return context.Users.Include("Role").Include("Role.RoleModules").Include("Role.RoleModules.Module").FirstOrDefault(x => x.Id == id);
             }
         }
 
@@ -38,7 +45,7 @@ namespace SupErp.DAL.ModuleUser
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.Users.Include("Role");
+                return context.Users.Include("Role").Include("Role.RoleModules").Include("Role.RoleModules.Module").ToList();
             }
         }
 
@@ -46,15 +53,18 @@ namespace SupErp.DAL.ModuleUser
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.Roles.Include("RoleModules");
+                return context.Roles.Include("RoleModules").Include("RoleModules.Module").Include("RoleModules.Role").ToList();
             }
         }
 
         public Role GetRoleById(int roleId)
         {
+            if (roleId < 0)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.Roles.Include("RoleModules").FirstOrDefault(x => x.Id == roleId);
+                return context.Roles.Include("RoleModules").Include("RoleModules.Module").Include("RoleModules.Role").FirstOrDefault(x => x.Id == roleId);
             }
         }
 
@@ -62,17 +72,21 @@ namespace SupErp.DAL.ModuleUser
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.Modules;
+                return context.Modules.Include("RoleModules").Include("RoleModules.Module").Include("RoleModules.Role").ToList();
             }
         }
 
         public Role GetRoleByUserId(int userId)
         {
+            if (userId < 0)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var r = context.Users.Find(userId);
+                var r = context.Users.Include("Role").FirstOrDefault(x => x.Id == userId);
                 if(r == null)
                     return null;
+
                 return r.Role;
             }
         }
@@ -83,6 +97,9 @@ namespace SupErp.DAL.ModuleUser
 
         public User CreateUser(User userToAdd)
         {
+            if (userToAdd == null)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 userToAdd.Passwordhash = Encrypt.hashSHA256(userToAdd.Passwordhash);
@@ -94,9 +111,27 @@ namespace SupErp.DAL.ModuleUser
 
         public Role CreateRole(Role roleToAdd)
         {
+            if (roleToAdd == null)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var r = context.Roles.Add(roleToAdd);
+                var r = context.Roles.Add(new Role()
+                    {
+                        Label = roleToAdd.Label,
+                        Users = new List<User>(),
+                        RoleModules = new List<RoleModule>()
+                    });
+                context.SaveChanges();
+
+                foreach(RoleModule rm in roleToAdd.RoleModules)
+                {
+                    context.RoleModules.Add(new RoleModule() { 
+                        Role_id = r.Id,
+                        Module_id = rm.Module_id
+                    });
+                }
+
                 context.SaveChanges();
                 return r;
             }
@@ -108,14 +143,28 @@ namespace SupErp.DAL.ModuleUser
 
         public User EditUser(User userToEdit)
         {
+            if (userToEdit == null)
+                return null;
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var u = context.Users.Find(userToEdit.Id);
                 if (u == null)
                     return null;
-                if (u.Passwordhash != userToEdit.Passwordhash)
-                    userToEdit.Passwordhash = Encrypt.hashSHA256(userToEdit.Passwordhash);
-                u = userToEdit;
+
+                u.Address = userToEdit.Address;
+                u.Email = userToEdit.Email;
+                u.Firstname = userToEdit.Firstname;
+                u.Lastname = userToEdit.Lastname;
+
+                if (userToEdit.Role != null)
+                {
+                    u.Role = context.Roles.Find(userToEdit.Role.Id);
+                    u.Role_id = u.Role.Id;
+                }
+
+                u.Zip_code = userToEdit.Zip_code;
+                u.City = userToEdit.City;
                 context.SaveChanges();
                 return u;
             }
@@ -123,12 +172,36 @@ namespace SupErp.DAL.ModuleUser
 
         public Role EditRole(Role roleToEdit)
         {
+            if (roleToEdit == null)
+                return null;
+
+            var listToAdd = new List<RoleModule>();
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var r = context.Roles.Find(roleToEdit.Id);
+                var r = context.Roles.Include("RoleModules").Include("RoleModules.Module").Include("RoleModules.Role").FirstOrDefault(x => x.Id == roleToEdit.Id);
                 if (r == null)
                     return null;
-                r = roleToEdit;
+
+                context.RoleModules.RemoveRange(r.RoleModules);
+                context.SaveChanges();
+                r.RoleModules.Clear();
+                foreach (var rm in roleToEdit.RoleModules)
+                {
+                    RoleModule rrm = null;
+                    if ((rrm = r.RoleModules.FirstOrDefault(x => x.Id == rm.Id)) == null)
+                    {
+                        listToAdd.Add(new RoleModule()
+                        {
+                            Module_id = rm.Module_id,
+                            Role_id = rm.Role_id
+                        });
+                    }
+                }
+
+                context.RoleModules.AddRange(listToAdd);
+
+                r.Label = roleToEdit.Label;
                 context.SaveChanges();
                 return r;
             }

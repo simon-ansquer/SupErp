@@ -61,6 +61,12 @@
   <wsdl:message name="IServiceSalaire_addAbsence_OutputMessage">
     <wsdl:part name="parameters" element="tns:addAbsenceResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceSalaire_GetAbsenceTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAbsenceTypes" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSalaire_GetAbsenceTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAbsenceTypesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceSalaire">
     <wsdl:operation name="GetUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSalaire/GetUser" message="tns:IServiceSalaire_GetUser_InputMessage" />
@@ -97,6 +103,10 @@
     <wsdl:operation name="addAbsence">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSalaire/addAbsence" message="tns:IServiceSalaire_addAbsence_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceSalaire/addAbsenceResponse" message="tns:IServiceSalaire_addAbsence_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAbsenceTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSalaire/GetAbsenceTypes" message="tns:IServiceSalaire_GetAbsenceTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSalaire/GetAbsenceTypesResponse" message="tns:IServiceSalaire_GetAbsenceTypes_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceSalaire" type="tns:IServiceSalaire">
@@ -175,6 +185,15 @@
     </wsdl:operation>
     <wsdl:operation name="addAbsence">
       <soap:operation soapAction="http://tempuri.org/IServiceSalaire/addAbsence" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAbsenceTypes">
+      <soap:operation soapAction="http://tempuri.org/IServiceSalaire/GetAbsenceTypes" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

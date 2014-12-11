@@ -74,6 +74,17 @@ namespace WpfControlLibrarySalaire.ViewModels
             }
         }
 
+        private DateTime _inputPrimeEnd;
+        public DateTime InputPrimeEnd
+        {
+            get { return _inputPrimeEnd; }
+            set
+            {
+                _inputPrimeEnd = value;
+                _addPrimeClickCommand.RaiseCanExecuteChanged();
+            }
+        }
+
         private DateTime _inputAbsenceStart;
         public DateTime InputAbsenceStart
         {
@@ -122,29 +133,64 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         public EmployeeDetailsViewModel(User employee)
         {
-            InitializeStatus();
             Employee = employee;
             UserStatus = employee.Status;
             if(UserStatus == null)
-                UserStatus = new Status(){id = -1};
+                UserStatus = new Status {id = -1};
             else
                 UserStatus.id -= 1;
-            //var listAbsenceType = ServiceSalaire.GetAbsenceTypes();
-            //AbsenceTypes = new ObservableCollection(listAbsenceType);
+            if(Employee.Salaries.Count == 0)
+                Employee.Salaries.Add(new Salary());
+            InitializeStatus();
+            InitializeAbsenceTypes();
+            InitializePrimes();
             _addPrimeClickCommand = new DelegateCommand<string>(
-                OnAddPrimeButtonClick,
-                s => !string.IsNullOrEmpty(InputPrimeName) && !string.IsNullOrEmpty(InputPrimePrice)
+                OnAddPrimeButtonClick/*,
+                s => !string.IsNullOrEmpty(InputPrimeName) && !string.IsNullOrEmpty(InputPrimePrice)*/
             );
             _addAbscenceClickCommand = new DelegateCommand<string>(OnAddAbscenceButtonClick);
             _regex = new Regex(@"[^0-9.,]+");
+            InputPrimeEnd = DateTime.Today;
             InputAbsenceStart = DateTime.Now;
             InputAbsenceEnd = DateTime.Now;
         }
 
+        private async void InitializePrimes()
+        {
+            try
+            {
+                var primes = ServiceSalaire.GetPrimesByUserId(Employee.Id);
+                Employee.Primes = primes;
+            }
+            catch (Exception) { }
+        }
+
         private async void InitializeStatus()
         {
-            var status = await ServiceSalaire.GetStateAsync();
-            if (ServiceSalaire != null) ListStatus = new ObservableCollection<Status>((IEnumerable<Status>)status);
+            try
+            {
+                var status = await ServiceSalaire.GetStateAsync();
+                if (ServiceSalaire != null) ListStatus = new ObservableCollection<Status>((IEnumerable<Status>) status);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Une erreur est survenue,\nveuillez réessayer", "Erreur", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+
+        private async void InitializeAbsenceTypes()
+        {
+            try
+            {
+                var listAbsencetypes = await ServiceSalaire.GetAbsenceTypesAsync();
+                AbsenceTypes = new ObservableCollection<AbsenceType>(listAbsencetypes);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Une erreur est survenue,\nveuillez réessayer", "Erreur", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
         }
 
         #region Commands
@@ -202,13 +248,14 @@ namespace WpfControlLibrarySalaire.ViewModels
             try
             {
                 decimal primePrice = decimal.Parse(InputPrimePrice);
-                if (InputPrimeName == string.Empty)
+                if (InputPrimeName == string.Empty || InputPrimeEnd < DateTime.Now)
                     throw new ArgumentNullException();
-                var newPrime = new Prime()
+                var newPrime = new Prime
                 {
                     Label = InputPrimeName,
                     Price = primePrice,
-                    StartDate = DateTime.Now
+                    StartDate = DateTime.Now,
+                    EndDate = InputPrimeEnd
                 };
                 var userId = Employee.Id;
                 ServiceSalaire.addPrime(userId, newPrime);
@@ -236,11 +283,13 @@ namespace WpfControlLibrarySalaire.ViewModels
         {
             try
             {
-                var newAbsence = new Absence()
+                if(AbsenceType == null || InputAbsenceStart > InputAbsenceEnd)
+                    throw new ArgumentNullException();
+                var newAbsence = new Absence
                 {
                     StartDate = InputAbsenceStart,
                     EndDate = InputAbsenceEnd,
-                    AbsenceType = AbsenceType
+                    AbsenceType_id = AbsenceType.id
                 };
                 var userId = Employee.Id;
                 ServiceSalaire.addAbsence(userId, newAbsence);
