@@ -22,7 +22,9 @@ namespace SupErp.BLL.FacturationBLL
 
         public List<ProductExtended> getListProductIncludedOrNot(long billquotation_id)
         {
-            return GetBillProduct().Select(p => new ProductExtended(p, billquotation_id)).ToList();
+            var listProduct = GetBillProduct();
+            var res = listProduct.Select(p => new ProductExtended(p, billquotation_id)).ToList();
+            return res;
         }
 
 
