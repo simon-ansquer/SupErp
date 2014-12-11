@@ -145,8 +145,8 @@ namespace WpfControlLibrarySalaire.ViewModels
             InitializeAbsenceTypes();
             InitializePrimes();
             _addPrimeClickCommand = new DelegateCommand<string>(
-                OnAddPrimeButtonClick,
-                s => !string.IsNullOrEmpty(InputPrimeName) && !string.IsNullOrEmpty(InputPrimePrice)
+                OnAddPrimeButtonClick/*,
+                s => !string.IsNullOrEmpty(InputPrimeName) && !string.IsNullOrEmpty(InputPrimePrice)*/
             );
             _addAbscenceClickCommand = new DelegateCommand<string>(OnAddAbscenceButtonClick);
             _regex = new Regex(@"[^0-9.,]+");
@@ -248,7 +248,7 @@ namespace WpfControlLibrarySalaire.ViewModels
             try
             {
                 decimal primePrice = decimal.Parse(InputPrimePrice);
-                if (InputPrimeName == string.Empty)
+                if (InputPrimeName == string.Empty || InputPrimeEnd < DateTime.Now)
                     throw new ArgumentNullException();
                 var newPrime = new Prime
                 {
@@ -283,6 +283,8 @@ namespace WpfControlLibrarySalaire.ViewModels
         {
             try
             {
+                if(AbsenceType == null || InputAbsenceStart > InputAbsenceEnd)
+                    throw new ArgumentNullException();
                 var newAbsence = new Absence
                 {
                     StartDate = InputAbsenceStart,
