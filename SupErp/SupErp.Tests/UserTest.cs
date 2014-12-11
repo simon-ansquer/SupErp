@@ -39,6 +39,14 @@ namespace SupErp.Tests
             Role newRole = new Role();
             newRole.Label = "Role de test";
 
+            RoleModule rm = userService.GetModules().First().RoleModules.First();
+            newRole.RoleModules.Add(new RoleModule() {
+                  Module = rm.Module,
+                  Module_id = rm.Module_id,
+                  Role = rm.Role,
+                  Role_id = rm.Role_id
+                });
+
             return userService.CreateRole(newRole);
         }
 
@@ -156,9 +164,7 @@ namespace SupErp.Tests
             List<Module> modules = userService.GetModules().ToList();
             RoleModule roleModule = new RoleModule();
             roleModule.Role_id = editRole.Id;
-            roleModule.Module = modules[0];
-            roleModule.Role = editRole;
-            roleModule.Module_id = modules[0].Id;
+            roleModule.Module_id = modules[1].Id;
 
             editRole.RoleModules.Add(roleModule);
 
