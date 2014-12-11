@@ -23,7 +23,6 @@
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="0.05*" />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0" Grid.Row="1" >
                 <Grid.RowDefinitions>
@@ -80,6 +79,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.8*" />
                         <RowDefinition Height="0.2*" />
+                        <RowDefinition Height="0.2*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.3*" />
@@ -103,11 +103,19 @@
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
+                            <DataGridTextColumn Width ="1*" Header="Fin" Binding="{Binding EndDate, StringFormat={}{0:dd\/MM\/yyyy}}" CanUserResize="False">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <TextBox Grid.Column="0" Grid.Row="1" BorderBrush="Black" Foreground="Black" FontSize="15" Text="{Binding InputPrimeName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                     <TextBox Grid.Column="1" Grid.Row="1" BorderBrush="Black" Foreground="Black" FontSize="15" Text="{Binding InputPrimePrice, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                    <Button Background="#4388CC" Grid.Row="1"  Grid.Column="2" Foreground="White" Content="Ajouter" FontSize="15"
+                    <DatePicker Grid.Column="2" Grid.Row="1" BorderBrush="Black" Foreground="Black" FontSize="15" SelectedDate="{Binding InputPrimeEnd, Mode=TwoWay}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                    <Button Background="#4388CC" Grid.Row="2"  Grid.Column="2" Foreground="White" Content="Ajouter" FontSize="15"
                             BorderThickness="0" Command="{Binding ButtonAddPrimeClickCommand}" />
                 </Grid>
                 <TextBlock Text="Absences" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" />

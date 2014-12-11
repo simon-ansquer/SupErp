@@ -74,6 +74,17 @@ namespace WpfControlLibrarySalaire.ViewModels
             }
         }
 
+        private DateTime _inputPrimeEnd;
+        public DateTime InputPrimeEnd
+        {
+            get { return _inputPrimeEnd; }
+            set
+            {
+                _inputPrimeEnd = value;
+                _addPrimeClickCommand.RaiseCanExecuteChanged();
+            }
+        }
+
         private DateTime _inputAbsenceStart;
         public DateTime InputAbsenceStart
         {
@@ -132,14 +143,26 @@ namespace WpfControlLibrarySalaire.ViewModels
                 Employee.Salaries.Add(new Salary());
             InitializeStatus();
             InitializeAbsenceTypes();
+            InitializePrimes();
             _addPrimeClickCommand = new DelegateCommand<string>(
                 OnAddPrimeButtonClick,
                 s => !string.IsNullOrEmpty(InputPrimeName) && !string.IsNullOrEmpty(InputPrimePrice)
             );
             _addAbscenceClickCommand = new DelegateCommand<string>(OnAddAbscenceButtonClick);
             _regex = new Regex(@"[^0-9.,]+");
+            InputPrimeEnd = DateTime.Today;
             InputAbsenceStart = DateTime.Now;
             InputAbsenceEnd = DateTime.Now;
+        }
+
+        private async void InitializePrimes()
+        {
+            try
+            {
+                var primes = ServiceSalaire.GetPrimesByUserId(Employee.Id);
+                Employee.Primes = primes;
+            }
+            catch (Exception) { }
         }
 
         private async void InitializeStatus()
@@ -231,7 +254,8 @@ namespace WpfControlLibrarySalaire.ViewModels
                 {
                     Label = InputPrimeName,
                     Price = primePrice,
-                    StartDate = DateTime.Now
+                    StartDate = DateTime.Now,
+                    EndDate = InputPrimeEnd
                 };
                 var userId = Employee.Id;
                 ServiceSalaire.addPrime(userId, newPrime);
