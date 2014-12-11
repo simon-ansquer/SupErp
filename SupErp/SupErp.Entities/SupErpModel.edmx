@@ -268,7 +268,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Prime">
@@ -293,7 +293,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Module_id" Type="bigint" Nullable="false" />
           <Property Name="Role_id" Type="bigint" Nullable="false" />
         </EntityType>
@@ -1113,7 +1113,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RoleModules" Relationship="SUPERPModel.FK_RoleModule_Module" FromRole="Module" ToRole="RoleModule" />
         </EntityType>
@@ -1142,7 +1142,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Module_id" Type="Int64" Nullable="false" />
           <Property Name="Role_id" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Module" Relationship="SUPERPModel.FK_RoleModule_Module" FromRole="RoleModule" ToRole="Module" />

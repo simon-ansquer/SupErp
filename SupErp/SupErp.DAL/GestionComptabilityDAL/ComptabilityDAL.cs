@@ -16,7 +16,8 @@ namespace SupErp.DAL.GestionComptabilityDAL
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.COMPTA_ClassOfAccounts.Include("COMPTA_ChartOfAccounts");
+                return context.COMPTA_ClassOfAccounts
+                    .Include("COMPTA_ChartOfAccounts").ToList();
             }
         }
 
@@ -26,7 +27,7 @@ namespace SupErp.DAL.GestionComptabilityDAL
             {
                 return context.COMPTA_ChartOfAccounts
                     .Include("COMPTA_AccountingEntries")
-                    .Include("COMPTA_ClassOfAccounts");
+                    .Include("COMPTA_ClassOfAccounts").ToList();
             }
         }
 
@@ -65,11 +66,23 @@ namespace SupErp.DAL.GestionComptabilityDAL
             }
         }
 
-        public IEnumerable<COMPTA_AccountingEntries> GetAccountingEntries()
+        public List<COMPTA_AccountingEntries> GetAccountingEntries()
         {
             using(SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.COMPTA_AccountingEntries.Include("COMPTA_ChartOfAccounts");
+                return context.COMPTA_AccountingEntries
+                    .Include("COMPTA_AccountingEntries_Periodicity")
+                    .Include("COMPTA_ChartOfAccounts").ToList();
+            }
+        }
+
+        public List<COMPTA_AccountingEntries> GetAccountingEntriesTop1 ()
+        {
+            using ( SUPERPEntities context = new SUPERPEntities(false) )
+            {
+                return context.COMPTA_AccountingEntries
+                    .Include("COMPTA_AccountingEntries_Periodicity")
+                    .Include("COMPTA_ChartOfAccounts").ToList();
             }
         }
 

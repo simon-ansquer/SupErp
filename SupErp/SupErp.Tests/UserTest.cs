@@ -17,8 +17,6 @@ namespace SupErp.Tests
         public void TestInitialize()
         {
             userService = new UserService();
-            //CreateTestUser();
-            //CreateTestRole();
         }
 
         private User CreateTestUser()
@@ -155,6 +153,15 @@ namespace SupErp.Tests
             Role editRole = (userService.GetRoles().ToList()).Last();
             editRole.Label += " - Test de modification";
 
+            List<Module> modules = userService.GetModules().ToList();
+            RoleModule roleModule = new RoleModule();
+            roleModule.Role_id = editRole.Id;
+            roleModule.Module = modules[0];
+            roleModule.Role = editRole;
+            roleModule.Module_id = modules[0].Id;
+
+            editRole.RoleModules.Add(roleModule);
+
             Assert.IsNotNull(userService.EditRole(editRole));
         }
 
@@ -167,8 +174,9 @@ namespace SupErp.Tests
         [TestMethod]
         public void TestDeleteUser()
         {
-            //User user = userService.GetUsers().ToList().Last();
-            //Assert.IsTrue(userService.DeleteUser((int) user.Id));
+            CreateTestUser();
+            User user = userService.GetUsers().ToList().Last();
+            Assert.IsTrue(userService.DeleteUser((int) user.Id));
         }
 
         [TestMethod]
@@ -180,8 +188,9 @@ namespace SupErp.Tests
         [TestMethod]
         public void TestDeleteRole()
         {
-            //Role role = userService.GetRoles().ToList().Last();
-            //Assert.IsTrue(userService.DeleteRole((int) role.Id));
+            CreateTestRole();
+            Role role = userService.GetRoles().ToList().Last();
+            Assert.IsTrue(userService.DeleteRole((int) role.Id));
         }
 
         [TestMethod]
