@@ -65,6 +65,7 @@ namespace SupErp.Tests
             var bc = clientService.GetBillQuotation(13);
             Assert.AreNotEqual(bc,null);
         }
+
         //[OperationContract]
         //List<LineExtended> GetAllLines(long billQuotation_id);
 
