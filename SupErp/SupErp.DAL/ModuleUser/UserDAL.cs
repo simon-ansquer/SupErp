@@ -116,7 +116,22 @@ namespace SupErp.DAL.ModuleUser
 
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var r = context.Roles.Add(roleToAdd);
+                var r = context.Roles.Add(new Role()
+                    {
+                        Label = roleToAdd.Label,
+                        Users = new List<User>(),
+                        RoleModules = new List<RoleModule>()
+                    });
+                context.SaveChanges();
+
+                foreach(RoleModule rm in roleToAdd.RoleModules)
+                {
+                    context.RoleModules.Add(new RoleModule() { 
+                        Role_id = r.Id,
+                        Module_id = rm.Module_id
+                    });
+                }
+
                 context.SaveChanges();
                 return r;
             }
