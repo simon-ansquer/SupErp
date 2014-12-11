@@ -16,9 +16,9 @@
             <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
         <Button Content="Ajouter un client"
-        		Command="{Binding AddCustomer}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click_1"/>
+        		Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CreateCustomer"/>
         <Button Content="Ajouter un contact"
-        		Command="{Binding AddContact}" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Button_Click"/>
+        		Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="CreateContact"/>
 
         <DataGrid ItemsSource="{Binding CompanyCollection}"
                   Name="dataGrid1"

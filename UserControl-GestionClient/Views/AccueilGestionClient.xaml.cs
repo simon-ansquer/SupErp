@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UserControl_GestionClient.Helpers;
 using UserControl_GestionClient.Models;
+using UserControl_GestionClient.ViewModels;
 
 namespace UserControl_GestionClient.Views
 {
@@ -27,16 +28,22 @@ namespace UserControl_GestionClient.Views
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CreateCustomer(object sender, RoutedEventArgs e)
         {
             //NavigationService.GetNavigationService(this).Navigate(new CreateCustomer());
             Switcher.Switch(new CreateCustomer());
         }
+        private void CreateContact(object sender, RoutedEventArgs e)
+        {
+            //NavigationService.GetNavigationService(this).Navigate(new CreateCustomer());
+            Switcher.Switch(new CreateContact());
+        }
 
         private void CompanyDetails(object sender, RoutedEventArgs e)
         {
-            var obj = (Company)dataGrid1.SelectedItem;
-            NavigationService.GetNavigationService(this).Navigate(new CreateCustomer());
+            Company obj = (Company)dataGrid1.SelectedItem;
+            var employeeDetails = new DetailCustomer(new DetailCustomerViewModel(obj));
+            Switcher.Switch(employeeDetails);
         }
 
         private void CompanyDelete(object sender, RoutedEventArgs e)
