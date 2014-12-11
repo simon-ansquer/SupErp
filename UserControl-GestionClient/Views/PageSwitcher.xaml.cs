@@ -17,24 +17,20 @@ using UserControl_GestionClient.Helpers;
 namespace UserControl_GestionClient.Views
 {
     /// <summary>
-    /// Logique d'interaction pour AccueilGestionClient.xaml
+    /// Logique d'interaction pour PageSwitcher.xaml
     /// </summary>
-    public partial class AccueilGestionClient : UserControl
+    public partial class PageSwitcher : UserControl
     {
-        public AccueilGestionClient()
+        public PageSwitcher()
         {
             InitializeComponent();
+            Switcher.PageSwitcher = this;
+            Switcher.Switch(new AccueilGestionClient());
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        internal void Navigate(UserControl goToUserControl)
         {
-            //NavigationService.GetNavigationService(this).Navigate(new CreateCustomer());
-            Switcher.Switch(new CreateCustomer());
-        }
-
-        private void CompanyDetails(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GetNavigationService(this).Navigate(new CreateCustomer());
+            this.Content = goToUserControl;
         }
     }
 }
