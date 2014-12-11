@@ -70,14 +70,43 @@ namespace SupErpModuleUser.ViewModels
             {
                 if(module.IsSelected)
                 {
-                    Role.Modules.ToList().Add(module);
+                    if (Role.Modules == null)
+                        Role.Modules = new List<IHMModule>();
+                    IHMModule m = null;
+                    if((m = Role.Modules.FirstOrDefault(x=>x.Id == module.Id)) == null)
+                    {
+                        Role.Modules = Role.Modules.ToList();
+                        ((List<IHMModule>)Role.Modules).Add(module);
+                    }
+                }else
+                {
+                    IHMModule m = null;
+                    if ((m = Role.Modules.FirstOrDefault(x => x.Id == module.Id)) != null)
+                    {
+                        Role.Modules = Role.Modules.ToList();
+                        ((List<IHMModule>)Role.Modules).Remove(Role.Modules.FirstOrDefault(x=>x.Id == m.Id));
+                    }
                 }
             }
 
             if (Role.IsNew)
-                new UserService.UserServiceClient().CreateRole(Role.ToRole());
+            {
+                using (UserServiceClient ws = new UserServiceClient())
+                {
+                    var newRole = Role.ToRole();
+                    if (newRole != null)
+                        ws.CreateRole(newRole);
+                }
+            }
             else
-                new UserService.UserServiceClient().EditRole(Role.ToRole());
+            {
+                using (UserServiceClient ws = new UserServiceClient())
+                {
+                    var newRole = Role.ToRole();
+                    if (newRole != null)
+                        ws.EditRole(newRole);
+                }
+            }
 
             Switcher.Switch(new ListRoleUserControl());
         }
