@@ -48,12 +48,12 @@
             <Button Grid.Column="5" Background="#4388CC" Foreground="White" Content="Exporter PDF" FontSize="15"
                         BorderThickness="0" Command="{Binding GeneratePdfCommand}"/>
         </Grid>
-        <DataGrid x:Name="DataGridEmployees" ItemsSource="{Binding Path=Employees}" Grid.Row="4" GridLinesVisibility="Horizontal" FontSize="15" HorizontalGridLinesBrush="Silver"  HorizontalAlignment="Stretch" SelectionMode="Single"
-                      AlternatingRowBackground="#FFCCCCCC" AlternationCount="1" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"
-                      Grid.Column="0" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="True" CanUserResizeRows="False" CanUserAddRows="False">
-
+        <DataGrid x:Name="DataGridEmployees" ItemsSource="{Binding Path=Employees}" Grid.Row="4" GridLinesVisibility="Horizontal" FontSize="15" HorizontalGridLinesBrush="Silver"  
+                  HorizontalAlignment="Stretch" SelectionMode="Single" AlternatingRowBackground="#FFCCCCCC" AlternationCount="1" AutoGenerateColumns="False" 
+                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2" Grid.Column="0" CanUserReorderColumns="False" 
+                  CanUserResizeColumns="False" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width ="1*" Header="Nom" CanUserSort="True" CanUserResize="False" IsReadOnly="True">
+                <DataGridTemplateColumn Width ="1*" Header="Nom" CanUserSort="True" >
                     <DataGridTemplateColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />

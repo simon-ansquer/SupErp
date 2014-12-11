@@ -144,14 +144,30 @@ namespace WpfControlLibrarySalaire.ViewModels
 
         private async void InitializeStatus()
         {
-            var status = await ServiceSalaire.GetStateAsync();
-            if (ServiceSalaire != null) ListStatus = new ObservableCollection<Status>((IEnumerable<Status>)status);
+            try
+            {
+                var status = await ServiceSalaire.GetStateAsync();
+                if (ServiceSalaire != null) ListStatus = new ObservableCollection<Status>((IEnumerable<Status>) status);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Une erreur est survenue,\nveuillez réessayer", "Erreur", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
         }
 
         private async void InitializeAbsenceTypes()
         {
-            var listAbsencetypes = await ServiceSalaire.GetAbsenceTypesAsync();
-            AbsenceTypes = new ObservableCollection<AbsenceType>(listAbsencetypes);
+            try
+            {
+                var listAbsencetypes = await ServiceSalaire.GetAbsenceTypesAsync();
+                AbsenceTypes = new ObservableCollection<AbsenceType>(listAbsencetypes);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Une erreur est survenue,\nveuillez réessayer", "Erreur", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
         }
 
         #region Commands
