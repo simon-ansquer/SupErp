@@ -14,6 +14,8 @@ namespace SupErpModuleUser.Helpers
 
         public static void Switch(UserControl newPage)
         {
+            if(PageSwitcher == null)
+                PageSwitcher = new PageSwitcher();
             PageSwitcher.Navigate(newPage);
         }
     }
