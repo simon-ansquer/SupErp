@@ -35,6 +35,7 @@ namespace UserControl_GestionClient.ViewModels
 
         public CreateContactViewModel()
         {
+            ListEntreprise = new Dictionary<long,string>();
             using (var ws = new ClientServiceGestionClient.ServiceGestionClientClient())
             {
                 List<ClientServiceGestionClient.Company> companies = ws.GetListCompany().ToList();

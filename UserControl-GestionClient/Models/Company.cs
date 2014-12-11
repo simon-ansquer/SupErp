@@ -14,6 +14,6 @@ namespace UserControl_GestionClient.Models
         public string address { get; set; }
         public int postalcode { get; set; }
         public string city { get; set; }
-        public virtual ICollection<Company_Contact> Company_Contact { get; set; }
+        public virtual ICollection<Contact> Company_Contact { get; set; }
     }
 }

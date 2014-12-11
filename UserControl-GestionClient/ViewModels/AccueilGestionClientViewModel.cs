@@ -53,12 +53,24 @@ namespace UserControl_GestionClient.ViewModels
             }
         }
 
-        
-        //public ICommand AddCustomer { get { return new DelegateCommand(AddNewCustomer); } }
-        //private void AddNewCustomer(object parameter)
-        //{
-            
-        //}
 
+        public ICommand AddCustomer { get { return new DelegateCommand(AddNewCustomer); } }
+        private void AddNewCustomer(object parameter)
+        {
+
+        }
+
+        public ICommand AddContact { get { return new DelegateCommand(AddNewContact); } }
+        private void AddNewContact(object parameter)
+        {
+
+        }
+
+        public ICommand DetailCustomer { get { return new DelegateCommand(DetailCusto); } }
+        private void DetailCusto(object parameter)
+        {
+            int id = Convert.ToInt32(((Button)parameter).Tag);
+            var CustomerDetail = new DetailCustomer(new DetailCustomerViewModel(id));
+        }
     }
 }
