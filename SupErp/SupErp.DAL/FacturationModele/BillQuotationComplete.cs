@@ -22,8 +22,8 @@ namespace SupErp.DAL.FacturationModele
             var DALbill = new FacturationDAL.LineBillQuotationDAL();
             lines = DALbill.GetLineBillQuotation(bill_billQuotation.BillQuotation_Id).Select(l => new LineCompleted(l)).ToList();
 
-            //var DALstatusChain = new FacturationDAL.StatusChainDAL();
-            //statusPossible = DALstatusChain.GetStatusChain(bill_billQuotation.BILL_BillQuotationStatus.OrderByDescending(s => s.DateAdvancement).First().Status_Id);
+            var DALstatusChain = new FacturationDAL.StatusChainDAL();
+            statusPossible = DALstatusChain.GetStatusChain(bill_billQuotation.BILL_BillQuotationStatus.OrderByDescending(s => s.DateAdvancement).First().Status_Id);
         }
     }
 }

@@ -26,27 +26,7 @@ namespace SupErp.DAL.FacturationDAL
             }
             return result;
         }
-
-        public List<BILL_BillQuotation> GetBillQuotationCompleted()
-        {
-            var result = new List<BILL_BillQuotation>();
-            try
-            {
-                using (SUPERPEntities context = new SUPERPEntities(false))
-                {
-                    result = context.BILL_BillQuotation.Include("Company").Include("BILL_Transmitter").Include("BILL_LineBillQuotation")
-                        .Include("BILL_LineBillQuotation.BILL_Product").Include("BILL_LineBillQuotation.BILL_Product.BILL_Vat")
-                        .Include("BILL_BillQuotationStatus").Include("BILL_BillQuotationStatus.BILL_Status")
-                        .Include("BILL_LineBillQuotation.BILL_Product.BILL_Category").ToList();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return result;
-        }
-
+        
         public List<BILL_BillQuotation> GetBills()
         {
             var result = new List<BILL_BillQuotation>();

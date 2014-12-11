@@ -328,6 +328,8 @@ namespace SupErp.BLL.ComptabilityBLL
                     tempList.Add(newEntry);
                 }
 
+                List<COMPTA_AccountingEntries> tempResult = new List<COMPTA_AccountingEntries>();
+
                 tempList.ForEach(delegate( COMPTA_AccountingEntries entry )
                 {
                     var resultTemp = comptabilityDal.GetAccountingEntriesPeriodicityById(entry.id);
@@ -357,39 +359,51 @@ namespace SupErp.BLL.ComptabilityBLL
                         int month = entry.postingDate.Value.Month;
                         //tant que refTime n'est pas supérieure ou égal a EndTime
                         // Je crée des nouvelles entrée tout les X Mois
-                        //j'incrémente refTime de X mois 
-                        while ( refTime.Month < refEndTime.Month || refTime.Month == refEndTime.Month && refTime.Year < refTime.Year || refEndTime.Year == refEndTime.Year )
+                        //j'incrémente refTime de X mois
+                        int previousYear = 0;
+                        int count = 0;
+                        while ( refTime <= refEndTime)
                         {
+                            if ( count > 6424 )
+                                count = 6424;
                             month += iteratorMonth;
                             int addYear = 0;
-                            while ( month > 13 )
+                            while ( month > 12 )
                             {
-                                month = -12;
+                                month += -12;
                                 addYear++;
                             }
+                            
+                            DateTime newDateTime;
 
-                            DateTime newDateTime = new DateTime(entry.postingDate.Value.Year + addYear, month, entry.postingDate.Value.Day);
+                            if ( previousYear == 0 )
+                                newDateTime = new DateTime(refTime.Year + addYear, month, refTime.Day);
+                            else
+                                newDateTime = new DateTime(refTime.Year + addYear, month, refTime.Day);
 
-                            if ( newDateTime < periode.endDate )
+                            
+                            COMPTA_AccountingEntries newEntry = new COMPTA_AccountingEntries()
                             {
-                                COMPTA_AccountingEntries newEntry = new COMPTA_AccountingEntries()
-                                {
-                                    amount = entry.amount,
-                                    chartOfAccount_id = entry.chartOfAccount_id,
-                                    direction = entry.direction,
-                                    postingDate = newDateTime
-                                };
+                                amount = entry.amount,
+                                chartOfAccount_id = entry.chartOfAccount_id,
+                                direction = entry.direction,
+                                postingDate = newDateTime
+                            };
 
-                                tempList.Add(newEntry);
+                            previousYear = newDateTime.Year;
+                            tempResult.Add(newEntry);
 
-                                refTime = newDateTime;
-                            }
+                                
+                            refTime = newDateTime;
+                            count++;
                         }
 
 
                     }
 
                 });
+
+                tempList.AddRange(tempResult);
                 
                 accountingResult = tempList;
 
@@ -516,9 +530,9 @@ namespace SupErp.BLL.ComptabilityBLL
                         {
                             int month2 = entry.postingDate.Value.Month + i;
                             int addYear = 0;
-                            while ( month2 > 13 )
+                            while ( month2 > 12 )
                             {
-                                month2 = -12;
+                                month2 += -12;
                                 addYear++;
                             }
 
@@ -628,9 +642,9 @@ namespace SupErp.BLL.ComptabilityBLL
                         {
                             int month = entry.postingDate.Value.Month + i;
                             int addYear = 0;
-                            while(month > 13)
+                            while(month > 12)
                             {
-                                month =- 12;
+                                month += -12;
                                 addYear++;
                             }
 

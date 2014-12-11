@@ -116,7 +116,22 @@ namespace SupErp.DAL.ModuleUser
 
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var r = context.Roles.Add(roleToAdd);
+                var r = context.Roles.Add(new Role()
+                    {
+                        Label = roleToAdd.Label,
+                        Users = new List<User>(),
+                        RoleModules = new List<RoleModule>()
+                    });
+                context.SaveChanges();
+
+                foreach(RoleModule rm in roleToAdd.RoleModules)
+                {
+                    context.RoleModules.Add(new RoleModule() { 
+                        Role_id = r.Id,
+                        Module_id = rm.Module_id
+                    });
+                }
+
                 context.SaveChanges();
                 return r;
             }
@@ -168,6 +183,9 @@ namespace SupErp.DAL.ModuleUser
                 if (r == null)
                     return null;
 
+                context.RoleModules.RemoveRange(r.RoleModules);
+                context.SaveChanges();
+                r.RoleModules.Clear();
                 foreach (var rm in roleToEdit.RoleModules)
                 {
                     RoleModule rrm = null;
@@ -175,9 +193,7 @@ namespace SupErp.DAL.ModuleUser
                     {
                         listToAdd.Add(new RoleModule()
                         {
-                            Module = rm.Module,
                             Module_id = rm.Module_id,
-                            Role = rm.Role,
                             Role_id = rm.Role_id
                         });
                     }

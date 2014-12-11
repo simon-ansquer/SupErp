@@ -20,38 +20,7 @@ namespace SupErp.BLL.FacturationBLL
             return DAL.GetStatus();
         }
 
-        public BILL_Status GetStatusById(int id)
-        {
-            return DAL.GetStatusById(id);
-        }
-
         #endregion
 
-        #region Create
-
-        public BILL_Status CreateStatus(BILL_Status billStatusToAdd)
-        {
-            return DAL.CreateStatus(billStatusToAdd);
-        }
-
-        #endregion
-
-        #region Edit
-
-        public BILL_Status EditBillQuotation(BILL_Status billStatusToEdit)
-        {
-            return DAL.EditBillQuotation(billStatusToEdit);
-        }
-
-        #endregion
-
-        #region Delete
-
-        public bool DeleteStatus(long id)
-        {
-            return DAL.DeleteStatus(id);
-        }
-
-        #endregion
     }
 }
