@@ -1,17 +1,16 @@
-﻿using System;
+﻿using SupErp.DAL.FacturationDAL;
+using SupErp.DAL.FacturationModele;
+using SupErp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SupErp.DAL.FacturationDAL;
-using SupErp.Entities;
-using SupErp.DAL.FacturationModele;
 
 namespace SupErp.BLL.FacturationBLL
 {
     public class BillQuotationBLL
     {
         private static readonly Lazy<BillQuotationDAL> LazyBillQuotationDAL = new Lazy<BillQuotationDAL>(() => new BillQuotationDAL());
+
         private static BillQuotationDAL billQuotationDAL { get { return LazyBillQuotationDAL.Value; } }
 
         #region Read
@@ -25,7 +24,11 @@ namespace SupErp.BLL.FacturationBLL
         {
             var tmp = billQuotationDAL.GetBillByNum(numBill);
 
-            return new BillQuotationLight(tmp);
+            BillQuotationLight bill = null;
+            if (tmp != null)
+                bill = new BillQuotationLight(tmp);
+
+            return bill;
         }
 
         public IEnumerable<BillQuotationLight> GetBills()
@@ -44,9 +47,10 @@ namespace SupErp.BLL.FacturationBLL
             try
             {
                 var list = billQuotationDAL.GetBillQuotation().Select(b => new BillQuotationLight(b)).Where(bq => bq.BillStatus.Status_Id == status.Status_Id);
-                
+                if (list != null && list.Count() > 0)
+                    res = list.ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(" BillQuotationBLL >> GetBillQuotationByStatus :" + ex.Message);
             }
@@ -63,17 +67,17 @@ namespace SupErp.BLL.FacturationBLL
             return new BillQuotationComplete(billQuotationDAL.GetBillQuotationsById(id));
         }
 
-        #endregion
+        #endregion Read
 
         #region Create
 
         public BILL_BillQuotation CreateBillQutotation(BILL_BillQuotation billQuotationToAdd)
         {
-            billQuotationToAdd.NBill = billQuotationDAL.getMaxNum();
+            billQuotationToAdd.NBill = BillQuotationDAL.getMaxNum();
             return billQuotationDAL.CreateBillQutotation(billQuotationToAdd);
         }
 
-        #endregion
+        #endregion Create
 
         #region Edit
 
@@ -82,7 +86,7 @@ namespace SupErp.BLL.FacturationBLL
             return billQuotationDAL.EditBillQuotation(billQuotationToEdit);
         }
 
-        #endregion
+        #endregion Edit
 
         #region Delete
 
@@ -91,7 +95,11 @@ namespace SupErp.BLL.FacturationBLL
             return billQuotationDAL.DeleteBillQuotation(id);
         }
 
-        #endregion
+        #endregion Delete
 
+        public void SetNumFacture()
+        {
+            billQuotationDAL.SetNumFacture();
+        }
     }
 }

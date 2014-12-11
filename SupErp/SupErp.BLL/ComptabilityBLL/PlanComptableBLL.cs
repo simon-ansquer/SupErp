@@ -156,9 +156,9 @@ namespace SupErp.BLL.ComptabilityBLL
         /// <returns></returns>
         public IEnumerable<Entries> GetEntries ( EntriesTypeEnum? type, bool? paye, bool? impaye, DateTime? Debut, DateTime? Fin )
         {
-            var bankResult = comptabilityDal.GetBankJournalLines();
-            var supplierResult = comptabilityDal.GetSupplierJournalLines();
-            var customerResult = comptabilityDal.GetCustomerJournalLines();
+            IEnumerable<COMPTA_BankJournalLine> bankResult = null;// comptabilityDal.GetBankJournalLines();
+            IEnumerable<COMPTA_SupplierJournalLine> supplierResult = null;// comptabilityDal.GetSupplierJournalLines();
+            IEnumerable<COMPTA_CustomerJournalLine> customerResult = null;// comptabilityDal.GetCustomerJournalLines();
             var accountingResult = comptabilityDal.GetAccountingEntries();
 
             List<COMPTA_BankJournalLine> resultBank = new List<COMPTA_BankJournalLine>();
@@ -312,7 +312,21 @@ namespace SupErp.BLL.ComptabilityBLL
 
             if ( accountingResult != null )
             {
-                List<COMPTA_AccountingEntries> tempList = new List<COMPTA_AccountingEntries>(accountingResult);
+                List<COMPTA_AccountingEntries> tempList = new List<COMPTA_AccountingEntries>();
+
+                foreach ( var item in accountingResult )
+                {
+                    COMPTA_AccountingEntries newEntry = new COMPTA_AccountingEntries()
+                    {
+                        amount = item.amount,
+                        chartOfAccount_id = item.chartOfAccount_id,
+                        direction = item.direction,
+                        id = item.id,
+                        postingDate = item.postingDate
+                    };
+
+                    tempList.Add(newEntry);
+                }
 
                 tempList.ForEach(delegate( COMPTA_AccountingEntries entry )
                 {
@@ -330,11 +344,11 @@ namespace SupErp.BLL.ComptabilityBLL
 
                         int iteratorMonth = 0;
 
-                        if ( periode.Libelle == "Mensuel" )
+                        if ( periode.Libelle == "Mensuelle" )
                             iteratorMonth = 1;
-                        if ( periode.Libelle == "Annuel" )
+                        if ( periode.Libelle == "Annuelle" )
                             iteratorMonth = 12;
-                        if ( periode.Libelle == "Trimestriel" )
+                        if ( periode.Libelle == "Trimestrielle" )
                             iteratorMonth = 3;
 
                         DateTime refTime = new DateTime(entry.postingDate.Value.Year, entry.postingDate.Value.Month, entry.postingDate.Value.Day);
@@ -399,8 +413,8 @@ namespace SupErp.BLL.ComptabilityBLL
                 else if ( Fin.HasValue )
                     resultAccounting = new List<COMPTA_AccountingEntries>(resultAccounting.Where(x => x.postingDate.Value < Fin.Value));
 
-                if ( noFilter )
-                    resultAccounting = new List<COMPTA_AccountingEntries>(accountingResult);
+                
+                resultAccounting = new List<COMPTA_AccountingEntries>(accountingResult);
 
                 resultAccounting.ForEach(delegate( COMPTA_AccountingEntries entry )
                 {
@@ -442,27 +456,25 @@ namespace SupErp.BLL.ComptabilityBLL
 
             if (Mode == BilanComptableModeEnum.Month)
             {
-                CreateBilanComptableModeYear(accountLines, Debut.Value, Fin.Value, out listBilan);
+                CreateBilanComptableModeMonth(accountLines, Debut.Value, Fin.Value, out listBilan);
                 return listBilan;
             }
             else if ( Mode == BilanComptableModeEnum.Year )
             {
-                CreateBilanComptableModeMonth(accountLines, Debut.Value, Fin.Value, out listBilan);
+                CreateBilanComptableModeYear(accountLines, Debut.Value, Fin.Value, out listBilan);
                 return listBilan;
             }
             return null;
         }
 
-        private void CreateBilanComptableModeMonth(IEnumerable<COMPTA_AccountingEntries> accountLines, DateTime Debut, DateTime Fin, out List<BilanComptable> bilan)
+        private void CreateBilanComptableModeYear(IEnumerable<COMPTA_AccountingEntries> accountLines, DateTime Debut, DateTime Fin, out List<BilanComptable> bilan)
         {
             DateTime refTime = Debut;
             DateTime refEndTime = Fin;
+            
+            int Capacity = 0;
 
-            int yearDifference, month;
-
-            yearDifference = Debut.Year - Fin.Year;
-
-            int Capacity = ( 12 - ( Debut.Month - 1 ) + 12 * yearDifference + Fin.Month );
+            Capacity = ( Debut.Year - Fin.Year ) + 1;
 
             bilan = new List<BilanComptable>(Capacity);
 
@@ -471,7 +483,7 @@ namespace SupErp.BLL.ComptabilityBLL
             while ( refTime.Year != refEndTime.Year + 1 )
             {
                 // On récupère les lignes correspondante à notre année de réfèrence
-                var result = accountLines.Where(x => x.postingDate.HasValue && x.postingDate.Value.Year == refTime.Year);
+                var result = accountLines.Where(x => x.postingDate.HasValue && x.postingDate.Value.Year == refTime.Year && x.chartOfAccount_id == 449);
 
                 List<COMPTA_AccountingEntries> tempList = new List<COMPTA_AccountingEntries>(result);
 
@@ -491,11 +503,11 @@ namespace SupErp.BLL.ComptabilityBLL
 
                         int iteratorMonth = 0;
 
-                        if ( periode.Libelle == "Mensuel" )
+                        if ( periode.Libelle == "Mensuelle" )
                             iteratorMonth = 1;
-                        if ( periode.Libelle == "Annuel" )
+                        if ( periode.Libelle == "Annuelle" )
                             iteratorMonth = 12;
-                        if ( periode.Libelle == "Trimestriel" )
+                        if ( periode.Libelle == "Trimestrielle" )
                             iteratorMonth = 3;
 
 
@@ -529,7 +541,8 @@ namespace SupErp.BLL.ComptabilityBLL
                     }
                 });
 
-                accountLines = tempList;
+                //accountLines = tempList;
+                result = tempList;
 
                 if ( result != null )
                 {
@@ -540,12 +553,13 @@ namespace SupErp.BLL.ComptabilityBLL
                     // Pour chaque ligne récupère on affecte ça valeur positive ou négative selon sa direction
                     foreach ( var lineAccount in result )
                     {
-                        if ( lineAccount.amount.HasValue && lineAccount.direction.HasValue )
-                            tempBilan.Amount += lineAccount.direction == false ? -lineAccount.amount.Value : lineAccount.amount.Value;
+                        decimal temp = tempBilan.Amount;
+                        decimal income = lineAccount.direction == false ? -lineAccount.amount.Value : lineAccount.amount.Value;
+                        tempBilan.Amount = temp + income;
                     }
 
                     // On assigne la valeur du Bilan temporaire à la listeFinale au niveau de l'index courant
-                    bilan[count] = tempBilan;
+                    bilan.Add(tempBilan);
                     // On incrémente l'index
                     count++;
 
@@ -558,20 +572,30 @@ namespace SupErp.BLL.ComptabilityBLL
             }
         }
 
-        private void CreateBilanComptableModeYear ( IEnumerable<COMPTA_AccountingEntries> accountLines, DateTime Debut, DateTime Fin, out List<BilanComptable> bilan )
+        private void CreateBilanComptableModeMonth ( IEnumerable<COMPTA_AccountingEntries> accountLines, DateTime Debut, DateTime Fin, out List<BilanComptable> bilan )
         {
             DateTime refTime = Debut;
             DateTime refEndTime = Fin;
 
-            int Capacity = (Debut.Year - Fin.Year) + 1;
+            int Capacity = 0;
+
+            int yearDifference;
+
+            yearDifference = Debut.Year - Fin.Year;
+
+            if ( yearDifference == 0 )
+                Capacity = ( 12 - ( Debut.Month - 1 ) + 12 * yearDifference );
+            else
+                Capacity = ( 12 - ( Debut.Month - 1 ) + 12 * yearDifference + Fin.Month );
+            
             int count = 0;
 
             bilan = new List<BilanComptable>(Capacity);
 
-            while ( refTime.Month != refEndTime.Month + 1 && refTime.Year != refEndTime.Year )
+            while ( refTime.Month != refEndTime.Month + 1 && refTime.Year == refEndTime.Year )
             {
                 // On récupère les lignes correspondante à notre mois et notre année de réfèrence
-                var result = accountLines.Where(x => x.postingDate.HasValue && x.postingDate.Value.Month == refTime.Month && x.postingDate.Value.Year == refTime.Year);
+                var result = accountLines.Where(x => x.postingDate.HasValue && x.postingDate.Value.Month == refTime.Month && x.postingDate.Value.Year == refTime.Year  && x.chartOfAccount_id == 449);
 
                 List<COMPTA_AccountingEntries> tempList = new List<COMPTA_AccountingEntries>(result);
 
@@ -591,11 +615,11 @@ namespace SupErp.BLL.ComptabilityBLL
 
                         int iteratorMonth = 0;
 
-                        if ( periode.Libelle == "Mensuel" )
+                        if ( periode.Libelle == "Mensuelle" )
                             iteratorMonth = 1;
-                        if ( periode.Libelle == "Annuel" )
+                        if ( periode.Libelle == "Annuelle" )
                             iteratorMonth = 12;
-                        if ( periode.Libelle == "Trimestriel" )
+                        if ( periode.Libelle == "Trimestrielle" )
                             iteratorMonth = 3;
 
                        
@@ -629,7 +653,8 @@ namespace SupErp.BLL.ComptabilityBLL
                     }
                 });
 
-                accountLines = tempList;
+                //accountLines = tempList;
+                result = tempList;
 
                 if ( result != null )
                 {
@@ -641,11 +666,15 @@ namespace SupErp.BLL.ComptabilityBLL
                     foreach ( var lineAccount in result )
                     {
                         if ( lineAccount.amount.HasValue && lineAccount.direction.HasValue )
-                            tempBilan.Amount += lineAccount.direction == false ? -lineAccount.amount.Value : lineAccount.amount.Value;
+                        {
+                            decimal temp = tempBilan.Amount;
+                            decimal income = lineAccount.direction == false ? -lineAccount.amount.Value : lineAccount.amount.Value;
+                            tempBilan.Amount = temp + income;
+                        }
                     }
 
                     // On assigne la valeur du Bilan temporaire à la listeFinale au niveau de l'index courant
-                    bilan[count] = tempBilan;
+                    bilan.Add(tempBilan);
                     // On incrémente l'index
                     count++;
 

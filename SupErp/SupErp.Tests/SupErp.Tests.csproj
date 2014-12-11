@@ -88,7 +88,7 @@
       <Name>SupErp.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\SupErp.WCF\SupErp.WCF.csproj">
-      <Project>{DDDB3846-F079-4103-B316-1EB8EDB76090}</Project>
+      <Project>{dddb3846-f079-4103-b316-1eb8edb76090}</Project>
       <Name>SupErp.WCF</Name>
     </ProjectReference>
   </ItemGroup>

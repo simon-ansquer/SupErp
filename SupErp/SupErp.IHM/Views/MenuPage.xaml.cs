@@ -34,13 +34,18 @@ namespace SupErp.IHM.Views
         {
             InitializeComponent();
 
+            RedefineScreenSize();
             MainMenus = mainMenus;
             SubMenus = new List<Grid>();
-            ScreenHeight = StaticParams.ScreenHeight;
-            ScreenWidth = StaticParams.ScreenWidth;
             Menus.ItemsSource = MainMenus;
-
             SetTextSize();
+        }
+
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
+            RedefineScreenSize();
+            SetTextSize();
+            ClearSubMenus(true);
         }
 
         private void SetTextSize()
@@ -49,21 +54,6 @@ namespace SupErp.IHM.Views
             LogOut.FontSize = ScreenHeight / 40;
             LogOutImage.Width = ScreenHeight / 25;
             LogOutImage.Height = ScreenHeight / 25;
-
-            //Connexion.FontSize = ScreenHeight / 35;
-
-            //LoginTbl.FontSize = ScreenHeight / 45;
-            //LoginTbx.Height = ScreenHeight / 30;
-            //LoginTbx.FontSize = ScreenHeight / 50;
-            //LoginTbx.Focus();
-
-            //PassTbl.FontSize = ScreenHeight / 45;
-            //PassTbx.Height = ScreenHeight / 30;
-            //PassTbx.FontSize = ScreenHeight / 50;
-
-            //Connect.Height = ScreenHeight / 25;
-            //Connect.Width = (ScreenWidth * 0.4) * 0.3;
-            //Connect.FontSize = ScreenHeight / 50;
         }
 
         private void LogOutPanel_MouseEnter(object sender, MouseEventArgs e)
@@ -86,14 +76,16 @@ namespace SupErp.IHM.Views
 
             if (t != null)
             {
-                t.FontSize = ScreenHeight / 38;
-                t.Height = ScreenHeight / 35;
+                t.FontSize = ScreenHeight / 40;
+                t.Height = ScreenHeight / 36;
             }
         }
 
         private void MainMenuClicked(object sender, SelectionChangedEventArgs e)
         {
             IMainMenu item = (Menus.SelectedItem as IMainMenu);
+            ClearSubMenus(false);
+
             ClearSubMenus(false);
 
             if (item != null)
@@ -159,6 +151,17 @@ namespace SupErp.IHM.Views
             {
                 ListBoxItem listBoxItem = (((ListBox)sender).ItemContainerGenerator.ContainerFromIndex(((ListBox)sender).SelectedIndex) as ListBoxItem);
                 Point position = listBoxItem.TransformToVisual((Visual)(Menus.Parent)).Transform(new Point(listBoxItem.ActualWidth, 0));
+
+                for (int i = 0; i < SubMenus.Count; i++)
+                {
+                    if(SubMenus[i].TransformToVisual((Visual)(Menus.Parent)).Transform(new Point(0, 0)).X >= position.X)
+                    {
+                        MainGrid.Children.Remove(SubMenus[i]);
+                        SubMenus.RemoveAt(i);
+                        i--;
+                    }
+                }
+
                 GenerateSubMenus(item.SubMenus, position, ((SolidColorBrush)(((Grid)(((ListBox)sender).Parent)).Background)).Color.Equals(Color.FromArgb(255, 51, 122, 204)));
             }
             else
@@ -182,6 +185,12 @@ namespace SupErp.IHM.Views
                 MainGrid.Children.Remove(SubMenus[i]);
 
             SubMenus.Clear();
+        }
+
+        public void RedefineScreenSize()
+        {
+            ScreenHeight = StaticParams.ScreenHeight;
+            ScreenWidth = StaticParams.ScreenWidth;
         }
     }
 }

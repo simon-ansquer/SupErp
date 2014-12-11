@@ -19,6 +19,7 @@ namespace SupErp.BLL.ComptabilityBLL.BllObject
         public Nullable<System.DateTime> postingDate { get; set; }
 
         public Nullable<long> Foreign_id { get; set; }
+        public string Foreign_libelle { get; set; }
 
         public Periodicity periode { get; set; }
     }

@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SupErp.IHM.Helpers;
 using SupErp.IHM.Models;
+using SupErp.IHM.Views;
 
 namespace SupErp.IHM.ViewModels
 {
@@ -31,12 +32,16 @@ namespace SupErp.IHM.ViewModels
         {
             InitializeComponent();
 
-            ScreenHeight = StaticParams.ScreenHeight;
-            ScreenWidth = StaticParams.ScreenWidth;
+            RedefineScreenSize();
             
             SetTextSize();
         }
 
+        private void PageLoaded(object sender, RoutedEventArgs e)
+        {
+            RedefineScreenSize();
+            SetTextSize();
+        }
 
         private void SetTextSize()
         {
@@ -56,6 +61,8 @@ namespace SupErp.IHM.ViewModels
             Connect.Height = ScreenHeight / 25;
             Connect.Width = (ScreenWidth * 0.4) * 0.3;
             Connect.FontSize = ScreenHeight / 50;
+
+            ErrorMsg.FontSize = ScreenHeight / 55;
         }
 
         private void LeftTape_KeyDown(object sender, KeyEventArgs e)
@@ -74,5 +81,12 @@ namespace SupErp.IHM.ViewModels
         {
             ProgressRing.IsActive = true;
         }
+
+        public void RedefineScreenSize()
+        {
+            ScreenHeight = StaticParams.ScreenHeight;
+            ScreenWidth = StaticParams.ScreenWidth;
+        }
+        
     }
 }
