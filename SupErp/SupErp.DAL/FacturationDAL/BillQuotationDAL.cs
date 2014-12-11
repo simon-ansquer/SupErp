@@ -1,9 +1,7 @@
-﻿using System;
+﻿using SupErp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SupErp.Entities;
 
 namespace SupErp.DAL.FacturationDAL
 {
@@ -18,12 +16,32 @@ namespace SupErp.DAL.FacturationDAL
             {
                 using (SUPERPEntities context = new SUPERPEntities(false))
                 {
-                    result = context.BILL_BillQuotation.ToList();
+                    result = context.BILL_BillQuotation.Include("Company").Include("BILL_Transmitter")
+                        .Include("BILL_BillQuotationStatus").Include("BILL_BillQuotationStatus.BILL_Status").ToList();
                 }
             }
             catch (Exception)
             {
-                
+                throw;
+            }
+            return result;
+        }
+
+        public List<BILL_BillQuotation> GetBillQuotationCompleted()
+        {
+            var result = new List<BILL_BillQuotation>();
+            try
+            {
+                using (SUPERPEntities context = new SUPERPEntities(false))
+                {
+                    result = context.BILL_BillQuotation.Include("Company").Include("BILL_Transmitter").Include("BILL_LineBillQuotation")
+                        .Include("BILL_LineBillQuotation.BILL_Product").Include("BILL_LineBillQuotation.BILL_Product.BILL_Vat")
+                        .Include("BILL_BillQuotationStatus").Include("BILL_BillQuotationStatus.BILL_Status")
+                        .Include("BILL_LineBillQuotation.BILL_Product.BILL_Category").ToList();
+                }
+            }
+            catch (Exception)
+            {
                 throw;
             }
             return result;
@@ -36,12 +54,14 @@ namespace SupErp.DAL.FacturationDAL
             {
                 using (SUPERPEntities context = new SUPERPEntities(false))
                 {
-                    result= context.BILL_BillQuotation.Where(b => b.NBill != null).ToList();
+                    result = context.BILL_BillQuotation.Include("Company").Include("BILL_Transmitter").Include("BILL_LineBillQuotation")
+                        .Include("BILL_LineBillQuotation.BILL_Product").Include("BILL_LineBillQuotation.BILL_Product.BILL_Vat")
+                        .Include("BILL_BillQuotationStatus").Include("BILL_BillQuotationStatus.BILL_Status")
+                        .Include("BILL_LineBillQuotation.BILL_Product.BILL_Category").Where(b => b.NBill != null).ToList();
                 }
             }
             catch (Exception)
             {
-                
                 throw;
             }
             return result;
@@ -54,12 +74,14 @@ namespace SupErp.DAL.FacturationDAL
             {
                 using (SUPERPEntities context = new SUPERPEntities(false))
                 {
-                    result = context.BILL_BillQuotation.Where(b => b.NBill == null).ToList();
+                    result = context.BILL_BillQuotation.Include("Company").Include("BILL_Transmitter").Include("BILL_LineBillQuotation")
+                        .Include("BILL_LineBillQuotation.BILL_Product").Include("BILL_LineBillQuotation.BILL_Product.BILL_Vat")
+                        .Include("BILL_BillQuotationStatus").Include("BILL_BillQuotationStatus.BILL_Status")
+                        .Include("BILL_LineBillQuotation.BILL_Product.BILL_Category").Where(b => b.NBill == null).ToList();
                 }
             }
             catch (Exception)
             {
-                
                 throw;
             }
             return result;
@@ -72,16 +94,18 @@ namespace SupErp.DAL.FacturationDAL
             {
                 using (SUPERPEntities context = new SUPERPEntities(false))
                 {
-                    result=  context.BILL_BillQuotation.SingleOrDefault(b => b.BillQuotation_Id == id);
+                    result = context.BILL_BillQuotation.Include("Company").Include("BILL_Transmitter").Include("BILL_LineBillQuotation")
+                        .Include("BILL_BillQuotationStatus").Include("BILL_BillQuotationStatus.BILL_Status")
+                        .Include("BILL_LineBillQuotation.BILL_Product").Include("BILL_LineBillQuotation.BILL_Product.BILL_Vat")
+                        .Include("BILL_LineBillQuotation.BILL_Product.BILL_Category")
+                        .SingleOrDefault(b => b.BillQuotation_Id == id);
                 }
             }
             catch (Exception)
             {
-                
                 throw;
             }
             return result;
-            
         }
 
         public BILL_BillQuotation GetBillByNum(string numBill)
@@ -91,16 +115,16 @@ namespace SupErp.DAL.FacturationDAL
             {
                 using (SUPERPEntities context = new SUPERPEntities(false))
                 {
-                    result = context.BILL_BillQuotation.SingleOrDefault(b => b.NBill == numBill);
+                    result = context.BILL_BillQuotation.Include("Company").Include("BILL_Transmitter").Include("BILL_LineBillQuotation")
+                        .Include("BILL_LineBillQuotation.BILL_Product").Include("BILL_LineBillQuotation.BILL_Product.BILL_Vat")
+                        .Include("BILL_LineBillQuotation.BILL_Product.BILL_Category").SingleOrDefault(b => b.NBill == numBill);
                 }
             }
             catch (Exception)
             {
-                
                 throw;
             }
             return result;
-            
         }
 
         public BILL_BillQuotation GetBillQuotation(DateTime dateBillQuotation)
@@ -110,42 +134,52 @@ namespace SupErp.DAL.FacturationDAL
             {
                 using (SUPERPEntities context = new SUPERPEntities(false))
                 {
-                    result = context.BILL_BillQuotation.SingleOrDefault(b => b.DateBillQuotation == dateBillQuotation);
+                    result = context.BILL_BillQuotation.Include("Company").Include("BILL_Transmitter").Include("BILL_LineBillQuotation")
+                        .Include("BILL_LineBillQuotation.BILL_Product").Include("BILL_LineBillQuotation.BILL_Product.BILL_Vat")
+                        .Include("BILL_LineBillQuotation.BILL_Product.BILL_Category").SingleOrDefault(b => b.DateBillQuotation == dateBillQuotation);
                 }
             }
             catch (Exception)
             {
-                
                 throw;
             }
             return result;
         }
 
-        public string getMaxNum()
+        public static string getMaxNum()
         {
-            var num = "000000001";
+            var numStr = "000000001";
 
             try
             {
                 using (SUPERPEntities context = new SUPERPEntities(false))
                 {
-                    var intNum = Convert.ToInt32(context.BILL_BillQuotation.OrderByDescending(b => Convert.ToInt32(b.NBill)).First().NBill) + 1;
-                    num = intNum.ToString();
-
-                    while(num.Length < 9)
+                    var num = Convert.ToInt32(numStr);
+                    var billQuotation = context.BILL_BillQuotation.OrderByDescending(b => b.NBill);
+                    if (billQuotation != null && billQuotation.Count() > 0)
                     {
-                        num = "0" + num;
+                        var nbill = billQuotation.First().NBill;
+                        if (nbill != null)
+                        {
+                            var intNum = Convert.ToInt32(nbill) + 1;
+                            numStr = intNum.ToString();
+                        }
+                    }
+
+                    while (numStr.Length < 9)
+                    {
+                        numStr = "0" + numStr;
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }
-            return num;
+            return numStr;
         }
 
-        #endregion
+        #endregion Read
 
         #region Create
 
@@ -159,7 +193,7 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        #endregion
+        #endregion Create
 
         #region Edit
 
@@ -174,7 +208,7 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        #endregion
+        #endregion Edit
 
         #region Delete
 
@@ -196,6 +230,54 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        #endregion
+        #endregion Delete
+
+        public void SetNumFacture()
+        {
+            var result = new BILL_BillQuotation();
+            try
+            {
+                using (SUPERPEntities context = new SUPERPEntities(false))
+                {
+                    var results = context.BILL_BillQuotation.OrderByDescending(b => b.BillQuotation_Id);
+                    if (results != null)
+                    {
+                        result = results.First();
+                        if (result != null && result.NBill.Equals("1"))
+                        {
+                            var numStr = "000000001";
+
+                            var num = Convert.ToInt32(numStr);
+                            var billQuotation = context.BILL_BillQuotation.OrderByDescending(b => b.NBill).Where(b => !b.NBill.Equals("1"));
+                            if (billQuotation != null && billQuotation.Count() > 0)
+                            {
+                                var nbill = billQuotation.First().NBill;
+                                if (nbill != null)
+                                {
+                                    var intNum = Convert.ToInt32(nbill) + 1;
+                                    numStr = intNum.ToString();
+                                }
+                            }
+
+                            while (numStr.Length < 9)
+                            {
+                                numStr = "0" + numStr;
+                            }
+
+                            //Set NbBill
+                            result.NBill = numStr;
+                        }
+                        else if (result != null && result.NBill.Equals("0"))
+                            result.NBill = null;
+                    }
+
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

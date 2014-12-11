@@ -1,21 +1,21 @@
-﻿using System;
+﻿using SupErp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SupErp.Entities;
 
 namespace SupErp.DAL.FacturationDAL
 {
     public class LineBillQuotationDAL
     {
-          #region Read
+        #region Read
 
         public IEnumerable<BILL_LineBillQuotation> GetLineBillQuotation(long billQuotation_id)
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.BILL_LineBillQuotation.Where(line => line.BillQuotation_Id == billQuotation_id).ToList();
+                return context.BILL_LineBillQuotation.Include("BILL_Product").Include("BILL_Product.BILL_Vat")
+                        .Include("BILL_Product.BILL_Category")
+                    .Where(line => line.BillQuotation_Id == billQuotation_id).ToList();
             }
         }
 
@@ -23,11 +23,28 @@ namespace SupErp.DAL.FacturationDAL
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.BILL_LineBillQuotation.Where(line => line.BillQuotation_Id == billquotation_id).Select(l => l.BILL_Product);
+                return context.BILL_LineBillQuotation.Include("BILL_Product").Include("BILL_Product.BILL_Vat")
+                        .Include("BILL_Product.BILL_Category")
+                    .Where(line => line.BillQuotation_Id == billquotation_id).Select(l => l.BILL_Product);
             }
         }
 
-        #endregion
+        public bool productsIncludedInBill(long billquotation_id, long product_id)
+        {
+            using (SUPERPEntities context = new SUPERPEntities(false))
+            {
+                var res = context.BILL_LineBillQuotation.Include("BILL_Product").Include("BILL_Product.BILL_Vat")
+                        .Include("BILL_Product.BILL_Category")
+                    .Where(line => line.BillQuotation_Id == billquotation_id).Select(l => l.BILL_Product);
+                var product = res.SingleOrDefault(x => x.Product_Id == product_id);
+                if (res != null && res.Count() > 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        #endregion Read
 
         #region Create
 
@@ -36,7 +53,7 @@ namespace SupErp.DAL.FacturationDAL
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var listLine = new List<BILL_LineBillQuotation>();
-                foreach(var line in billLineToAdd)
+                foreach (var line in billLineToAdd)
                 {
                     var s = context.BILL_LineBillQuotation.Add(line);
                     listLine.Add(line);
@@ -46,7 +63,7 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        #endregion
+        #endregion Create
 
         #region Edit
 
@@ -66,7 +83,7 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        #endregion
+        #endregion Edit
 
         #region Delete
 
@@ -76,7 +93,7 @@ namespace SupErp.DAL.FacturationDAL
             {
                 try
                 {
-                    foreach(var id in listID)
+                    foreach (var id in listID)
                     {
                         var l = context.BILL_LineBillQuotation.Find(id);
                         context.BILL_LineBillQuotation.Remove(l);
@@ -91,8 +108,6 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        #endregion
+        #endregion Delete
     }
-
-
 }
