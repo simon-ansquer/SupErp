@@ -39,7 +39,9 @@
         </StackPanel>
 
         <DataGrid x:Name="UserListView" ItemsSource="{Binding Users}" Grid.Row="1" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="White"  HorizontalAlignment="Stretch"
-                      AlternatingRowBackground="#FFCCCCCC" AlternationCount="1" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled"  VerticalScrollBarVisibility="Auto">
+                      AlternatingRowBackground="#FFCCCCCC" AlternationCount="1" AutoGenerateColumns="False" 
+                  CanUserAddRows="False"
+                  HorizontalScrollBarVisibility="Disabled"  VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Rôle" Width ="1*" Binding="{Binding Role.Label}" IsReadOnly="True" CanUserResize="False" >
                     <DataGridTextColumn.HeaderStyle>

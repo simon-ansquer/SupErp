@@ -42,7 +42,9 @@
 
 
         <DataGrid x:Name="RoleListView" ItemsSource="{Binding Roles}" Grid.Row="1" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="White"  HorizontalAlignment="Stretch"
-                      AlternatingRowBackground="#FFCCCCCC" AlternationCount="1" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled"  VerticalScrollBarVisibility="Auto">
+                      AlternatingRowBackground="#FFCCCCCC" 
+                  CanUserAddRows="False"
+                  AlternationCount="1" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled"  VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
                 <DataGridTextColumn Width ="1*" Header="Rôle" IsReadOnly="True" Binding="{Binding Label}" CanUserResize="False">
                     <DataGridTextColumn.HeaderStyle>

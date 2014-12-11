@@ -98,28 +98,9 @@
                 Margin="0, 10, 10, 10"
                 ItemsSource="{Binding Path=Modules,Mode=TwoWay}"
                 HeadersVisibility="None"
-                AutoGenerateColumns="True" AutoGeneratingColumn="DataGrid_OnAutoGeneratingColumn">
-                <!--<DataGrid.Columns>
-                    <DataGridCheckBoxColumn
-                        Width="0.5*"
-                        Binding="{Binding Path=IsSelected, Mode=TwoWay}">
-                        <DataGridCheckBoxColumn.ElementStyle>
-                            <Style TargetType="CheckBox">
-                                <Setter Property="Content" Value="{Binding Path=Name, Mode=TwoWay}" />
-                            </Style>
-                        </DataGridCheckBoxColumn.ElementStyle>
-                    </DataGridCheckBoxColumn>
-                    <DataGridCheckBoxColumn
-                        Width="0.5*"
-                        Binding="{Binding IsWritingSelected}">
-                        <DataGridCheckBoxColumn.ElementStyle>
-                            <Style TargetType="CheckBox">
-                                <Setter Property="Content" Value="Ecriture" />
-                            </Style>
-                        </DataGridCheckBoxColumn.ElementStyle>
-                    </DataGridCheckBoxColumn>
-                </DataGrid.Columns>-->
-            </DataGrid>
+                AutoGenerateColumns="True" 
+                AutoGeneratingColumn="DataGrid_OnAutoGeneratingColumn"
+                CanUserAddRows="False"/>
             
             <Grid x:Name="ButtonContainer"
                 Grid.Column="0"
