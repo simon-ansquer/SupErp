@@ -54,6 +54,7 @@
     <Compile Include="Helpers\CompanyAdapter.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Helpers\NotificationObject.cs" />
+    <Compile Include="Helpers\Switcher.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Company_Contact.cs" />
     <Compile Include="Models\Contact.cs" />
@@ -87,6 +88,9 @@
     </Compile>
     <Compile Include="Views\CreateCustomer.xaml.cs">
       <DependentUpon>CreateCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PageSwitcher.xaml.cs">
+      <DependentUpon>PageSwitcher.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DetailCustomer.xaml.cs">
       <DependentUpon>DetailCustomer.xaml</DependentUpon>
@@ -131,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PageSwitcher.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
