@@ -202,8 +202,14 @@ namespace SupErp.DAL.FacturationDAL
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
                 var b = context.BILL_BillQuotation.Find(billQuotationToEdit.BillQuotation_Id);
-                b = billQuotationToEdit;
-                context.SaveChanges();
+                if (b != null)
+                {
+                    b.AmountDF = billQuotationToEdit.AmountDF;
+                    b.Company_Id = billQuotationToEdit.Company_Id;
+                    b.Transmitter_Id = billQuotationToEdit.Transmitter_Id;
+                    b.Vat = billQuotationToEdit.Vat;
+                    context.SaveChanges();
+                }
                 return b;
             }
         }

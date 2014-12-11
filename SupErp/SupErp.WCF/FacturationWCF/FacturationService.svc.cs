@@ -26,6 +26,11 @@ namespace SupErp.WCF.FacturationWCF
         public List<BillQuotationLight> SearchBillQuotation(string nomClient, string numFact, DateTime? dateDocument, BILL_Status status, int? MontantHTMin, int? MontantHTMax, bool? isBill)
         {
             var list = new List<BillQuotationLight>();
+            var noFilter = string.IsNullOrEmpty(nomClient) & string.IsNullOrEmpty(numFact) & dateDocument == null
+                & status == null & MontantHTMin == null & MontantHTMax == null & isBill == null;
+
+            if (noFilter)
+                list = billQuotationBLL.GetBillQuotation().ToList();
 
             /*** Filtre client ***/
             if (nomClient != null)
@@ -34,7 +39,11 @@ namespace SupErp.WCF.FacturationWCF
             /*** Filtre numero ***/
             if (numFact != null)
                 if (list.Count == 0)
-                    list.Add(billQuotationBLL.GetBillByNum(numFact));
+                {
+                    var bill = billQuotationBLL.GetBillByNum(numFact);
+                    if (bill != null)
+                        list.Add(bill);
+                }
                 else
                     list.Where(b => b.NBill == numFact);
 
@@ -212,11 +221,11 @@ namespace SupErp.WCF.FacturationWCF
                     Transmitter_Id = billQuotationComplete.Transmitter_Id
                 };
 
-                billQuotationBLL.EditBillQuotation(bill);
+                var billEdit = billQuotationBLL.EditBillQuotation(bill);
 
                 /*** Modification du status ***/
                 var status = new BILL_BillQuotationStatus { BillQuotation_Id = bill.BillQuotation_Id, DateAdvancement = DateTime.Now, Status_Id = billQuotationComplete.BillStatus.Status_Id };
-                bqsBLL.CreateBillQuotationStatus(status);
+                //bqsBLL.CreateBillQuotationStatus(status);
 
                 /*** Modification des lignes de facture ***/
                 var lineBDD = lineBLL.GetLineBillQuotation(billQuotationComplete.BillQuotation_Id);
