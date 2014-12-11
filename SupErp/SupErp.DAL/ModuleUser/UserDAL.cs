@@ -83,7 +83,7 @@ namespace SupErp.DAL.ModuleUser
 
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var r = context.Users.Find(userId);
+                var r = context.Users.Include("Role").FirstOrDefault(x => x.Id == userId);
                 if(r == null)
                     return null;
 
@@ -141,8 +141,13 @@ namespace SupErp.DAL.ModuleUser
                 u.Email = userToEdit.Email;
                 u.Firstname = userToEdit.Firstname;
                 u.Lastname = userToEdit.Lastname;
-                u.Role = context.Roles.Find(userToEdit.Role.Id);
-                u.Role_id = u.Role.Id;
+
+                if (userToEdit.Role != null)
+                {
+                    u.Role = context.Roles.Find(userToEdit.Role.Id);
+                    u.Role_id = u.Role.Id;
+                }
+
                 u.Zip_code = userToEdit.Zip_code;
                 u.City = userToEdit.City;
                 context.SaveChanges();
@@ -155,12 +160,32 @@ namespace SupErp.DAL.ModuleUser
             if (roleToEdit == null)
                 return null;
 
+            var listToAdd = new List<RoleModule>();
+
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var r = context.Roles.Find(roleToEdit.Id);
+                var r = context.Roles.Include("RoleModules").Include("RoleModules.Module").Include("RoleModules.Role").FirstOrDefault(x => x.Id == roleToEdit.Id);
                 if (r == null)
                     return null;
-                r = roleToEdit;
+
+                foreach (var rm in roleToEdit.RoleModules)
+                {
+                    RoleModule rrm = null;
+                    if ((rrm = r.RoleModules.FirstOrDefault(x => x.Id == rm.Id)) == null)
+                    {
+                        listToAdd.Add(new RoleModule()
+                        {
+                            Module = rm.Module,
+                            Module_id = rm.Module_id,
+                            Role = rm.Role,
+                            Role_id = rm.Role_id
+                        });
+                    }
+                }
+
+                context.RoleModules.AddRange(listToAdd);
+
+                r.Label = roleToEdit.Label;
                 context.SaveChanges();
                 return r;
             }

@@ -38,7 +38,17 @@ namespace SupErp.Kernel
                 throw new MainMenuImplementationException(assembly.FullName);
             }
 
-            return (IMainMenu)Activator.CreateInstance(mainMenus.First());
+            IMainMenu mainMenu;
+            try
+            {
+                mainMenu = (IMainMenu)Activator.CreateInstance(mainMenus.First());
+            }
+            catch
+            {
+                return null;
+            }
+
+            return mainMenu;
         }
 
         /// <summary>
@@ -55,7 +65,12 @@ namespace SupErp.Kernel
             {
                 if (userRole.RoleModules.Any(x => x.Module.Name == Path.GetFileNameWithoutExtension(p)))
                 {
-                    mainMenus.Add(GetMainMenu(p));
+                    IMainMenu mainMenu = GetMainMenu(p);
+
+                    if (mainMenu != null && mainMenu is IMainMenu)
+                    {
+                        mainMenus.Add(mainMenu);
+                    }
                 }
             }
 

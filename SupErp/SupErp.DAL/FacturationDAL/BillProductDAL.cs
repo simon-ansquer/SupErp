@@ -1,20 +1,19 @@
-﻿using System;
+﻿using SupErp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SupErp.Entities;
 
 namespace SupErp.DAL.FacturationDAL
 {
     public class BillProductDAL
     {
         #region Read
+
         public List<BILL_Product> GetBillProduct()
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.BILL_Product.ToList();
+                return context.BILL_Product.Include("BILL_Vat").Include("BILL_Category").ToList();
             }
         }
 
@@ -22,7 +21,7 @@ namespace SupErp.DAL.FacturationDAL
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.BILL_Product.Single(p => p.Product_Id == id);
+                return context.BILL_Product.Include("BILL_Vat").Include("BILL_Category").Single(p => p.Product_Id == id);
             }
         }
 
@@ -30,7 +29,7 @@ namespace SupErp.DAL.FacturationDAL
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.BILL_Product.Where(p => p.Name != null).ToList();
+                return context.BILL_Product.Include("BILL_Vat").Include("BILL_Category").Where(p => p.Name != null).ToList();
             }
         }
 
@@ -38,16 +37,15 @@ namespace SupErp.DAL.FacturationDAL
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.BILL_Product.SingleOrDefault(p => p.Product_Id == id);
+                return context.BILL_Product.Include("BILL_Vat").Include("BILL_Category").SingleOrDefault(p => p.Product_Id == id);
             }
         }
-
 
         public BILL_Product GetProductByName(string nameProduct)
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.BILL_Product.SingleOrDefault(p => p.Name == nameProduct);
+                return context.BILL_Product.Include("BILL_Vat").Include("BILL_Category").SingleOrDefault(p => p.Name == nameProduct);
             }
         }
 
@@ -55,7 +53,7 @@ namespace SupErp.DAL.FacturationDAL
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.BILL_Product.Where(p => p.Category_Id == idCategory);
+                return context.BILL_Product.Include("BILL_Vat").Include("BILL_Category").Where(p => p.Category_Id == idCategory);
             }
         }
 
@@ -63,13 +61,14 @@ namespace SupErp.DAL.FacturationDAL
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                return context.BILL_Product.SingleOrDefault(p => p.Price == priceProduct);
+                return context.BILL_Product.Include("BILL_Vat").Include("BILL_Category").SingleOrDefault(p => p.Price == priceProduct);
             }
         }
 
-        #endregion
+        #endregion Read
 
         #region Create
+
         public BILL_Product CreateBillProduct(BILL_Product billProductToAdd)
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
@@ -79,9 +78,11 @@ namespace SupErp.DAL.FacturationDAL
                 return p;
             }
         }
-        #endregion
+
+        #endregion Create
 
         #region Edit
+
         public BILL_Product EditBillProduct(BILL_Product billProductToEdit)
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
@@ -92,9 +93,11 @@ namespace SupErp.DAL.FacturationDAL
                 return p;
             }
         }
-        #endregion
+
+        #endregion Edit
 
         #region Delete
+
         public bool DeleteBillProduct(long billProduct_id)
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
@@ -112,6 +115,7 @@ namespace SupErp.DAL.FacturationDAL
                 }
             }
         }
-        #endregion
+
+        #endregion Delete
     }
 }

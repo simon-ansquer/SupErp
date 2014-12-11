@@ -1,9 +1,7 @@
-﻿using System;
+﻿using SupErp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SupErp.Entities;
 
 namespace SupErp.DAL.FacturationDAL
 {
@@ -36,7 +34,7 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        #endregion
+        #endregion Read
 
         #region Create
 
@@ -44,13 +42,20 @@ namespace SupErp.DAL.FacturationDAL
         {
             using (SUPERPEntities context = new SUPERPEntities(false))
             {
-                var s = context.BILL_BillQuotationStatus.Add(billQuotationStatusToAdd);
-                context.SaveChanges();
-                return s;
+                var exist = context.BILL_BillQuotationStatus.SingleOrDefault(x => x.BillQuotation_Id == billQuotationStatusToAdd.BillQuotation_Id
+                                                                    && x.BILL_Status.Status_Id == billQuotationStatusToAdd.BILL_Status.Status_Id);
+                if (exist != null)
+                    return exist;
+                else
+                {
+                    var s = context.BILL_BillQuotationStatus.Add(billQuotationStatusToAdd);
+                    context.SaveChanges();
+                    return s;
+                }
             }
         }
 
-        #endregion
+        #endregion Create
 
         #region Edit
 
@@ -65,7 +70,7 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        #endregion
+        #endregion Edit
 
         #region Delete
 
@@ -87,6 +92,6 @@ namespace SupErp.DAL.FacturationDAL
             }
         }
 
-        #endregion
+        #endregion Delete
     }
 }
