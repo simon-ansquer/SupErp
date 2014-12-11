@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UserControl_GestionClient.Helpers;
 using UserControl_GestionClient.ViewModels;
 
 namespace UserControl_GestionClient.Views
@@ -25,6 +26,11 @@ namespace UserControl_GestionClient.Views
         {
             InitializeComponent();
             DataContext = viewModel;
+        }
+
+        private void Retour(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new AccueilGestionClient());
         }
     }
 }

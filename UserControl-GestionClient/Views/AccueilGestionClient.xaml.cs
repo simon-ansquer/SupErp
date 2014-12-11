@@ -30,21 +30,19 @@ namespace UserControl_GestionClient.Views
 
         private void CreateCustomer(object sender, RoutedEventArgs e)
         {
-            //NavigationService.GetNavigationService(this).Navigate(new CreateCustomer());
             Switcher.Switch(new CreateCustomer());
         }
         private void CreateContact(object sender, RoutedEventArgs e)
         {
-            //NavigationService.GetNavigationService(this).Navigate(new CreateCustomer());
             Switcher.Switch(new CreateContact());
         }
 
-        private void CompanyDetails(object sender, RoutedEventArgs e)
-        {
-            Company obj = (Company)dataGrid1.SelectedItem;
-            var employeeDetails = new DetailCustomer(new DetailCustomerViewModel(obj));
-            Switcher.Switch(employeeDetails);
-        }
+        //private void CompanyDetails(object sender, RoutedEventArgs e)
+        //{
+        //    Company obj = (Company)dataGrid1.SelectedItem;
+        //    var employeeDetails = new DetailCustomer(new DetailCustomerViewModel(obj));
+        //    Switcher.Switch(employeeDetails);
+        //}
 
         private void CompanyDelete(object sender, RoutedEventArgs e)
         {
@@ -53,6 +51,8 @@ namespace UserControl_GestionClient.Views
             using (var ws = new ClientServiceGestionClient.ServiceGestionClientClient())
             {
                 ws.DeleteCompany((int)obj.id);
+
+                Switcher.Switch(new AccueilGestionClient());
             }
         }
     }

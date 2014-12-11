@@ -66,11 +66,14 @@ namespace UserControl_GestionClient.ViewModels
 
         }
 
-        //public ICommand DetailCustomer { get { return new DelegateCommand(DetailCusto); } }
-        //private void DetailCusto(object parameter)
-        //{
-        //    int id = Convert.ToInt32(((Button)parameter).Tag);
-        //    var CustomerDetail = new DetailCustomer(new DetailCustomerViewModel(id));
-        //}
+        public ICommand DetailCustomer { 
+            get { return new DelegateCommand(DetailCusto); } 
+        }
+        private void DetailCusto(object compSelected)
+        {
+            int id = Convert.ToInt32(((UserControl_GestionClient.Models.Company)compSelected).id);
+            var CustomerDetail = new DetailCustomer(new DetailCustomerViewModel(id));
+            Switcher.Switch(CustomerDetail);
+        }
     }
 }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using UserControl_GestionClient.Helpers;
 using UserControl_GestionClient.Models;
+using UserControl_GestionClient.Views;
 
 namespace UserControl_GestionClient.ViewModels
 {
-    public class CreateContactViewModel
+    public class CreateContactViewModel : NotificationObject
     {
         public Contact NewContact {get; set;}
         public Dictionary<long, string> ListEntreprise { get; set; }
@@ -19,17 +20,18 @@ namespace UserControl_GestionClient.ViewModels
         /// <value>
         /// The login.
         /// </value>
-        private ICommand addCustomer;
 
-        public ICommand AddCustomer
+        private ICommand addContact;
+
+        public ICommand AddContact
         {
             get
             {
-                return addCustomer;
+                return addContact;
             }
             set
             {
-                addCustomer = value;
+                addContact = value;
             }
         }
 
@@ -45,15 +47,19 @@ namespace UserControl_GestionClient.ViewModels
                 }
             }
             NewContact = new Contact();
-            AddCustomer = new DelegateCommand(new Action<object>(AddNewCustomer));
+            AddContact = new DelegateCommand(new Action<object>(AddNewContact));
         }
-        private void AddNewCustomer(object contact)
+
+
+        //On a pas réussi à récupérer l'item selectionné, on a mis le company_id est dur
+        private void AddNewContact(object contact)
         {
             using (var ws = new ClientServiceGestionClient.ServiceGestionClientClient())
             {                
-                ClientServiceGestionClient.Company_Contact cont = new ClientServiceGestionClient.Company_Contact { email = NewContact.email, firstname = NewContact.email, gender = NewContact.gender, lastname = NewContact.lastname, phone = NewContact.phone, company_id = NewContact.company_id };
+                ClientServiceGestionClient.Company_Contact cont = new ClientServiceGestionClient.Company_Contact { email = NewContact.email, firstname = NewContact.firstname, gender = NewContact.gender, lastname = NewContact.lastname, phone = NewContact.phone, company_id = 3 };
                 ws.CreateCompany_Contact(cont);
             }
+            Switcher.Switch(new AccueilGestionClient());
         }
     }
 }

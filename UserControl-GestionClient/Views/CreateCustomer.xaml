@@ -54,5 +54,6 @@
         <Label Grid.Row="7" Content="Email" Grid.Column="2" Grid.RowSpan="2"/>
         <Label Grid.Row="9" Content="Numéro Tel" Grid.Column="2"/>
 
+        <Button Content="Retour" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Retour"/>
     </Grid>
 </UserControl>

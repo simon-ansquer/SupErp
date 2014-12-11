@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UserControl_GestionClient.Helpers;
 
 namespace UserControl_GestionClient.Views
 {
@@ -23,6 +24,11 @@ namespace UserControl_GestionClient.Views
         public CreateContact()
         {
             InitializeComponent();
+        }
+
+        private void Retour(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new AccueilGestionClient());
         }
     }
 }

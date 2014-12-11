@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using UserControl_GestionClient.Helpers;
 using UserControl_GestionClient.Models;
+using UserControl_GestionClient.Views;
 
 namespace UserControl_GestionClient.ViewModels
 {
@@ -48,6 +49,7 @@ namespace UserControl_GestionClient.ViewModels
                 ClientServiceGestionClient.Company_Contact cont = new ClientServiceGestionClient.Company_Contact { email = NewContact.email, firstname = NewContact.email, gender = NewContact.gender, lastname = NewContact.lastname, phone = NewContact.phone, company_id = idComp };
                 ws.CreateCompany_Contact(cont);
             }
+            Switcher.Switch(new AccueilGestionClient());
         }
     }
 }

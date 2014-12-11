@@ -6,10 +6,7 @@
              xmlns:viewModels="clr-namespace:UserControl_GestionClient.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000">
-    <UserControl.Resources>
-        <viewModels:DetailCustomerViewModel x:Key="ViewModel" />
-    </UserControl.Resources>
-    <Grid DataContext="{StaticResource ViewModel}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140"/>
             <ColumnDefinition/>
@@ -30,18 +27,18 @@
             <RowDefinition Height="270"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="5" Grid.Column="1" Content="{Binding Company.address}"/>
-        <Label Grid.Row="1" Grid.Column="1" Content="{Binding Company.name}"/>
-        <Label Grid.Row="3" Grid.Column="1" Content="{Binding Company.siret}"/>
-        <Label Grid.Row="7" Grid.Column="1" Content="{Binding Company.postalcode}"/>
-        <Label Grid.Column="1" Grid.Row="9" Content="{Binding Company.city}"/>
+        <Label Grid.Row="5" Grid.Column="1" Content="{Binding Customer.address}"/>
+        <Label Grid.Row="1" Grid.Column="1" Content="{Binding Customer.name}"/>
+        <Label Grid.Row="3" Grid.Column="1" Content="{Binding Customer.siret}"/>
+        <Label Grid.Row="7" Grid.Column="1" Content="{Binding Customer.postalcode}"/>
+        <Label Grid.Column="1" Grid.Row="9" Content="{Binding Customer.city}"/>
         <Label Grid.Row="1" Content="Nom Entreprise :"/>
         <Label Grid.Row="3" Content="Siret :" Grid.RowSpan="2" Height="64" VerticalAlignment="Bottom"/>
         <Label Grid.Row="5" Content="Adresse :" Grid.RowSpan="2"/>
         <Label Grid.Row="7" Content="Code Postal :"/>
         <Label Grid.Row="9" Content="Ville :" RenderTransformOrigin="0.53,6.06"/>
         <Label Grid.Row="1" Content="Liste des contacts :" Grid.Column="2" Margin="0,0,469,0"/>
-        <DataGrid ItemsSource="{Binding Company.Company_Contact}"
+        <DataGrid ItemsSource="{Binding Customer.Company_Contact}"
             	AutoGenerateColumns="False"
             	CanUserAddRows="False"  Grid.Row="2" Grid.Column="2" Grid.RowSpan="9">
             <DataGrid.Columns>
@@ -65,5 +62,6 @@
         <Button Content="Supprimer"
         		Command="{Binding DeleteCustomer}" CommandParameter="{Binding NewContact}" Grid.Row="11" Grid.Column="2" Margin="235,40,99,172"/>
 
+        <Button Content="Retour" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Retour"/>
     </Grid>
 </UserControl>

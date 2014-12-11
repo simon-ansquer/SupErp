@@ -42,9 +42,11 @@
         <Label Grid.Row="7" Content="Email"/>
         <Label Grid.Row="9" Content="Numéro Tel"/>
         <Button Content="Ajouter un contact"
-        		Command="{Binding AddContact}" CommandParameter="{Binding NewContact}" Grid.Row="12" Grid.Column="1" Margin="0,33,0,135"/>
-        <ListBox Grid.Row="11" Grid.Column="1" ItemsSource="{Binding ListEntreprise}" SelectedItem="{Binding NewContact.company_id, Mode=TwoWay}">
+                Command="{Binding AddContact}" CommandParameter="{Binding NewContact}"
+                Grid.Row="12" Grid.Column="1" Margin="0,81,0,87"/>
+        <ListBox Grid.Row="11" Grid.Column="1" ItemsSource="{Binding ListEntreprise}" SelectedItem="{Binding NewContact.company_id, Mode=TwoWay}" Margin="0,0,0,195" Grid.RowSpan="2">
         </ListBox>
         <Label Grid.Row="11" Content="Entrprise"/>
+        <Button Content="Retour" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Retour"/>
     </Grid>
 </UserControl>

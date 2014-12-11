@@ -16,9 +16,9 @@
             <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
         <Button Content="Ajouter un client"
-        		Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CreateCustomer"/>
+        		Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CreateCustomer" Margin="10,6,0,0"/>
         <Button Content="Ajouter un contact"
-        		Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="CreateContact"/>
+        		Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="CreateContact" Margin="0,5,10,0"/>
 
         <DataGrid ItemsSource="{Binding CompanyCollection}"
                   Name="dataGrid1"
@@ -44,7 +44,8 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Details"
-                                    Command="{Binding DetailCustomer}" />
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DetailCustomer}" 
+                                    CommandParameter="{Binding ElementName=dataGrid1, Path=SelectedItem}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
