@@ -1,0 +1,29 @@
+﻿<Window x:Class="SupERP.WPF.Comptabiity.Journal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Journal" Height="600" Width="600">
+    <Grid>
+       
+                <Grid>
+                    <StackPanel>
+
+                    </StackPanel>
+
+                    <ListView x:Name="lvListeTransactions" Margin="1,34,1,2" SelectionChanged="ListView_SelectionChanged"  GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler"
+>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="150" Header="compte" DisplayMemberBinding="{Binding compte}"/>
+                                <GridViewColumn Width="150" Header="libelle" DisplayMemberBinding="{Binding libelle}"/>
+                                <GridViewColumn Width="50" Header="montant" DisplayMemberBinding="{Binding montant}"/>
+                                <GridViewColumn Width="250" Header="date" DisplayMemberBinding="{Binding date}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+        <Label Content="JOURNAL" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+
+
+
+    </Grid>
+</Window>
