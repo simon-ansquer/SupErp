@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using WpfControlLibrarySalaire.ServiceSalaire;
+using System.Linq;
 
 namespace WpfControlLibrarySalaire.Helpers
 {
@@ -38,12 +39,14 @@ namespace WpfControlLibrarySalaire.Helpers
             return true;
         }
 
+        private static Document document;
+
         public static bool generate(User user, string path)
         {
 
 
 
-            var document = new Document(PageSize.A4, 50, 50, 25, 25);
+            document = new Document(PageSize.A4, 50, 50, 25, 25);
 
             var output = new MemoryStream();
             var writer = PdfWriter.GetInstance(document, new FileStream(path + "/BS-" + DateTime.Now.Month + "-" + DateTime.Now.Year + "-" + user.Firstname + "-" + user.Lastname + ".pdf", FileMode.Create));
@@ -98,8 +101,104 @@ namespace WpfControlLibrarySalaire.Helpers
             //***********************   ABSENCES   *****************************************/
             //******************************************************************************/
 
+            generateAbsences(tableTitle, user);
 
-            Paragraph titleAbs = new Paragraph("Liste des abscences", subTitleFont);
+            generateTableSalary(user);
+
+
+
+
+            document.Close();
+            return true;
+        }
+
+        private static void generateTableSalary(User user){
+
+
+            List<string[]> values = new List<string[]>();
+
+            decimal taxe = .8m;
+            decimal total = 0;
+            
+            // en-tête
+            values.Add(new string[] { "Rubrique", "Montant (HT)", "Montant (TTC)" });
+
+            decimal vraiSalaire = (decimal)user.Salaries.OrderByDescending(S => S.Date).First().NetSalary;
+
+            // salaire
+            values.Add(new string[] { "Salaire", vraiSalaire.ToString("#.00"), ((decimal)(vraiSalaire * taxe)).ToString("#.00") });
+            total += vraiSalaire * taxe;
+
+
+            values.Add(new string[] { " ", " ", " " });
+            values.Add(new string[] { "Primes : ", " ", " " });
+
+
+            // primes
+            foreach(Prime P in user.Primes){
+
+                if (P.EndDate.Value.Month >= DateTime.Now.Month && P.EndDate.Value.Year >= DateTime.Now.Year)
+                {
+                    values.Add(new string[] { "  " + P.Label, "-", ((decimal)P.Price).ToString("#.00") });
+                    total += (decimal)P.Price;
+                }
+            }
+
+            values.Add(new string[] { " ", " ", " " });
+
+            // total
+            values.Add(new string[] { "NET À PAYER", "", total.ToString("#.00") + " €" });
+
+
+
+
+            PdfPTable table = new PdfPTable(3);
+
+            bool first = true;
+
+            foreach (string[] S in values)
+            {
+
+                PdfPCell cellA = new PdfPCell(new Paragraph(S[0]));
+                PdfPCell cellB = new PdfPCell(new Paragraph(S[1]));
+                PdfPCell cellC = new PdfPCell(new Paragraph(S[2]));
+
+                if (first)
+                {
+                    cellA.Padding = 5;
+                    cellA.BackgroundColor = BaseColor.LIGHT_GRAY;
+                    cellB.Padding = 5;
+                    cellB.BackgroundColor = BaseColor.LIGHT_GRAY;
+                    cellC.Padding = 5;
+                    cellC.BackgroundColor = BaseColor.LIGHT_GRAY;
+                }
+                else
+                {
+                    cellA.BorderColorTop = BaseColor.WHITE;
+                    cellA.BorderColorBottom = BaseColor.WHITE;
+                    cellB.BorderColorTop = BaseColor.WHITE;
+                    cellB.BorderColorBottom = BaseColor.WHITE;
+                    cellC.BorderColorTop = BaseColor.WHITE;
+                    cellC.BorderColorBottom = BaseColor.WHITE;
+                }
+
+                table.AddCell(cellA);
+                table.AddCell(cellB);
+                table.AddCell(cellC);
+
+                first = false;
+            }
+
+            table.WidthPercentage = 100;
+            document.Add(table);
+        }
+
+
+        private static void generateAbsences(PdfPTable tableTitle, User user)
+        {
+
+
+            Paragraph titleAbs = new Paragraph("Total des abscences : " + user.Absences.Count, subTitleFont);
             titleAbs.Alignment = Element.ALIGN_LEFT;
             PdfPCell cellTitleAbs = new PdfPCell(titleAbs);
             cellTitleAbs.PaddingBottom = 5;
@@ -110,35 +209,7 @@ namespace WpfControlLibrarySalaire.Helpers
 
 
 
-            PdfPTable tableAbs = new PdfPTable(3);
-            tableAbs.AddCell("Début");
-            tableAbs.AddCell("Fin");
-            tableAbs.AddCell("Type");
-
-            foreach (Absence a in user.Absences)
-            {
-                tableAbs.AddCell(a.StartDate.ToString());
-                tableAbs.AddCell(a.EndDate.ToString());
-                tableAbs.AddCell("non justifiée"); // a.AbsenceType.ToString()
-            }
-
-            PdfPCell cellAbs = new PdfPCell(tableAbs);
-            cellAbs.PaddingBottom = 5;
-            cellAbs.Colspan = 2;
-            cellAbs.HorizontalAlignment = 0;
-            cellAbs.Border = Rectangle.NO_BORDER;
-            tableTitle.AddCell(cellAbs);
-
             document.Add(tableTitle);
-
-
-
-
-
-
-
-            document.Close();
-            return true;
         }
 
 

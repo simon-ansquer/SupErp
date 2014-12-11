@@ -138,5 +138,21 @@ namespace SupErp.Tests
                 Assert.AreEqual(me.Absences.Count, count+1);
             }
         }
+
+        [TestMethod]
+        public void TestGetUsersById()
+        {
+            User user = clientService.GetUserById(1);
+            Assert.IsNotNull(user);
+
+        }
+
+        [TestMethod]
+        public void TestGetAbsenceType()
+        {
+            List<AbsenceType> lst = clientService.GetAbsenceTypes();
+            Assert.IsNotNull(lst);
+            Assert.IsTrue(lst.Count >= 1);
+        }
     }
 }
