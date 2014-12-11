@@ -24,5 +24,15 @@ namespace UserControl_GestionClient.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new CreateCustomer());
+        }
+
+        private void CompanyDetails(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new CreateCustomer());
+        }
     }
 }
