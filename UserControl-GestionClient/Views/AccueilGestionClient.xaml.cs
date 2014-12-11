@@ -27,10 +27,16 @@ namespace UserControl_GestionClient.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GetNavigationService(this).Navigate(new CreateCustomer());
+            NavigationService.GetNavigationService(this).Navigate(new CreateContact());
         }
 
-        private void CompanyDetails(object sender, RoutedEventArgs e)
+        //private void CompanyDetails(object sender, RoutedEventArgs e)
+        //{
+        //    int idCompany = Convert.ToInt32(((Button)sender).Tag);
+        //    NavigationService.GetNavigationService(this).Navigate(new DetailCustomer(idCompany));
+        //}
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             NavigationService.GetNavigationService(this).Navigate(new CreateCustomer());
         }

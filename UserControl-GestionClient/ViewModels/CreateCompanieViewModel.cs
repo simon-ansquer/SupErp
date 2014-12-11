@@ -43,8 +43,9 @@ namespace UserControl_GestionClient.ViewModels
             using (var ws = new ClientServiceGestionClient.ServiceGestionClientClient())
             {
                 ClientServiceGestionClient.Company comp = new ClientServiceGestionClient.Company { address = NewContact.address, city = NewContact.city, name = NewContact.name, postalcode = NewContact.postalcode, siret = NewContact.siret };
-                ClientServiceGestionClient.Company_Contact cont = new ClientServiceGestionClient.Company_Contact { email = NewContact.email, firstname = NewContact.email, gender = NewContact.gender, lastname = NewContact.lastname, phone = NewContact.phone };
-                ws.CreateCompany(comp);
+                
+                int idComp = ws.CreateCompany(comp);
+                ClientServiceGestionClient.Company_Contact cont = new ClientServiceGestionClient.Company_Contact { email = NewContact.email, firstname = NewContact.email, gender = NewContact.gender, lastname = NewContact.lastname, phone = NewContact.phone, company_id = idComp };
                 ws.CreateCompany_Contact(cont);
             }
         }

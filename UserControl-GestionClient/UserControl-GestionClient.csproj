@@ -78,6 +78,7 @@
     <Compile Include="ViewModels\AccueilGestionClientViewModel.cs" />
     <Compile Include="ViewModels\CreateCompanieViewModel.cs" />
     <Compile Include="ViewModels\CreateContactViewModel.cs" />
+    <Compile Include="ViewModels\DetailCustomerViewModel.cs" />
     <Compile Include="Views\AccueilGestionClient.xaml.cs">
       <DependentUpon>AccueilGestionClient.xaml</DependentUpon>
     </Compile>
@@ -86,6 +87,9 @@
     </Compile>
     <Compile Include="Views\CreateCustomer.xaml.cs">
       <DependentUpon>CreateCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailCustomer.xaml.cs">
+      <DependentUpon>DetailCustomer.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -127,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetailCustomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
