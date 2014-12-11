@@ -23,40 +23,42 @@ namespace SupERP.WPF.Comptabiity
     public partial class MainWindow : Window
     {
         List<TransactionWPF> listeTransactions;
+        List<TransactionWPF> listeTransactionsCharges;
+        List<TransactionWPF> listeTransactionsProduits;
         GridViewColumnHeader _lastHeaderClicked = null;
         ListSortDirection _lastDirection = ListSortDirection.Ascending;
+        double totCharges = 0;
+        double totProduits = 0;
 
         public MainWindow()
         {
             InitializeComponent();
             listeTransactions = new List<TransactionWPF>();
-            
+            listeTransactionsCharges = new List<TransactionWPF>();
+            listeTransactionsProduits = new List<TransactionWPF>();
 
             listeTransactions = new List<TransactionWPF>(getEntries());
+            foreach (TransactionWPF item in listeTransactions)
+            {
+                if (item.montant > 0)
+                {
+                    listeTransactionsProduits.Add(item);
+                    totProduits += (double)item.montant;
+                }
+                else
+                {
+                    listeTransactionsCharges.Add(item);
+                    totCharges += (double)item.montant;
+                }
+            }
 
-            lvListeTransactions.ItemsSource = listeTransactions;
-            //foreach ( var item in listeTransactions )
-            //{
-            //    addTransactionToListView(item);
-            //}
+            lvListeCharges.ItemsSource = listeTransactionsCharges;
+            lvListeProduits.ItemsSource = listeTransactionsProduits;
 
-            //// donnees en dur en attendant de recuperer les vraies donnees
-            //TransactionWPF transction1 = new TransactionWPF("premier", 140, DateTime.Now, true, "Client1");
-            //TransactionWPF transction2 = new TransactionWPF("deuxieme", 14, DateTime.Now, false, "Client2");
-            //TransactionWPF transction3 = new TransactionWPF("trois", 1, DateTime.Now, true, "Client3");
-            //TransactionWPF transction4 = new TransactionWPF("quatre", 4, DateTime.Now, false, "Client1");
-            //TransactionWPF transction5 = new TransactionWPF("cinq", 41, DateTime.Now, false, "Client4");
-            //TransactionWPF transction6 = new TransactionWPF("six", 141, DateTime.Now, false, "Client2");
-            //TransactionWPF transction7 = new TransactionWPF("sept", 1400, DateTime.Now, true, "Client6");
+            lblTotCharge.Content=totCharges;
+            lblTotProduit.Content = totProduits;
 
-            //addTransactionToListView(transction1);
-            //addTransactionToListView(transction2);
-            //addTransactionToListView(transction3);
-            //addTransactionToListView(transction4);
-            //addTransactionToListView(transction5);
-            //addTransactionToListView(transction6);
-            //addTransactionToListView(transction7);
-
+            lblDiff.Content = totProduits - totCharges;
 
         }
 

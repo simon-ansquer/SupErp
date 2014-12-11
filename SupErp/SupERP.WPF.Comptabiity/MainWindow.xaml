@@ -3,41 +3,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TabControl>
-            <TabItem x:Name="tabGestion" Header="Gestion">
-                <Grid>
-                    <StackPanel>
-                        <ComboBox x:Name="cbTypeTransaction" Width="150" Margin="0,0,0,0"  HorizontalAlignment="Left" SelectionChanged="cbTypeTransaction_SelectionChanged">
-                            <ComboBoxItem x:Name="cbItemEntreeSorties" IsSelected="True" Content="Entrees et sorties"/>
-                            <ComboBoxItem x:Name="cbItemEntres" Content="Entrees"/>
-                            <ComboBoxItem x:Name="cbItemSorties" Content="Sorties"/>
-                            <ComboBoxItem x:Name="cbItemPayes" Content="Payés"/>
-                            <ComboBoxItem x:Name="cbItemImpayes" Content="Impayés"/>
-                        </ComboBox>
-                    </StackPanel>
-                    <DatePicker x:Name="dPickerdateDebut"  VerticalAlignment="Top" Width="150" Height="22" Margin="155,0,206,0"/>
-                    <DatePicker x:Name="dPickerdateFin"  VerticalAlignment="Top" Width="150" Height="22" Margin="310,0,51,0"/>
-                    <Button x:Name="btnTrier" Content="Trier" HorizontalAlignment="Right" Margin="0,2,0,0" VerticalAlignment="Top" Width="45"/>
+        <Grid>
+            <StackPanel>
+                <ComboBox x:Name="cbTypeTransaction" Width="150" Margin="0,0,0,0"  HorizontalAlignment="Left" SelectionChanged="cbTypeTransaction_SelectionChanged">
+                    <ComboBoxItem x:Name="cbItemEntreeSorties" IsSelected="True" Content="Entrees et sorties"/>
+                    <ComboBoxItem x:Name="cbItemEntres" Content="Entrees"/>
+                    <ComboBoxItem x:Name="cbItemSorties" Content="Sorties"/>
+                    <ComboBoxItem x:Name="cbItemPayes" Content="Payés"/>
+                    <ComboBoxItem x:Name="cbItemImpayes" Content="Impayés"/>
+                </ComboBox>
+            </StackPanel>
+            <DatePicker x:Name="dPickerdateDebut"  VerticalAlignment="Top" Width="150" Height="22" Margin="155,0,206,0"/>
+            <DatePicker x:Name="dPickerdateFin"  VerticalAlignment="Top" Width="150" Height="22" Margin="310,0,51,0"/>
+            <Button x:Name="btnTrier" Content="Trier" HorizontalAlignment="Right" Margin="0,2,0,0" VerticalAlignment="Top" Width="45"/>
 
-                    <ListView x:Name="lvListeTransactions" Margin="1,34,1,2" SelectionChanged="ListView_SelectionChanged"  GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler"
+            <ListView x:Name="lvListeCharges" Margin="0,44,281,44.5" SelectionChanged="ListView_SelectionChanged"  GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="150" Header="charge" DisplayMemberBinding="{Binding libelle}"/>
+                        <GridViewColumn Width="50" Header="montant" DisplayMemberBinding="{Binding montant}"/>
+
+                    </GridView>
+                </ListView.View>
+                <ScrollViewer Height="100" Width="100"/>
+            </ListView>
+            <ListView x:Name="lvListeProduits" Margin="293,44,0,44.5" SelectionChanged="ListView_SelectionChanged"  GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler"
 >
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Width="150" Header="libelle" DisplayMemberBinding="{Binding libelle}"/>
-                                <GridViewColumn Width="50" Header="montant" DisplayMemberBinding="{Binding montant}"/>
-                                <GridViewColumn Width="50" Header="date" DisplayMemberBinding="{Binding date}"/>
-                                <GridViewColumn Width="100" Header="paye" DisplayMemberBinding="{Binding paye}"/>
-                                <GridViewColumn Width="150" Header="client" DisplayMemberBinding="{Binding client}"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Prévisionnel" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="150" Header="produit" DisplayMemberBinding="{Binding libelle}"/>
+                        <GridViewColumn Width="50" Header="montant" DisplayMemberBinding="{Binding montant}"/>
 
-            </TabItem>
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
-        </TabControl>
+            <Label Content="total des charges" HorizontalAlignment="Left" Margin="0,283,0,0" VerticalAlignment="Top"/>
+            <Label Content="Total des produits" HorizontalAlignment="Left" Margin="359,283,0,0" VerticalAlignment="Top"/>
+
+            <Label Content="difference" HorizontalAlignment="Left" Margin="184,283,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblDiff" Content="" HorizontalAlignment="Left" Margin="249,283,0,0" VerticalAlignment="Top"/>
+
+
+            <Label x:Name="lblTotCharge" Content="" HorizontalAlignment="Left" Margin="105,283,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblTotProduit" Content="" HorizontalAlignment="Left" Margin="470,286,0,0" VerticalAlignment="Top"/>
+
+        </Grid>
+
+
 
     </Grid>
 </Window>
