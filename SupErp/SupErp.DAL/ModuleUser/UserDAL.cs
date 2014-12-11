@@ -183,6 +183,9 @@ namespace SupErp.DAL.ModuleUser
                 if (r == null)
                     return null;
 
+                context.RoleModules.RemoveRange(r.RoleModules);
+                context.SaveChanges();
+                r.RoleModules.Clear();
                 foreach (var rm in roleToEdit.RoleModules)
                 {
                     RoleModule rrm = null;
