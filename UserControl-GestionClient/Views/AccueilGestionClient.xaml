@@ -21,6 +21,7 @@
         		Command="{Binding AddCustomer}" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Button_Click"/>
 
         <DataGrid ItemsSource="{Binding CompanyCollection}"
+                  Name="dataGrid1"
             	AutoGenerateColumns="False"
             	CanUserAddRows="False"  Grid.Row="1">
             <DataGrid.Columns>
@@ -39,11 +40,19 @@
                 <DataGridTextColumn Binding="{Binding siret}"
             			IsReadOnly="True"
             			Header="Siret" />
-                <DataGridTemplateColumn Header="Delete">
+                <DataGridTemplateColumn Header="Details">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Details"
                                     Click="CompanyDetails"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Delete">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete"
+                                    Click="CompanyDelete"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UserControl_GestionClient.Helpers;
+using UserControl_GestionClient.Models;
 
 namespace UserControl_GestionClient.Views
 {
@@ -34,7 +35,18 @@ namespace UserControl_GestionClient.Views
 
         private void CompanyDetails(object sender, RoutedEventArgs e)
         {
+            var obj = (Company)dataGrid1.SelectedItem;
             NavigationService.GetNavigationService(this).Navigate(new CreateCustomer());
+        }
+
+        private void CompanyDelete(object sender, RoutedEventArgs e)
+        {
+            var obj = (Company)dataGrid1.SelectedItem;
+
+            using (var ws = new ClientServiceGestionClient.ServiceGestionClientClient())
+            {
+                ws.DeleteCompany((int)obj.id);
+            }
         }
     }
 }
