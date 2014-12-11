@@ -34,10 +34,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Syncfusion.Chart.Wpf.SampleLayout, Version=12.3450.0.36, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.Core, Version=12.3450.0.36, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.SfChart.WPF, Version=12.3450.0.36, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.Shared.Wpf, Version=12.3450.0.36, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Chart.Wpf.SampleLayout">
+      <HintPath>.\Syncfusion.Chart.Wpf.SampleLayout.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Core">
+      <HintPath>.\Syncfusion.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfChart.WPF">
+      <HintPath>.\Syncfusion.SfChart.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.Wpf">
+      <HintPath>.\Syncfusion.Shared.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />

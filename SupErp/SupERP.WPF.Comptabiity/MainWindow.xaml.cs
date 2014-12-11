@@ -156,7 +156,7 @@ namespace SupERP.WPF.Comptabiity
         private void Sort(string sortBy, ListSortDirection direction)
         {
             ICollectionView dataView =
-              CollectionViewSource.GetDefaultView(lvListeTransactions.ItemsSource);
+              CollectionViewSource.GetDefaultView(lvListeCharges.ItemsSource);
 
             dataView.SortDescriptions.Clear();
             SortDescription sd = new SortDescription(sortBy, direction);
