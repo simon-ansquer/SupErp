@@ -29,7 +29,7 @@ namespace SupERP.WPF.Comptabiity
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Simulation : //SampleLayoutWindow
+    public partial class Simulation : SampleLayoutWindow
     {
         public Simulation()
         {
@@ -38,11 +38,11 @@ namespace SupERP.WPF.Comptabiity
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //DateTime dateDebut = dpDateDebut.SelectedDate.Value;
-            //DateTime dateFin = dpDateFin.SelectedDate.Value;
+            DateTime dateDebut = dpDateDebut.SelectedDate.Value;
+            DateTime dateFin = dpDateFin.SelectedDate.Value;
 
-            //LineChartViewModel line = new LineChartViewModel();
-            //line.populateGraph(dateDebut, dateFin);
+            LineChartViewModel line = new LineChartViewModel();
+            line.populateGraph(dateDebut, dateFin);
            
         }
 
