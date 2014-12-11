@@ -23,6 +23,7 @@ namespace SupErpModuleUser.Helpers
                 Email = user.Email,
                 Firstname = user.Firstname,
                 Lastname = user.Lastname,
+                Passwordhash = user.Password,
                 Address = user.Address,
                 Role = user.Role.ToRole(),
                 Role_id = user.Role.Id,

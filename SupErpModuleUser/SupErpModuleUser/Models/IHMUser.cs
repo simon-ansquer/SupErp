@@ -14,6 +14,7 @@ namespace SupErpModuleUser.Models
         private string email;
         private string firstname;
         private string lastname;
+        private string password;
         private string address;
         private IHMRole role;
         private bool isNew;
@@ -33,7 +34,11 @@ namespace SupErpModuleUser.Models
             set { zipcode = value; OnPropertyChanged("Zipcode"); }
         }
         
-        
+        public string Password
+        {
+            get { return password; }
+            set { password = value; OnPropertyChanged("Password"); }
+        }
 
         public IHMUser()
         {

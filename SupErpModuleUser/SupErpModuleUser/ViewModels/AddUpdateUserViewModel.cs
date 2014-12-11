@@ -9,6 +9,7 @@ using SupErpModuleUser.UserService;
 using SupErpModuleUser.Helpers;
 using SupErpModuleUser.Models;
 using SupErpModuleUser.Views;
+using System.Windows.Controls;
 
 namespace SupErpModuleUser.ViewModels
 {
@@ -71,14 +72,24 @@ namespace SupErpModuleUser.ViewModels
 
         #region Commands
 
-        public ICommand AddOrUpdateCommand { get { return new DelegateCommand(OnAddOrUpdate); } }
+        public ICommand AddOrUpdateCommand { get { return new ActionCommand(OnAddOrUpdate); } }
         public ICommand CancelCommand { get { return new DelegateCommand(OnCancel); } }
 
         #endregion
 
         #region Command Handlers
-        private void OnAddOrUpdate()
+        private void OnAddOrUpdate(object obj = null)
         {
+            if (User.IsNew)
+            {
+                if (obj != null)
+        {
+                    var passwordBox = obj as PasswordBox;
+                    if (passwordBox != null)
+                        User.Password = passwordBox.Password;
+                }
+            }
+
             //TODO Terminer l'ajout du user
             User.Role = SelectedRole;
             if (User.IsNew)
