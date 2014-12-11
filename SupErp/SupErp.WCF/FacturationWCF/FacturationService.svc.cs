@@ -235,33 +235,35 @@ namespace SupErp.WCF.FacturationWCF
 
                 /*** Modification des lignes de facture ***/
                 var lineBDD = lineBLL.GetLineBillQuotation(billQuotationComplete.BillQuotation_Id);
-                var lineModif = billQuotationComplete.lines;
+                var lineModif = billQuotationComplete.BILL_LineBillQuotation;
 
                 var listLineAModifie = new List<BILL_LineBillQuotation>();
                 var listLineAAjoute = new List<BILL_LineBillQuotation>();
                 /* TODO: METTRE A JOUR LES LIGNES FACTURES */
                 foreach (var line in lineModif)
                 {
-                    var l = new BILL_LineBillQuotation
-                   {
-                       BILL_BillQuotation = bill,
-                       BILL_Product = line.BILL_Product,
-                       BillQuotation_Id = bill.BillQuotation_Id,
-                       DateLine = line.DateLine,
-                       LineBillQuotation_Id = line.LineBillQuotation_Id,
-                       Product_Id = line.Product_Id,
-                       Quantite = line.Quantite
-                   };
+                    if (line != null)
+                    {
+                        var l = new BILL_LineBillQuotation
+                       {
+                           BillQuotation_Id = bill.BillQuotation_Id,
+                           DateLine = line.DateLine,
+                           LineBillQuotation_Id = line.LineBillQuotation_Id,
+                           Product_Id = line.Product_Id,
+                           Quantite = line.Quantite
+                       };
 
-                    if (lineBDD.Contains(l))
-                    {
-                        listLineAModifie.Add(l);
-                        lineBDD.Remove(l);
-                    }
-                    else
-                    {
-                        listLineAAjoute.Add(l);
-                        lineBDD.Remove(l);
+                        var lineExist = lineBDD.SingleOrDefault(x => x.LineBillQuotation_Id == line.LineBillQuotation_Id);
+                        if (lineExist != null && lineExist.LineBillQuotation_Id != 0)
+                        {
+                            listLineAModifie.Add(l);
+                            lineBDD.Remove(l);
+                        }
+                        else
+                        {
+                            listLineAAjoute.Add(l);
+                            lineBDD.Remove(l);
+                        }
                     }
                 }
 
