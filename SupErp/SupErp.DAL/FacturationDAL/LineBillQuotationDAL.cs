@@ -37,7 +37,7 @@ namespace SupErp.DAL.FacturationDAL
                         .Include("BILL_Product.BILL_Category")
                     .Where(line => line.BillQuotation_Id == billquotation_id).Select(l => l.BILL_Product);
                 var product = res.SingleOrDefault(x => x.Product_Id == product_id);
-                if (res != null && res.Count() > 0)
+                if (product != null)
                     return true;
                 else
                     return false;
