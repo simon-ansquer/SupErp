@@ -19,11 +19,6 @@ namespace WpfControlLibrarySalaire.ViewModels
             _employee = employee;
         }
 
-        public EmployeeHistoryViewModel()
-        {
-            
-        }
-
         public ICommand PreviousCommand
         {
             get

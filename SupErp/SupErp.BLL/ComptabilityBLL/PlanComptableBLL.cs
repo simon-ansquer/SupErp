@@ -344,11 +344,11 @@ namespace SupErp.BLL.ComptabilityBLL
 
                         int iteratorMonth = 0;
 
-                        if ( periode.Libelle == "Mensuel" )
+                        if ( periode.Libelle == "Mensuelle" )
                             iteratorMonth = 1;
-                        if ( periode.Libelle == "Annuel" )
+                        if ( periode.Libelle == "Annuelle" )
                             iteratorMonth = 12;
-                        if ( periode.Libelle == "Trimestriel" )
+                        if ( periode.Libelle == "Trimestrielle" )
                             iteratorMonth = 3;
 
                         DateTime refTime = new DateTime(entry.postingDate.Value.Year, entry.postingDate.Value.Month, entry.postingDate.Value.Day);
@@ -503,11 +503,11 @@ namespace SupErp.BLL.ComptabilityBLL
 
                         int iteratorMonth = 0;
 
-                        if ( periode.Libelle == "Mensuel" )
+                        if ( periode.Libelle == "Mensuelle" )
                             iteratorMonth = 1;
-                        if ( periode.Libelle == "Annuel" )
+                        if ( periode.Libelle == "Annuelle" )
                             iteratorMonth = 12;
-                        if ( periode.Libelle == "Trimestriel" )
+                        if ( periode.Libelle == "Trimestrielle" )
                             iteratorMonth = 3;
 
 
@@ -615,11 +615,11 @@ namespace SupErp.BLL.ComptabilityBLL
 
                         int iteratorMonth = 0;
 
-                        if ( periode.Libelle == "Mensuel" )
+                        if ( periode.Libelle == "Mensuelle" )
                             iteratorMonth = 1;
-                        if ( periode.Libelle == "Annuel" )
+                        if ( periode.Libelle == "Annuelle" )
                             iteratorMonth = 12;
-                        if ( periode.Libelle == "Trimestriel" )
+                        if ( periode.Libelle == "Trimestrielle" )
                             iteratorMonth = 3;
 
                        
