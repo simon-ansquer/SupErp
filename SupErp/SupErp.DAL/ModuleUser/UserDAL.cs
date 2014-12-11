@@ -182,7 +182,7 @@ namespace SupErp.DAL.ModuleUser
                 var r = context.Roles.Include("RoleModules").Include("RoleModules.Module").Include("RoleModules.Role").FirstOrDefault(x => x.Id == roleToEdit.Id);
                 if (r == null)
                     return null;
-
+                r.RoleModules.Clear();
                 foreach (var rm in roleToEdit.RoleModules)
                 {
                     RoleModule rrm = null;
